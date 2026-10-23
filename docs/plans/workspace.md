@@ -60,7 +60,8 @@ Séquence d’amorçage (repo vide) :
 
 ## 4. Suite (après BRICK-B1)
 
+- Vision produit / hub Lego City : [../design/vision.md](../design/vision.md) · roadmap [roadmap.md](roadmap.md).
 - Références démos w3dts : [../references/w3dts-demos.md](../references/w3dts-demos.md) (Lego Kart primaire, Motocross secondaire).
-- Plan host kart : [lego-kart-host.md](lego-kart-host.md).
+- Plan host kart (P0) : [lego-kart-host.md](lego-kart-host.md).
 - Sprint : [BRICK-B2](../sprints/BRICK-B2.md) — branche `feature/lego-kart-host`.
 
