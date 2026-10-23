@@ -16,7 +16,8 @@ pnpm dev
 ## Documentation
 
 - Plan workspace : [docs/plans/workspace.md](docs/plans/workspace.md)
-- Sprint courant : [docs/sprints/BRICK-B1.md](docs/sprints/BRICK-B1.md)
+- Réfs démos w3dts : [docs/references/w3dts-demos.md](docs/references/w3dts-demos.md)
+- Plan / sprint host kart : [docs/plans/lego-kart-host.md](docs/plans/lego-kart-host.md) · [docs/sprints/BRICK-B2.md](docs/sprints/BRICK-B2.md)
 - Version / releases : [docs/semver.md](docs/semver.md)
 
 ## Contribuer
