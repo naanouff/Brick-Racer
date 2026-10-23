@@ -4,7 +4,7 @@ Course / aventure en univers **full brick**, non officiel. Moteur [W3DTS](https:
 
 **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.** LEGO®, Mario Kart™ et toute marque citée comme référence d’intention appartiennent à leurs détenteurs.
 
-Roadmap : [../plans/roadmap.md](../plans/roadmap.md). Ton : [tone.md](tone.md). Réfs techniques démos : [../references/w3dts-demos.md](../references/w3dts-demos.md).
+GDD (gameplay + lore aventure) : [gdd.md](gdd.md). Roadmap : [../plans/roadmap.md](../plans/roadmap.md). Ton : [tone.md](tone.md). Levels (hub, 16 circuits, items) : [levels.md](levels.md). Réfs techniques démos : [../references/w3dts-demos.md](../references/w3dts-demos.md).
 
 ## Piliers
 
@@ -49,7 +49,7 @@ flowchart TB
 
 ### Solo
 
-Explorer la city, customiser, enchaîner courses et défis via les pads. Progression et déblocages à préciser dans des design docs ultérieurs (monnaie, trophées, etc.).
+Explorer la city, customiser, enchaîner courses et défis via les pads. Mode histoire : 4 biomes (**Plage → Forêt → Désert → Montagne**) + boss par biome — [gdd.md](gdd.md) ; roster pistes / items : [levels.md](levels.md). Monnaie / trophées / unlocks chiffrés restent à préciser.
 
 ### Multi (jusqu’à 4)
 
