@@ -16,6 +16,7 @@ pnpm dev
 ## Documentation
 
 - Vision : [docs/design/vision.md](docs/design/vision.md) · ton : [docs/design/tone.md](docs/design/tone.md)
+- GDD : [docs/design/gdd.md](docs/design/gdd.md)
 - Roadmap : [docs/plans/roadmap.md](docs/plans/roadmap.md)
 - Réfs démos w3dts : [docs/references/w3dts-demos.md](docs/references/w3dts-demos.md)
 - Host kart (P0) : [docs/plans/lego-kart-host.md](docs/plans/lego-kart-host.md) · [docs/sprints/BRICK-B2.md](docs/sprints/BRICK-B2.md)

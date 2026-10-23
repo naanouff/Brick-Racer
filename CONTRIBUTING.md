@@ -31,6 +31,19 @@ Détail : [docs/semver.md](docs/semver.md) (créé dans le sprint workspace).
 - Sprints : `docs/sprints/`.
 - Build / semver / notes de release : `docs/`.
 
+## Assets images
+
+Pour limiter la taille du dépôt, **toutes les images** versionnées (refs art, UI, docs) sont en **WebP**.
+
+- N’ajoute pas de `.jpg` / `.jpeg` / `.png` / `.gif` sources dans le repo (sauf exception technique justifiée, ex. favicon `.ico`).
+- Avant commit : convertir en `.webp` (qualité ~80–85 pour concept art). Exemple :
+
+```bash
+npx --yes sharp-cli -i chemin/source.png -o chemin/cible.webp --format webp --quality 82
+```
+
+- Refs personnages : `docs/design/art/characters/` (voir [docs/design/characters-candidates.md](docs/design/characters-candidates.md)).
+
 ## Stack de référence
 
 Même famille que [w3dts-chessmaster](https://github.com/naanouff/w3dts-chessmaster) : Electron, electron-vite, Vite, React, TypeScript, pnpm, Vitest, packages npm `@naanouff/w3dts-*`.
