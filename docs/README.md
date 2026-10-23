@@ -4,6 +4,9 @@
 | ------ | ------- |
 | [build.md](build.md) | Prérequis et scripts |
 | [semver.md](semver.md) | Politique de version et releases |
+| [design/vision.md](design/vision.md) | Vision produit (hub city, multi, ton) |
+| [design/tone.md](design/tone.md) | Bible de ton 16+ |
+| [plans/roadmap.md](plans/roadmap.md) | Roadmap phases P0–P5 |
 | [plans/workspace.md](plans/workspace.md) | Plan d’amorçage du workspace |
 | [plans/lego-kart-host.md](plans/lego-kart-host.md) | Plan host Lego Kart |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
