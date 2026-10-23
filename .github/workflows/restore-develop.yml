@@ -1,0 +1,34 @@
+# Recreate `develop` if it is deleted. Branch protection blocks deletion, and
+# delete_branch_on_merge does not remove a protected head branch. This job
+# remains the fallback if protection is lifted.
+name: Restore develop
+
+on:
+  delete:
+
+jobs:
+  restore-develop:
+    if: github.event.ref_type == 'branch' && (github.event.ref == 'develop' || github.event.ref == 'refs/heads/develop')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Recreate develop from last tip or main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          MAIN_SHA="$(gh api "repos/${REPO}/commits/main" --jq .sha)"
+          PUSH_SHA="$(gh api "repos/${REPO}/events?per_page=100" --jq '[.[] | select(.type=="PushEvent" and .payload.ref=="refs/heads/develop")] | .[0].payload.head // empty' || true)"
+
+          SHA="${MAIN_SHA}"
+          if [ -n "${PUSH_SHA}" ] && [ "${PUSH_SHA}" != "null" ]; then
+            if gh api "repos/${REPO}/git/commits/${PUSH_SHA}" >/dev/null 2>&1; then
+              SHA="${PUSH_SHA}"
+            fi
+          fi
+
+          echo "Recreating refs/heads/develop at ${SHA}"
+          gh api -X POST "repos/${REPO}/git/refs" -f ref='refs/heads/develop' -f sha="${SHA}"
