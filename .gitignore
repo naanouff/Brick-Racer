@@ -1,0 +1,9 @@
+node_modules
+out
+release
+dist
+docs/api
+*.log
+.DS_Store
+tmp/
+.vercel
