@@ -60,4 +60,7 @@ Séquence d’amorçage (repo vide) :
 
 ## 4. Suite (après BRICK-B1)
 
-Branche `feature/lego-kart-host` : adapter `LegoKartProject` + `legoKartSceneRuntime` du monorepo viewer vers `src/racer/`, avec deps `w3dts-scenedd` / `character` / `loaders` / `scripts` si besoin.
+- Références démos w3dts : [../references/w3dts-demos.md](../references/w3dts-demos.md) (Lego Kart primaire, Motocross secondaire).
+- Plan host kart : [lego-kart-host.md](lego-kart-host.md).
+- Sprint : [BRICK-B2](../sprints/BRICK-B2.md) — branche `feature/lego-kart-host`.
+
