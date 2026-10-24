@@ -9,24 +9,21 @@
  * - Player vehicle via `?vehicle=kart|moto|plane` (others parked as display props)
  */
 
+// Import leaf modules only — barrel `../shared` pulls spawnLevel → w3dts-scripts (mono / CI).
 import {
-  BLOCKOUT_KART_SPAWN_Y,
   BLOCKOUT_PRIMITIVES,
   BLOCKOUT_SHADER_GRAPHS,
-  blockoutKartGraphRefs,
   blockoutMaterials,
-  createBlockoutKartEntities,
-  flushRampCenterY,
   makeSunEntity,
-  quatYawPitch,
-  quatYawY,
-  spawnStaticBox,
-  type LevelEntity,
-  type LevelSpawnPose,
-  type LevelSpec,
-  type LevelTrigger,
-  type Vec3,
-} from '../shared';
+} from '../shared/blockoutKit';
+import {
+  BLOCKOUT_KART_SPAWN_Y,
+  blockoutKartGraphRefs,
+  createBlockoutKartEntities,
+} from '../shared/kartKit';
+import type { LevelEntity, LevelSpec, Vec3 } from '../shared/levelTypes';
+import type { LevelSpawnPose, LevelTrigger } from '../shared/levelTriggers';
+import { flushRampCenterY, quatYawPitch, quatYawY, spawnStaticBox } from '../shared/staticBox';
 import { createBlockoutMotoEntities, BLOCKOUT_MOTO_SPAWN_Y } from '../../vehicles/moto/blockoutMotoKit';
 import {
   createBlockoutPlaneEntities,

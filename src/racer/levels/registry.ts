@@ -3,10 +3,10 @@
  * @description Level id → TypeScript LevelSpec (BRICK-BO1).
  */
 
-import { cityTestSpec } from './cityTest';
-import { raceTestSpec } from './raceTest';
-import { sandboxKartSpec } from './sandboxKart';
-import type { LevelSpec } from './shared';
+import { cityTestSpec } from './cityTest/cityTestSpec';
+import { raceTestSpec } from './raceTest/raceTestSpec';
+import { sandboxKartSpec } from './sandboxKart/sandboxKartSpec';
+import type { LevelSpec } from './shared/levelTypes';
 
 export const LEVEL_IDS = ['race-test', 'city-test', 'sandbox-kart'] as const;
 export type LevelId = (typeof LEVEL_IDS)[number];

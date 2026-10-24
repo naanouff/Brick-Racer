@@ -1,6 +1,9 @@
 /**
  * @file index.ts
  * @description Shared level spawn helpers (BRICK-BO1a / BO1f).
+ *
+ * Specs / unit tests should import leaf modules (`blockoutKit`, `kartKit`, …)
+ * so they do not pull `spawnLevel` → `@naanouff/w3dts-scripts` (mono-only).
  */
 
 export type {

@@ -12,15 +12,13 @@ import {
 import { TransformComponent, World } from '@naanouff/w3dts-core';
 import { cityTestSpec } from '../src/racer/levels/cityTest';
 import { raceTestSpec } from '../src/racer/levels/raceTest';
+import { GROUP_RAMP, GROUP_WALL, GROUP_WORLD } from '../src/racer/levels/shared/collisionGroups';
 import {
   CHASE_FRAME_BOOST,
-  GROUP_RAMP,
-  GROUP_WALL,
-  GROUP_WORLD,
   KART_SCALE,
   createPlayerKartEntities,
   scaleKartEntities,
-} from '../src/racer/levels/shared';
+} from '../src/racer/levels/shared/kartKit';
 import { isW3dtsMonoAvailable } from '../w3dtsMonoAliases';
 
 function colliderGroup(entityId: string, entities: typeof raceTestSpec.entities): number | null {

@@ -5,7 +5,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { RACE_TEST_SPAWN } from '../src/racer/levels/raceTest';
-import { createBlockoutKartEntities } from '../src/racer/levels/shared';
+import { createBlockoutKartEntities } from '../src/racer/levels/shared/kartKit';
 import { pointInTrigger } from '../src/racer/levels/shared/levelTriggers';
 import {
   ARCADE_PROFILES,

@@ -1,3 +1,4 @@
+/** Spec/triggers only — spawn lives in `spawnRaceTest.ts` (pulls w3dts-scripts). */
 export {
   raceTestSpec,
   buildRaceTestSpec,
@@ -7,4 +8,3 @@ export {
   RACE_TEST_SPAWN,
   RACE_GRID_SLOTS,
 } from './raceTestSpec';
-export { spawnRaceTest } from './spawnRaceTest';

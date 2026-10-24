@@ -9,23 +9,21 @@
  * - npc.hex | npc.bolt
  */
 
+// Leaf imports only — avoid shared barrel → spawnLevel → w3dts-scripts (CI without mono).
 import {
-  BLOCKOUT_KART_SPAWN_Y,
   BLOCKOUT_PRIMITIVES,
   BLOCKOUT_SHADER_GRAPHS,
-  blockoutKartGraphRefs,
   blockoutMaterials,
-  createBlockoutKartEntities,
-  flushRampCenterY,
   makeSunEntity,
-  quatPitchX,
-  quatYawY,
-  spawnStaticBox,
-  type LevelEntity,
-  type LevelSpawnPose,
-  type LevelSpec,
-  type LevelTrigger,
-} from '../shared';
+} from '../shared/blockoutKit';
+import {
+  BLOCKOUT_KART_SPAWN_Y,
+  blockoutKartGraphRefs,
+  createBlockoutKartEntities,
+} from '../shared/kartKit';
+import type { LevelEntity, LevelSpec } from '../shared/levelTypes';
+import type { LevelSpawnPose, LevelTrigger } from '../shared/levelTriggers';
+import { flushRampCenterY, quatPitchX, quatYawY, spawnStaticBox } from '../shared/staticBox';
 
 export const CITY_TEST_STABLE_IDS = [
   'poi.garage',

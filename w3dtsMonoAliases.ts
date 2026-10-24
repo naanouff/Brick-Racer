@@ -21,6 +21,7 @@ const PACKAGES: Array<[string, string]> = [
 ];
 
 export function isW3dtsMonoAvailable(): boolean {
+  if (process.env.BRICK_RACER_NO_MONO === '1') return false;
   return PACKAGES.every(([, entry]) => existsSync(resolve(W3DTS_MONO_ROOT, 'packages', entry)));
 }
 
