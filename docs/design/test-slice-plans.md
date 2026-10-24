@@ -67,7 +67,7 @@ flowchart TB
 
 | Zone | min (X,Z) | max (X,Z) | Hauteur max Y | Notes |
 | ---- | --------- | --------- | ------------- | ----- |
-| Plaza + fontaine | (12, 12) | (28, 28) | Fontaine **2,00** | Spawn `(20, 0, 20)` yaw 0° |
+| Plaza + fontaine | (12, 12) | (28, 28) | Fontaine **2,00** | Spawn `(20, 0, 14)` yaw 0° (sud fontaine ; centre plaza = fontaine) |
 | Tour horloge | (8, 22) | (12, 28) | **8,00** | Emprise 4×6 ; penchée cosmétiques ±5° |
 | Billboard YOU ARE NOBODY | (14, 26) | (22, 28) | Toit **5,50** ; panneau 3,00 × 1,50 | Lisibilité 30 wu |
 | Garage Bolt | (28, 14) | (36, 22) | **4,50** | Porte 2,40 × 2,20 |
@@ -186,7 +186,9 @@ Volumes verticaux sol → plafond vol (Y 0 → 8).
 
 ---
 
-## Checklist SceneDD (cotée)
+## Checklist blockout TS (cotée)
+
+Authoring : modules `src/racer/levels/cityTest/` + `raceTest/` (pas SceneDD).
 
 ### `city-test`
 

@@ -2,6 +2,7 @@
   "name": "brick-racer",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.34.8",
   "license": "UNLICENSED",
   "author": "Cyril TARRIET",
   "description": "Brick Racer — desktop kart racer (W3DTS)",

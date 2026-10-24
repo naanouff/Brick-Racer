@@ -16,9 +16,12 @@ const PACKAGES: Array<[string, string]> = [
   ['@naanouff/w3dts-scripts', 'scripts/dist/w3dts-scripts.es.js'],
   // npm 0.2.8 lacks LegoWheel / LegoAxleBracket / MeshLOD used by public/gproc kart graphs.
   ['@naanouff/w3dts-gproc', 'gproc/src/index.ts'],
+  // npm 0.0.28 lacks yawAssist / uprightStiffness / antiWheelie / applyKartPhysicsCollisionTuning.
+  ['@naanouff/w3dts-physics', 'physics/src/index.ts'],
 ];
 
 export function isW3dtsMonoAvailable(): boolean {
+  if (process.env.BRICK_RACER_NO_MONO === '1') return false;
   return PACKAGES.every(([, entry]) => existsSync(resolve(W3DTS_MONO_ROOT, 'packages', entry)));
 }
 

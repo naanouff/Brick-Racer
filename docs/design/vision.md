@@ -4,7 +4,7 @@ Course / aventure en univers **full brick**, non officiel. Moteur [W3DTS](https:
 
 **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.** LEGO®, Mario Kart™ et toute marque citée comme référence d’intention appartiennent à leurs détenteurs.
 
-GDD (gameplay + lore aventure) : [gdd.md](gdd.md). Roadmap : [../plans/roadmap.md](../plans/roadmap.md). Ton : [tone.md](tone.md). Levels (hub, 16 circuits, items) : [levels.md](levels.md). Réfs techniques démos : [../references/w3dts-demos.md](../references/w3dts-demos.md).
+GDD (gameplay + lore aventure) : [gdd.md](gdd.md). Minifig GPROC : [minifig-gproc.md](minifig-gproc.md). Roadmap : [../plans/roadmap.md](../plans/roadmap.md). Ton : [tone.md](tone.md). Levels (hub, 16 circuits, items) : [levels.md](levels.md). Réfs techniques démos : [../references/w3dts-demos.md](../references/w3dts-demos.md).
 
 ## Piliers
 

@@ -775,6 +775,11 @@ packages:
   '@naanouff/w3dts-audio@0.0.19':
     resolution: {integrity: sha512-8zxCadsHPnJzFzHI8syQf8AtDC635qqCqoYrB2J3l/Wtl09yqdVtjOFQdIPYywALpDpeUbo5tTDN6j03qbCZKg==}
 
+  '@naanouff/w3dts-core@0.0.36':
+    resolution: {integrity: sha512-1TSlhoMRIxrn8m8HCp2uXNWsO4GqaRJmaEaL7VWrxDsG+e2lbiojAZDPyyU9aT3zf6CQwWhwzngToY6Q6ilHfg==}
+    peerDependencies:
+      '@webgpu/types': ^0.1.40
+
   '@naanouff/w3dts-core@0.0.37':
     resolution: {integrity: sha512-HPyOzVoTkolmd+ghWasfLENcP9x2/eFM9LwEsOQTHM+m6A3fQ81PGmuvYSsXxH97qviiRB9Wzt621KLeUSS3zQ==}
     peerDependencies:
@@ -2999,10 +3004,19 @@ snapshots:
 
   '@naanouff/w3dts-audio@0.0.19(@webgpu/types@0.1.74)':
     dependencies:
-      '@naanouff/w3dts-core': 0.0.37(@webgpu/types@0.1.74)
+      '@naanouff/w3dts-core': 0.0.36(@webgpu/types@0.1.74)
       '@naanouff/w3dts-logger': 0.0.22
     transitivePeerDependencies:
       - '@webgpu/types'
+
+  '@naanouff/w3dts-core@0.0.36(@webgpu/types@0.1.74)':
+    dependencies:
+      '@naanouff/w3dts-animation': 0.0.14(gl-matrix@3.4.4)
+      '@naanouff/w3dts-input': 0.0.21
+      '@naanouff/w3dts-loader-hdr': 0.0.18
+      '@naanouff/w3dts-logger': 0.0.22
+      '@webgpu/types': 0.1.74
+      gl-matrix: 3.4.4
 
   '@naanouff/w3dts-core@0.0.37(@webgpu/types@0.1.74)':
     dependencies:
@@ -3017,7 +3031,7 @@ snapshots:
     dependencies:
       '@loaders.gl/core': 4.5.4
       '@loaders.gl/gltf': 4.5.4(@loaders.gl/core@4.5.4)
-      '@naanouff/w3dts-core': 0.0.37(@webgpu/types@0.1.74)
+      '@naanouff/w3dts-core': 0.0.36(@webgpu/types@0.1.74)
       '@naanouff/w3dts-logger': 0.0.22
       fastnoise-lite: 1.1.1
       gl-matrix: 3.4.4
@@ -3038,7 +3052,7 @@ snapshots:
 
   '@naanouff/w3dts-physics@0.0.28(@webgpu/types@0.1.74)':
     dependencies:
-      '@naanouff/w3dts-core': 0.0.37(@webgpu/types@0.1.74)
+      '@naanouff/w3dts-core': 0.0.36(@webgpu/types@0.1.74)
       gl-matrix: 3.4.4
     transitivePeerDependencies:
       - '@webgpu/types'

@@ -10,6 +10,9 @@
 | [design/ui-ux.md](design/ui-ux.md) | Maquette UI/UX écrans MVP (tokens, layouts, microcopy) |
 | [mocup/](mocup/) | Maquettes HTML cliquables (validation visuelle) |
 | [design/characters-candidates.md](design/characters-candidates.md) | 40 PNJ candidats ; roster ~20 figé post-playtest (équilibrage) |
+| [design/minifig-gproc.md](design/minifig-gproc.md) | Décision minifig GPROC (slots, recipes, vs Meshy) |
+| [plans/minifig-gproc.md](plans/minifig-gproc.md) | Plan fondation minifig GPROC |
+| [sprints/BRICK-MF1.md](sprints/BRICK-MF1.md) | Sprint fondation minifig GPROC |
 | [design/levels.md](design/levels.md) | 16 circuits (Plage/Forêt/Désert/Montagne), boosts, items |
 | [design/test-slice.md](design/test-slice.md) | Slice test hub+course + prompts artwork |
 | [design/test-slice-plans.md](design/test-slice-plans.md) | Plans cotés W3DTS (city-test / race-test) |
@@ -19,6 +22,8 @@
 | [plans/workspace.md](plans/workspace.md) | Plan d’amorçage du workspace |
 | [plans/lego-kart-host.md](plans/lego-kart-host.md) | Plan host Lego Kart |
 | [plans/test-slice-blockout.md](plans/test-slice-blockout.md) | Plan blockout city-test / race-test |
+| [plans/blockout-physics.md](plans/blockout-physics.md) | Plan physique / collisions blockout (BO1f) |
+| [plans/blockout-arcade-kart.md](plans/blockout-arcade-kart.md) | Plan kart arcade + texture debug (BO1g) |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
 | [sprints/BRICK-B1.md](sprints/BRICK-B1.md) | Sprint workspace (fait) |
 | [sprints/BRICK-B2.md](sprints/BRICK-B2.md) | Sprint host Lego Kart |

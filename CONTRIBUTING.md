@@ -44,6 +44,21 @@ npx --yes sharp-cli -i chemin/source.png -o chemin/cible.webp --format webp --qu
 
 - Refs personnages : `docs/design/art/characters/` (voir [docs/design/characters-candidates.md](docs/design/characters-candidates.md)).
 
+## Assets 3D
+
+**Canon personnages in-game :** GPROC + recettes JSON ([docs/design/minifig-gproc.md](docs/design/minifig-gproc.md)) — **pas** les GLB Meshy.
+
+### Moodboard Meshy (optionnel)
+
+- Emplacement : `docs/design/art/characters/` (ex. `c01-bolt.glb`), nommés `cNN-slug.glb`.
+- Préférer un seul fichier GLB texturé ; viser sous 10 Mo / perso.
+- **Jamais** chargés en runtime jeu ; vibe / silhouette seulement.
+
+### Runtime
+
+- Generators : `public/gproc/minifig-*` (voir [BRICK-MF1](docs/sprints/BRICK-MF1.md)).
+- Recipes PNJ / joueur : JSON slots (pas de mesh unique par perso).
+
 ## Stack de référence
 
 Même famille que [w3dts-chessmaster](https://github.com/naanouff/w3dts-chessmaster) : Electron, electron-vite, Vite, React, TypeScript, pnpm, Vitest, packages npm `@naanouff/w3dts-*`.

@@ -64,7 +64,7 @@ Module `src/racer/levels/cityTest/` — AABB [test-slice-plans.md](../design/tes
 - Plaza + fontaine ; boxes landmarks (tour, garage, Vinyle, billboard, mairie)
 - Pad tutoriel 8×6×0,22 ; gate Riviera **non traversable**
 - Capsules PNJ stub Hex / Bolt
-- Spawn kart `(20,0,20)` yaw 0 (scooter reporté)
+- Spawn kart `(20, y, 14)` yaw 0 — sud de la fontaine (plaza centre `(20,20)` occupé)
 - Triggers `poi.garage` / `pad.race_test` **visuels** (pas de load race encore)
 
 ## 4. Brancher le host
@@ -82,6 +82,16 @@ Module `src/racer/levels/cityTest/` — AABB [test-slice-plans.md](../design/tes
 - `pnpm dev` : ovale driveable ; `?level=city-test` : hub 40×40, gate impassable
 - IDs stables en tête de chaque `*Spec.ts`
 
+## 6. Physique & collisions (suite)
+
+Voir [blockout-physics.md](blockout-physics.md) (sprint ticket BO1f) : groupes WORLD/WALL/RAMP, alias mono physics, kart ×2,5 sur race/city, switch par reload.
+
+## 7. Kart arcade + texture debug (suite)
+
+Voir [blockout-arcade-kart.md](blockout-arcade-kart.md) (ticket **BO1g**) : kart blockout 2 m, couche arcade (cc / drift / boost), grille debug.
+
+**Densité de texels (convention blockout)** : 1 wu = 1 m ; environnement **256 px/m** (texture 1024 → tuile 4 m) ; kart **512 px/m**. Projection triplanar monde (décor) / objet (kart). Défaut = couleurs unies ; `?debugTex=1` pour la grille (coûteux).
+
 ## Hors scope
 
-Art final, items/boosts fonctionnels, CP scoring / laps, IA, multi, scooter hub, SceneDD. Suite gameplay course → [BRICK-B3](../sprints/BRICK-B3.md) (B3c+).
+Art final, items / IA / laps, multi, scooter hub, SceneDD. Boosts sol / anneaux arcade → BO1g. Suite course → [BRICK-B3](../sprints/BRICK-B3.md) (B3c+).

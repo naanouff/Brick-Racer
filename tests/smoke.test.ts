@@ -45,4 +45,12 @@ describe('brick-racer smoke', () => {
     expect(existsSync('public/shader-graphs/RockProceduralPBR.json')).toBe(true);
     expect(existsSync('public/gproc/lego-brick-generator.json')).toBe(true);
   });
+
+  it('ships blockout level modules + shared spawn (BO1)', () => {
+    expect(existsSync('src/racer/levels/shared/spawnLevel.ts')).toBe(true);
+    expect(existsSync('src/racer/levels/raceTest/raceTestSpec.ts')).toBe(true);
+    expect(existsSync('src/racer/levels/cityTest/cityTestSpec.ts')).toBe(true);
+    expect(existsSync('src/racer/levels/registry.ts')).toBe(true);
+  });
 });
+

@@ -1,0 +1,5 @@
+# pnpm 10.15+ / 11: approve postinstall for Electron toolchain (CI + local).
+allowBuilds:
+  electron: true
+  electron-winstaller: true
+  esbuild: true

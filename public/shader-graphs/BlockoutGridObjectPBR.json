@@ -1,0 +1,246 @@
+{
+  "id": "BlockoutGridObjectPBR",
+  "properties": {
+    "baseColor": {
+      "type": "vec3f",
+      "defaultValue": [1, 1, 1],
+      "name": "Tint",
+      "exposed": true
+    },
+    "baseColorTexture": {
+      "type": "texture_2d",
+      "defaultValue": null,
+      "name": "Debug Grid"
+    },
+    "texScale": {
+      "type": "f32",
+      "defaultValue": 0.5,
+      "name": "Tex Scale (1/tileMeters)",
+      "exposed": true
+    },
+    "blendSharpness": {
+      "type": "f32",
+      "defaultValue": 8,
+      "name": "Triplanar Sharpness",
+      "exposed": true
+    },
+    "roughness": {
+      "type": "f32",
+      "defaultValue": 0.55,
+      "name": "Roughness",
+      "exposed": true
+    },
+    "metallic": {
+      "type": "f32",
+      "defaultValue": 0.05,
+      "name": "Metallic",
+      "exposed": true
+    },
+    "opacity": {
+      "type": "f32",
+      "defaultValue": 1,
+      "name": "Opacity",
+      "exposed": true
+    }
+  },
+  "metadata": { "editorLayout": "manual" },
+  "nodes": [
+    {
+      "id": "pbr_master",
+      "type": "PBRMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1200, "y": 160 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness F", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic F", "dataType": "f32" },
+        { "id": "anisotropy", "name": "Anisotropy", "dataType": "f32" },
+        { "id": "anisotropyRotation", "name": "Rotation", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "obj_pos",
+      "type": "GetObjectPosition",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 80 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "obj_norm",
+      "type": "GetObjectNormal",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 200 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Norm", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_scale",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 320 },
+      "data": { "propertyName": "texScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "scaled_pos",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 280, "y": 80 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_tex",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 280, "y": 220 },
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "prop_sharp",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 280, "y": 320 },
+      "data": { "propertyName": "blendSharpness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "triplanar",
+      "type": "TriPlanarSample",
+      "stage": "fragment",
+      "position": { "x": 520, "y": 80 },
+      "inputs": [
+        { "id": "pos", "name": "Object Pos", "dataType": "vec3f" },
+        { "id": "norm", "name": "Object Norm", "dataType": "vec3f" },
+        { "id": "tex_y", "name": "Tex Top (Y)", "dataType": "texture_2d" },
+        { "id": "tex_xz", "name": "Tex Side (X/Z)", "dataType": "texture_2d" },
+        { "id": "sharpness", "name": "Sharpness", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Color", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_tint",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 520, "y": 280 },
+      "data": { "propertyName": "baseColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "tinted",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 760, "y": 80 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "split_tint",
+      "type": "SplitVec3",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 40 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "R", "dataType": "f32" },
+        { "id": "y", "name": "G", "dataType": "f32" },
+        { "id": "z", "name": "B", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "const_one",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 200 },
+      "data": { "value": 1 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "alb_rgba",
+      "type": "Combine",
+      "stage": "fragment",
+      "position": { "x": 1040, "y": 40 },
+      "inputs": [
+        { "id": "r", "name": "R", "dataType": "f32" },
+        { "id": "g", "name": "G", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "a", "name": "A", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "prop_opacity",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1040, "y": 200 },
+      "data": { "propertyName": "opacity" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_rough",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1040, "y": 280 },
+      "data": { "propertyName": "roughness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_metal",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1040, "y": 360 },
+      "data": { "propertyName": "metallic" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_aniso",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 1040, "y": 440 },
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    }
+  ],
+  "connections": [
+    { "fromNodeId": "obj_pos", "fromSocketId": "out", "toNodeId": "scaled_pos", "toSocketId": "a" },
+    { "fromNodeId": "prop_scale", "fromSocketId": "out", "toNodeId": "scaled_pos", "toSocketId": "b" },
+    { "fromNodeId": "scaled_pos", "fromSocketId": "out", "toNodeId": "triplanar", "toSocketId": "pos" },
+    { "fromNodeId": "obj_norm", "fromSocketId": "out", "toNodeId": "triplanar", "toSocketId": "norm" },
+    { "fromNodeId": "prop_tex", "fromSocketId": "out", "toNodeId": "triplanar", "toSocketId": "tex_y" },
+    { "fromNodeId": "prop_tex", "fromSocketId": "out", "toNodeId": "triplanar", "toSocketId": "tex_xz" },
+    { "fromNodeId": "prop_sharp", "fromSocketId": "out", "toNodeId": "triplanar", "toSocketId": "sharpness" },
+    { "fromNodeId": "triplanar", "fromSocketId": "out", "toNodeId": "tinted", "toSocketId": "a" },
+    { "fromNodeId": "prop_tint", "fromSocketId": "out", "toNodeId": "tinted", "toSocketId": "b" },
+    { "fromNodeId": "tinted", "fromSocketId": "out", "toNodeId": "split_tint", "toSocketId": "in" },
+    { "fromNodeId": "split_tint", "fromSocketId": "x", "toNodeId": "alb_rgba", "toSocketId": "r" },
+    { "fromNodeId": "split_tint", "fromSocketId": "y", "toNodeId": "alb_rgba", "toSocketId": "g" },
+    { "fromNodeId": "split_tint", "fromSocketId": "z", "toNodeId": "alb_rgba", "toSocketId": "b" },
+    { "fromNodeId": "const_one", "fromSocketId": "out", "toNodeId": "alb_rgba", "toSocketId": "a" },
+    { "fromNodeId": "alb_rgba", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "albedo" },
+    { "fromNodeId": "prop_opacity", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "opacity" },
+    { "fromNodeId": "obj_norm", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "normal" },
+    { "fromNodeId": "prop_rough", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "roughness_factor" },
+    { "fromNodeId": "prop_metal", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "metallic_factor" },
+    { "fromNodeId": "const_aniso", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "anisotropy" },
+    { "fromNodeId": "const_aniso", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "anisotropyRotation" }
+  ]
+}
