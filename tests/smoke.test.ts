@@ -6,6 +6,7 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { isW3dtsMonoAvailable } from '../w3dtsMonoAliases';
 
 describe('brick-racer smoke', () => {
   it('ships version 0.1.0 as brick-racer', () => {
@@ -20,9 +21,18 @@ describe('brick-racer smoke', () => {
     expect(pkg.build.productName).toBe('Brick Racer');
   });
 
-  it('exports startBrickRacerHost from the host module', async () => {
-    const host = await import('../src/racer/host/startBrickRacerHost');
-    expect(typeof host.startBrickRacerHost).toBe('function');
+  // Host pulls @naanouff/w3dts-scripts via mono alias (unpublished on npm).
+  it.skipIf(!isW3dtsMonoAvailable())(
+    'exports startBrickRacerHost from the host module',
+    async () => {
+      const host = await import('../src/racer/host/startBrickRacerHost');
+      expect(typeof host.startBrickRacerHost).toBe('function');
+    },
+  );
+
+  it('ships host entry module (CI without mono)', () => {
+    expect(existsSync('src/racer/host/startBrickRacerHost.ts')).toBe(true);
+    expect(existsSync('src/racer/host/bootEngine.ts')).toBe(true);
   });
 
   it('ships sandbox kart level module + runtime assets (B2c/B2d)', () => {
