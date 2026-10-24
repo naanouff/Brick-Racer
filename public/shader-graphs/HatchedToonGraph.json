@@ -1,0 +1,165 @@
+{
+  "id": "HatchedToonShading",
+  "properties": {
+    "baseColor": {
+      "name": "Base Color",
+      "type": "vec4f",
+      "defaultValue": [1.0, 1.0, 1.0, 1.0]
+    },
+    "opacity": {
+      "name": "Opacity",
+      "type": "f32",
+      "defaultValue": 1.0
+    },
+    "shadowQuantization": {
+      "name": "Shadow Bands",
+      "type": "f32",
+      "defaultValue": 3.0
+    },
+    "hatchingIntensity": {
+      "name": "Hatching Intensity",
+      "type": "f32",
+      "defaultValue": 0.6
+    },
+    "hatchingScale": {
+      "name": "Hatching Scale",
+      "type": "f32",
+      "defaultValue": 1.0
+    },
+    "rimPower": {
+      "name": "Rim Power",
+      "type": "f32",
+      "defaultValue": 3.0
+    },
+    "rimIntensity": {
+      "name": "Rim Intensity",
+      "type": "f32",
+      "defaultValue": 0.4
+    }
+  },
+  "nodes": [
+    {
+      "id": "master_toon",
+      "type": "ToonMasterNode",
+      "stage": "fragment",
+      "position": { "x": 800, "y": 200 },
+      "inputs": [
+        { "id": "albedo",              "name": "Albedo",             "dataType": "vec4f" },
+        { "id": "opacity",             "name": "Opacity",            "dataType": "f32" },
+        { "id": "shadow_quantization", "name": "Shadow Bands",       "dataType": "f32" },
+        { "id": "hatching_intensity",  "name": "Hatching Intensity", "dataType": "f32" },
+        { "id": "hatching_scale",      "name": "Hatching Scale",     "dataType": "f32" },
+        { "id": "rim_power",           "name": "Rim Power",          "dataType": "f32" },
+        { "id": "rim_intensity",       "name": "Rim Intensity",      "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "prop_baseColor",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "baseColor" },
+      "position": { "x": 200, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "prop_opacity",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "opacity" },
+      "position": { "x": 200, "y": 200 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_shadowQuantization",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "shadowQuantization" },
+      "position": { "x": 200, "y": 300 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_hatchingIntensity",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "hatchingIntensity" },
+      "position": { "x": 200, "y": 400 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_hatchingScale",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "hatchingScale" },
+      "position": { "x": 200, "y": 500 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_rimPower",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "rimPower" },
+      "position": { "x": 200, "y": 600 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_rimIntensity",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "rimIntensity" },
+      "position": { "x": 200, "y": 700 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "prop_baseColor",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "prop_opacity",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "opacity"
+    },
+    {
+      "fromNodeId": "prop_shadowQuantization",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "shadow_quantization"
+    },
+    {
+      "fromNodeId": "prop_hatchingIntensity",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "hatching_intensity"
+    },
+    {
+      "fromNodeId": "prop_hatchingScale",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "hatching_scale"
+    },
+    {
+      "fromNodeId": "prop_rimPower",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "rim_power"
+    },
+    {
+      "fromNodeId": "prop_rimIntensity",
+      "fromSocketId": "out",
+      "toNodeId": "master_toon",
+      "toSocketId": "rim_intensity"
+    }
+  ]
+}

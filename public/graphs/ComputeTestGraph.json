@@ -1,0 +1,41 @@
+{
+  "name": "ComputeTestGraph",
+  "description": "Example graph demonstrating compute pass infrastructure",
+  "resources": [
+    {
+      "name": "computeOutput",
+      "type": "texture",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 12
+    }
+  ],
+  "passes": [
+    {
+      "name": "TestComputePass",
+      "type": "compute",
+      "shaderPath": "/shaders/compute/test_gradient.compute.wgsl",
+      "entryPoint": "main",
+      "dispatchMode": "auto",
+      "workgroupSize": [8, 8, 1],
+      "textureBindings": {
+        "0": {
+          "handle": "computeOutput",
+          "access": "write",
+          "format": "rgba8unorm"
+        }
+      },
+      "inputs": [],
+      "outputs": ["computeOutput"]
+    },
+    {
+      "name": "BlitToScreen",
+      "type": "fullscreen",
+      "shaderPath": "/shaders/post-processing/blit.frag.wgsl",
+      "inputs": ["computeOutput"],
+      "outputs": ["FINAL_OUTPUT"]
+    }
+  ]
+}

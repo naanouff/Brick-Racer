@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "oak_tree_proc",
+      "name": "Oak (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "oak", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "birch_tree_proc",
+      "name": "Birch (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "birch", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "pine_tree_proc",
+      "name": "Pine (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "pine", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "spruce_tree_proc",
+      "name": "Spruce (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "spruce", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "apple_tree_proc",
+      "name": "Apple (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "apple", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "cherry_tree_proc",
+      "name": "Cherry (procedural)",
+      "category": "tree",
+      "graphUrl": "/gproc/tree-generator.json",
+      "kind": "tree-generator",
+      "parameters": { "Species": "cherry", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "bush_proc",
+      "name": "Bush (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "bush", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "berry_bush_proc",
+      "name": "Berry bush (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "berry", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "mushroom_proc",
+      "name": "Mushroom (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "mushroom", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "fern_proc",
+      "name": "Fern (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "fern", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "grass_clump_proc",
+      "name": "Grass clump (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "grass", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "flower_proc",
+      "name": "Flower (procedural)",
+      "category": "plant",
+      "graphUrl": "/gproc/plant-generator.json",
+      "kind": "plant-generator",
+      "parameters": { "Species": "flower", "Seed": 1000, "Scale": 1 }
+    },
+    {
+      "id": "island_tree",
+      "name": "Island Tree",
+      "category": "tree",
+      "graphUrl": "/gproc/island-tree-generator.json",
+      "kind": "island-tree-generator"
+    },
+    {
+      "id": "rock_generator",
+      "name": "Rock Generator",
+      "category": "prop",
+      "graphUrl": "/gproc/rock-generator.json",
+      "kind": "rock-generator"
+    },
+    {
+      "id": "clockwork_train",
+      "name": "Clockwork Train",
+      "category": "prop",
+      "subcategory": "clockwork",
+      "graphUrl": "/gproc/clockwork-train.json",
+      "kind": "clockwork"
+    },
+    {
+      "id": "involute_gears",
+      "name": "Involute spur gears",
+      "category": "prop",
+      "subcategory": "clockwork",
+      "graphUrl": "/gproc/involute-gears.json",
+      "kind": "clockwork"
+    },
+    {
+      "id": "monkey_bridge",
+      "name": "Monkey Bridge",
+      "category": "structure",
+      "graphUrl": "/gproc/monkey_bridge.json",
+      "kind": "monkey-bridge"
+    },
+    {
+      "id": "lego_brick_2x4",
+      "name": "Brick 2×4",
+      "category": "lego",
+      "subcategory": "brick",
+      "graphUrl": "/gproc/lego-brick-generator.json",
+      "kind": "lego-brick",
+      "parameters": { "WidthStuds": 2, "LengthStuds": 4, "HeightPlates": 3, "Kind": "brick" }
+    },
+    {
+      "id": "preset_cube",
+      "name": "Cube",
+      "category": "primitive",
+      "graphUrl": "/gproc/presets/cube.json"
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+{
+  "id": "pendulum_spot_light",
+  "name": "pendulum_spot_light",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "event-tick",
+      "type": "EventTick",
+      "position": {
+        "x": 80,
+        "y": 80
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "totalTime",
+          "name": "Total Time",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 40
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 1.5
+      }
+    },
+    {
+      "id": "amp",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 120
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 4
+      }
+    },
+    {
+      "id": "y-const",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 200
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 4
+      }
+    },
+    {
+      "id": "z-const",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 280
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 2
+      }
+    },
+    {
+      "id": "time-speed",
+      "type": "MultiplyNumber",
+      "position": {
+        "x": 480,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "sin-node",
+      "type": "Sin",
+      "position": {
+        "x": 680,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "x-val",
+      "type": "MultiplyNumber",
+      "position": {
+        "x": 880,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "set-position",
+      "type": "SetTransformPosition",
+      "position": {
+        "x": 1080,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "x",
+          "name": "X",
+          "type": "number"
+        },
+        {
+          "id": "y",
+          "name": "Y",
+          "type": "number"
+        },
+        {
+          "id": "z",
+          "name": "Z",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ]
+    },
+    {
+      "id": "look-at",
+      "type": "LookAt",
+      "position": {
+        "x": 1280,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "targetX",
+          "name": "Target X",
+          "type": "number"
+        },
+        {
+          "id": "targetY",
+          "name": "Target Y",
+          "type": "number"
+        },
+        {
+          "id": "targetZ",
+          "name": "Target Z",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ]
+    },
+    {
+      "id": "target-x",
+      "type": "NumberConstant",
+      "position": {
+        "x": 1080,
+        "y": 200
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 0
+      }
+    },
+    {
+      "id": "target-y",
+      "type": "NumberConstant",
+      "position": {
+        "x": 1080,
+        "y": 280
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 0
+      }
+    },
+    {
+      "id": "target-z",
+      "type": "NumberConstant",
+      "position": {
+        "x": 1080,
+        "y": 360
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 0
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "exec",
+      "toNodeId": "set-position",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "totalTime",
+      "toNodeId": "time-speed",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "speed",
+      "fromSocketId": "value",
+      "toNodeId": "time-speed",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "time-speed",
+      "fromSocketId": "value",
+      "toNodeId": "sin-node",
+      "toSocketId": "angle"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "sin-node",
+      "fromSocketId": "value",
+      "toNodeId": "x-val",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "amp",
+      "fromSocketId": "value",
+      "toNodeId": "x-val",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l7",
+      "fromNodeId": "x-val",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "x"
+    },
+    {
+      "id": "l8",
+      "fromNodeId": "y-const",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "y"
+    },
+    {
+      "id": "l9",
+      "fromNodeId": "z-const",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "z"
+    },
+    {
+      "id": "l10",
+      "fromNodeId": "set-position",
+      "fromSocketId": "exec",
+      "toNodeId": "look-at",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "l11",
+      "fromNodeId": "target-x",
+      "fromSocketId": "value",
+      "toNodeId": "look-at",
+      "toSocketId": "targetX"
+    },
+    {
+      "id": "l12",
+      "fromNodeId": "target-y",
+      "fromSocketId": "value",
+      "toNodeId": "look-at",
+      "toSocketId": "targetY"
+    },
+    {
+      "id": "l13",
+      "fromNodeId": "target-z",
+      "fromSocketId": "value",
+      "toNodeId": "look-at",
+      "toSocketId": "targetZ"
+    }
+  ],
+  "exposedParameters": []
+}

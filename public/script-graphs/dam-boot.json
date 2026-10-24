@@ -1,0 +1,56 @@
+{
+  "id": "dam_boot",
+  "version": 1,
+  "name": "Dam Boot (SCR-A2b)",
+  "nodes": [
+    {
+      "id": "begin",
+      "type": "EventBeginPlay",
+      "position": { "x": 0, "y": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }]
+    },
+    {
+      "id": "enable-gameplay",
+      "type": "InputEnableMap",
+      "position": { "x": 260, "y": 0 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "mapId", "name": "Map Id", "type": "string" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": { "mapId": "gameplay" }
+    },
+    {
+      "id": "lock-pointer",
+      "type": "InputLockPointer",
+      "position": { "x": 540, "y": 0 },
+      "inputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }]
+    },
+    {
+      "id": "on-fire",
+      "type": "EventInputActionStarted",
+      "position": { "x": 0, "y": 180 },
+      "inputs": [],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": { "actionName": "fire" }
+    }
+  ],
+  "links": [
+    {
+      "id": "begin-to-enable",
+      "fromNodeId": "begin",
+      "fromSocketId": "exec",
+      "toNodeId": "enable-gameplay",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "enable-to-lock",
+      "fromNodeId": "enable-gameplay",
+      "fromSocketId": "exec",
+      "toNodeId": "lock-pointer",
+      "toSocketId": "exec"
+    }
+  ]
+}

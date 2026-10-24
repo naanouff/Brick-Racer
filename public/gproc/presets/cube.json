@@ -1,0 +1,122 @@
+{
+  "id": "preset_cube",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "cube",
+      "type": "PrimitiveCube",
+      "label": "Cube",
+      "position": {
+        "x": 80,
+        "y": 120
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1,
+          1,
+          1
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "out",
+      "type": "GroupOutput",
+      "label": "Output",
+      "position": {
+        "x": 360,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 140,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1_to_mesh_lod",
+      "fromNodeId": "cube",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l1_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

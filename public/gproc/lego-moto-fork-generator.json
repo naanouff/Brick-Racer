@@ -1,0 +1,224 @@
+{
+  "id": "lego-moto-fork-generator",
+  "name": "Lego Moto Fork",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-moto"
+  },
+  "parameters": {
+    "LegLength": {
+      "type": "float",
+      "value": 0.72
+    },
+    "RakeDeg": {
+      "type": "float",
+      "value": 25
+    },
+    "TubeRadius": {
+      "type": "float",
+      "value": 0.045
+    },
+    "Spread": {
+      "type": "float",
+      "value": 0.12
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "LegLength",
+          "name": "LegLength",
+          "type": "float"
+        },
+        {
+          "id": "RakeDeg",
+          "name": "RakeDeg",
+          "type": "float"
+        },
+        {
+          "id": "TubeRadius",
+          "name": "TubeRadius",
+          "type": "float"
+        },
+        {
+          "id": "Spread",
+          "name": "Spread",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "LegLength": 0.72,
+        "RakeDeg": 25,
+        "TubeRadius": 0.045,
+        "Spread": 0.12
+      }
+    },
+    {
+      "id": "part",
+      "type": "LegoMotoFork",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "legLength",
+          "name": "legLength",
+          "type": "float"
+        },
+        {
+          "id": "rakeDeg",
+          "name": "rakeDeg",
+          "type": "int"
+        },
+        {
+          "id": "tubeRadius",
+          "name": "tubeRadius",
+          "type": "float"
+        },
+        {
+          "id": "spread",
+          "name": "spread",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "legLength": 0.72,
+        "rakeDeg": 25,
+        "tubeRadius": 0.045,
+        "spread": 0.12
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 340,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l4_to_mesh_lod",
+      "fromNodeId": "part",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l4_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    },
+    {
+      "id": "l_LegLength",
+      "fromNodeId": "group_in",
+      "fromSocketId": "LegLength",
+      "toNodeId": "part",
+      "toSocketId": "legLength"
+    },
+    {
+      "id": "l_RakeDeg",
+      "fromNodeId": "group_in",
+      "fromSocketId": "RakeDeg",
+      "toNodeId": "part",
+      "toSocketId": "rakeDeg"
+    },
+    {
+      "id": "l_TubeRadius",
+      "fromNodeId": "group_in",
+      "fromSocketId": "TubeRadius",
+      "toNodeId": "part",
+      "toSocketId": "tubeRadius"
+    },
+    {
+      "id": "l_Spread",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Spread",
+      "toNodeId": "part",
+      "toSocketId": "spread"
+    }
+  ]
+}

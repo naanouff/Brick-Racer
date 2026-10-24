@@ -1,0 +1,246 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--br-font-body);
+  font-size: calc(16px * var(--br-ui-scale));
+  color: var(--br-paper);
+  background: var(--br-asphalt);
+  line-height: 1.45;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--br-stud-yellow);
+  outline-offset: 3px;
+}
+
+.mocup-frame {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.mocup-world {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--br-asphalt);
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05);
+  pointer-events: none;
+}
+
+.mocup-world--plaza {
+  background-image:
+    linear-gradient(180deg, rgb(26 21 32 / 25%) 0%, rgb(26 21 32 / 45%) 100%),
+    url("../assets/hub-plaza.png");
+}
+
+.mocup-world--chase {
+  background-image:
+    linear-gradient(180deg, rgb(26 21 32 / 20%) 0%, rgb(26 21 32 / 50%) 100%),
+    url("../assets/chase.jpg");
+}
+
+.mocup-world--asphalt {
+  background-image:
+    radial-gradient(ellipse at 50% 20%, #3a4258 0%, transparent 55%),
+    linear-gradient(160deg, #1a1520 0%, var(--br-asphalt) 45%, #12151c 100%);
+}
+
+.mocup-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--br-scrim);
+  pointer-events: none;
+}
+
+.mocup-scrim--heavy {
+  background: var(--br-scrim-heavy);
+}
+
+.mocup-layer {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  pointer-events: auto;
+}
+
+.plaque {
+  background: var(--br-paper);
+  color: var(--br-ink);
+  border: var(--br-border) solid var(--br-ink);
+  border-radius: var(--br-radius);
+  box-shadow: 4px 4px 0 rgb(26 21 32 / 35%);
+  animation: plaque-in 120ms ease-out;
+}
+
+.plaque--oil {
+  border-color: var(--br-garage-oil);
+}
+
+.plaque--magenta {
+  border-color: var(--br-billboard-magenta);
+}
+
+.plaque--mint {
+  border-color: var(--br-beach-mint);
+}
+
+@keyframes plaque-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.display {
+  font-family: var(--br-font-display);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.micro {
+  font-style: italic;
+  font-weight: 500;
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.25rem;
+  border: 3px solid var(--br-ink);
+  border-radius: var(--br-radius);
+  background: var(--br-stud-yellow);
+  color: var(--br-ink);
+  font-family: var(--br-font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 80ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--ghost {
+  background: var(--br-paper);
+}
+
+.btn--secondary {
+  background: var(--br-plaza-pastel);
+}
+
+.btn--oil {
+  background: var(--br-garage-oil);
+  color: var(--br-paper);
+  border-color: var(--br-ink);
+}
+
+.btn--magenta {
+  background: var(--br-billboard-magenta);
+  color: var(--br-paper);
+}
+
+.btn--danger {
+  background: var(--br-danger);
+  color: var(--br-paper);
+}
+
+.btn--mint {
+  background: var(--br-beach-mint);
+  color: var(--br-ink);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.mocup-chrome {
+  position: fixed;
+  z-index: 50;
+  left: 12px;
+  top: 12px;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mocup-chrome a,
+.mocup-chrome span {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgb(26 21 32 / 75%);
+  color: #c5ccd8;
+  text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 12%);
+}
+
+.mocup-chrome a:hover {
+  color: var(--br-stud-yellow);
+}
+
+.disclaimer {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #c5ccd8;
+  max-width: 36rem;
+  margin: 0;
+}
+
+.kbd {
+  display: inline-block;
+  min-width: 1.4em;
+  padding: 0.1em 0.35em;
+  border: 2px solid var(--br-ink);
+  border-radius: 4px;
+  background: var(--br-stud-yellow);
+  font-family: var(--br-font-display);
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: 650;
+  text-align: center;
+}

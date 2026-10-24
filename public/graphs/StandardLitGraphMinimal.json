@@ -1,0 +1,42 @@
+{
+  "name": "Diagnostic Game: opaques + tonemap (no skybox / shadows / FXAA)",
+  "resources": [
+    {
+      "name": "sceneDepth",
+      "format": "depth24plus",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "sceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    }
+  ],
+  "passes": [
+    {
+      "name": "02_Opaques",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["opaque"],
+      "colorLoadOp": "clear",
+      "depthLoadOp": "clear",
+      "clearColor": { "r": 0.02, "g": 0.02, "b": 0.02, "a": 1.0 }
+    },
+    {
+      "name": "Tone Mapping & Output",
+      "type": "fullscreen",
+      "inputs": ["sceneColor"],
+      "outputs": ["FINAL_OUTPUT"],
+      "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
+      "uniforms": { "exposure": { "type": "f32", "value": 1.0 } }
+    }
+  ]
+}

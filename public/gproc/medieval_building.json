@@ -1,0 +1,1628 @@
+{
+  "id": "medieval_building",
+  "nodes": [
+    {
+      "id": "cube_walls",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "walls_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          6,
+          4,
+          6
+        ],
+        "center": [
+          0,
+          2,
+          0
+        ]
+      }
+    },
+    {
+      "id": "mat_walls",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 250,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "walls_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "cube_gable_fill",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 150
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "gfill_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          2.8,
+          0.8,
+          6
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_gable_fill",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 150
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "gfill_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          4.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_gable_fill",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 150
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "gfill_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "cube_roof_left",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "rl_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          4.1,
+          0.18,
+          7.2
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_roof_left",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rl_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -1.75,
+          5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          30
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_roof_left",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rl_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "cube_roof_right",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 280
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "rr_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          4.1,
+          0.18,
+          7.2
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_roof_right",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rr_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          1.75,
+          5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -30
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_roof_right",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rr_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "cube_ridge",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 350
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "ridge_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.22,
+          0.22,
+          7.4
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_ridge",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 350
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ridge_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          6.05,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_ridge",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 350
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ridge_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "cube_door",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 400
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "door_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.2,
+          2.6,
+          0.15
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_door",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 400
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "door_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          1.3,
+          -3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_door",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 400
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "door_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 2
+      }
+    },
+    {
+      "id": "cube_door_frame_top",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 500
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "dft_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.6,
+          0.2,
+          0.25
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_door_frame_top",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "dft_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          2.7,
+          -3.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_door_frame_top",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "dft_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 2
+      }
+    },
+    {
+      "id": "cube_win_fl",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 600
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "wfl_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.9,
+          0.9,
+          0.15
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_win_fl",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 600
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wfl_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -1.8,
+          2.6,
+          -3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_win_fl",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 600
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wfl_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 3
+      }
+    },
+    {
+      "id": "cube_win_fr",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 700
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "wfr_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.9,
+          0.9,
+          0.15
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_win_fr",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 700
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wfr_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          1.8,
+          2.6,
+          -3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_win_fr",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 700
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wfr_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 3
+      }
+    },
+    {
+      "id": "cube_win_left",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 800
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "wl_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.15,
+          0.9,
+          0.9
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_win_left",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 800
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wl_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -3,
+          2.6,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_win_left",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 800
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wl_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 3
+      }
+    },
+    {
+      "id": "cube_win_right",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 900
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "wr_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.15,
+          0.9,
+          0.9
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_win_right",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 900
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wr_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          3,
+          2.6,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_win_right",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 900
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "wr_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 3
+      }
+    },
+    {
+      "id": "cube_sill_fl",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 1000
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "sfl_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.1,
+          0.12,
+          0.3
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_sill_fl",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 1000
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "sfl_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -1.8,
+          2.1,
+          -3.1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_sill_fl",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 1000
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "sfl_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "cube_sill_fr",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 1100
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "sfr_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.1,
+          0.12,
+          0.3
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_sill_fr",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 250,
+        "y": 1100
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "sfr_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          1.8,
+          2.1,
+          -3.1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_sill_fr",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 1100
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "sfr_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "join_house",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 750,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geo_walls",
+          "name": "geo_walls",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_gfill",
+          "name": "geo_gfill",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_rl",
+          "name": "geo_rl",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_rr",
+          "name": "geo_rr",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_ridge",
+          "name": "geo_ridge",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_door",
+          "name": "geo_door",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_dft",
+          "name": "geo_dft",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_wfl",
+          "name": "geo_wfl",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_wfr",
+          "name": "geo_wfr",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_wl",
+          "name": "geo_wl",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_wr",
+          "name": "geo_wr",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_sill_fl",
+          "name": "geo_sill_fl",
+          "type": "geometry"
+        },
+        {
+          "id": "geo_sill_fr",
+          "name": "geo_sill_fr",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "house_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "shade_flat",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 950,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "house_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 1150,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 930,
+        "y": 500
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l_walls1",
+      "fromNodeId": "cube_walls",
+      "fromSocketId": "walls_raw",
+      "toNodeId": "mat_walls",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_walls2",
+      "fromNodeId": "mat_walls",
+      "fromSocketId": "walls_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_walls"
+    },
+    {
+      "id": "l_gfill1",
+      "fromNodeId": "cube_gable_fill",
+      "fromSocketId": "gfill_raw",
+      "toNodeId": "transform_gable_fill",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_gfill2",
+      "fromNodeId": "transform_gable_fill",
+      "fromSocketId": "gfill_moved",
+      "toNodeId": "mat_gable_fill",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_gfill3",
+      "fromNodeId": "mat_gable_fill",
+      "fromSocketId": "gfill_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_gfill"
+    },
+    {
+      "id": "l_rl1",
+      "fromNodeId": "cube_roof_left",
+      "fromSocketId": "rl_raw",
+      "toNodeId": "transform_roof_left",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_rl2",
+      "fromNodeId": "transform_roof_left",
+      "fromSocketId": "rl_moved",
+      "toNodeId": "mat_roof_left",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_rl3",
+      "fromNodeId": "mat_roof_left",
+      "fromSocketId": "rl_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_rl"
+    },
+    {
+      "id": "l_rr1",
+      "fromNodeId": "cube_roof_right",
+      "fromSocketId": "rr_raw",
+      "toNodeId": "transform_roof_right",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_rr2",
+      "fromNodeId": "transform_roof_right",
+      "fromSocketId": "rr_moved",
+      "toNodeId": "mat_roof_right",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_rr3",
+      "fromNodeId": "mat_roof_right",
+      "fromSocketId": "rr_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_rr"
+    },
+    {
+      "id": "l_ridge1",
+      "fromNodeId": "cube_ridge",
+      "fromSocketId": "ridge_raw",
+      "toNodeId": "transform_ridge",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_ridge2",
+      "fromNodeId": "transform_ridge",
+      "fromSocketId": "ridge_moved",
+      "toNodeId": "mat_ridge",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_ridge3",
+      "fromNodeId": "mat_ridge",
+      "fromSocketId": "ridge_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_ridge"
+    },
+    {
+      "id": "l_door1",
+      "fromNodeId": "cube_door",
+      "fromSocketId": "door_raw",
+      "toNodeId": "transform_door",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_door2",
+      "fromNodeId": "transform_door",
+      "fromSocketId": "door_moved",
+      "toNodeId": "mat_door",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_door3",
+      "fromNodeId": "mat_door",
+      "fromSocketId": "door_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_door"
+    },
+    {
+      "id": "l_dft1",
+      "fromNodeId": "cube_door_frame_top",
+      "fromSocketId": "dft_raw",
+      "toNodeId": "transform_door_frame_top",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_dft2",
+      "fromNodeId": "transform_door_frame_top",
+      "fromSocketId": "dft_moved",
+      "toNodeId": "mat_door_frame_top",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_dft3",
+      "fromNodeId": "mat_door_frame_top",
+      "fromSocketId": "dft_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_dft"
+    },
+    {
+      "id": "l_wfl1",
+      "fromNodeId": "cube_win_fl",
+      "fromSocketId": "wfl_raw",
+      "toNodeId": "transform_win_fl",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wfl2",
+      "fromNodeId": "transform_win_fl",
+      "fromSocketId": "wfl_moved",
+      "toNodeId": "mat_win_fl",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wfl3",
+      "fromNodeId": "mat_win_fl",
+      "fromSocketId": "wfl_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_wfl"
+    },
+    {
+      "id": "l_wfr1",
+      "fromNodeId": "cube_win_fr",
+      "fromSocketId": "wfr_raw",
+      "toNodeId": "transform_win_fr",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wfr2",
+      "fromNodeId": "transform_win_fr",
+      "fromSocketId": "wfr_moved",
+      "toNodeId": "mat_win_fr",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wfr3",
+      "fromNodeId": "mat_win_fr",
+      "fromSocketId": "wfr_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_wfr"
+    },
+    {
+      "id": "l_wl1",
+      "fromNodeId": "cube_win_left",
+      "fromSocketId": "wl_raw",
+      "toNodeId": "transform_win_left",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wl2",
+      "fromNodeId": "transform_win_left",
+      "fromSocketId": "wl_moved",
+      "toNodeId": "mat_win_left",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wl3",
+      "fromNodeId": "mat_win_left",
+      "fromSocketId": "wl_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_wl"
+    },
+    {
+      "id": "l_wr1",
+      "fromNodeId": "cube_win_right",
+      "fromSocketId": "wr_raw",
+      "toNodeId": "transform_win_right",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wr2",
+      "fromNodeId": "transform_win_right",
+      "fromSocketId": "wr_moved",
+      "toNodeId": "mat_win_right",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_wr3",
+      "fromNodeId": "mat_win_right",
+      "fromSocketId": "wr_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_wr"
+    },
+    {
+      "id": "l_sfl1",
+      "fromNodeId": "cube_sill_fl",
+      "fromSocketId": "sfl_raw",
+      "toNodeId": "transform_sill_fl",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_sfl2",
+      "fromNodeId": "transform_sill_fl",
+      "fromSocketId": "sfl_moved",
+      "toNodeId": "mat_sill_fl",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_sfl3",
+      "fromNodeId": "mat_sill_fl",
+      "fromSocketId": "sfl_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_sill_fl"
+    },
+    {
+      "id": "l_sfr1",
+      "fromNodeId": "cube_sill_fr",
+      "fromSocketId": "sfr_raw",
+      "toNodeId": "transform_sill_fr",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_sfr2",
+      "fromNodeId": "transform_sill_fr",
+      "fromSocketId": "sfr_moved",
+      "toNodeId": "mat_sill_fr",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_sfr3",
+      "fromNodeId": "mat_sill_fr",
+      "fromSocketId": "sfr_geo",
+      "toNodeId": "join_house",
+      "toSocketId": "geo_sill_fr"
+    },
+    {
+      "id": "l_join",
+      "fromNodeId": "join_house",
+      "fromSocketId": "house_joined",
+      "toNodeId": "shade_flat",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_flat_to_mesh_lod",
+      "fromNodeId": "shade_flat",
+      "fromSocketId": "house_flat",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_flat_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "id": "mushroom",
+  "nodes": [
+    {
+      "id": "stem_cube",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "stem_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.28,
+          0.7,
+          0.28
+        ],
+        "center": [
+          0,
+          0.35,
+          0
+        ]
+      }
+    },
+    {
+      "id": "shade_stem",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "stem_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_stem",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "stem_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "cap_sphere",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 220
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "cap_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 0.7,
+        "segments": 10,
+        "rings": 6
+      }
+    },
+    {
+      "id": "transform_cap",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "cap_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          0.8,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1.5,
+          0.55,
+          1.5
+        ]
+      }
+    },
+    {
+      "id": "mat_cap",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "cap_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "join_mushroom",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 620,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "mushroom_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 820,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 600,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "stem_cube",
+      "fromSocketId": "stem_raw",
+      "toNodeId": "shade_stem",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "shade_stem",
+      "fromSocketId": "stem_flat",
+      "toNodeId": "mat_stem",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mat_stem",
+      "fromSocketId": "stem_geo",
+      "toNodeId": "join_mushroom",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "cap_sphere",
+      "fromSocketId": "cap_raw",
+      "toNodeId": "transform_cap",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "transform_cap",
+      "fromSocketId": "cap_moved",
+      "toNodeId": "mat_cap",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "mat_cap",
+      "fromSocketId": "cap_geo",
+      "toNodeId": "join_mushroom",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l7_to_mesh_lod",
+      "fromNodeId": "join_mushroom",
+      "fromSocketId": "mushroom_joined",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l7_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

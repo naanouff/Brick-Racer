@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brick Racer — Maquettes UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:ital,wght@0,500;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/screens.css" />
+  </head>
+  <body>
+    <div class="mocup-chrome">
+      <a href="#home" data-go="home">Index</a>
+      <span id="chrome-screen">home</span>
+      <span>Esc = retour</span>
+    </div>
+
+    <!-- HOME -->
+    <section data-screen="home" class="index-page mocup-world--asphalt">
+      <h1>Brick Racer — Maquettes</h1>
+      <p class="lead">
+        Navigation par ancres (<code>#title</code>, …) — fonctionne en
+        <code>file://</code> et via serveur local. Maquette non jouable.
+      </p>
+      <p>
+        <a class="btn" href="#title" data-go="title">Démarrer le parcours</a>
+      </p>
+      <nav class="index-grid" aria-label="Écrans">
+        <a href="#title" data-go="title">Title<small>Écran titre</small></a>
+        <a href="#loading" data-go="loading">Loading<small>Scrim chargement</small></a>
+        <a href="#hub" data-go="hub">Hub<small>Overlays POI / dialogue</small></a>
+        <a href="#garage" data-go="garage">Garage<small>Bolt — custom kart</small></a>
+        <a href="#shop" data-go="shop">Boutique<small>Vinyle — minifig</small></a>
+        <a href="#countdown" data-go="countdown">Countdown<small>3-2-1-GO</small></a>
+        <a href="#race-hud" data-go="race-hud">Race HUD<small>Course</small></a>
+        <a href="#pause" data-go="pause">Pause<small>Menu course</small></a>
+        <a href="#results" data-go="results">Results<small>Arrivée</small></a>
+        <a href="#settings" data-go="settings">Settings<small>Paramètres</small></a>
+      </nav>
+      <section class="plaque index-flow">
+        <h2 class="display" style="font-size: 1rem">Parcours</h2>
+        <ol>
+          <li>Title → Loading → Hub</li>
+          <li>Garage → Hub (pad) → Countdown → HUD → Pause → Results → Hub</li>
+        </ol>
+      </section>
+      <p class="disclaimer" style="margin-top: 2rem">
+        Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo. Sprint BRICK-UIM1.
+      </p>
+    </section>
+
+    <!-- TITLE -->
+    <section data-screen="title" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--plaza" aria-hidden="true"></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer title-screen">
+          <img class="title-logo" src="assets/logo.svg" alt="" width="96" height="96" />
+          <h1 class="display">Brick Racer</h1>
+          <p class="micro">« Tu n’es personne. Encore. »</p>
+          <div class="btn-row" style="margin-top: 0.75rem">
+            <a class="btn" href="#loading" data-go="loading">Jouer</a>
+            <a class="btn btn--ghost" href="#settings" data-go="settings">Paramètres</a>
+          </div>
+          <div class="title-footer">
+            <p class="disclaimer">
+              Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.
+            </p>
+            <p class="meta">v0.1.0 · maquette</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOADING -->
+    <section data-screen="loading" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--asphalt" aria-hidden="true"></div>
+        <div class="mocup-scrim mocup-scrim--heavy" aria-hidden="true"></div>
+        <div class="mocup-layer loading-screen">
+          <p class="display" style="font-size: 1.25rem; color: var(--br-paper)">Brick City</p>
+          <p class="micro">« Chargement de ta médiocrité… »</p>
+          <div class="stud-bar" role="progressbar">
+            <div class="stud-bar__fill"></div>
+          </div>
+          <p style="margin-top: 1rem">
+            <a class="btn btn--ghost" href="#hub" data-go="hub">Skip → Hub</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUB -->
+    <section data-screen="hub" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--plaza" aria-hidden="true"></div>
+        <div class="mocup-layer">
+          <div class="hub-top">
+            <span class="hub-chip">Studs : 120</span>
+            <a class="hub-chip" href="#title" data-go="title">Esc menu</a>
+          </div>
+          <div id="prompt-garage" class="plaque hub-prompt">
+            <p class="hub-prompt__action"><span class="kbd">E</span> Entrer — Garage Bolt</p>
+            <p class="micro">« On jugera ton build »</p>
+            <p style="margin-top: 0.75rem">
+              <a class="btn btn--oil" href="#garage" data-go="garage">Entrer</a>
+            </p>
+          </div>
+          <div id="prompt-pad" class="plaque hub-prompt" hidden>
+            <p class="hub-prompt__action"><span class="kbd">E</span> Circuit d’essai</p>
+            <p class="micro">« Pas de glory »</p>
+            <p style="margin-top: 0.75rem">
+              <a class="btn" href="#countdown" data-go="countdown">Lancer</a>
+            </p>
+          </div>
+          <aside id="hub-dialogue" class="plaque hub-dialogue" hidden>
+            <div class="hub-portrait" aria-hidden="true"></div>
+            <div>
+              <h2>Hex</h2>
+              <p>« Souris, l’outsider — les pubs paient mieux si tu perds. »</p>
+              <a
+                class="btn"
+                style="min-height: 2.2rem; font-size: 0.85rem"
+                href="#hub?prompt=garage"
+                data-go="hub"
+                data-prompt="garage"
+                >Suite</a
+              >
+            </div>
+          </aside>
+          <div class="hub-debug" aria-label="États maquette">
+            <a class="btn btn--ghost" href="#hub?prompt=garage" data-go="hub" data-prompt="garage"
+              >Prompt garage</a
+            >
+            <a class="btn btn--ghost" href="#hub?prompt=pad" data-go="hub" data-prompt="pad"
+              >Prompt pad</a
+            >
+            <a
+              class="btn btn--secondary"
+              href="#hub?prompt=dialogue"
+              data-go="hub"
+              data-prompt="dialogue"
+              >Dialogue Hex</a
+            >
+            <a class="btn btn--magenta" href="#shop" data-go="shop">Boutique</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARAGE -->
+    <section data-screen="garage" hidden>
+      <div class="mocup-frame">
+        <div
+          class="mocup-world mocup-world--plaza"
+          aria-hidden="true"
+          style="filter: blur(6px) saturate(0.9)"
+        ></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer atelier">
+          <div class="plaque plaque--oil atelier__panel">
+            <div class="atelier__preview">
+              <div class="kart-silhouette" aria-hidden="true"></div>
+              <p class="micro">Aperçu 3D stub</p>
+            </div>
+            <div class="atelier__body">
+              <div class="atelier__header">
+                <div>
+                  <h1 class="display">Garage — « Crime empilé »</h1>
+                  <p class="micro">Bolt juge ton build. Cosmétiques d’abord.</p>
+                </div>
+                <a class="btn btn--ghost" href="#hub" data-go="hub" aria-label="Fermer">X</a>
+              </div>
+              <div class="slot-tabs" role="tablist">
+                <button type="button" role="tab" aria-selected="true">Châssis</button>
+                <button type="button" role="tab" aria-selected="false">Roues</button>
+                <button type="button" role="tab" aria-selected="false">Stickers</button>
+                <button type="button" role="tab" aria-selected="false">Couleur</button>
+              </div>
+              <ul class="piece-list">
+                <li aria-selected="true">Châssis Reliable (base)</li>
+                <li>Châssis Absurde Stud</li>
+                <li>Châssis « Amende »</li>
+              </ul>
+              <div class="stat-row">
+                <label>Fiabilité soft</label>
+                <div class="stat-bar"><span style="width: 70%"></span></div>
+              </div>
+              <div class="stat-row">
+                <label>Look (lisibilité course)</label>
+                <div class="stat-bar"><span style="width: 55%"></span></div>
+              </div>
+              <div class="btn-row" style="justify-content: flex-start">
+                <a class="btn btn--oil" href="#hub?prompt=garage" data-go="hub" data-prompt="garage"
+                  >Équiper</a
+                >
+                <a class="btn btn--ghost" href="#hub?prompt=pad" data-go="hub" data-prompt="pad"
+                  >Sortir → Pad</a
+                >
+              </div>
+              <p class="atelier__quote">Bolt : « C’est pas un bolide, c’est un crime empilé. »</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section data-screen="shop" hidden>
+      <div class="mocup-frame">
+        <div
+          class="mocup-world mocup-world--plaza"
+          aria-hidden="true"
+          style="filter: blur(6px) saturate(0.9)"
+        ></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer atelier atelier--shop">
+          <div class="plaque plaque--magenta atelier__panel">
+            <div class="atelier__preview">
+              <div class="minifig-silhouette" aria-hidden="true"></div>
+              <p class="micro">Minifig stub</p>
+            </div>
+            <div class="atelier__body">
+              <div class="atelier__header">
+                <div>
+                  <h1 class="display">Boutique Vinyle</h1>
+                  <p class="micro">Si ça brille, c’est légal <em>ici</em>.</p>
+                </div>
+                <a class="btn btn--ghost" href="#hub" data-go="hub" aria-label="Fermer">X</a>
+              </div>
+              <div class="slot-tabs" role="tablist">
+                <button type="button" role="tab" aria-selected="true">Tête</button>
+                <button type="button" role="tab" aria-selected="false">Torse</button>
+                <button type="button" role="tab" aria-selected="false">Jambes</button>
+                <button type="button" role="tab" aria-selected="false">Coiffe</button>
+                <button type="button" role="tab" aria-selected="false">Accessoire</button>
+              </div>
+              <ul class="piece-list">
+                <li aria-selected="true">Visage Outsider</li>
+                <li>Visage « Souris pour la caméra »</li>
+                <li>Visage Amende unpaid</li>
+              </ul>
+              <div class="stat-row">
+                <label>Choc Hex (cosmétique)</label>
+                <div class="stat-bar"><span style="width: 40%"></span></div>
+              </div>
+              <div class="btn-row" style="justify-content: flex-start">
+                <a class="btn btn--magenta" href="#hub" data-go="hub">Acheter / Équiper</a>
+                <a class="btn btn--ghost" href="#hub" data-go="hub">Sortir</a>
+              </div>
+              <p class="atelier__quote">Vinyle : « Si ça brille, c’est légal <em>ici</em>. »</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section data-screen="countdown" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--chase" aria-hidden="true"></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer countdown-screen">
+          <p class="countdown-track">Promenade Test — PAS DE GLORY</p>
+          <p class="countdown-num" data-countdown>3</p>
+          <p>
+            <a class="btn btn--ghost" href="#race-hud" data-go="race-hud">Skip → HUD</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RACE HUD -->
+    <section data-screen="race-hud" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--chase" aria-hidden="true"></div>
+        <div class="mocup-layer hud" aria-label="HUD course">
+          <div class="hud__top">
+            <span>P3/4</span>
+            <span>Tour 2/3</span>
+            <span>01:24.08</span>
+          </div>
+          <div class="plaque hud__toast" id="hex-toast">
+            <p class="micro">Hex : « Brique Rouge — partage la douleur. »</p>
+          </div>
+          <div class="hud__item" title="Utiliser item">
+            <strong>ITEM</strong>
+            <span aria-hidden="true">■■</span>
+            <small>F</small>
+          </div>
+          <div class="plaque hud__standings">
+            <ol>
+              <li>IA-A</li>
+              <li>IA-B</li>
+              <li>Toi</li>
+              <li>IA-C</li>
+            </ol>
+          </div>
+          <div class="hud__hint btn-row">
+            <a class="btn btn--ghost" href="#pause" data-go="pause">Pause</a>
+            <a class="btn btn--mint" href="#results" data-go="results">Finish</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAUSE -->
+    <section data-screen="pause" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--chase" aria-hidden="true"></div>
+        <div class="mocup-scrim mocup-scrim--heavy" aria-hidden="true"></div>
+        <div class="mocup-layer modal-center">
+          <div class="plaque modal-plaque">
+            <h1 class="display">Pause</h1>
+            <p class="micro">Même la médiocrité a droit à un break</p>
+            <div class="btn-row">
+              <a class="btn" href="#race-hud" data-go="race-hud">Reprendre</a>
+              <a class="btn btn--ghost" href="#countdown" data-go="countdown">Recommencer</a>
+              <a
+                class="btn btn--secondary"
+                href="#settings?from=pause"
+                data-go="settings"
+                data-from="pause"
+                >Options</a
+              >
+              <a class="btn btn--danger" href="#hub" data-go="hub">Quitter vers le hub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section data-screen="results" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--chase" aria-hidden="true"></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer modal-center">
+          <div class="plaque plaque--mint results-plaque">
+            <h1 class="display">Arrivée — Promenade Test</h1>
+            <table class="results-table">
+              <tbody>
+                <tr>
+                  <td>1.</td>
+                  <td>IA-A</td>
+                  <td>01:18.42</td>
+                </tr>
+                <tr class="is-you">
+                  <td>2.</td>
+                  <td>Toi</td>
+                  <td>01:24.08</td>
+                </tr>
+                <tr>
+                  <td>3.</td>
+                  <td>IA-B</td>
+                  <td>01:26.11</td>
+                </tr>
+                <tr>
+                  <td>4.</td>
+                  <td>IA-C</td>
+                  <td>01:31.90</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="results-meta">Temps 01:24.08 · Meilleur tour 0:26.04</p>
+            <p class="results-meta micro">Hex : « Pas mal pour un outsider. Pub demain. »</p>
+            <p class="results-meta"><strong>Récompense :</strong> +45 Studs sales</p>
+            <div class="btn-row">
+              <a class="btn btn--mint" href="#hub" data-go="hub">Retour hub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section data-screen="settings" hidden>
+      <div class="mocup-frame">
+        <div class="mocup-world mocup-world--asphalt" aria-hidden="true"></div>
+        <div class="mocup-scrim" aria-hidden="true"></div>
+        <div class="mocup-layer modal-center">
+          <div class="plaque settings-plaque">
+            <h1 class="display">Paramètres</h1>
+            <section class="settings-section">
+              <h2>Audio</h2>
+              <div class="settings-row">
+                <label for="master">Master</label>
+                <input id="master" type="range" min="0" max="100" value="80" />
+              </div>
+              <div class="settings-row">
+                <label for="sfx">SFX</label>
+                <input id="sfx" type="range" min="0" max="100" value="90" />
+              </div>
+              <div class="settings-row">
+                <label for="announce">Annonces Hex</label>
+                <input id="announce" type="range" min="0" max="100" value="70" />
+              </div>
+            </section>
+            <section class="settings-section">
+              <h2>Accessibilité</h2>
+              <div class="settings-row">
+                <span>Échelle UI</span>
+                <span>
+                  <button type="button" class="btn" style="min-height: 2rem; font-size: 0.8rem">
+                    100%
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--ghost"
+                    style="min-height: 2rem; font-size: 0.8rem"
+                  >
+                    125%
+                  </button>
+                </span>
+              </div>
+              <div class="settings-row">
+                <label for="subs">Sous-titres annonces</label>
+                <input id="subs" type="checkbox" checked />
+              </div>
+            </section>
+            <section class="settings-section">
+              <h2>Contrôles</h2>
+              <p style="margin: 0; font-size: 0.9rem">
+                WASD · <span class="kbd">E</span> POI · <span class="kbd">Esc</span> pause
+              </p>
+            </section>
+            <section class="settings-section" style="border-bottom: none; margin-bottom: 0">
+              <h2>À propos</h2>
+              <p class="disclaimer" style="color: #5a5260">
+                Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.
+              </p>
+            </section>
+            <div class="btn-row settings-actions">
+              <a class="btn" id="settings-back" href="#title" data-go="title">Retour</a>
+            </div>
+            <p id="esc-hint" class="micro" style="margin-top: 0.75rem; text-align: center">
+              Esc → title
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/nav.js"></script>
+  </body>
+</html>

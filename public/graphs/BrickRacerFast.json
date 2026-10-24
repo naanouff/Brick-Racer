@@ -1,0 +1,75 @@
+{
+  "name": "Brick Racer Fast: opaques + sky + transparents + tonemap (no shadows / AO / SSR / bloom / AA)",
+  "resources": [
+    {
+      "name": "sceneDepth",
+      "format": "depth24plus",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "sceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    }
+  ],
+  "passes": [
+    {
+      "name": "02_Opaques",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["opaque"],
+      "colorLoadOp": "clear",
+      "depthLoadOp": "clear",
+      "clearColor": { "r": 0.35, "g": 0.55, "b": 0.95, "a": 1.0 }
+    },
+    {
+      "name": "03_Skybox",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "builtInPipeline": "skybox",
+      "colorLoadOp": "load",
+      "depthLoadOp": "load",
+      "vertexCount": 36,
+      "skyboxParams": {
+        "sunSize": 0.06,
+        "sunBloom": 1.35,
+        "starsThreshold": 0.995,
+        "timeOfDay": 12.0,
+        "clouds": { "density": 0.0, "scale": 2.2, "speed": 0.0, "brightness": 1.0 },
+        "gradientStops": [
+          { "offset": 0.0, "color": [0.04, 0.06, 0.1] },
+          { "offset": 0.42, "color": [0.35, 0.55, 0.95] },
+          { "offset": 1.0, "color": [0.15, 0.38, 0.92] }
+        ]
+      }
+    },
+    {
+      "name": "04_Transparents",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["transparent"],
+      "colorLoadOp": "load",
+      "depthLoadOp": "load"
+    },
+    {
+      "name": "Tone Mapping & Output",
+      "type": "fullscreen",
+      "inputs": ["sceneColor"],
+      "outputs": ["FINAL_OUTPUT"],
+      "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
+      "uniforms": { "exposure": { "type": "f32", "value": 0.85 } }
+    }
+  ]
+}

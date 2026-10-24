@@ -1,0 +1,357 @@
+{
+  "id": "UltraTerrainWithTextures",
+  "properties": {
+    "grassTexture": {
+      "name": "Grass Texture",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "rockTexture": {
+      "name": "Rock Texture",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "grassRoughness": {
+      "name": "Grass Roughness",
+      "type": "f32",
+      "defaultValue": 0.95
+    },
+    "rockRoughness": {
+      "name": "Rock Roughness",
+      "type": "f32",
+      "defaultValue": 0.8
+    },
+    "metallic": {
+      "name": "Metallic",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "heightBlend": {
+      "name": "Height Blend",
+      "type": "f32",
+      "defaultValue": 0.5
+    },
+    "emission": {
+      "name": "Emission",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.0, 0.0, 0.0]
+    }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_norm",
+      "type": "GetWorldNormal",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "World Normal", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "get_world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "wpos", "name": "World Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "grass_tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "grassTexture" }
+    },
+    {
+      "id": "rock_tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "rockTexture" }
+    },
+    {
+      "id": "grass_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "rock_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "height_blend_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "heightBlend" }
+    },
+    {
+      "id": "blend_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "grass_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "grassRoughness" }
+    },
+    {
+      "id": "rock_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "rockRoughness" }
+    },
+    {
+      "id": "rough_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "metal_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "metallic" }
+    },
+    {
+      "id": "emission_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "emission" }
+    },
+    {
+      "id": "one_const",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 1.0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "normal_z_const",
+      "type": "Constant",
+      "stage": "fragment",
+      "data": { "value": 1.0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "normal_xy_const",
+      "type": "Constant",
+      "stage": "fragment",
+      "data": { "value": 0.0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "build_normal",
+      "type": "CombineVec3",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "f_master",
+      "type": "TerrainMasterNode",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo (RGBA)", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic", "dataType": "f32" },
+        { "id": "emission", "name": "Emission", "dataType": "vec4f" }
+      ],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+
+    {
+      "fromNodeId": "grass_tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "grass_sample",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "get_uv",
+      "fromSocketId": "uv",
+      "toNodeId": "grass_sample",
+      "toSocketId": "uv"
+    },
+
+    {
+      "fromNodeId": "rock_tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rock_sample",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "get_uv", "fromSocketId": "uv", "toNodeId": "rock_sample", "toSocketId": "uv" },
+
+    {
+      "fromNodeId": "grass_sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "blend_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "rock_sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "blend_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "height_blend_prop",
+      "fromSocketId": "out",
+      "toNodeId": "blend_lerp",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "grass_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "rock_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "height_blend_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_lerp",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "blend_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "opacity"
+    },
+
+    {
+      "fromNodeId": "normal_xy_const",
+      "fromSocketId": "out",
+      "toNodeId": "build_normal",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "normal_xy_const",
+      "fromSocketId": "out",
+      "toNodeId": "build_normal",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "normal_z_const",
+      "fromSocketId": "out",
+      "toNodeId": "build_normal",
+      "toSocketId": "z"
+    },
+    {
+      "fromNodeId": "build_normal",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "normal"
+    },
+
+    {
+      "fromNodeId": "rough_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "roughness_factor"
+    },
+    {
+      "fromNodeId": "metal_prop",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "metallic_factor"
+    },
+    {
+      "fromNodeId": "emission_prop",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "emission"
+    }
+  ]
+}

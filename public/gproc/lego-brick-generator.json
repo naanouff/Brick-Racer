@@ -1,0 +1,373 @@
+{
+  "id": "lego-brick-generator",
+  "name": "Lego Brick",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-brick"
+  },
+  "parameters": {
+    "WidthStuds": {
+      "type": "int",
+      "value": 2
+    },
+    "LengthStuds": {
+      "type": "int",
+      "value": 4
+    },
+    "HeightPlates": {
+      "type": "int",
+      "value": 3
+    },
+    "Kind": {
+      "type": "string",
+      "value": "brick"
+    },
+    "SlopeAngle": {
+      "type": "int",
+      "value": 45
+    },
+    "Bevel": {
+      "type": "bool",
+      "value": true
+    },
+    "BevelWidth": {
+      "type": "float",
+      "value": 0.02
+    },
+    "Underside": {
+      "type": "bool",
+      "value": true
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "WidthStuds",
+          "name": "WidthStuds",
+          "type": "int"
+        },
+        {
+          "id": "LengthStuds",
+          "name": "LengthStuds",
+          "type": "int"
+        },
+        {
+          "id": "HeightPlates",
+          "name": "HeightPlates",
+          "type": "int"
+        },
+        {
+          "id": "Kind",
+          "name": "Kind",
+          "type": "string"
+        },
+        {
+          "id": "SlopeAngle",
+          "name": "SlopeAngle",
+          "type": "int"
+        },
+        {
+          "id": "RoundProfile",
+          "name": "RoundProfile",
+          "type": "string"
+        },
+        {
+          "id": "Bevel",
+          "name": "Bevel",
+          "type": "bool"
+        },
+        {
+          "id": "BevelWidth",
+          "name": "BevelWidth",
+          "type": "float"
+        },
+        {
+          "id": "Underside",
+          "name": "Underside",
+          "type": "bool"
+        }
+      ],
+      "properties": {
+        "WidthStuds": 2,
+        "LengthStuds": 4,
+        "HeightPlates": 3,
+        "Kind": "brick",
+        "SlopeAngle": 45,
+        "RoundProfile": "cylinder",
+        "Bevel": true,
+        "BevelWidth": 0.02,
+        "Underside": true
+      }
+    },
+    {
+      "id": "brick",
+      "type": "LegoBrick",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "widthStuds",
+          "name": "widthStuds",
+          "type": "int"
+        },
+        {
+          "id": "lengthStuds",
+          "name": "lengthStuds",
+          "type": "int"
+        },
+        {
+          "id": "heightPlates",
+          "name": "heightPlates",
+          "type": "int"
+        },
+        {
+          "id": "kind",
+          "name": "kind",
+          "type": "any"
+        },
+        {
+          "id": "slopeAngle",
+          "name": "slopeAngle",
+          "type": "int"
+        },
+        {
+          "id": "roundProfile",
+          "name": "roundProfile",
+          "type": "any"
+        },
+        {
+          "id": "bevel",
+          "name": "bevel",
+          "type": "any"
+        },
+        {
+          "id": "bevelWidth",
+          "name": "bevelWidth",
+          "type": "float"
+        },
+        {
+          "id": "underside",
+          "name": "underside",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "widthStuds": 2,
+        "lengthStuds": 4,
+        "heightPlates": 3,
+        "kind": "brick",
+        "slopeAngle": 45,
+        "roundProfile": "cylinder",
+        "bevel": true,
+        "bevelWidth": 0.02,
+        "underside": true
+      }
+    },
+    {
+      "id": "bake_maps",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 540,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 2.2,
+        "aoRadius": 0.08,
+        "aoSamples": 8,
+        "heightScale": 1
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 780,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l_w",
+      "fromNodeId": "group_in",
+      "fromSocketId": "WidthStuds",
+      "toNodeId": "brick",
+      "toSocketId": "widthStuds"
+    },
+    {
+      "id": "l_l",
+      "fromNodeId": "group_in",
+      "fromSocketId": "LengthStuds",
+      "toNodeId": "brick",
+      "toSocketId": "lengthStuds"
+    },
+    {
+      "id": "l_h",
+      "fromNodeId": "group_in",
+      "fromSocketId": "HeightPlates",
+      "toNodeId": "brick",
+      "toSocketId": "heightPlates"
+    },
+    {
+      "id": "l_k",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Kind",
+      "toNodeId": "brick",
+      "toSocketId": "kind"
+    },
+    {
+      "id": "l_a",
+      "fromNodeId": "group_in",
+      "fromSocketId": "SlopeAngle",
+      "toNodeId": "brick",
+      "toSocketId": "slopeAngle"
+    },
+    {
+      "id": "l_r",
+      "fromNodeId": "group_in",
+      "fromSocketId": "RoundProfile",
+      "toNodeId": "brick",
+      "toSocketId": "roundProfile"
+    },
+    {
+      "id": "l_bevel",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Bevel",
+      "toNodeId": "brick",
+      "toSocketId": "bevel"
+    },
+    {
+      "id": "l_bevel_w",
+      "fromNodeId": "group_in",
+      "fromSocketId": "BevelWidth",
+      "toNodeId": "brick",
+      "toSocketId": "bevelWidth"
+    },
+    {
+      "id": "l_under",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Underside",
+      "toNodeId": "brick",
+      "toSocketId": "underside"
+    },
+    {
+      "id": "l_bake",
+      "fromNodeId": "brick",
+      "fromSocketId": "geometry",
+      "toNodeId": "bake_maps",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_out_to_mesh_lod",
+      "fromNodeId": "bake_maps",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_out_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

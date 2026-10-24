@@ -1,0 +1,92 @@
+{
+  "id": "showcase_datejust_minute",
+  "name": "showcase_datejust_minute",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "event-begin",
+      "type": "EventBeginPlay",
+      "position": {
+        "x": 80,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ]
+    },
+    {
+      "id": "event-tick",
+      "type": "EventTick",
+      "position": {
+        "x": 80,
+        "y": 140
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "deltaTime",
+          "name": "Delta Time",
+          "type": "number"
+        },
+        {
+          "id": "totalTime",
+          "name": "Total Time",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "wall-clock-hand",
+      "type": "ApplyLocalWallClockHandRotation",
+      "position": {
+        "x": 380,
+        "y": 70
+      },
+      "inputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ],
+      "properties": {
+        "hand": "minute",
+        "eulerAxis": "y"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "begin-to-hand",
+      "fromNodeId": "event-begin",
+      "fromSocketId": "exec",
+      "toNodeId": "wall-clock-hand",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "tick-to-hand",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "exec",
+      "toNodeId": "wall-clock-hand",
+      "toSocketId": "exec"
+    }
+  ],
+  "exposedParameters": []
+}

@@ -1,0 +1,1341 @@
+{
+  "id": "pont_de_singe",
+  "nodes": [
+    {
+      "id": "primitivecube_9ao5soll9",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 112.61904761904746,
+        "y": 90.93253968253988
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geo_uz1dos10t",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.3,
+          0.05,
+          2
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "triangulate_76cbdacw3",
+      "type": "Triangulate",
+      "position": {
+        "x": 2025.999999999999,
+        "y": 470.91666666666714
+      },
+      "inputs": [
+        {
+          "id": "geo_d0k8ikdw6",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_syye8ry6a",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "subdividemesh_cbazeli9j",
+      "type": "SubdivideMesh",
+      "position": {
+        "x": 326.76190476190493,
+        "y": 83.7896825396823
+      },
+      "inputs": [
+        {
+          "id": "geo_eufm59l8a",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lvl_oagt5bj2f",
+          "name": "level",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_k6gaqg3yt",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "level": 4
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "setposition_69etffopt",
+      "type": "SetPosition",
+      "position": {
+        "x": 577.9047619047636,
+        "y": 248.6468253968269
+      },
+      "inputs": [
+        {
+          "id": "geo_zh99aivk5",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "off_0qxr54h3y",
+          "name": "offset",
+          "type": "vec3"
+        },
+        {
+          "id": "sel_dijl44tlj",
+          "name": "selection",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_q1jrtbpf3",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "combinevector_lj6dv63ph",
+      "type": "CombineVector",
+      "position": {
+        "x": 297.33333333333366,
+        "y": 243.36111111111197
+      },
+      "inputs": [
+        {
+          "id": "x_hd62squ3l",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_r66cutiq0",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_g1w4a09bd",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_liceprua7",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "noise_fpomi3xa9",
+      "type": "Noise",
+      "position": {
+        "x": 117.47619047619051,
+        "y": 209.36111111111168
+      },
+      "inputs": [
+        {
+          "id": "scale_pleftus06",
+          "name": "scale",
+          "type": "float"
+        },
+        {
+          "id": "amp_f9vppuog7",
+          "name": "amplitude",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "fac_0hbpw8kla",
+          "name": "fac",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "scale": "0.10",
+        "detail": 8,
+        "roughness": 0.5,
+        "amplitude": 0.012
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "viewer_nyuarbsee",
+      "type": "Viewer",
+      "position": {
+        "x": 566.619047619048,
+        "y": 87.78968253968215
+      },
+      "inputs": [
+        {
+          "id": "geo_in_dbsx32zqq",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_os4jas413",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "recalculatenormals_gwudebj8s",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 791.190476190477,
+        "y": 114.6468253968252
+      },
+      "inputs": [
+        {
+          "id": "geo_aoev757ra",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_ltdcl4ueo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "primitiveline_tmjgy6lvj",
+      "type": "PrimitiveLine",
+      "position": {
+        "x": 114.00000000000004,
+        "y": 185.25000000000006
+      },
+      "inputs": [
+        {
+          "id": "start_uno24xw3o",
+          "name": "start",
+          "type": "vec3"
+        },
+        {
+          "id": "end_qactgdemp",
+          "name": "end",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_9oy8p74hh",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "start": [
+          -5,
+          0,
+          0
+        ],
+        "end": [
+          5,
+          1,
+          0
+        ],
+        "resolution": 30
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "setposition_hzowshqfb",
+      "type": "SetPosition",
+      "position": {
+        "x": 1159.666666666667,
+        "y": 189.25000000000003
+      },
+      "inputs": [
+        {
+          "id": "geo_sty8qn2vs",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "off_mcr9yz4sh",
+          "name": "offset",
+          "type": "vec3"
+        },
+        {
+          "id": "sel_gc3190uog",
+          "name": "selection",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_le5r95s1q",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "inputattribute_k5a4pw7p0",
+      "type": "InputAttribute",
+      "position": {
+        "x": 116.33333333333331,
+        "y": 404.58333333333326
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val_lqxnsqg29",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "name": "position"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "instanceonpoints_blzk4wznv",
+      "type": "InstanceOnPoints",
+      "position": {
+        "x": 1586.3333333333346,
+        "y": 476.99999999999955
+      },
+      "inputs": [
+        {
+          "id": "pts_z3ajbtxv3",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "inst_xfqilaavk",
+          "name": "instance",
+          "type": "geometry"
+        },
+        {
+          "id": "s_sftw4vu6k",
+          "name": "scale",
+          "type": "vec3"
+        },
+        {
+          "id": "r_h8t4broz7",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_tf3468gvs",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "useSpiral": false,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "separatevector_u5lffrbmd",
+      "type": "SeparateVector",
+      "position": {
+        "x": 312.6666666666667,
+        "y": 405.91666666666663
+      },
+      "inputs": [
+        {
+          "id": "vec_lu6jhazn2",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x_7byyqyl40",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_a6o95om6m",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_jiqm7fx53",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_pevj3xiix",
+      "type": "Math",
+      "position": {
+        "x": 516.0000000000007,
+        "y": 411.24999999999983
+      },
+      "inputs": [
+        {
+          "id": "a_ttbumtdgi",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_ee69u2pir",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_lyb3uowwv",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_4p4udufnq",
+      "type": "Math",
+      "position": {
+        "x": 707.3333333333336,
+        "y": 416.58333333333326
+      },
+      "inputs": [
+        {
+          "id": "a_x1qy77qe6",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_7csmnnv4n",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_7txcvr9jf",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": "0.05"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combinevector_b51bojf85",
+      "type": "CombineVector",
+      "position": {
+        "x": 927.0000000000008,
+        "y": 405.9166666666663
+      },
+      "inputs": [
+        {
+          "id": "x_f05mb4cu8",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_96jdmw84g",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_9kugcwoc1",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_gppb7sy9s",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "inputattribute_izp63zdgl",
+      "type": "InputAttribute",
+      "position": {
+        "x": 137.08333333333337,
+        "y": 688.8958333333321
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val_5vhcuatpg",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "name": "position"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_djby4owj7",
+      "type": "Math",
+      "position": {
+        "x": 355.83333333333326,
+        "y": 686.8125000000001
+      },
+      "inputs": [
+        {
+          "id": "a_ywsnatgb4",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_h65djjtsj",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_8aj2ihn47",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": "0.2"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combinevector_myngc0yd5",
+      "type": "CombineVector",
+      "position": {
+        "x": 575.119047619048,
+        "y": 674.4315476190482
+      },
+      "inputs": [
+        {
+          "id": "x_u7ny89py3",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_ikqxbe8ra",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_tlt70y6xi",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_0uo1hoa6b",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "aligneulertovector_usm3kzq3o",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": 793.3333333333333,
+        "y": 675.1458333333335
+      },
+      "inputs": [
+        {
+          "id": "vector_9duk1ajxu",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor_qbyc2tg6h",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation_5lmmweiyh",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Y",
+        "factor": "1",
+        "vector": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "recalculatenormals_2c46adwq8",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 1816.666666666666,
+        "y": 464.7222222222219
+      },
+      "inputs": [
+        {
+          "id": "geo_fh3htp4lw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_171r0mvmk",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "primitivecurverectangle_j0a4t9ufr",
+      "type": "PrimitiveCurveRectangle",
+      "position": {
+        "x": -516.3333333333334,
+        "y": 1460.9166666666663
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "curve_nio0fr9vh",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "width": "0.1",
+        "height": "0.1"
+      }
+    },
+    {
+      "id": "curvetomesh_olpduk15c",
+      "type": "CurveToMesh",
+      "position": {
+        "x": -160,
+        "y": 1392.0454545454545
+      },
+      "inputs": [
+        {
+          "id": "c_kltwatmzq",
+          "name": "curve",
+          "type": "geometry"
+        },
+        {
+          "id": "p_jsftxj9q3",
+          "name": "profile",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "mesh_mcg4dut4l",
+          "name": "mesh",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "resolution": 16,
+        "radius": 0.01
+      }
+    },
+    {
+      "id": "triangulate_e6oeele30",
+      "type": "Triangulate",
+      "position": {
+        "x": 1067.9419191919196,
+        "y": 1364.7979797979806
+      },
+      "inputs": [
+        {
+          "id": "geo_5dy4mp712",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_d1vgmqp8b",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "groupoutput_uvsk72vjf",
+      "type": "GroupOutput",
+      "position": {
+        "x": 2494.047619047618,
+        "y": 730.1339285714288
+      },
+      "inputs": [
+        {
+          "id": "geo_in_sfkwnn83d",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "transformgeometry_kp3216bxs",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 133.75,
+        "y": 1392.8125
+      },
+      "inputs": [
+        {
+          "id": "geo_gaudhv1b9",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t_45bv2sd69",
+          "name": "translation",
+          "type": "vec3"
+        },
+        {
+          "id": "r_fnkxlrd59",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "s_jex6mlgli",
+          "name": "scale",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_0egtq7u1q",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          -0.01,
+          0.85
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "joingeometry_folf98ol8",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 2020.2380952380956,
+        "y": 674.6428571428569
+      },
+      "inputs": [
+        {
+          "id": "geo1_xb22234n2",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2_peir83o9i",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_mwzhwg0g5",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "recalculatenormals_14ix5j33q",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 384.28571428571405,
+        "y": 1456.3095238095248
+      },
+      "inputs": [
+        {
+          "id": "geo_vjp0qrjt1",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_dj46qkvav",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "curvetomesh_dilc512s2",
+      "type": "CurveToMesh",
+      "position": {
+        "x": -157,
+        "y": 1586.25
+      },
+      "inputs": [
+        {
+          "id": "c_l3gmwfne4",
+          "name": "curve",
+          "type": "geometry"
+        },
+        {
+          "id": "p_kurywpscs",
+          "name": "profile",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "mesh_qvx5l2xsk",
+          "name": "mesh",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "resolution": 16,
+        "radius": 0.1
+      }
+    },
+    {
+      "id": "transformgeometry_u2trywa0b",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 84.28571428571433,
+        "y": 1618.928571428572
+      },
+      "inputs": [
+        {
+          "id": "geo_kr446ltej",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t_4xai8ceby",
+          "name": "translation",
+          "type": "vec3"
+        },
+        {
+          "id": "r_jlw4gwsdl",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "s_1bmxk3d47",
+          "name": "scale",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_eujujwlct",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          -0.01,
+          -0.85
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "recalculatenormals_1jinf8r4b",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 397.142857142857,
+        "y": 1667.5000000000002
+      },
+      "inputs": [
+        {
+          "id": "geo_cush6rtz5",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_q12bijwfb",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "joingeometry_lp775zx8t",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 721.4285714285712,
+        "y": 1521.7857142857154
+      },
+      "inputs": [
+        {
+          "id": "geo1_bfm82qsnq",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2_ywetkm5w0",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_mxk7r6ctb",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 2274.047619047618,
+        "y": 730.1339285714288
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "9ee2ade5-3934-4e59-80fa-b7e217e61fbb",
+      "fromNodeId": "primitivecube_9ao5soll9",
+      "fromSocketId": "geo_uz1dos10t",
+      "toNodeId": "subdividemesh_cbazeli9j",
+      "toSocketId": "geo_eufm59l8a"
+    },
+    {
+      "id": "6e432f08-ed2b-4d62-a9e5-4e32ac34c0fe",
+      "fromNodeId": "subdividemesh_cbazeli9j",
+      "fromSocketId": "geo_out_k6gaqg3yt",
+      "toNodeId": "setposition_69etffopt",
+      "toSocketId": "geo_zh99aivk5"
+    },
+    {
+      "id": "357bfb47-1c73-4106-a63c-aff09f0c7744",
+      "fromNodeId": "combinevector_lj6dv63ph",
+      "fromSocketId": "vec_liceprua7",
+      "toNodeId": "setposition_69etffopt",
+      "toSocketId": "off_0qxr54h3y"
+    },
+    {
+      "id": "a376b844-1248-4a94-9f8b-90409088f124",
+      "fromNodeId": "noise_fpomi3xa9",
+      "fromSocketId": "fac_0hbpw8kla",
+      "toNodeId": "combinevector_lj6dv63ph",
+      "toSocketId": "y_r66cutiq0"
+    },
+    {
+      "id": "0fd10f35-de09-4225-b3de-3adfa4afdef8",
+      "fromNodeId": "subdividemesh_cbazeli9j",
+      "fromSocketId": "geo_out_k6gaqg3yt",
+      "toNodeId": "viewer_nyuarbsee",
+      "toSocketId": "geo_in_dbsx32zqq"
+    },
+    {
+      "id": "a8b4c302-f6d1-4dbe-8004-8dc405fe2eb3",
+      "fromNodeId": "setposition_69etffopt",
+      "fromSocketId": "geo_out_q1jrtbpf3",
+      "toNodeId": "recalculatenormals_gwudebj8s",
+      "toSocketId": "geo_aoev757ra"
+    },
+    {
+      "id": "99e59720-0987-4701-ae31-1f1b3e521a84",
+      "fromNodeId": "primitiveline_tmjgy6lvj",
+      "fromSocketId": "geo_9oy8p74hh",
+      "toNodeId": "setposition_hzowshqfb",
+      "toSocketId": "geo_sty8qn2vs"
+    },
+    {
+      "id": "297fa3b9-4a3c-449a-821f-48becbbcc07b",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "pts_z3ajbtxv3"
+    },
+    {
+      "id": "31ac891e-d274-4de1-902c-566e63f21549",
+      "fromNodeId": "recalculatenormals_gwudebj8s",
+      "fromSocketId": "geo_out_ltdcl4ueo",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "inst_xfqilaavk"
+    },
+    {
+      "id": "bb2d73a0-5b98-4191-b873-9c4828ac2679",
+      "fromNodeId": "inputattribute_k5a4pw7p0",
+      "fromSocketId": "val_lqxnsqg29",
+      "toNodeId": "separatevector_u5lffrbmd",
+      "toSocketId": "vec_lu6jhazn2"
+    },
+    {
+      "id": "fd3b9dd3-3180-40e2-9ed9-fac64e72999a",
+      "fromNodeId": "math_pevj3xiix",
+      "fromSocketId": "val_lyb3uowwv",
+      "toNodeId": "math_4p4udufnq",
+      "toSocketId": "a_x1qy77qe6"
+    },
+    {
+      "id": "34b503e8-47f2-4ecf-8b76-e8b1634289b3",
+      "fromNodeId": "math_4p4udufnq",
+      "fromSocketId": "val_7txcvr9jf",
+      "toNodeId": "combinevector_b51bojf85",
+      "toSocketId": "y_96jdmw84g"
+    },
+    {
+      "id": "c2c0ffb5-ec1d-4b52-83ac-d7733d36cdef",
+      "fromNodeId": "combinevector_b51bojf85",
+      "fromSocketId": "vec_gppb7sy9s",
+      "toNodeId": "setposition_hzowshqfb",
+      "toSocketId": "off_mcr9yz4sh"
+    },
+    {
+      "id": "c4381abb-4732-4fb9-bed0-0d330fc9835b",
+      "fromNodeId": "separatevector_u5lffrbmd",
+      "fromSocketId": "x_7byyqyl40",
+      "toNodeId": "math_pevj3xiix",
+      "toSocketId": "a_ttbumtdgi"
+    },
+    {
+      "id": "6a0636ee-5b7a-41b8-9148-a1ef9da4425c",
+      "fromNodeId": "separatevector_u5lffrbmd",
+      "fromSocketId": "x_7byyqyl40",
+      "toNodeId": "math_pevj3xiix",
+      "toSocketId": "b_ee69u2pir"
+    },
+    {
+      "id": "21552330-f671-4508-a41d-01a71d897b36",
+      "fromNodeId": "inputattribute_izp63zdgl",
+      "fromSocketId": "val_5vhcuatpg",
+      "toNodeId": "math_djby4owj7",
+      "toSocketId": "a_ywsnatgb4"
+    },
+    {
+      "id": "2fceba19-9829-481f-85bf-1587723762dd",
+      "fromNodeId": "math_djby4owj7",
+      "fromSocketId": "val_8aj2ihn47",
+      "toNodeId": "combinevector_myngc0yd5",
+      "toSocketId": "y_ikqxbe8ra"
+    },
+    {
+      "id": "f443a476-f033-4e14-b14d-4cfd99e9403e",
+      "fromNodeId": "combinevector_myngc0yd5",
+      "fromSocketId": "vec_0uo1hoa6b",
+      "toNodeId": "aligneulertovector_usm3kzq3o",
+      "toSocketId": "vector_9duk1ajxu"
+    },
+    {
+      "id": "72735ca5-d9e9-452d-9825-aba8eeae79cc",
+      "fromNodeId": "aligneulertovector_usm3kzq3o",
+      "fromSocketId": "rotation_5lmmweiyh",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "r_h8t4broz7"
+    },
+    {
+      "id": "74aae44f-c233-471a-b8b2-28a1a3e0ca63",
+      "fromNodeId": "instanceonpoints_blzk4wznv",
+      "fromSocketId": "geo_tf3468gvs",
+      "toNodeId": "recalculatenormals_2c46adwq8",
+      "toSocketId": "geo_fh3htp4lw"
+    },
+    {
+      "id": "2ff26c8f-7d57-4564-8691-f8c1a6175b91",
+      "fromNodeId": "recalculatenormals_2c46adwq8",
+      "fromSocketId": "geo_out_171r0mvmk",
+      "toNodeId": "triangulate_76cbdacw3",
+      "toSocketId": "geo_d0k8ikdw6"
+    },
+    {
+      "id": "84ffcb8a-5b1b-4c3a-aacb-a1ad01c64b84",
+      "fromNodeId": "primitivecurverectangle_j0a4t9ufr",
+      "fromSocketId": "curve_nio0fr9vh",
+      "toNodeId": "curvetomesh_olpduk15c",
+      "toSocketId": "p_jsftxj9q3"
+    },
+    {
+      "id": "c7a89ad7-f15a-44df-8a7b-2447a3b9ed19",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "curvetomesh_olpduk15c",
+      "toSocketId": "c_kltwatmzq"
+    },
+    {
+      "id": "c67fd1d5-48bb-44a1-a789-b248b98ee56f",
+      "fromNodeId": "curvetomesh_olpduk15c",
+      "fromSocketId": "mesh_mcg4dut4l",
+      "toNodeId": "transformgeometry_kp3216bxs",
+      "toSocketId": "geo_gaudhv1b9"
+    },
+    {
+      "id": "e67484e7-1819-46a5-a5b8-3ea1652eb313",
+      "fromNodeId": "triangulate_76cbdacw3",
+      "fromSocketId": "geo_out_syye8ry6a",
+      "toNodeId": "joingeometry_folf98ol8",
+      "toSocketId": "geo1_xb22234n2"
+    },
+    {
+      "id": "17d29510-c085-4095-bda4-584ebab4426b",
+      "fromNodeId": "transformgeometry_kp3216bxs",
+      "fromSocketId": "geo_out_0egtq7u1q",
+      "toNodeId": "recalculatenormals_14ix5j33q",
+      "toSocketId": "geo_vjp0qrjt1"
+    },
+    {
+      "id": "df7808e3-d3e7-474d-b6b6-5bee0348ded9",
+      "fromNodeId": "triangulate_e6oeele30",
+      "fromSocketId": "geo_out_d1vgmqp8b",
+      "toNodeId": "joingeometry_folf98ol8",
+      "toSocketId": "geo2_peir83o9i"
+    },
+    {
+      "id": "d763109d-cbaa-4c19-aef7-1364fb5717f3",
+      "fromNodeId": "primitivecurverectangle_j0a4t9ufr",
+      "fromSocketId": "curve_nio0fr9vh",
+      "toNodeId": "curvetomesh_dilc512s2",
+      "toSocketId": "p_kurywpscs"
+    },
+    {
+      "id": "6fb8f412-a22d-4ef1-8198-5c2989bc40d0",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "curvetomesh_dilc512s2",
+      "toSocketId": "c_l3gmwfne4"
+    },
+    {
+      "id": "ec98ab63-8b4d-4b1f-bf61-f8e3b3563020",
+      "fromNodeId": "curvetomesh_dilc512s2",
+      "fromSocketId": "mesh_qvx5l2xsk",
+      "toNodeId": "transformgeometry_u2trywa0b",
+      "toSocketId": "geo_kr446ltej"
+    },
+    {
+      "id": "ff3ec3fd-fdbe-4dd3-9191-c6d7fb7dfb3a",
+      "fromNodeId": "transformgeometry_u2trywa0b",
+      "fromSocketId": "geo_out_eujujwlct",
+      "toNodeId": "recalculatenormals_1jinf8r4b",
+      "toSocketId": "geo_cush6rtz5"
+    },
+    {
+      "id": "31acc808-3c88-4da7-b58a-17db8ad657e9",
+      "fromNodeId": "recalculatenormals_14ix5j33q",
+      "fromSocketId": "geo_out_dj46qkvav",
+      "toNodeId": "joingeometry_lp775zx8t",
+      "toSocketId": "geo1_bfm82qsnq"
+    },
+    {
+      "id": "a781b2ca-63dd-4e8f-b2cc-879ebf19e27b",
+      "fromNodeId": "recalculatenormals_1jinf8r4b",
+      "fromSocketId": "geo_out_q12bijwfb",
+      "toNodeId": "joingeometry_lp775zx8t",
+      "toSocketId": "geo2_ywetkm5w0"
+    },
+    {
+      "id": "eca9a717-bcca-4a63-bd82-85d121048db3",
+      "fromNodeId": "joingeometry_lp775zx8t",
+      "fromSocketId": "geo_out_mxk7r6ctb",
+      "toNodeId": "triangulate_e6oeele30",
+      "toSocketId": "geo_5dy4mp712"
+    },
+    {
+      "id": "923b5641-4be0-476c-96b9-66e6617b19ca_to_mesh_lod",
+      "fromNodeId": "joingeometry_folf98ol8",
+      "fromSocketId": "geo_out_mwzhwg0g5",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "923b5641-4be0-476c-96b9-66e6617b19ca_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "groupoutput_uvsk72vjf",
+      "toSocketId": "geo_in_sfkwnn83d"
+    }
+  ],
+  "frames": [
+    {
+      "id": "frame_1765949267793",
+      "label": "Planche",
+      "x": 79.04761904761892,
+      "y": 10.039682539682488,
+      "width": 894.2857142857142,
+      "height": 397.1428571428571,
+      "color": "#444444",
+      "collapsed": true
+    },
+    {
+      "id": "frame_1766034123364",
+      "label": "Bridge curve",
+      "x": 80.0000000000001,
+      "y": 140.35714285714283,
+      "width": 1397.3333333333333,
+      "height": 782.2857142857142,
+      "color": "#444444",
+      "collapsed": true
+    }
+  ],
+  "parameters": []
+}

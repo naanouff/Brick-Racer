@@ -1,0 +1,314 @@
+{
+  "id": "rock_b",
+  "nodes": [
+    {
+      "id": "boulder_main",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "boulder_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.9,
+          1.8,
+          0.8
+        ],
+        "center": [
+          0,
+          0.9,
+          0
+        ]
+      }
+    },
+    {
+      "id": "shade_boulder",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "boulder_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_boulder",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "boulder_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "base_cube",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 220
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "base_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.4,
+          0.3,
+          1.2
+        ],
+        "center": [
+          0,
+          0.15,
+          0
+        ]
+      }
+    },
+    {
+      "id": "shade_base",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "base_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_base",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "base_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "join_rock_b",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 620,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rock_b_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 820,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 600,
+        "y": 110
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "boulder_main",
+      "fromSocketId": "boulder_raw",
+      "toNodeId": "shade_boulder",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "shade_boulder",
+      "fromSocketId": "boulder_flat",
+      "toNodeId": "mat_boulder",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mat_boulder",
+      "fromSocketId": "boulder_geo",
+      "toNodeId": "join_rock_b",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "base_cube",
+      "fromSocketId": "base_raw",
+      "toNodeId": "shade_base",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "shade_base",
+      "fromSocketId": "base_flat",
+      "toNodeId": "mat_base",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "mat_base",
+      "fromSocketId": "base_geo",
+      "toNodeId": "join_rock_b",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l7_to_mesh_lod",
+      "fromNodeId": "join_rock_b",
+      "fromSocketId": "rock_b_joined",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l7_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

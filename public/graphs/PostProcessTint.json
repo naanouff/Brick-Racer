@@ -1,0 +1,40 @@
+{
+  "name": "Post-Process Tint (editor alpha fragment)",
+  "resources": [
+    {
+      "name": "sceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ldrBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    }
+  ],
+  "passes": [
+    {
+      "name": "Tone Mapping",
+      "type": "fullscreen",
+      "inputs": ["sceneColor"],
+      "outputs": ["ldrBuffer"],
+      "outputFormat": "rgba8unorm",
+      "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
+      "uniforms": { "exposure": { "type": "f32", "value": 1.0 } }
+    },
+    {
+      "name": "Tint",
+      "type": "fullscreen",
+      "inputs": ["ldrBuffer"],
+      "outputs": ["FINAL_OUTPUT"],
+      "outputFormat": "rgba8unorm",
+      "shaderGraphId": "PostProcessTintGraph"
+    }
+  ]
+}

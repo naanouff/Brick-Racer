@@ -48,6 +48,10 @@ function registerAppProtocol(): void {
 async function loadApp(win: BrowserWindow): Promise<void> {
   const devUrl = process.env.ELECTRON_RENDERER_URL;
   if (devUrl) {
+    win.webContents.on('console-message', ({ level, message, lineNumber, sourceId }) => {
+      if (level !== 'warning' && level !== 'error') return;
+      console.log(`[renderer:${level}] ${message} (${sourceId}:${lineNumber})`);
+    });
     await win.loadURL(devUrl);
     return;
   }

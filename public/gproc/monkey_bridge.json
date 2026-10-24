@@ -1,0 +1,2496 @@
+{
+  "id": "pont_de_singe_dynamique",
+  "name": "Monkey Bridge",
+  "metadata": {
+    "kind": "monkey-bridge",
+    "spawnAnchors": true
+  },
+  "parameters": [
+    {
+      "name": "BridgeLength",
+      "type": "float",
+      "value": 15
+    }
+  ],
+  "nodes": [
+    {
+      "id": "var_length",
+      "type": "Variable",
+      "position": {
+        "x": -450,
+        "y": 180
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val_len",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "name": "BridgeLength"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_density",
+      "type": "Math",
+      "position": {
+        "x": -200,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "a_dens",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_dens",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_count",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": 3
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combine_end_vec",
+      "type": "CombineVector",
+      "position": {
+        "x": -200,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "x_end",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_end",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_end",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_end",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "anchor_start",
+      "type": "ObjectTransform",
+      "position": {
+        "x": -450,
+        "y": 20
+      },
+      "inputs": [
+        {
+          "id": "entity",
+          "name": "entity",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "location",
+          "name": "location",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "entity": "Start"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "anchor_end",
+      "type": "ObjectTransform",
+      "position": {
+        "x": -450,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "entity",
+          "name": "entity",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "location",
+          "name": "location",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "entity": "End"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_span",
+      "type": "VectorMath",
+      "position": {
+        "x": -200,
+        "y": 20
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "DISTANCE"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_dir",
+      "type": "VectorMath",
+      "position": {
+        "x": -200,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "SUB"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_dir_xz",
+      "type": "VectorMath",
+      "position": {
+        "x": 0,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MULTIPLY",
+        "b": [
+          1,
+          0,
+          1
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combine_world_up",
+      "type": "CombineVector",
+      "position": {
+        "x": 0,
+        "y": 140
+      },
+      "inputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_side_raw",
+      "type": "VectorMath",
+      "position": {
+        "x": 180,
+        "y": 140
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "CROSS"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_xz_len",
+      "type": "VectorMath",
+      "position": {
+        "x": 180,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "LENGTH"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_rail_s",
+      "type": "Math",
+      "position": {
+        "x": 360,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "DIV",
+        "a": 0.85,
+        "b": 1
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combine_rail_s",
+      "type": "CombineVector",
+      "position": {
+        "x": 520,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_off_r",
+      "type": "VectorMath",
+      "position": {
+        "x": 700,
+        "y": 140
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "SCALE"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combine_neg",
+      "type": "CombineVector",
+      "position": {
+        "x": 700,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": -1,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_off_l",
+      "type": "VectorMath",
+      "position": {
+        "x": 880,
+        "y": 140
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "SCALE"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "setpos_rail_r",
+      "type": "SetPosition",
+      "position": {
+        "x": 1060,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "offset",
+          "name": "offset",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "setpos_rail_l",
+      "type": "SetPosition",
+      "position": {
+        "x": 1060,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "offset",
+          "name": "offset",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_from_start",
+      "type": "VectorMath",
+      "position": {
+        "x": 300,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "SUB"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_dot_span",
+      "type": "VectorMath",
+      "position": {
+        "x": 500,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "DOT"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "vec_len2",
+      "type": "VectorMath",
+      "position": {
+        "x": 500,
+        "y": 300
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "DOT"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_t",
+      "type": "Math",
+      "position": {
+        "x": 700,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "DIV",
+        "a": 0,
+        "b": 1
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_one_minus_t",
+      "type": "Math",
+      "position": {
+        "x": 900,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "SUB",
+        "a": 1,
+        "b": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_sag_k",
+      "type": "Math",
+      "position": {
+        "x": 700,
+        "y": 300
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": -0.8
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "primitiveline_tmjgy6lvj",
+      "type": "PrimitiveLine",
+      "position": {
+        "x": 114,
+        "y": 185
+      },
+      "inputs": [
+        {
+          "id": "start_uno24xw3o",
+          "name": "start",
+          "type": "vec3"
+        },
+        {
+          "id": "end_qactgdemp",
+          "name": "end",
+          "type": "vec3"
+        },
+        {
+          "id": "res_dyn",
+          "name": "resolution",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_9oy8p74hh",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "start": [
+          0,
+          0,
+          0
+        ],
+        "end": [
+          5,
+          1,
+          0
+        ],
+        "resolution": 30
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "primitivecube_9ao5soll9",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 112.6,
+        "y": 90.9
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geo_uz1dos10t",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.3,
+          0.05,
+          2
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "triangulate_76cbdacw3",
+      "type": "Triangulate",
+      "position": {
+        "x": 2026,
+        "y": 470.9
+      },
+      "inputs": [
+        {
+          "id": "geo_d0k8ikdw6",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_syye8ry6a",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "subdividemesh_cbazeli9j",
+      "type": "SubdivideMesh",
+      "position": {
+        "x": 326.7,
+        "y": 83.7
+      },
+      "inputs": [
+        {
+          "id": "geo_eufm59l8a",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lvl_oagt5bj2f",
+          "name": "level",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_k6gaqg3yt",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "level": 4
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "setposition_69etffopt",
+      "type": "SetPosition",
+      "position": {
+        "x": 577.9,
+        "y": 248.6
+      },
+      "inputs": [
+        {
+          "id": "geo_zh99aivk5",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "off_0qxr54h3y",
+          "name": "offset",
+          "type": "vec3"
+        },
+        {
+          "id": "sel_dijl44tlj",
+          "name": "selection",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_q1jrtbpf3",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "combinevector_lj6dv63ph",
+      "type": "CombineVector",
+      "position": {
+        "x": 297.3,
+        "y": 243.3
+      },
+      "inputs": [
+        {
+          "id": "x_hd62squ3l",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_r66cutiq0",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_g1w4a09bd",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_liceprua7",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "noise_fpomi3xa9",
+      "type": "Noise",
+      "position": {
+        "x": 117.4,
+        "y": 209.3
+      },
+      "inputs": [
+        {
+          "id": "scale_pleftus06",
+          "name": "scale",
+          "type": "float"
+        },
+        {
+          "id": "amp_f9vppuog7",
+          "name": "amplitude",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "fac_0hbpw8kla",
+          "name": "fac",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "scale": 2.2,
+        "detail": 8,
+        "roughness": 0.62,
+        "amplitude": 0.018
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "viewer_nyuarbsee",
+      "type": "Viewer",
+      "position": {
+        "x": 566.6,
+        "y": 87.7
+      },
+      "inputs": [
+        {
+          "id": "geo_in_dbsx32zqq",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_os4jas413",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "recalculatenormals_gwudebj8s",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 791.1,
+        "y": 114.6
+      },
+      "inputs": [
+        {
+          "id": "geo_aoev757ra",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_ltdcl4ueo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "bake_plank",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 1020,
+        "y": 114.6
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 3.4,
+        "aoRadius": 0.12,
+        "aoSamples": 8,
+        "heightScale": 1.35
+      },
+      "parentFrameId": "frame_1765949267793"
+    },
+    {
+      "id": "setposition_hzowshqfb",
+      "type": "SetPosition",
+      "position": {
+        "x": 1159.6,
+        "y": 189.2
+      },
+      "inputs": [
+        {
+          "id": "geo_sty8qn2vs",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "off_mcr9yz4sh",
+          "name": "offset",
+          "type": "vec3"
+        },
+        {
+          "id": "sel_gc3190uog",
+          "name": "selection",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_le5r95s1q",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "inputattribute_k5a4pw7p0",
+      "type": "InputAttribute",
+      "position": {
+        "x": 116.3,
+        "y": 404.5
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val_lqxnsqg29",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "name": "position"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "instanceonpoints_blzk4wznv",
+      "type": "InstanceOnPoints",
+      "position": {
+        "x": 1586.3,
+        "y": 477
+      },
+      "inputs": [
+        {
+          "id": "pts_z3ajbtxv3",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "inst_xfqilaavk",
+          "name": "instance",
+          "type": "geometry"
+        },
+        {
+          "id": "s_sftw4vu6k",
+          "name": "scale",
+          "type": "vec3"
+        },
+        {
+          "id": "r_h8t4broz7",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_tf3468gvs",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "useSpiral": false,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "separatevector_u5lffrbmd",
+      "type": "SeparateVector",
+      "position": {
+        "x": 312.6,
+        "y": 405.9
+      },
+      "inputs": [
+        {
+          "id": "vec_lu6jhazn2",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x_7byyqyl40",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_a6o95om6m",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_jiqm7fx53",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {},
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_pevj3xiix",
+      "type": "Math",
+      "position": {
+        "x": 516,
+        "y": 411.2
+      },
+      "inputs": [
+        {
+          "id": "a_ttbumtdgi",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_ee69u2pir",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_lyb3uowwv",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_4p4udufnq",
+      "type": "Math",
+      "position": {
+        "x": 707.3,
+        "y": 416.5
+      },
+      "inputs": [
+        {
+          "id": "a_x1qy77qe6",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_7csmnnv4n",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_7txcvr9jf",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": 1
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combinevector_b51bojf85",
+      "type": "CombineVector",
+      "position": {
+        "x": 927,
+        "y": 405.9
+      },
+      "inputs": [
+        {
+          "id": "x_f05mb4cu8",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_96jdmw84g",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_9kugcwoc1",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_gppb7sy9s",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "inputattribute_izp63zdgl",
+      "type": "InputAttribute",
+      "position": {
+        "x": 137,
+        "y": 688.9
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val_5vhcuatpg",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "name": "position"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "math_djby4owj7",
+      "type": "Math",
+      "position": {
+        "x": 355.8,
+        "y": 686.8
+      },
+      "inputs": [
+        {
+          "id": "a_ywsnatgb4",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b_h65djjtsj",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val_8aj2ihn47",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "MUL",
+        "a": 0,
+        "b": "0.2"
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "combinevector_myngc0yd5",
+      "type": "CombineVector",
+      "position": {
+        "x": 575.1,
+        "y": 674.4
+      },
+      "inputs": [
+        {
+          "id": "x_u7ny89py3",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y_ikqxbe8ra",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z_tlt70y6xi",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vec_0uo1hoa6b",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "aligneulertovector_usm3kzq3o",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": 793.3,
+        "y": 675.1
+      },
+      "inputs": [
+        {
+          "id": "vector_9duk1ajxu",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor_qbyc2tg6h",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation_5lmmweiyh",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "X",
+        "factor": "1",
+        "vector": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "frame_1766034123364"
+    },
+    {
+      "id": "recalculatenormals_2c46adwq8",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 1816.6,
+        "y": 464.7
+      },
+      "inputs": [
+        {
+          "id": "geo_fh3htp4lw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_171r0mvmk",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "primitivecurverectangle_j0a4t9ufr",
+      "type": "PrimitiveCurveRectangle",
+      "position": {
+        "x": -516.3,
+        "y": 1460.9
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "curve_nio0fr9vh",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "width": "0.1",
+        "height": "0.1"
+      }
+    },
+    {
+      "id": "curvetomesh_olpduk15c",
+      "type": "CurveToMesh",
+      "position": {
+        "x": -160,
+        "y": 1392
+      },
+      "inputs": [
+        {
+          "id": "c_kltwatmzq",
+          "name": "curve",
+          "type": "geometry"
+        },
+        {
+          "id": "p_jsftxj9q3",
+          "name": "profile",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "mesh_mcg4dut4l",
+          "name": "mesh",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "resolution": 16,
+        "radius": 0.01
+      }
+    },
+    {
+      "id": "triangulate_e6oeele30",
+      "type": "Triangulate",
+      "position": {
+        "x": 1067.9,
+        "y": 1364.8
+      },
+      "inputs": [
+        {
+          "id": "geo_5dy4mp712",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_d1vgmqp8b",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "bake_ropes",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 1280,
+        "y": 1364.8
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 2.5,
+        "aoRadius": 0.08,
+        "aoSamples": 8,
+        "heightScale": 1
+      }
+    },
+    {
+      "id": "groupoutput_uvsk72vjf",
+      "type": "GroupOutput",
+      "position": {
+        "x": 2494,
+        "y": 730.1
+      },
+      "inputs": [
+        {
+          "id": "geo_in_sfkwnn83d",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "transformgeometry_kp3216bxs",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 133.7,
+        "y": 1392.8
+      },
+      "inputs": [
+        {
+          "id": "geo_gaudhv1b9",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t_45bv2sd69",
+          "name": "translation",
+          "type": "vec3"
+        },
+        {
+          "id": "r_fnkxlrd59",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "s_jex6mlgli",
+          "name": "scale",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_0egtq7u1q",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          -0.01,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "joingeometry_folf98ol8",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 2020.2,
+        "y": 674.6
+      },
+      "inputs": [
+        {
+          "id": "geo1_xb22234n2",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2_peir83o9i",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_mwzhwg0g5",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "recalculatenormals_14ix5j33q",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 384.3,
+        "y": 1456.3
+      },
+      "inputs": [
+        {
+          "id": "geo_vjp0qrjt1",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_dj46qkvav",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "curvetomesh_dilc512s2",
+      "type": "CurveToMesh",
+      "position": {
+        "x": -157,
+        "y": 1586.2
+      },
+      "inputs": [
+        {
+          "id": "c_l3gmwfne4",
+          "name": "curve",
+          "type": "geometry"
+        },
+        {
+          "id": "p_kurywpscs",
+          "name": "profile",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "mesh_qvx5l2xsk",
+          "name": "mesh",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "resolution": 16,
+        "radius": 0.1
+      }
+    },
+    {
+      "id": "transformgeometry_u2trywa0b",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 84.3,
+        "y": 1618.9
+      },
+      "inputs": [
+        {
+          "id": "geo_kr446ltej",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t_4xai8ceby",
+          "name": "translation",
+          "type": "vec3"
+        },
+        {
+          "id": "r_jlw4gwsdl",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "s_1bmxk3d47",
+          "name": "scale",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_eujujwlct",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          -0.01,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "recalculatenormals_1jinf8r4b",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 397.1,
+        "y": 1667.5
+      },
+      "inputs": [
+        {
+          "id": "geo_cush6rtz5",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_q12bijwfb",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "joingeometry_lp775zx8t",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 721.4,
+        "y": 1521.8
+      },
+      "inputs": [
+        {
+          "id": "geo1_bfm82qsnq",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2_ywetkm5w0",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out_mxk7r6ctb",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 2274,
+        "y": 730.1
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "link_len_to_combine",
+      "fromNodeId": "var_length",
+      "fromSocketId": "val_len",
+      "toNodeId": "combine_end_vec",
+      "toSocketId": "x_end"
+    },
+    {
+      "id": "link_len_to_math",
+      "fromNodeId": "vec_span",
+      "fromSocketId": "value",
+      "toNodeId": "math_density",
+      "toSocketId": "a_dens"
+    },
+    {
+      "id": "link_start_to_line",
+      "fromNodeId": "anchor_start",
+      "fromSocketId": "location",
+      "toNodeId": "primitiveline_tmjgy6lvj",
+      "toSocketId": "start_uno24xw3o"
+    },
+    {
+      "id": "link_end_to_line",
+      "fromNodeId": "anchor_end",
+      "fromSocketId": "location",
+      "toNodeId": "primitiveline_tmjgy6lvj",
+      "toSocketId": "end_qactgdemp"
+    },
+    {
+      "id": "link_start_to_span",
+      "fromNodeId": "anchor_start",
+      "fromSocketId": "location",
+      "toNodeId": "vec_span",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_end_to_span",
+      "fromNodeId": "anchor_end",
+      "fromSocketId": "location",
+      "toNodeId": "vec_span",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_end_to_dir",
+      "fromNodeId": "anchor_end",
+      "fromSocketId": "location",
+      "toNodeId": "vec_dir",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_start_to_dir",
+      "fromNodeId": "anchor_start",
+      "fromSocketId": "location",
+      "toNodeId": "vec_dir",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_dens_to_line",
+      "fromNodeId": "math_density",
+      "fromSocketId": "val_count",
+      "toNodeId": "primitiveline_tmjgy6lvj",
+      "toSocketId": "res_dyn"
+    },
+    {
+      "id": "9ee2ade5-3934-4e59-80fa-b7e217e61fbb",
+      "fromNodeId": "primitivecube_9ao5soll9",
+      "fromSocketId": "geo_uz1dos10t",
+      "toNodeId": "subdividemesh_cbazeli9j",
+      "toSocketId": "geo_eufm59l8a"
+    },
+    {
+      "id": "6e432f08-ed2b-4d62-a9e5-4e32ac34c0fe",
+      "fromNodeId": "subdividemesh_cbazeli9j",
+      "fromSocketId": "geo_out_k6gaqg3yt",
+      "toNodeId": "setposition_69etffopt",
+      "toSocketId": "geo_zh99aivk5"
+    },
+    {
+      "id": "357bfb47-1c73-4106-a63c-aff09f0c7744",
+      "fromNodeId": "combinevector_lj6dv63ph",
+      "fromSocketId": "vec_liceprua7",
+      "toNodeId": "setposition_69etffopt",
+      "toSocketId": "off_0qxr54h3y"
+    },
+    {
+      "id": "a376b844-1248-4a94-9f8b-90409088f124",
+      "fromNodeId": "noise_fpomi3xa9",
+      "fromSocketId": "fac_0hbpw8kla",
+      "toNodeId": "combinevector_lj6dv63ph",
+      "toSocketId": "y_r66cutiq0"
+    },
+    {
+      "id": "0fd10f35-de09-4225-b3de-3adfa4afdef8",
+      "fromNodeId": "subdividemesh_cbazeli9j",
+      "fromSocketId": "geo_out_k6gaqg3yt",
+      "toNodeId": "viewer_nyuarbsee",
+      "toSocketId": "geo_in_dbsx32zqq"
+    },
+    {
+      "id": "a8b4c302-f6d1-4dbe-8004-8dc405fe2eb3",
+      "fromNodeId": "setposition_69etffopt",
+      "fromSocketId": "geo_out_q1jrtbpf3",
+      "toNodeId": "recalculatenormals_gwudebj8s",
+      "toSocketId": "geo_aoev757ra"
+    },
+    {
+      "id": "99e59720-0987-4701-ae31-1f1b3e521a84",
+      "fromNodeId": "primitiveline_tmjgy6lvj",
+      "fromSocketId": "geo_9oy8p74hh",
+      "toNodeId": "setposition_hzowshqfb",
+      "toSocketId": "geo_sty8qn2vs"
+    },
+    {
+      "id": "297fa3b9-4a3c-449a-821f-48becbbcc07b",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "pts_z3ajbtxv3"
+    },
+    {
+      "id": "31ac891e-d274-4de1-902c-566e63f21549",
+      "fromNodeId": "recalculatenormals_gwudebj8s",
+      "fromSocketId": "geo_out_ltdcl4ueo",
+      "toNodeId": "bake_plank",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_bake_plank_inst",
+      "fromNodeId": "bake_plank",
+      "fromSocketId": "geometry",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "inst_xfqilaavk"
+    },
+    {
+      "id": "bb2d73a0-5b98-4191-b873-9c4828ac2679",
+      "fromNodeId": "inputattribute_k5a4pw7p0",
+      "fromSocketId": "val_lqxnsqg29",
+      "toNodeId": "separatevector_u5lffrbmd",
+      "toSocketId": "vec_lu6jhazn2"
+    },
+    {
+      "id": "fd3b9dd3-3180-40e2-9ed9-fac64e72999a",
+      "fromNodeId": "math_pevj3xiix",
+      "fromSocketId": "val_lyb3uowwv",
+      "toNodeId": "math_4p4udufnq",
+      "toSocketId": "a_x1qy77qe6"
+    },
+    {
+      "id": "34b503e8-47f2-4ecf-8b76-e8b1634289b3",
+      "fromNodeId": "math_4p4udufnq",
+      "fromSocketId": "val_7txcvr9jf",
+      "toNodeId": "combinevector_b51bojf85",
+      "toSocketId": "y_96jdmw84g"
+    },
+    {
+      "id": "c2c0ffb5-ec1d-4b52-83ac-d7733d36cdef",
+      "fromNodeId": "combinevector_b51bojf85",
+      "fromSocketId": "vec_gppb7sy9s",
+      "toNodeId": "setposition_hzowshqfb",
+      "toSocketId": "off_mcr9yz4sh"
+    },
+    {
+      "id": "link_pos_to_from_start",
+      "fromNodeId": "inputattribute_k5a4pw7p0",
+      "fromSocketId": "val_lqxnsqg29",
+      "toNodeId": "vec_from_start",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_start_to_from_start",
+      "fromNodeId": "anchor_start",
+      "fromSocketId": "location",
+      "toNodeId": "vec_from_start",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_from_start_to_dot",
+      "fromNodeId": "vec_from_start",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_dot_span",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_dir_to_dot",
+      "fromNodeId": "vec_dir",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_dot_span",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_dir_to_len2_a",
+      "fromNodeId": "vec_dir",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_len2",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_dir_to_len2_b",
+      "fromNodeId": "vec_dir",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_len2",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_dot_to_t",
+      "fromNodeId": "vec_dot_span",
+      "fromSocketId": "value",
+      "toNodeId": "math_t",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_len2_to_t",
+      "fromNodeId": "vec_len2",
+      "fromSocketId": "value",
+      "toNodeId": "math_t",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_t_to_one_minus",
+      "fromNodeId": "math_t",
+      "fromSocketId": "value",
+      "toNodeId": "math_one_minus_t",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_t_to_tt",
+      "fromNodeId": "math_t",
+      "fromSocketId": "value",
+      "toNodeId": "math_pevj3xiix",
+      "toSocketId": "a_ttbumtdgi"
+    },
+    {
+      "id": "link_one_minus_to_tt",
+      "fromNodeId": "math_one_minus_t",
+      "fromSocketId": "value",
+      "toNodeId": "math_pevj3xiix",
+      "toSocketId": "b_ee69u2pir"
+    },
+    {
+      "id": "link_span_to_sag_k",
+      "fromNodeId": "vec_span",
+      "fromSocketId": "value",
+      "toNodeId": "math_sag_k",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_sag_k_to_amp",
+      "fromNodeId": "math_sag_k",
+      "fromSocketId": "value",
+      "toNodeId": "math_4p4udufnq",
+      "toSocketId": "b_7csmnnv4n"
+    },
+    {
+      "id": "21552330-f671-4508-a41d-01a71d897b36",
+      "fromNodeId": "inputattribute_izp63zdgl",
+      "fromSocketId": "val_5vhcuatpg",
+      "toNodeId": "math_djby4owj7",
+      "toSocketId": "a_ywsnatgb4"
+    },
+    {
+      "id": "2fceba19-9829-481f-85bf-1587723762dd",
+      "fromNodeId": "math_djby4owj7",
+      "fromSocketId": "val_8aj2ihn47",
+      "toNodeId": "combinevector_myngc0yd5",
+      "toSocketId": "y_ikqxbe8ra"
+    },
+    {
+      "id": "f443a476-f033-4e14-b14d-4cfd99e9403e",
+      "fromNodeId": "vec_dir",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_dir_xz",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_dir_xz_to_align",
+      "fromNodeId": "vec_dir_xz",
+      "fromSocketId": "vector",
+      "toNodeId": "aligneulertovector_usm3kzq3o",
+      "toSocketId": "vector_9duk1ajxu"
+    },
+    {
+      "id": "link_up_to_side",
+      "fromNodeId": "combine_world_up",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_side_raw",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_dir_xz_to_side",
+      "fromNodeId": "vec_dir_xz",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_side_raw",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_dir_xz_to_len",
+      "fromNodeId": "vec_dir_xz",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_xz_len",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_len_to_rail_s",
+      "fromNodeId": "vec_xz_len",
+      "fromSocketId": "value",
+      "toNodeId": "math_rail_s",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_rail_s_to_combine",
+      "fromNodeId": "math_rail_s",
+      "fromSocketId": "value",
+      "toNodeId": "combine_rail_s",
+      "toSocketId": "x"
+    },
+    {
+      "id": "link_side_to_off_r",
+      "fromNodeId": "vec_side_raw",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_off_r",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_s_to_off_r",
+      "fromNodeId": "combine_rail_s",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_off_r",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_off_r_to_off_l",
+      "fromNodeId": "vec_off_r",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_off_l",
+      "toSocketId": "a"
+    },
+    {
+      "id": "link_neg_to_off_l",
+      "fromNodeId": "combine_neg",
+      "fromSocketId": "vector",
+      "toNodeId": "vec_off_l",
+      "toSocketId": "b"
+    },
+    {
+      "id": "link_sag_to_rail_r",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "setpos_rail_r",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "link_off_r_to_rail",
+      "fromNodeId": "vec_off_r",
+      "fromSocketId": "vector",
+      "toNodeId": "setpos_rail_r",
+      "toSocketId": "offset"
+    },
+    {
+      "id": "link_sag_to_rail_l",
+      "fromNodeId": "setposition_hzowshqfb",
+      "fromSocketId": "geo_out_le5r95s1q",
+      "toNodeId": "setpos_rail_l",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "link_off_l_to_rail",
+      "fromNodeId": "vec_off_l",
+      "fromSocketId": "vector",
+      "toNodeId": "setpos_rail_l",
+      "toSocketId": "offset"
+    },
+    {
+      "id": "72735ca5-d9e9-452d-9825-aba8eeae79cc",
+      "fromNodeId": "aligneulertovector_usm3kzq3o",
+      "fromSocketId": "rotation_5lmmweiyh",
+      "toNodeId": "instanceonpoints_blzk4wznv",
+      "toSocketId": "r_h8t4broz7"
+    },
+    {
+      "id": "74aae44f-c233-471a-b8b2-28a1a3e0ca63",
+      "fromNodeId": "instanceonpoints_blzk4wznv",
+      "fromSocketId": "geo_tf3468gvs",
+      "toNodeId": "recalculatenormals_2c46adwq8",
+      "toSocketId": "geo_fh3htp4lw"
+    },
+    {
+      "id": "2ff26c8f-7d57-4564-8691-f8c1a6175b91",
+      "fromNodeId": "recalculatenormals_2c46adwq8",
+      "fromSocketId": "geo_out_171r0mvmk",
+      "toNodeId": "triangulate_76cbdacw3",
+      "toSocketId": "geo_d0k8ikdw6"
+    },
+    {
+      "id": "84ffcb8a-5b1b-4c3a-aacb-a1ad01c64b84",
+      "fromNodeId": "primitivecurverectangle_j0a4t9ufr",
+      "fromSocketId": "curve_nio0fr9vh",
+      "toNodeId": "curvetomesh_olpduk15c",
+      "toSocketId": "p_jsftxj9q3"
+    },
+    {
+      "id": "c7a89ad7-f15a-44df-8a7b-2447a3b9ed19",
+      "fromNodeId": "setpos_rail_r",
+      "fromSocketId": "geometry",
+      "toNodeId": "curvetomesh_olpduk15c",
+      "toSocketId": "c_kltwatmzq"
+    },
+    {
+      "id": "c67fd1d5-48bb-44a1-a789-b248b98ee56f",
+      "fromNodeId": "curvetomesh_olpduk15c",
+      "fromSocketId": "mesh_mcg4dut4l",
+      "toNodeId": "transformgeometry_kp3216bxs",
+      "toSocketId": "geo_gaudhv1b9"
+    },
+    {
+      "id": "e67484e7-1819-46a5-a5b8-3ea1652eb313",
+      "fromNodeId": "triangulate_76cbdacw3",
+      "fromSocketId": "geo_out_syye8ry6a",
+      "toNodeId": "joingeometry_folf98ol8",
+      "toSocketId": "geo1_xb22234n2"
+    },
+    {
+      "id": "17d29510-c085-4095-bda4-584ebab4426b",
+      "fromNodeId": "transformgeometry_kp3216bxs",
+      "fromSocketId": "geo_out_0egtq7u1q",
+      "toNodeId": "recalculatenormals_14ix5j33q",
+      "toSocketId": "geo_vjp0qrjt1"
+    },
+    {
+      "id": "df7808e3-d3e7-474d-b6b6-5bee0348ded9",
+      "fromNodeId": "triangulate_e6oeele30",
+      "fromSocketId": "geo_out_d1vgmqp8b",
+      "toNodeId": "bake_ropes",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_bake_ropes_join",
+      "fromNodeId": "bake_ropes",
+      "fromSocketId": "geometry",
+      "toNodeId": "joingeometry_folf98ol8",
+      "toSocketId": "geo2_peir83o9i"
+    },
+    {
+      "id": "d763109d-cbaa-4c19-aef7-1364fb5717f3",
+      "fromNodeId": "primitivecurverectangle_j0a4t9ufr",
+      "fromSocketId": "curve_nio0fr9vh",
+      "toNodeId": "curvetomesh_dilc512s2",
+      "toSocketId": "p_kurywpscs"
+    },
+    {
+      "id": "6fb8f412-a22d-4ef1-8198-5c2989bc40d0",
+      "fromNodeId": "setpos_rail_l",
+      "fromSocketId": "geometry",
+      "toNodeId": "curvetomesh_dilc512s2",
+      "toSocketId": "c_l3gmwfne4"
+    },
+    {
+      "id": "ec98ab63-8b4d-4b1f-bf61-f8e3b3563020",
+      "fromNodeId": "curvetomesh_dilc512s2",
+      "fromSocketId": "mesh_qvx5l2xsk",
+      "toNodeId": "transformgeometry_u2trywa0b",
+      "toSocketId": "geo_kr446ltej"
+    },
+    {
+      "id": "ff3ec3fd-fdbe-4dd3-9191-c6d7fb7dfb3a",
+      "fromNodeId": "transformgeometry_u2trywa0b",
+      "fromSocketId": "geo_out_eujujwlct",
+      "toNodeId": "recalculatenormals_1jinf8r4b",
+      "toSocketId": "geo_cush6rtz5"
+    },
+    {
+      "id": "31acc808-3c88-4da7-b58a-17db8ad657e9",
+      "fromNodeId": "recalculatenormals_14ix5j33q",
+      "fromSocketId": "geo_out_dj46qkvav",
+      "toNodeId": "joingeometry_lp775zx8t",
+      "toSocketId": "geo1_bfm82qsnq"
+    },
+    {
+      "id": "a781b2ca-63dd-4e8f-b2cc-879ebf19e27b",
+      "fromNodeId": "recalculatenormals_1jinf8r4b",
+      "fromSocketId": "geo_out_q12bijwfb",
+      "toNodeId": "joingeometry_lp775zx8t",
+      "toSocketId": "geo2_ywetkm5w0"
+    },
+    {
+      "id": "eca9a717-bcca-4a63-bd82-85d121048db3",
+      "fromNodeId": "joingeometry_lp775zx8t",
+      "fromSocketId": "geo_out_mxk7r6ctb",
+      "toNodeId": "triangulate_e6oeele30",
+      "toSocketId": "geo_5dy4mp712"
+    },
+    {
+      "id": "923b5641-4be0-476c-96b9-66e6617b19ca_to_mesh_lod",
+      "fromNodeId": "joingeometry_folf98ol8",
+      "fromSocketId": "geo_out_mwzhwg0g5",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "923b5641-4be0-476c-96b9-66e6617b19ca_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "groupoutput_uvsk72vjf",
+      "toSocketId": "geo_in_sfkwnn83d"
+    }
+  ],
+  "frames": [
+    {
+      "id": "frame_1765949267793",
+      "label": "Planche",
+      "x": 79,
+      "y": 10,
+      "width": 894.2,
+      "height": 397.1,
+      "color": "#444444",
+      "collapsed": true
+    },
+    {
+      "id": "frame_1766034123364",
+      "label": "Bridge curve",
+      "x": -500,
+      "y": 50,
+      "width": 1800,
+      "height": 800,
+      "color": "#444444",
+      "collapsed": false
+    }
+  ]
+}

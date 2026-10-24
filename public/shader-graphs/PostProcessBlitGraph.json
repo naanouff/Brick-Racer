@@ -1,0 +1,74 @@
+{
+  "id": "PostProcessBlitGraph",
+  "name": "PostProcessBlitGraph",
+  "metadata": { "kind": "postprocess" },
+  "properties": {
+    "ldrBuffer": {
+      "type": "texture_2d",
+      "defaultValue": null,
+      "name": "Source"
+    }
+  },
+  "nodes": [
+    {
+      "id": "uv",
+      "type": "ScreenUV",
+      "position": { "x": 80, "y": 180 },
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "texProp",
+      "type": "Property",
+      "position": { "x": 80, "y": 40 },
+      "stage": "common",
+      "data": { "propertyName": "ldrBuffer" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "sample",
+      "type": "TextureSample",
+      "position": { "x": 320, "y": 100 },
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" },
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "A", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "master",
+      "type": "PostProcessMasterNode",
+      "position": { "x": 560, "y": 120 },
+      "stage": "fragment",
+      "inputs": [{ "id": "color", "name": "Color (RGBA)", "dataType": "vec4f" }],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "texProp",
+      "fromSocketId": "out",
+      "toNodeId": "sample",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "uv",
+      "fromSocketId": "uv",
+      "toNodeId": "sample",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "master",
+      "toSocketId": "color"
+    }
+  ]
+}

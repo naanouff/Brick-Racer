@@ -1,0 +1,182 @@
+{
+  "id": "rock_a",
+  "nodes": [
+    {
+      "id": "rock_body",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "rock_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          2.2,
+          0.5,
+          1.6
+        ],
+        "center": [
+          0,
+          0.25,
+          0
+        ]
+      }
+    },
+    {
+      "id": "shade_rock",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rock_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_rock",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rock_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 600,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 380,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "rock_body",
+      "fromSocketId": "rock_raw",
+      "toNodeId": "shade_rock",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "shade_rock",
+      "fromSocketId": "rock_flat",
+      "toNodeId": "mat_rock",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3_to_mesh_lod",
+      "fromNodeId": "mat_rock",
+      "fromSocketId": "rock_geo",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

@@ -1,0 +1,1007 @@
+{
+  "id": "clockwork-train",
+  "name": "Clockwork Train",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "clockwork",
+    "category": "prop",
+    "subcategory": "clockwork"
+  },
+  "parameters": {},
+  "nodes": [
+    {
+      "id": "gear_barrel",
+      "type": "SpurGear",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        },
+        {
+          "id": "faceWidth",
+          "name": "faceWidth",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 0.28,
+        "teeth": 16,
+        "faceWidth": 0.2,
+        "pressureAngle": 20
+      }
+    },
+    {
+      "id": "xf_barrel",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          1.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "gear_center",
+      "type": "SpurGear",
+      "position": {
+        "x": 0,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        },
+        {
+          "id": "faceWidth",
+          "name": "faceWidth",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 0.28,
+        "teeth": 12,
+        "faceWidth": 0.2,
+        "pressureAngle": 20
+      }
+    },
+    {
+      "id": "xf_center",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          3.92,
+          1.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          165
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "gear_escape",
+      "type": "EscapeWheel",
+      "position": {
+        "x": 0,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        },
+        {
+          "id": "faceWidth",
+          "name": "faceWidth",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 0.28,
+        "teeth": 10,
+        "faceWidth": 0.2,
+        "pressureAngle": 20
+      }
+    },
+    {
+      "id": "xf_escape",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          7,
+          1.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          162
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "anchor",
+      "type": "AnchorEscapement",
+      "position": {
+        "x": 0,
+        "y": 540
+      },
+      "inputs": [
+        {
+          "id": "bobLength",
+          "name": "bobLength",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bobLength": 0.55,
+        "palletReach": 0.4
+      }
+    },
+    {
+      "id": "xf_anchor",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 540
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          7,
+          -0.48,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "hand_hour",
+      "type": "ClockHand",
+      "position": {
+        "x": 0,
+        "y": 720
+      },
+      "inputs": [
+        {
+          "id": "length",
+          "name": "length",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "length": 1.1,
+        "width": 0.08,
+        "thickness": 0.05
+      }
+    },
+    {
+      "id": "xf_hand_hour",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 720
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          1.5,
+          0.14
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "hand_minute",
+      "type": "ClockHand",
+      "position": {
+        "x": 0,
+        "y": 860
+      },
+      "inputs": [
+        {
+          "id": "length",
+          "name": "length",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "length": 1.6,
+        "width": 0.05,
+        "thickness": 0.04
+      }
+    },
+    {
+      "id": "xf_hand_minute",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 860
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          3.92,
+          1.5,
+          0.14
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "hand_second",
+      "type": "ClockHand",
+      "position": {
+        "x": 0,
+        "y": 1000
+      },
+      "inputs": [
+        {
+          "id": "length",
+          "name": "length",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "length": 1.35,
+        "width": 0.03,
+        "thickness": 0.03
+      }
+    },
+    {
+      "id": "xf_hand_second",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 260,
+        "y": 1000
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          7,
+          1.5,
+          0.14
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "plate",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 1140
+      },
+      "inputs": [
+        {
+          "id": "size",
+          "name": "size",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          10,
+          3.4,
+          0.12
+        ],
+        "center": [
+          3.5,
+          1.5,
+          -0.35
+        ]
+      }
+    },
+    {
+      "id": "join_a",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 560,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_b",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 560,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_c",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 560,
+        "y": 480
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_d",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 800,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_e",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 800,
+        "y": 420
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_f",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 1040,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_g",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 1280,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 1540,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 1320,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "gear_barrel",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_barrel",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "gear_center",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_center",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "gear_escape",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_escape",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "anchor",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_anchor",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "hand_hour",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_hand_hour",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "hand_minute",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_hand_minute",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l7",
+      "fromNodeId": "hand_second",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_hand_second",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "j1",
+      "fromNodeId": "xf_barrel",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_a",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j2",
+      "fromNodeId": "xf_center",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_a",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j3",
+      "fromNodeId": "xf_escape",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_b",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j4",
+      "fromNodeId": "xf_anchor",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_b",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j5",
+      "fromNodeId": "join_a",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_c",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j6",
+      "fromNodeId": "join_b",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_c",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j7",
+      "fromNodeId": "xf_hand_hour",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_d",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j8",
+      "fromNodeId": "xf_hand_minute",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_d",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j9",
+      "fromNodeId": "join_c",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_e",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j10",
+      "fromNodeId": "join_d",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_e",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j11",
+      "fromNodeId": "join_e",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_f",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j12",
+      "fromNodeId": "xf_hand_second",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_f",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j13",
+      "fromNodeId": "join_f",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_g",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j14",
+      "fromNodeId": "plate",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_g",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "out_to_mesh_lod",
+      "fromNodeId": "join_g",
+      "fromSocketId": "geo_out",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "out_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

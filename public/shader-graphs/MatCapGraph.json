@@ -1,0 +1,126 @@
+{
+  "id": "MatCapGraph_v1",
+  "properties": {
+    "matcapTexture": {
+      "name": "MatCap Texture",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "_dummy": {
+      "name": "Dummy",
+      "type": "f32",
+      "defaultValue": 0.0
+    }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "position": { "x": 1000, "y": 50 },
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "position": { "x": 700, "y": 50 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_norm",
+      "type": "GetNormal",
+      "stage": "vertex",
+      "position": { "x": 700, "y": 150 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Norm", "dataType": "vec3f" }]
+    },
+    {
+      "id": "f_master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1000, "y": 300 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "prop_texture",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 450 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "texture_2d" }],
+      "data": { "propertyName": "matcapTexture" }
+    },
+    {
+      "id": "get_matcap_uvs",
+      "type": "GetMatCapUVs",
+      "stage": "fragment",
+      "position": { "x": 300, "y": 300 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "UVs", "dataType": "vec2f" }]
+    },
+    {
+      "id": "texture_sampler",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "position": { "x": 600, "y": 350 },
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "Alpha", "dataType": "f32" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+    {
+      "fromNodeId": "get_norm",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "normal"
+    },
+    {
+      "fromNodeId": "get_matcap_uvs",
+      "fromSocketId": "out",
+      "toNodeId": "texture_sampler",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "prop_texture",
+      "fromSocketId": "out",
+      "toNodeId": "texture_sampler",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "texture_sampler",
+      "fromSocketId": "rgb",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "texture_sampler",
+      "fromSocketId": "a",
+      "toNodeId": "f_master",
+      "toSocketId": "alpha"
+    }
+  ]
+}

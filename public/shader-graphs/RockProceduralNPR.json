@@ -1,0 +1,1195 @@
+{
+  "id": "RockProceduralNPR",
+  "properties": {
+    "seed": {
+      "name": "Seed",
+      "type": "f32",
+      "defaultValue": 0,
+      "exposed": true
+    },
+    "triplanarScale": {
+      "name": "Triplanar Scale",
+      "type": "f32",
+      "defaultValue": 1.2,
+      "exposed": true
+    },
+    "mossAmount": {
+      "name": "Moss Amount",
+      "type": "f32",
+      "defaultValue": 0.55,
+      "exposed": true
+    },
+    "aoStrength": {
+      "name": "AO Strength",
+      "type": "f32",
+      "defaultValue": 0.65,
+      "exposed": true
+    },
+    "rockColor": {
+      "name": "Rock Color",
+      "type": "vec3f",
+      "defaultValue": [
+        0.42,
+        0.38,
+        0.34
+      ],
+      "exposed": true
+    },
+    "mossColor": {
+      "name": "Moss Color",
+      "type": "vec3f",
+      "defaultValue": [
+        0.22,
+        0.34,
+        0.18
+      ],
+      "exposed": true
+    },
+    "wearColor": {
+      "name": "Edge Wear Color",
+      "type": "vec3f",
+      "defaultValue": [
+        0.58,
+        0.54,
+        0.5
+      ],
+      "exposed": true
+    },
+    "edgeWear": {
+      "name": "Edge Wear",
+      "type": "f32",
+      "defaultValue": 0.35,
+      "exposed": true
+    },
+    "shadowQuantization": {
+      "name": "Toon Steps",
+      "type": "f32",
+      "defaultValue": 3,
+      "exposed": true
+    },
+    "hatchingIntensity": {
+      "name": "Hatching",
+      "type": "f32",
+      "defaultValue": 0.45,
+      "exposed": true
+    },
+    "rimIntensity": {
+      "name": "Rim Intensity",
+      "type": "f32",
+      "defaultValue": 0.35,
+      "exposed": true
+    }
+  },
+  "metadata": {
+    "editorLayout": "manual"
+  },
+  "nodes": [
+    {
+      "id": "toon_master",
+      "type": "ToonMasterNode",
+      "stage": "fragment",
+      "position": {
+        "x": 1100,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "albedo",
+          "name": "Albedo",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "shadow_quantization",
+          "name": "Steps",
+          "dataType": "f32"
+        },
+        {
+          "id": "hatching_intensity",
+          "name": "Hatching",
+          "dataType": "f32"
+        },
+        {
+          "id": "rim_intensity",
+          "name": "Rim",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "pos",
+          "name": "Position",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "split_pos",
+      "type": "SplitVec3",
+      "stage": "fragment",
+      "position": {
+        "x": 180,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "In",
+          "dataType": "vec3f"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x",
+          "name": "X",
+          "dataType": "f32"
+        },
+        {
+          "id": "y",
+          "name": "Y",
+          "dataType": "f32"
+        },
+        {
+          "id": "z",
+          "name": "Z",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_scale",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 180,
+        "y": 120
+      },
+      "data": {
+        "propertyName": "triplanarScale"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_seed",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 180,
+        "y": 220
+      },
+      "data": {
+        "propertyName": "seed"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "reroute_scale",
+      "type": "Reroute",
+      "stage": "common",
+      "position": {
+        "x": 270,
+        "y": 10
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "reroute_seed",
+      "type": "Reroute",
+      "stage": "common",
+      "position": {
+        "x": 270,
+        "y": 230
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_x",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": -20
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_z",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 40
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "add_seed_x",
+      "type": "Add",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": -20
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "add_seed_z",
+      "type": "Add",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 40
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "noise_uv",
+      "type": "CombineVec2",
+      "stage": "fragment",
+      "position": {
+        "x": 680,
+        "y": 10
+      },
+      "inputs": [
+        {
+          "id": "x",
+          "name": "X",
+          "dataType": "f32"
+        },
+        {
+          "id": "y",
+          "name": "Y",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec2f"
+        }
+      ]
+    },
+    {
+      "id": "macro_noise",
+      "type": "FractalNoise",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 10
+      },
+      "data": {
+        "octaves": 4
+      },
+      "inputs": [
+        {
+          "id": "uv",
+          "name": "UV",
+          "dataType": "vec2f"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "vertex_color",
+      "type": "VertexColor",
+      "stage": "fragment",
+      "position": {
+        "x": 0,
+        "y": 260
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "color",
+          "name": "Color",
+          "dataType": "vec4f"
+        }
+      ]
+    },
+    {
+      "id": "mesh_maps",
+      "type": "MeshMaps",
+      "stage": "fragment",
+      "position": {
+        "x": 180,
+        "y": 260
+      },
+      "inputs": [
+        {
+          "id": "color",
+          "name": "Vertex Color",
+          "dataType": "vec4f"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "concavity",
+          "name": "Concavity",
+          "dataType": "f32"
+        },
+        {
+          "id": "convexity",
+          "name": "Convexity",
+          "dataType": "f32"
+        },
+        {
+          "id": "ao",
+          "name": "AO",
+          "dataType": "f32"
+        },
+        {
+          "id": "height",
+          "name": "Height",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_rock_color",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 260
+      },
+      "data": {
+        "propertyName": "rockColor"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "prop_moss_color",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 340
+      },
+      "data": {
+        "propertyName": "mossColor"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "prop_wear_color",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 420
+      },
+      "data": {
+        "propertyName": "wearColor"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "prop_moss_amt",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 500
+      },
+      "data": {
+        "propertyName": "mossAmount"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_edge_wear",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 360,
+        "y": 580
+      },
+      "data": {
+        "propertyName": "edgeWear"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_ao_str",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 260
+      },
+      "data": {
+        "propertyName": "aoStrength"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_moss_mask",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 340
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_edge_mask",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 420
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "lerp_moss",
+      "type": "Lerp",
+      "stage": "fragment",
+      "position": {
+        "x": 680,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "t",
+          "name": "T",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "lerp_wear",
+      "type": "Lerp",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "t",
+          "name": "T",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "mul_macro",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "macro_variation",
+      "type": "Add",
+      "stage": "fragment",
+      "position": {
+        "x": 680,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "const_macro_base",
+      "type": "ConstantFloat",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 80
+      },
+      "data": {
+        "value": 0.75
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "const_macro_amp",
+      "type": "ConstantFloat",
+      "stage": "fragment",
+      "position": {
+        "x": 520,
+        "y": 160
+      },
+      "data": {
+        "value": 0.25
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_noise_amp",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 680,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_ao",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 380
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "f32"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "mul_ao_color",
+      "type": "Multiply",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 460
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "dataType": "vec3f"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "dataType": "f32"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "vec3f"
+        }
+      ]
+    },
+    {
+      "id": "prop_shadow_q",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 540
+      },
+      "data": {
+        "propertyName": "shadowQuantization"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_hatching",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 620
+      },
+      "data": {
+        "propertyName": "hatchingIntensity"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    },
+    {
+      "id": "prop_rim",
+      "type": "Property",
+      "stage": "fragment",
+      "position": {
+        "x": 860,
+        "y": 700
+      },
+      "data": {
+        "propertyName": "rimIntensity"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "Out",
+          "dataType": "f32"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "world_pos",
+      "fromSocketId": "pos",
+      "toNodeId": "split_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "split_pos",
+      "fromSocketId": "x",
+      "toNodeId": "mul_x",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_scale",
+      "fromSocketId": "out",
+      "toNodeId": "reroute_scale",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "reroute_scale",
+      "fromSocketId": "out",
+      "toNodeId": "mul_x",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_pos",
+      "fromSocketId": "z",
+      "toNodeId": "mul_z",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "reroute_scale",
+      "fromSocketId": "out",
+      "toNodeId": "mul_z",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_x",
+      "fromSocketId": "out",
+      "toNodeId": "add_seed_x",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_seed",
+      "fromSocketId": "out",
+      "toNodeId": "reroute_seed",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "reroute_seed",
+      "fromSocketId": "out",
+      "toNodeId": "add_seed_x",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_z",
+      "fromSocketId": "out",
+      "toNodeId": "add_seed_z",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "reroute_seed",
+      "fromSocketId": "out",
+      "toNodeId": "add_seed_z",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_seed_x",
+      "fromSocketId": "out",
+      "toNodeId": "noise_uv",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "add_seed_z",
+      "fromSocketId": "out",
+      "toNodeId": "noise_uv",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "noise_uv",
+      "fromSocketId": "out",
+      "toNodeId": "macro_noise",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "vertex_color",
+      "fromSocketId": "color",
+      "toNodeId": "mesh_maps",
+      "toSocketId": "color"
+    },
+    {
+      "fromNodeId": "prop_rock_color",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_moss",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_moss_color",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_moss",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mesh_maps",
+      "fromSocketId": "concavity",
+      "toNodeId": "mul_moss_mask",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_moss_amt",
+      "fromSocketId": "out",
+      "toNodeId": "mul_moss_mask",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_moss_mask",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_moss",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "lerp_moss",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_wear",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_wear_color",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_wear",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mesh_maps",
+      "fromSocketId": "convexity",
+      "toNodeId": "mul_edge_mask",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_edge_wear",
+      "fromSocketId": "out",
+      "toNodeId": "mul_edge_mask",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_edge_mask",
+      "fromSocketId": "out",
+      "toNodeId": "lerp_wear",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "macro_noise",
+      "fromSocketId": "out",
+      "toNodeId": "mul_noise_amp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "const_macro_amp",
+      "fromSocketId": "out",
+      "toNodeId": "mul_noise_amp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "const_macro_base",
+      "fromSocketId": "out",
+      "toNodeId": "macro_variation",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_noise_amp",
+      "fromSocketId": "out",
+      "toNodeId": "macro_variation",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "lerp_wear",
+      "fromSocketId": "out",
+      "toNodeId": "mul_macro",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "macro_variation",
+      "fromSocketId": "out",
+      "toNodeId": "mul_macro",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mesh_maps",
+      "fromSocketId": "ao",
+      "toNodeId": "mul_ao",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_ao_str",
+      "fromSocketId": "out",
+      "toNodeId": "mul_ao",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_macro",
+      "fromSocketId": "out",
+      "toNodeId": "mul_ao_color",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_ao",
+      "fromSocketId": "out",
+      "toNodeId": "mul_ao_color",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mul_ao_color",
+      "fromSocketId": "out",
+      "toNodeId": "toon_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "prop_shadow_q",
+      "fromSocketId": "out",
+      "toNodeId": "toon_master",
+      "toSocketId": "shadow_quantization"
+    },
+    {
+      "fromNodeId": "prop_hatching",
+      "fromSocketId": "out",
+      "toNodeId": "toon_master",
+      "toSocketId": "hatching_intensity"
+    },
+    {
+      "fromNodeId": "prop_rim",
+      "fromSocketId": "out",
+      "toNodeId": "toon_master",
+      "toSocketId": "rim_intensity"
+    }
+  ]
+}

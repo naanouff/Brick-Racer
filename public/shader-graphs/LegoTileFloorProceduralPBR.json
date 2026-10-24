@@ -1,0 +1,478 @@
+{
+  "id": "LegoTileFloorProceduralPBR",
+  "properties": {
+    "seed": {
+      "name": "Seed",
+      "type": "f32",
+      "defaultValue": 3,
+      "exposed": true
+    },
+    "tileScale": {
+      "name": "Tile Scale",
+      "type": "f32",
+      "defaultValue": 1.35,
+      "exposed": true
+    },
+    "gapWidth": {
+      "name": "Bevel Width",
+      "type": "f32",
+      "defaultValue": 0.045,
+      "exposed": true
+    },
+    "studAmount": {
+      "name": "Stud Amount",
+      "type": "f32",
+      "defaultValue": 0.02,
+      "exposed": true
+    },
+    "normalDetailScale": {
+      "name": "Normal Strength",
+      "type": "f32",
+      "defaultValue": 0.85,
+      "exposed": true
+    },
+    "colorA": {
+      "name": "Light Grey",
+      "type": "vec3f",
+      "defaultValue": [0.82, 0.82, 0.84],
+      "exposed": true
+    },
+    "colorB": {
+      "name": "Mid Grey",
+      "type": "vec3f",
+      "defaultValue": [0.52, 0.53, 0.55],
+      "exposed": true
+    },
+    "colorC": {
+      "name": "Dark / Black",
+      "type": "vec3f",
+      "defaultValue": [0.14, 0.14, 0.15],
+      "exposed": true
+    },
+    "colorD": {
+      "name": "Warm Beige",
+      "type": "vec3f",
+      "defaultValue": [0.72, 0.66, 0.55],
+      "exposed": true
+    },
+    "accentA": {
+      "name": "Accent Green",
+      "type": "vec3f",
+      "defaultValue": [0.18, 0.55, 0.26],
+      "exposed": true
+    },
+    "accentB": {
+      "name": "Accent Red",
+      "type": "vec3f",
+      "defaultValue": [0.78, 0.16, 0.14],
+      "exposed": true
+    },
+    "accentC": {
+      "name": "Accent Blue",
+      "type": "vec3f",
+      "defaultValue": [0.16, 0.42, 0.78],
+      "exposed": true
+    },
+    "accentD": {
+      "name": "Accent Yellow",
+      "type": "vec3f",
+      "defaultValue": [0.92, 0.72, 0.12],
+      "exposed": true
+    },
+    "roughness": {
+      "name": "Roughness",
+      "type": "f32",
+      "defaultValue": 0.36,
+      "exposed": true
+    },
+    "roughnessVary": {
+      "name": "Per-Tile Gloss Vary",
+      "type": "f32",
+      "defaultValue": 0.18,
+      "exposed": true
+    },
+    "gapRoughness": {
+      "name": "Bevel Roughness Boost",
+      "type": "f32",
+      "defaultValue": 0.18,
+      "exposed": true
+    },
+    "metallic": {
+      "name": "Metallic",
+      "type": "f32",
+      "defaultValue": 0.02,
+      "exposed": true
+    },
+    "opacity": {
+      "name": "Opacity",
+      "type": "f32",
+      "defaultValue": 1,
+      "exposed": true
+    }
+  },
+  "metadata": {
+    "editorLayout": "manual"
+  },
+  "nodes": [
+    {
+      "id": "pbr_master",
+      "type": "PBRMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1280, "y": 160 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness F", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic F", "dataType": "f32" },
+        { "id": "anisotropy", "name": "Anisotropy", "dataType": "f32" },
+        { "id": "anisotropyRotation", "name": "Rotation", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 40 },
+      "inputs": [],
+      "outputs": [{ "id": "pos", "name": "Position", "dataType": "vec3f" }]
+    },
+    {
+      "id": "world_normal",
+      "type": "GetWorldNormal",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 320 },
+      "inputs": [],
+      "outputs": [{ "id": "norm", "name": "Normal", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_seed",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 120 },
+      "data": { "propertyName": "seed" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_scale",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 180 },
+      "data": { "propertyName": "tileScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_gap",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 240 },
+      "data": { "propertyName": "gapWidth" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_stud",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 280 },
+      "data": { "propertyName": "studAmount" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_color_a",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 360 },
+      "data": { "propertyName": "colorA" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_color_b",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 410 },
+      "data": { "propertyName": "colorB" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_color_c",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 460 },
+      "data": { "propertyName": "colorC" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_color_d",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 510 },
+      "data": { "propertyName": "colorD" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_accent_a",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 560 },
+      "data": { "propertyName": "accentA" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_accent_b",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 610 },
+      "data": { "propertyName": "accentB" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_accent_c",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 660 },
+      "data": { "propertyName": "accentC" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_accent_d",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 710 },
+      "data": { "propertyName": "accentD" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_roughness",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 760 },
+      "data": { "propertyName": "roughness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_rough_vary",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 810 },
+      "data": { "propertyName": "roughnessVary" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_gap_rough",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 180, "y": 860 },
+      "data": { "propertyName": "gapRoughness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "lego_fn",
+      "type": "CustomFunction",
+      "stage": "fragment",
+      "position": { "x": 480, "y": 80 },
+      "data": { "functionName": "lego_tile_look" },
+      "inputs": [
+        { "id": "pos", "name": "Position", "dataType": "vec3f" },
+        { "id": "seed", "name": "Seed", "dataType": "f32" },
+        { "id": "scale", "name": "Scale", "dataType": "f32" },
+        { "id": "gapWidth", "name": "Gap", "dataType": "f32" },
+        { "id": "studAmount", "name": "Studs", "dataType": "f32" },
+        { "id": "colorA", "name": "Color A", "dataType": "vec3f" },
+        { "id": "colorB", "name": "Color B", "dataType": "vec3f" },
+        { "id": "colorC", "name": "Color C", "dataType": "vec3f" },
+        { "id": "colorD", "name": "Color D", "dataType": "vec3f" },
+        { "id": "accentA", "name": "Accent A", "dataType": "vec3f" },
+        { "id": "accentB", "name": "Accent B", "dataType": "vec3f" },
+        { "id": "accentC", "name": "Accent C", "dataType": "vec3f" },
+        { "id": "accentD", "name": "Accent D", "dataType": "vec3f" },
+        { "id": "roughness", "name": "Roughness", "dataType": "f32" },
+        { "id": "roughnessVary", "name": "Rough Vary", "dataType": "f32" },
+        { "id": "gapRoughness", "name": "Gap Rough", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Look", "dataType": "vec4f" }]
+    },
+    {
+      "id": "split_look",
+      "type": "SplitVec4",
+      "stage": "fragment",
+      "position": { "x": 720, "y": 80 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec4f" }],
+      "outputs": [
+        { "id": "x", "name": "R", "dataType": "f32" },
+        { "id": "y", "name": "G", "dataType": "f32" },
+        { "id": "z", "name": "B", "dataType": "f32" },
+        { "id": "w", "name": "Rough", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "const_one",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 720, "y": 280 },
+      "data": { "value": 1 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "alb_rgba",
+      "type": "Combine",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 40 },
+      "inputs": [
+        { "id": "r", "name": "R", "dataType": "f32" },
+        { "id": "g", "name": "G", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "a", "name": "A", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "prop_normal_scale",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 720, "y": 360 },
+      "data": { "propertyName": "normalDetailScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "lego_n_fn",
+      "type": "CustomFunction",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 300 },
+      "data": { "functionName": "lego_tile_normal" },
+      "inputs": [
+        { "id": "pos", "name": "Position", "dataType": "vec3f" },
+        { "id": "seed", "name": "Seed", "dataType": "f32" },
+        { "id": "scale", "name": "Scale", "dataType": "f32" },
+        { "id": "gapWidth", "name": "Gap", "dataType": "f32" },
+        { "id": "studAmount", "name": "Studs", "dataType": "f32" },
+        { "id": "baseNormal", "name": "Base Normal", "dataType": "vec3f" },
+        { "id": "normalStrength", "name": "Strength", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Normal", "dataType": "vec3f" }]
+    },
+    {
+      "id": "clamp_rough",
+      "type": "Clamp",
+      "stage": "fragment",
+      "position": { "x": 1100, "y": 200 },
+      "inputs": [
+        { "id": "in", "name": "In", "dataType": "f32" },
+        { "id": "min", "name": "Min", "dataType": "f32" },
+        { "id": "max", "name": "Max", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_zero",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 480 },
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_one_r",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 920, "y": 540 },
+      "data": { "value": 1 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_metallic",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 1100, "y": 300 },
+      "data": { "propertyName": "metallic" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_opacity",
+      "type": "Property",
+      "stage": "fragment",
+      "position": { "x": 1100, "y": 140 },
+      "data": { "propertyName": "opacity" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_aniso",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 1100, "y": 360 },
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_aniso_rot",
+      "type": "Constant",
+      "stage": "fragment",
+      "position": { "x": 1100, "y": 420 },
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    }
+  ],
+  "connections": [
+    { "fromNodeId": "world_pos", "fromSocketId": "pos", "toNodeId": "lego_fn", "toSocketId": "pos" },
+    { "fromNodeId": "prop_seed", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "seed" },
+    { "fromNodeId": "prop_scale", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "scale" },
+    { "fromNodeId": "prop_gap", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "gapWidth" },
+    { "fromNodeId": "prop_stud", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "studAmount" },
+    { "fromNodeId": "prop_color_a", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "colorA" },
+    { "fromNodeId": "prop_color_b", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "colorB" },
+    { "fromNodeId": "prop_color_c", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "colorC" },
+    { "fromNodeId": "prop_color_d", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "colorD" },
+    { "fromNodeId": "prop_accent_a", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "accentA" },
+    { "fromNodeId": "prop_accent_b", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "accentB" },
+    { "fromNodeId": "prop_accent_c", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "accentC" },
+    { "fromNodeId": "prop_accent_d", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "accentD" },
+    { "fromNodeId": "prop_roughness", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "roughness" },
+    { "fromNodeId": "prop_rough_vary", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "roughnessVary" },
+    { "fromNodeId": "prop_gap_rough", "fromSocketId": "out", "toNodeId": "lego_fn", "toSocketId": "gapRoughness" },
+    { "fromNodeId": "lego_fn", "fromSocketId": "out", "toNodeId": "split_look", "toSocketId": "in" },
+    { "fromNodeId": "split_look", "fromSocketId": "x", "toNodeId": "alb_rgba", "toSocketId": "r" },
+    { "fromNodeId": "split_look", "fromSocketId": "y", "toNodeId": "alb_rgba", "toSocketId": "g" },
+    { "fromNodeId": "split_look", "fromSocketId": "z", "toNodeId": "alb_rgba", "toSocketId": "b" },
+    { "fromNodeId": "const_one", "fromSocketId": "out", "toNodeId": "alb_rgba", "toSocketId": "a" },
+    { "fromNodeId": "world_pos", "fromSocketId": "pos", "toNodeId": "lego_n_fn", "toSocketId": "pos" },
+    { "fromNodeId": "prop_seed", "fromSocketId": "out", "toNodeId": "lego_n_fn", "toSocketId": "seed" },
+    { "fromNodeId": "prop_scale", "fromSocketId": "out", "toNodeId": "lego_n_fn", "toSocketId": "scale" },
+    { "fromNodeId": "prop_gap", "fromSocketId": "out", "toNodeId": "lego_n_fn", "toSocketId": "gapWidth" },
+    { "fromNodeId": "prop_stud", "fromSocketId": "out", "toNodeId": "lego_n_fn", "toSocketId": "studAmount" },
+    { "fromNodeId": "world_normal", "fromSocketId": "norm", "toNodeId": "lego_n_fn", "toSocketId": "baseNormal" },
+    { "fromNodeId": "prop_normal_scale", "fromSocketId": "out", "toNodeId": "lego_n_fn", "toSocketId": "normalStrength" },
+    { "fromNodeId": "split_look", "fromSocketId": "w", "toNodeId": "clamp_rough", "toSocketId": "in" },
+    { "fromNodeId": "const_zero", "fromSocketId": "out", "toNodeId": "clamp_rough", "toSocketId": "min" },
+    { "fromNodeId": "const_one_r", "fromSocketId": "out", "toNodeId": "clamp_rough", "toSocketId": "max" },
+    { "fromNodeId": "alb_rgba", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "albedo" },
+    { "fromNodeId": "prop_opacity", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "opacity" },
+    { "fromNodeId": "lego_n_fn", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "normal" },
+    { "fromNodeId": "clamp_rough", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "roughness_factor" },
+    { "fromNodeId": "prop_metallic", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "metallic_factor" },
+    { "fromNodeId": "const_aniso", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "anisotropy" },
+    { "fromNodeId": "const_aniso_rot", "fromSocketId": "out", "toNodeId": "pbr_master", "toSocketId": "anisotropyRotation" }
+  ]
+}

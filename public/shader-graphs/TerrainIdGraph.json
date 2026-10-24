@@ -1,0 +1,230 @@
+{
+  "id": "TerrainIdGraph_Array_Lit",
+  "label": "Terrain Multi-Texture Array (PBR)",
+  "group": "Terrain",
+  "properties": {
+    "baseColorTexture": {
+      "type": "texture_2d_array",
+      "defaultValue": null,
+      "name": "Terrain Texture Array"
+    },
+    "uvScale": {
+      "type": "f32",
+      "defaultValue": 40.0,
+      "name": "Échelle UV"
+    },
+    "roughness": {
+      "type": "f32",
+      "defaultValue": 0.9,
+      "name": "Rugosité"
+    },
+    "metallic": {
+      "type": "f32",
+      "defaultValue": 0.0,
+      "name": "Métallique"
+    }
+  },
+  "nodes": [
+    {
+      "id": "master",
+      "type": "PBRMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1400, "y": 300 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness", "name": "Roughness", "dataType": "f32" },
+        { "id": "metallic", "name": "Metallic", "dataType": "f32" },
+        { "id": "ao", "name": "Occlusion", "dataType": "f32" },
+        { "id": "emission", "name": "Emission", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "vtx_col",
+      "type": "VertexColor",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "split_col",
+      "type": "SplitVec4",
+      "stage": "fragment",
+      "position": { "x": 200, "y": 100 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec4f" }],
+      "outputs": [
+        { "id": "r", "name": "Tex ID", "dataType": "f32" },
+        { "id": "g", "name": "Var", "dataType": "f32" },
+        { "id": "b", "name": "Biome", "dataType": "f32" },
+        { "id": "a", "name": "Alpha", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "uv_mesh",
+      "type": "GetUV",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 300 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "p_scale",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 400 },
+      "data": { "propertyName": "uvScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Val", "dataType": "f32" }]
+    },
+    {
+      "id": "uv_scaled",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 250, "y": 350 },
+      "inputs": [
+        { "id": "a", "name": "UV", "dataType": "vec2f" },
+        { "id": "b", "name": "Scale", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "prop_array",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 500 },
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Array", "dataType": "texture_2d_array" }]
+    },
+    {
+      "id": "sample_array",
+      "type": "CustomFunction",
+      "stage": "fragment",
+      "position": { "x": 550, "y": 300 },
+      "data": { "functionName": "sample_terrain_array" },
+      "inputs": [
+        { "id": "texArray", "name": "Array", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "index", "name": "Index", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "split_rgb",
+      "type": "SplitVec3",
+      "stage": "fragment",
+      "position": { "x": 800, "y": 300 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "R", "dataType": "f32" },
+        { "id": "y", "name": "G", "dataType": "f32" },
+        { "id": "z", "name": "B", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "combine_rgba",
+      "type": "Combine",
+      "stage": "fragment",
+      "position": { "x": 1000, "y": 300 },
+      "inputs": [
+        { "id": "r", "name": "R", "dataType": "f32" },
+        { "id": "g", "name": "G", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "a", "name": "A", "dataType": "f32", "value": 1.0 }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "p_rough",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1000, "y": 450 },
+      "data": { "propertyName": "roughness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Val", "dataType": "f32" }]
+    },
+    {
+      "id": "p_metal",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1000, "y": 550 },
+      "data": { "propertyName": "metallic" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Val", "dataType": "f32" }]
+    }
+  ],
+  "connections": [
+    { "fromNodeId": "vtx_col", "fromSocketId": "out", "toNodeId": "split_col", "toSocketId": "in" },
+    { "fromNodeId": "uv_mesh", "fromSocketId": "out", "toNodeId": "uv_scaled", "toSocketId": "a" },
+    { "fromNodeId": "p_scale", "fromSocketId": "out", "toNodeId": "uv_scaled", "toSocketId": "b" },
+
+    {
+      "fromNodeId": "prop_array",
+      "fromSocketId": "out",
+      "toNodeId": "sample_array",
+      "toSocketId": "texArray"
+    },
+    {
+      "fromNodeId": "uv_scaled",
+      "fromSocketId": "out",
+      "toNodeId": "sample_array",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "split_col",
+      "fromSocketId": "r",
+      "toNodeId": "sample_array",
+      "toSocketId": "index"
+    },
+
+    {
+      "fromNodeId": "sample_array",
+      "fromSocketId": "out",
+      "toNodeId": "split_rgb",
+      "toSocketId": "in"
+    },
+
+    {
+      "fromNodeId": "split_rgb",
+      "fromSocketId": "x",
+      "toNodeId": "combine_rgba",
+      "toSocketId": "r"
+    },
+    {
+      "fromNodeId": "split_rgb",
+      "fromSocketId": "y",
+      "toNodeId": "combine_rgba",
+      "toSocketId": "g"
+    },
+    {
+      "fromNodeId": "split_rgb",
+      "fromSocketId": "z",
+      "toNodeId": "combine_rgba",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "combine_rgba",
+      "fromSocketId": "rgba",
+      "toNodeId": "master",
+      "toSocketId": "albedo"
+    },
+
+    {
+      "fromNodeId": "p_rough",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "roughness"
+    },
+    {
+      "fromNodeId": "p_metal",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "metallic"
+    }
+  ]
+}

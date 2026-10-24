@@ -1,0 +1,338 @@
+{
+  "name": "Standard Lit Pipeline (Full Stack: DoF + Cinema + FXAA)",
+  "resources": [
+    {
+      "name": "shadowMap",
+      "format": "depth32float",
+      "sizeType": "absolute",
+      "width": 2048,
+      "height": 2048,
+      "usage": 22
+    },
+    {
+      "name": "sceneDepth",
+      "format": "depth24plus",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "sceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "normalBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ssaoRaw",
+      "format": "r8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ssaoFinal",
+      "format": "r8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ssaoNoise",
+      "format": "rgba8unorm",
+      "sizeType": "absolute",
+      "width": 4,
+      "height": 4,
+      "usage": 22
+    },
+    {
+      "name": "ssaoKernel",
+      "format": "rgba16float",
+      "sizeType": "absolute",
+      "width": 8,
+      "height": 8,
+      "usage": 22
+    },
+    {
+      "name": "dofBuffer",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "bloomTexture",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 0.5,
+      "height": 0.5,
+      "usage": 22
+    },
+    {
+      "name": "pingPongTexture",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 0.5,
+      "height": 0.5,
+      "usage": 22
+    },
+    {
+      "name": "tonemappingInput",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ldrBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "lutTexture",
+      "format": "rgba8unorm",
+      "sizeType": "absolute",
+      "width": 256,
+      "height": 16,
+      "usage": 22
+    },
+    {
+      "name": "gradingBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "sharpBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "cinemaBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ssrBuffer",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 0.5,
+      "height": 0.5,
+      "usage": 22
+    }
+  ],
+  "passes": [
+    {
+      "name": "01_Shadows",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["shadowMap"],
+      "viewType": "shadow",
+      "depthLoadOp": "clear",
+      "queueTags": ["shadow_caster"]
+    },
+    {
+      "name": "02_Opaques",
+      "type": "raster",
+      "inputs": ["shadowMap"],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["opaque"],
+      "colorLoadOp": "clear",
+      "depthLoadOp": "clear",
+      "clearColor": { "r": 0.05, "g": 0.05, "b": 0.05, "a": 1.0 }
+    },
+    {
+      "name": "03_Skybox",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "builtInPipeline": "skybox",
+      "colorLoadOp": "load",
+      "depthLoadOp": "load",
+      "vertexCount": 36,
+      "skyboxParams": {
+        "sunSize": 0.01,
+        "sunBloom": 0.1,
+        "starsThreshold": 0.98,
+        "clouds": { "density": 0.6, "scale": 5.0, "speed": 0.4, "brightness": 2.0 },
+        "gradientStops": [
+          { "offset": 0.0, "color": [0.05, 0.04, 0.04] },
+          { "offset": 0.15, "color": [0.2, 0.15, 0.1] },
+          { "offset": 0.25, "color": [0.9, 0.5, 0.2] },
+          { "offset": 0.35, "color": [0.4, 0.6, 0.9] },
+          { "offset": 1.0, "color": [0.05, 0.1, 0.6] }
+        ]
+      }
+    },
+    {
+      "name": "04_Transparents",
+      "type": "raster",
+      "inputs": ["shadowMap"],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["transparent"],
+      "colorLoadOp": "load",
+      "depthLoadOp": "load"
+    },
+    {
+      "name": "SSAO Calculation",
+      "type": "fullscreen",
+      "useFrameUniforms": true,
+      "outputFormat": "r8unorm",
+      "inputs": ["sceneDepth", "normalBuffer", "ssaoNoise", "ssaoKernel"],
+      "outputs": ["ssaoRaw"],
+      "shaderPath": "/shaders/post-processing/ssao.frag.wgsl",
+      "uniforms": {
+        "ssaoParams": { "type": "struct", "value": [32.0, 0.5, 0.1, 0.0, 0.0] }
+      }
+    },
+    {
+      "name": "SSAO Blur",
+      "type": "fullscreen",
+      "outputFormat": "r8unorm",
+      "inputs": ["ssaoRaw"],
+      "outputs": ["ssaoFinal"],
+      "shaderPath": "/shaders/post-processing/ssao_blur.frag.wgsl"
+    },
+    {
+      "name": "DoF Pass",
+      "type": "fullscreen",
+      "useFrameUniforms": true,
+      "inputs": ["sceneColor", "sceneDepth"],
+      "outputs": ["dofBuffer"],
+      "shaderPath": "/shaders/post-processing/dof.frag.wgsl",
+      "uniforms": {
+        "params": {
+          "type": "struct",
+          "value": [2.0, 2.0, 4.0]
+        }
+      }
+    },
+    {
+      "name": "Bright Pass",
+      "type": "fullscreen",
+      "inputs": ["sceneColor"],
+      "outputs": ["bloomTexture"],
+      "shaderPath": "/shaders/post-processing/bright.frag.wgsl",
+      "uniforms": { "threshold": { "type": "f32", "value": 2.0 } }
+    },
+    {
+      "name": "Blur H",
+      "type": "fullscreen",
+      "inputs": ["bloomTexture"],
+      "outputs": ["pingPongTexture"],
+      "shaderPath": "/shaders/post-processing/blur_h.frag.wgsl",
+      "uniforms": {
+        "radius": { "type": "f32", "value": 1.0 },
+        "resolution": { "type": "vec2f", "value": [1024, 1024] }
+      }
+    },
+    {
+      "name": "Blur V",
+      "type": "fullscreen",
+      "inputs": ["pingPongTexture"],
+      "outputs": ["bloomTexture"],
+      "shaderPath": "/shaders/post-processing/blur_v.frag.wgsl",
+      "uniforms": {
+        "radius": { "type": "f32", "value": 1.0 },
+        "resolution": { "type": "vec2f", "value": [1024, 1024] }
+      }
+    },
+    {
+      "name": "Combine Pass",
+      "type": "fullscreen",
+      "inputs": ["dofBuffer", "bloomTexture", "ssaoFinal", "ssrBuffer"],
+      "outputs": ["tonemappingInput"],
+      "shaderPath": "/shaders/post-processing/combine.frag.wgsl",
+      "uniforms": { "intensity": { "type": "f32", "value": 1.0 } }
+    },
+    {
+      "name": "Tone Mapping",
+      "type": "fullscreen",
+      "inputs": ["tonemappingInput"],
+      "outputFormat": "rgba8unorm",
+      "outputs": ["ldrBuffer"],
+      "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
+      "uniforms": { "exposure": { "type": "f32", "value": 1.0 } }
+    },
+    {
+      "name": "Color Grading Pass",
+      "type": "fullscreen",
+      "inputs": ["ldrBuffer", "lutTexture"],
+      "outputFormat": "rgba8unorm",
+      "outputs": ["gradingBuffer"],
+      "shaderPath": "/shaders/post-processing/color_grading.frag.wgsl",
+      "uniforms": {
+        "params": { "type": "struct", "value": [1.0] }
+      }
+    },
+    {
+      "name": "Sharpen Pass",
+      "type": "fullscreen",
+      "inputs": ["gradingBuffer"],
+      "outputFormat": "rgba8unorm",
+      "outputs": ["sharpBuffer"],
+      "shaderPath": "/shaders/post-processing/sharpen.frag.wgsl",
+      "uniforms": {
+        "params": { "type": "struct", "value": [0.01] }
+      }
+    },
+    {
+      "name": "Cinema FX Pass",
+      "type": "fullscreen",
+      "inputs": ["sharpBuffer"],
+      "outputFormat": "rgba8unorm",
+      "outputs": ["cinemaBuffer"],
+      "shaderPath": "/shaders/post-processing/cinema_fx.frag.wgsl",
+      "uniforms": {
+        "params": {
+          "type": "struct",
+          "value": [0.005, 0.002]
+        }
+      }
+    },
+    {
+      "name": "FXAA Pass",
+      "type": "fullscreen",
+      "inputs": ["cinemaBuffer"],
+      "outputs": ["FINAL_OUTPUT"],
+      "shaderPath": "/shaders/post-processing/fxaa.frag.wgsl"
+    },
+    {
+      "name": "Debug Lines Pass",
+      "type": "raster",
+      "inputs": ["sceneDepth"],
+      "outputs": ["FINAL_OUTPUT"],
+      "viewType": "main",
+      "clearDepth": false,
+      "builtInPipeline": "debug"
+    }
+  ]
+}

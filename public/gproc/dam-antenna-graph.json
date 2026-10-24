@@ -1,0 +1,315 @@
+{
+  "id": "dam_tower",
+  "nodes": [
+    {
+      "id": "mast",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "mast_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.45,
+          7.5,
+          0.45
+        ],
+        "center": [
+          0,
+          3.75,
+          0
+        ]
+      }
+    },
+    {
+      "id": "crossbar_raw",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "cross_raw_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          4.2,
+          0.18,
+          0.18
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "crossbar_xform",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 360,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "cross_xformed",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          6.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "dish_raw",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 200,
+        "y": 120
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "dish_raw_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 0.55,
+        "segments": 14,
+        "rings": 8
+      }
+    },
+    {
+      "id": "dish_xform",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 360,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "dish_xformed",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          7.35,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1.25,
+          0.4,
+          1.25
+        ]
+      }
+    },
+    {
+      "id": "join_all",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        },
+        {
+          "id": "geo3",
+          "name": "geo3",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "joined_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 820,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 600,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "crossbar_raw",
+      "fromSocketId": "cross_raw_out",
+      "toNodeId": "crossbar_xform",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "dish_raw",
+      "fromSocketId": "dish_raw_out",
+      "toNodeId": "dish_xform",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mast",
+      "fromSocketId": "mast_out",
+      "toNodeId": "join_all",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "crossbar_xform",
+      "fromSocketId": "cross_xformed",
+      "toNodeId": "join_all",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "dish_xform",
+      "fromSocketId": "dish_xformed",
+      "toNodeId": "join_all",
+      "toSocketId": "geo3"
+    },
+    {
+      "id": "l6_to_mesh_lod",
+      "fromNodeId": "join_all",
+      "fromSocketId": "joined_out",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

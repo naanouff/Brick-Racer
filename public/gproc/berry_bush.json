@@ -1,0 +1,554 @@
+{
+  "id": "berry_bush",
+  "nodes": [
+    {
+      "id": "bush_sphere",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "bush_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 1.2,
+        "segments": 10,
+        "rings": 7
+      }
+    },
+    {
+      "id": "transform_bush",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "bush_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          1,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_bush",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "bush_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "berry1_sphere",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "b1_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 0.15,
+        "segments": 6,
+        "rings": 4
+      }
+    },
+    {
+      "id": "transform_b1",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b1_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0.6,
+          0.9,
+          0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_b1",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b1_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "berry2_sphere",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 380
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "b2_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 0.15,
+        "segments": 6,
+        "rings": 4
+      }
+    },
+    {
+      "id": "transform_b2",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 380
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b2_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -0.5,
+          1.5,
+          0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_b2",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 380
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b2_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "berry3_sphere",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 560
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "b3_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 0.15,
+        "segments": 6,
+        "rings": 4
+      }
+    },
+    {
+      "id": "transform_b3",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 560
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b3_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0.3,
+          1.6,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_b3",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 560
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "b3_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "join_bush",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 620,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        },
+        {
+          "id": "geo3",
+          "name": "geo3",
+          "type": "geometry"
+        },
+        {
+          "id": "geo4",
+          "name": "geo4",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "bush_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 820,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 600,
+        "y": 280
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "bush_sphere",
+      "fromSocketId": "bush_raw",
+      "toNodeId": "transform_bush",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "transform_bush",
+      "fromSocketId": "bush_moved",
+      "toNodeId": "mat_bush",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mat_bush",
+      "fromSocketId": "bush_geo",
+      "toNodeId": "join_bush",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "berry1_sphere",
+      "fromSocketId": "b1_raw",
+      "toNodeId": "transform_b1",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "transform_b1",
+      "fromSocketId": "b1_moved",
+      "toNodeId": "mat_b1",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "mat_b1",
+      "fromSocketId": "b1_geo",
+      "toNodeId": "join_bush",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l7",
+      "fromNodeId": "berry2_sphere",
+      "fromSocketId": "b2_raw",
+      "toNodeId": "transform_b2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l8",
+      "fromNodeId": "transform_b2",
+      "fromSocketId": "b2_moved",
+      "toNodeId": "mat_b2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l9",
+      "fromNodeId": "mat_b2",
+      "fromSocketId": "b2_geo",
+      "toNodeId": "join_bush",
+      "toSocketId": "geo3"
+    },
+    {
+      "id": "l10",
+      "fromNodeId": "berry3_sphere",
+      "fromSocketId": "b3_raw",
+      "toNodeId": "transform_b3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l11",
+      "fromNodeId": "transform_b3",
+      "fromSocketId": "b3_moved",
+      "toNodeId": "mat_b3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l12",
+      "fromNodeId": "mat_b3",
+      "fromSocketId": "b3_geo",
+      "toNodeId": "join_bush",
+      "toSocketId": "geo4"
+    },
+    {
+      "id": "l13_to_mesh_lod",
+      "fromNodeId": "join_bush",
+      "fromSocketId": "bush_joined",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l13_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

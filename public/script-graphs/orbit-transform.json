@@ -1,0 +1,454 @@
+{
+  "id": "orbit_transform",
+  "name": "orbit_transform",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "event-tick",
+      "type": "EventTick",
+      "position": {
+        "x": 80,
+        "y": 80
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "totalTime",
+          "name": "Total Time",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 40
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 1.5
+      }
+    },
+    {
+      "id": "radius",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 160
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 4
+      }
+    },
+    {
+      "id": "height",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 280
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 4
+      }
+    },
+    {
+      "id": "center-x",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 400
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 0
+      }
+    },
+    {
+      "id": "center-z",
+      "type": "NumberConstant",
+      "position": {
+        "x": 280,
+        "y": 520
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ],
+      "properties": {
+        "value": 0
+      }
+    },
+    {
+      "id": "time-speed",
+      "type": "MultiplyNumber",
+      "position": {
+        "x": 480,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "cos-node",
+      "type": "Cos",
+      "position": {
+        "x": 680,
+        "y": 40
+      },
+      "inputs": [
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "sin-node",
+      "type": "Sin",
+      "position": {
+        "x": 680,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "x-partial",
+      "type": "MultiplyNumber",
+      "position": {
+        "x": 880,
+        "y": 40
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "z-partial",
+      "type": "MultiplyNumber",
+      "position": {
+        "x": 880,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "x-final",
+      "type": "AddNumber",
+      "position": {
+        "x": 1080,
+        "y": 40
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "z-final",
+      "type": "AddNumber",
+      "position": {
+        "x": 1080,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "type": "number"
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "value",
+          "name": "Value",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "set-position",
+      "type": "SetTransformPosition",
+      "position": {
+        "x": 1280,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        },
+        {
+          "id": "x",
+          "name": "X",
+          "type": "number"
+        },
+        {
+          "id": "y",
+          "name": "Y",
+          "type": "number"
+        },
+        {
+          "id": "z",
+          "name": "Z",
+          "type": "number"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "exec",
+          "name": "Exec",
+          "type": "exec"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "exec",
+      "toNodeId": "set-position",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "totalTime",
+      "toNodeId": "time-speed",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "speed",
+      "fromSocketId": "value",
+      "toNodeId": "time-speed",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "time-speed",
+      "fromSocketId": "value",
+      "toNodeId": "cos-node",
+      "toSocketId": "angle"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "time-speed",
+      "fromSocketId": "value",
+      "toNodeId": "sin-node",
+      "toSocketId": "angle"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "cos-node",
+      "fromSocketId": "value",
+      "toNodeId": "x-partial",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l7",
+      "fromNodeId": "radius",
+      "fromSocketId": "value",
+      "toNodeId": "x-partial",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l8",
+      "fromNodeId": "sin-node",
+      "fromSocketId": "value",
+      "toNodeId": "z-partial",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l9",
+      "fromNodeId": "radius",
+      "fromSocketId": "value",
+      "toNodeId": "z-partial",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l10",
+      "fromNodeId": "x-partial",
+      "fromSocketId": "value",
+      "toNodeId": "x-final",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l11",
+      "fromNodeId": "center-x",
+      "fromSocketId": "value",
+      "toNodeId": "x-final",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l12",
+      "fromNodeId": "z-partial",
+      "fromSocketId": "value",
+      "toNodeId": "z-final",
+      "toSocketId": "a"
+    },
+    {
+      "id": "l13",
+      "fromNodeId": "center-z",
+      "fromSocketId": "value",
+      "toNodeId": "z-final",
+      "toSocketId": "b"
+    },
+    {
+      "id": "l14",
+      "fromNodeId": "x-final",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "x"
+    },
+    {
+      "id": "l15",
+      "fromNodeId": "height",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "y"
+    },
+    {
+      "id": "l16",
+      "fromNodeId": "z-final",
+      "fromSocketId": "value",
+      "toNodeId": "set-position",
+      "toSocketId": "z"
+    }
+  ],
+  "exposedParameters": []
+}

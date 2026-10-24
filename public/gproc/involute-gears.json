@@ -1,0 +1,455 @@
+{
+  "id": "involute-gears",
+  "name": "Involute Spur Gears",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "clockwork",
+    "category": "prop",
+    "subcategory": "clockwork"
+  },
+  "parameters": {},
+  "nodes": [
+    {
+      "id": "gear_20",
+      "type": "SpurGear",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 1,
+        "teeth": 20,
+        "faceWidth": 0.35,
+        "pressureAngle": 20,
+        "addendumFactor": 1,
+        "dedendumFactor": 0.8,
+        "maxSteps": 60,
+        "filletRadius": 0.4,
+        "arcStepSize": 0.05,
+        "boreRadius": 0.45
+      }
+    },
+    {
+      "id": "gear_12",
+      "type": "SpurGear",
+      "position": {
+        "x": 0,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 1,
+        "teeth": 12,
+        "faceWidth": 0.35,
+        "pressureAngle": 20,
+        "addendumFactor": 1,
+        "dedendumFactor": 0.8,
+        "maxSteps": 60,
+        "filletRadius": 0.4,
+        "arcStepSize": 0.05,
+        "boreRadius": 0.45
+      }
+    },
+    {
+      "id": "gear_5",
+      "type": "SpurGear",
+      "position": {
+        "x": 0,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "module",
+          "name": "module",
+          "type": "float"
+        },
+        {
+          "id": "teeth",
+          "name": "teeth",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "module": 1,
+        "teeth": 5,
+        "faceWidth": 0.35,
+        "pressureAngle": 20,
+        "addendumFactor": 1,
+        "dedendumFactor": 0.8,
+        "maxSteps": 60,
+        "filletRadius": 0.4,
+        "arcStepSize": 0.05,
+        "boreRadius": 0.35
+      }
+    },
+    {
+      "id": "xf_20",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "xf_12",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 280,
+        "y": 180
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          16,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          165
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "xf_5",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 280,
+        "y": 360
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "t",
+          "name": "translation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          10.625,
+          6.585,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          175.8
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "join_a",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 560,
+        "y": 90
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_b",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 800,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 1040,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 820,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "gear_20",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_20",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "gear_12",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_12",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "gear_5",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_5",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "j1",
+      "fromNodeId": "xf_20",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_a",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j2",
+      "fromNodeId": "xf_12",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_a",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "j3",
+      "fromNodeId": "join_a",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_b",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "j4",
+      "fromNodeId": "xf_5",
+      "fromSocketId": "geo_out",
+      "toNodeId": "join_b",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "out_to_mesh_lod",
+      "fromNodeId": "join_b",
+      "fromSocketId": "geo_out",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "out_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}
