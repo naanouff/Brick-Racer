@@ -1,0 +1,201 @@
+{
+  "id": "lego-moto-windshield-generator",
+  "name": "Lego Moto Windshield",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-moto"
+  },
+  "parameters": {
+    "Width": {
+      "type": "float",
+      "value": 0.22
+    },
+    "Height": {
+      "type": "float",
+      "value": 0.12
+    },
+    "TiltDeg": {
+      "type": "float",
+      "value": 28
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Width",
+          "name": "Width",
+          "type": "float"
+        },
+        {
+          "id": "Height",
+          "name": "Height",
+          "type": "float"
+        },
+        {
+          "id": "TiltDeg",
+          "name": "TiltDeg",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "Width": 0.22,
+        "Height": 0.12,
+        "TiltDeg": 28
+      }
+    },
+    {
+      "id": "part",
+      "type": "LegoMotoWindshield",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "width",
+          "name": "width",
+          "type": "float"
+        },
+        {
+          "id": "height",
+          "name": "height",
+          "type": "float"
+        },
+        {
+          "id": "tiltDeg",
+          "name": "tiltDeg",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "width": 0.22,
+        "height": 0.12,
+        "tiltDeg": 28
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 340,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l4_to_mesh_lod",
+      "fromNodeId": "part",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l4_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    },
+    {
+      "id": "l_Width",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Width",
+      "toNodeId": "part",
+      "toSocketId": "width"
+    },
+    {
+      "id": "l_Height",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Height",
+      "toNodeId": "part",
+      "toSocketId": "height"
+    },
+    {
+      "id": "l_TiltDeg",
+      "fromNodeId": "group_in",
+      "fromSocketId": "TiltDeg",
+      "toNodeId": "part",
+      "toSocketId": "tiltDeg"
+    }
+  ]
+}

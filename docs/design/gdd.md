@@ -10,6 +10,7 @@
 | --- | ---- |
 | [vision.md](vision.md) | Piliers produit, non-objectifs |
 | [tone.md](tone.md) | Garde-fous 16+ |
+| [ui-ux.md](ui-ux.md) | Maquette UI/UX écrans MVP |
 | [levels.md](levels.md) | Circuits, boosts, items, specs SceneDD piste |
 | [test-slice.md](test-slice.md) | Slice hub+course « Brick Proving Grounds » + prompts art |
 | [test-slice-plans.md](test-slice-plans.md) | Plans cotés W3DTS (échelle minifig, AABB, piste) |
@@ -336,6 +337,8 @@ Surfaces ton course : annonces + punchlines courtes ([tone.md](tone.md)). Items 
 ---
 
 ## 16. Audio / UI / feedback
+
+Canon écrans / HUD / tokens : **[ui-ux.md](ui-ux.md)** · maquettes HTML [../mocup/](../mocup/) ([BRICK-UIM1](../sprints/BRICK-UIM1.md)) · coque React [BRICK-UI1](../sprints/BRICK-UI1.md).
 
 - Annonces course (Hex) + one-liners items.  
 - Tooltips / titres d’écran avec clin d’œil ([tone.md](tone.md)).  

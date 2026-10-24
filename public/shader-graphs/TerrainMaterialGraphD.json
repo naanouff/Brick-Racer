@@ -1,0 +1,72 @@
+{
+  "id": "TerrainTriPlanarGraph_Test5_Unlit",
+  "properties": {
+    "baseColorTexture": { "type": "texture_2d", "defaultValue": null, "name": "Texture de Base" },
+    "baseColor": { "type": "vec3f", "defaultValue": [1, 1, 1], "name": "Color Tint" },
+    "texRock": { "type": "texture_2d", "defaultValue": null, "name": "Texture Roche (X/Z)" },
+    "texScale": { "type": "f32", "defaultValue": 20.0, "name": "Échelle Textures" },
+    "blendSharpness": { "type": "f32", "defaultValue": 8.0, "name": "Netteté (Blend)" }
+  },
+  "nodes": [
+    {
+      "id": "master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1200, "y": 200 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "prop_base_tex",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 100, "y": 0 },
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Texture", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "position": { "x": 100, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Vec2", "dataType": "vec2f" }]
+    },
+    {
+      "id": "sample_tex",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "position": { "x": 400, "y": 50 },
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UVs", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" },
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "Alpha", "dataType": "f32" }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "prop_base_tex",
+      "fromSocketId": "out",
+      "toNodeId": "sample_tex",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "get_uv", "fromSocketId": "out", "toNodeId": "sample_tex", "toSocketId": "uv" },
+
+    {
+      "fromNodeId": "sample_tex",
+      "fromSocketId": "rgb",
+      "toNodeId": "master",
+      "toSocketId": "albedo"
+    }
+  ]
+}

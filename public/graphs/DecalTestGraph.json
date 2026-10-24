@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "name": "DecalTestGraph",
+  "description": "Render graph for testing the Decal Rendering system",
+  "resources": [
+    {
+      "id": "depthBuffer",
+      "type": "depth",
+      "format": "depth32float",
+      "size": "viewport"
+    },
+    {
+      "id": "hdrBuffer",
+      "type": "color",
+      "format": "rgba16float",
+      "size": "viewport"
+    },
+    {
+      "id": "gBufferAlbedo",
+      "type": "color",
+      "format": "rgba8unorm",
+      "size": "viewport"
+    },
+    {
+      "id": "gBufferNormal",
+      "type": "color",
+      "format": "rgba16float",
+      "size": "viewport"
+    },
+    {
+      "id": "gBufferPBR",
+      "type": "color",
+      "format": "rgba8unorm",
+      "size": "viewport"
+    }
+  ],
+  "passes": [
+    {
+      "id": "shadowPass",
+      "type": "shadow",
+      "config": {
+        "resolution": 2048,
+        "cascadeCount": 3,
+        "cascadeSplitLambda": 0.85,
+        "shadowBias": 0.001,
+        "normalBias": 0.02
+      }
+    },
+    {
+      "id": "gBufferPass",
+      "type": "gbuffer",
+      "inputs": [],
+      "outputs": [
+        { "id": "gBufferAlbedo", "attachment": "color0" },
+        { "id": "gBufferNormal", "attachment": "color1" },
+        { "id": "gBufferPBR", "attachment": "color2" },
+        { "id": "depthBuffer", "attachment": "depth" }
+      ],
+      "config": {}
+    },
+    {
+      "id": "lightingPass",
+      "type": "deferred-lighting",
+      "inputs": [
+        { "id": "gBufferAlbedo", "binding": "albedo" },
+        { "id": "gBufferNormal", "binding": "normal" },
+        { "id": "gBufferPBR", "binding": "pbr" },
+        { "id": "depthBuffer", "binding": "depth" }
+      ],
+      "outputs": [{ "id": "hdrBuffer", "attachment": "color0" }],
+      "config": {}
+    },
+    {
+      "id": "decalPass",
+      "type": "decal",
+      "inputs": [{ "id": "depthBuffer", "binding": "depth" }],
+      "outputs": [{ "id": "hdrBuffer", "attachment": "color0" }],
+      "config": {}
+    },
+    {
+      "id": "skyboxPass",
+      "type": "skybox",
+      "inputs": [{ "id": "depthBuffer", "binding": "depth" }],
+      "outputs": [{ "id": "hdrBuffer", "attachment": "color0" }],
+      "config": {
+        "intensity": 1.0
+      }
+    },
+    {
+      "id": "tonemapPass",
+      "type": "tonemap",
+      "inputs": [{ "id": "hdrBuffer", "binding": "hdr" }],
+      "outputs": [],
+      "config": {
+        "exposure": 1.0,
+        "operator": "aces"
+      }
+    }
+  ]
+}

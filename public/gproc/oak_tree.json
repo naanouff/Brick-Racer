@@ -1,0 +1,323 @@
+{
+  "id": "oak_tree",
+  "nodes": [
+    {
+      "id": "cube_trunk",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "trunk_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.8,
+          4,
+          0.8
+        ],
+        "center": [
+          0,
+          2,
+          0
+        ]
+      }
+    },
+    {
+      "id": "shade_trunk",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "trunk_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_trunk",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "trunk_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "sphere_canopy",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "canopy_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 2.8,
+        "segments": 10,
+        "rings": 8
+      }
+    },
+    {
+      "id": "transform_canopy",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "canopy_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          6.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "mat_canopy",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "canopy_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "join_tree",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 600,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "tree_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 800,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 580,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "cube_trunk",
+      "fromSocketId": "trunk_raw",
+      "toNodeId": "shade_trunk",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "shade_trunk",
+      "fromSocketId": "trunk_flat",
+      "toNodeId": "mat_trunk",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mat_trunk",
+      "fromSocketId": "trunk_geo",
+      "toNodeId": "join_tree",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "sphere_canopy",
+      "fromSocketId": "canopy_raw",
+      "toNodeId": "transform_canopy",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "transform_canopy",
+      "fromSocketId": "canopy_moved",
+      "toNodeId": "mat_canopy",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "mat_canopy",
+      "fromSocketId": "canopy_geo",
+      "toNodeId": "join_tree",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l7_to_mesh_lod",
+      "fromNodeId": "join_tree",
+      "fromSocketId": "tree_joined",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l7_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

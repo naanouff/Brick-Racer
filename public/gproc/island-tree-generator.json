@@ -1,0 +1,2375 @@
+{
+  "id": "island-tree-generator",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "Reroute.003",
+      "type": "Reroute",
+      "position": {
+        "x": 892.9658,
+        "y": -410.2309
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "in": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "Reroute",
+      "type": "Reroute",
+      "position": {
+        "x": 558.6797,
+        "y": -486.5942
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "in": 0
+      }
+    },
+    {
+      "id": "Reroute.001",
+      "type": "Reroute",
+      "position": {
+        "x": -239.6586,
+        "y": 319.0076
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "in": 0
+      }
+    },
+    {
+      "id": "Group Output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 4065.5706,
+        "y": -272.0328
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "Join Geometry",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 3589.5222,
+        "y": -188.3816
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        },
+        {
+          "id": "geo3",
+          "name": "geo3",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "Collection Info.001",
+      "type": "MeshAsset",
+      "position": {
+        "x": 2560.9226,
+        "y": -786.2171
+      },
+      "inputs": [
+        {
+          "id": "collection",
+          "name": "Collection",
+          "type": "float"
+        },
+        {
+          "id": "separateChildren",
+          "name": "Separate Children",
+          "type": "float"
+        },
+        {
+          "id": "resetChildren",
+          "name": "Reset Children",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "instances",
+          "name": "instances",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "collection": "island_tree_01_leaves_LOD0",
+        "separateChildren": 1,
+        "resetChildren": 1
+      }
+    },
+    {
+      "id": "Collection Info",
+      "type": "MeshAsset",
+      "position": {
+        "x": 1414.7959,
+        "y": -264.3279
+      },
+      "inputs": [
+        {
+          "id": "collection",
+          "name": "Collection",
+          "type": "float"
+        },
+        {
+          "id": "separateChildren",
+          "name": "Separate Children",
+          "type": "float"
+        },
+        {
+          "id": "resetChildren",
+          "name": "Reset Children",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "instances",
+          "name": "instances",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "collection": "island_tree_01_branches_LOD0",
+        "separateChildren": 1,
+        "resetChildren": 1
+      }
+    },
+    {
+      "id": "branch_scale_multiplier",
+      "type": "Math",
+      "position": {
+        "x": 1147.4086,
+        "y": 0.108
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": 0.5,
+        "b": 1.9399999380111694
+      }
+    },
+    {
+      "id": "Math.004",
+      "type": "Math",
+      "position": {
+        "x": 965.6324,
+        "y": 4.1507
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": 0.5,
+        "b": 1.399999976158142
+      }
+    },
+    {
+      "id": "Instance on Points",
+      "type": "InstanceOnPoints",
+      "position": {
+        "x": 1679.2068,
+        "y": -366.1599
+      },
+      "inputs": [
+        {
+          "id": "points",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "instance",
+          "name": "instance",
+          "type": "geometry"
+        },
+        {
+          "id": "scale",
+          "name": "scale",
+          "type": "vec3"
+        },
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "selection",
+          "name": "Selection",
+          "type": "float"
+        },
+        {
+          "id": "pickInstance",
+          "name": "Pick Instance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "useSpiral": false,
+        "scale": [
+          8,
+          8,
+          8
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ],
+        "realizeInstances": true,
+        "selection": 1,
+        "pickInstance": 1,
+        "instance": 0
+      }
+    },
+    {
+      "id": "SizeRandom",
+      "type": "Random",
+      "position": {
+        "x": 528.1839,
+        "y": -65.0664
+      },
+      "inputs": [
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "int"
+        },
+        {
+          "id": "min",
+          "name": "min",
+          "type": "float"
+        },
+        {
+          "id": "max",
+          "name": "max",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ],
+        "seed": 9,
+        "data_type": "FLOAT"
+      }
+    },
+    {
+      "id": "branch_scale_gradient",
+      "type": "ColorRamp",
+      "position": {
+        "x": 442.5525,
+        "y": 138.1783
+      },
+      "inputs": [
+        {
+          "id": "fac",
+          "name": "fac",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "color",
+          "name": "color",
+          "type": "vec4"
+        },
+        {
+          "id": "alpha",
+          "name": "alpha",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "stops": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "fac": 0.5
+      }
+    },
+    {
+      "id": "Vector Math.002",
+      "type": "VectorMath",
+      "position": {
+        "x": -1383.9017,
+        "y": -1312.8896
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          3.3999996185302734
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Separate XYZ.001",
+      "type": "SeparateVector",
+      "position": {
+        "x": -1145.0525,
+        "y": -1304.1819
+      },
+      "inputs": [
+        {
+          "id": "vec",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "vec": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Separate XYZ.002",
+      "type": "SeparateVector",
+      "position": {
+        "x": -1127.0707,
+        "y": -1110.6249
+      },
+      "inputs": [
+        {
+          "id": "vec",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "vec": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Vector Math.003",
+      "type": "VectorMath",
+      "position": {
+        "x": -1385.7078,
+        "y": -1072.0846
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          0.009999999776482582
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Math.003",
+      "type": "Math",
+      "position": {
+        "x": -701.679,
+        "y": 280.6186
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": 0.5,
+        "b": 0.5
+      }
+    },
+    {
+      "id": "Group Input",
+      "type": "GroupInput",
+      "position": {
+        "x": -1046.9587,
+        "y": -41.7184
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Input_0",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "Input_2",
+          "name": "branch_density",
+          "type": "float"
+        },
+        {
+          "id": "Input_3",
+          "name": "branch_seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_11",
+          "name": "br_min_density",
+          "type": "float"
+        },
+        {
+          "id": "Input_4",
+          "name": "br_max_density",
+          "type": "float"
+        },
+        {
+          "id": "Input_5",
+          "name": "br_size_min",
+          "type": "float"
+        },
+        {
+          "id": "Input_6",
+          "name": "br_size_max",
+          "type": "float"
+        },
+        {
+          "id": "Input_15",
+          "name": "br_scale_multiplier",
+          "type": "float"
+        },
+        {
+          "id": "Input_8",
+          "name": "leaf_density",
+          "type": "float"
+        },
+        {
+          "id": "Input_9",
+          "name": "density_multiplier",
+          "type": "float"
+        },
+        {
+          "id": "Input_12",
+          "name": "leaf_seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_10",
+          "name": "leaf_scale_multiplier",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "parameters": [
+          "seed",
+          "scale"
+        ],
+        "seed": 0,
+        "scale": 1,
+        "Input_2": 2,
+        "Input_3": 0,
+        "Input_11": 0.14000000059604645,
+        "Input_4": 0.5,
+        "Input_5": 6.439999580383301,
+        "Input_6": 7.860000133514404,
+        "Input_15": 1.9399999380111694,
+        "Input_8": 217.39999389648438,
+        "Input_9": 0.5,
+        "Input_12": 7,
+        "Input_10": 0.5,
+        "Input_0_asset": "island_tree_01_trunk"
+      }
+    },
+    {
+      "id": "leaf_scale_multiplier",
+      "type": "Math",
+      "position": {
+        "x": 2065.0137,
+        "y": 342.9232
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": 0.8999999761581421,
+        "b": 0.5
+      }
+    },
+    {
+      "id": "Instance on Points.001",
+      "type": "InstanceOnPoints",
+      "position": {
+        "x": 2834.1226,
+        "y": -623.338
+      },
+      "inputs": [
+        {
+          "id": "points",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "instance",
+          "name": "instance",
+          "type": "geometry"
+        },
+        {
+          "id": "scale",
+          "name": "scale",
+          "type": "vec3"
+        },
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "selection",
+          "name": "Selection",
+          "type": "float"
+        },
+        {
+          "id": "pickInstance",
+          "name": "Pick Instance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "useSpiral": false,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ],
+        "realizeInstances": false,
+        "selection": 1,
+        "pickInstance": 1,
+        "instance": 0
+      }
+    },
+    {
+      "id": "Align Euler to Vector.002",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -1105.6853,
+        "y": -905.9861
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Z",
+        "factor": 0.6666666269302368,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Vector Math.001",
+      "type": "VectorMath",
+      "position": {
+        "x": -1399.4829,
+        "y": -830.2619
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Align Euler to Vector.001",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -180.7273,
+        "y": -996.5562
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Z",
+        "factor": 1,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Separate XYZ",
+      "type": "SeparateVector",
+      "position": {
+        "x": -1145.0525,
+        "y": -1553.5564
+      },
+      "inputs": [
+        {
+          "id": "vec",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "vec": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Vector Math",
+      "type": "VectorMath",
+      "position": {
+        "x": -1383.9017,
+        "y": -1562.264
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          4.120000839233398
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Align Euler to Vector",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -152.0124,
+        "y": -720.5496
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Z",
+        "factor": 1,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Rotate Euler",
+      "type": "RotateEuler",
+      "position": {
+        "x": 327.9765,
+        "y": -792.4709
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "rotateBy",
+          "name": "rotateBy",
+          "type": "vec3"
+        },
+        {
+          "id": "axis",
+          "name": "Axis",
+          "type": "vec3"
+        },
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "rotationType": [
+          null,
+          null,
+          null
+        ],
+        "space": "LOCAL",
+        "rotation": [
+          null,
+          null,
+          null
+        ],
+        "rotateBy": null,
+        "axis": null,
+        "angle": 0
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Align Euler to Vector.003",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -1115.8041,
+        "y": -2100.5166
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Y",
+        "factor": 1,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Vector Math.004",
+      "type": "VectorMath",
+      "position": {
+        "x": -1409.6018,
+        "y": -2024.7925
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Position",
+      "type": "InputAttribute",
+      "position": {
+        "x": -1824.5889,
+        "y": -1147.5316
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "any"
+        },
+        {
+          "id": "value",
+          "name": "Position",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "name": "position",
+        "position": null
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Distribute Points on Faces",
+      "type": "DistributePointsOnFaces",
+      "position": {
+        "x": -475.9343,
+        "y": -332.9783
+      },
+      "inputs": [
+        {
+          "id": "mesh",
+          "name": "mesh",
+          "type": "geometry"
+        },
+        {
+          "id": "density",
+          "name": "density",
+          "type": "float"
+        },
+        {
+          "id": "densityMax",
+          "name": "densityMax",
+          "type": "float"
+        },
+        {
+          "id": "distanceMin",
+          "name": "distanceMin",
+          "type": "float"
+        },
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "int"
+        },
+        {
+          "id": "selection",
+          "name": "Selection",
+          "type": "float"
+        },
+        {
+          "id": "densityFactor",
+          "name": "Density Factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "points",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "normal",
+          "name": "normal",
+          "type": "vec3"
+        },
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "density": 2,
+        "densityMax": 73.29999542236328,
+        "distanceMin": 0.14000000059604645,
+        "seed": 0,
+        "distributeMethod": "POISSON",
+        "selection": 1,
+        "densityFactor": 1
+      }
+    },
+    {
+      "id": "Distribute Points on Faces.001",
+      "type": "DistributePointsOnFaces",
+      "position": {
+        "x": 2579.344,
+        "y": -692.8881
+      },
+      "inputs": [
+        {
+          "id": "mesh",
+          "name": "mesh",
+          "type": "geometry"
+        },
+        {
+          "id": "density",
+          "name": "density",
+          "type": "float"
+        },
+        {
+          "id": "densityMax",
+          "name": "densityMax",
+          "type": "float"
+        },
+        {
+          "id": "distanceMin",
+          "name": "distanceMin",
+          "type": "float"
+        },
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "int"
+        },
+        {
+          "id": "selection",
+          "name": "Selection",
+          "type": "float"
+        },
+        {
+          "id": "densityFactor",
+          "name": "Density Factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "points",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "normal",
+          "name": "normal",
+          "type": "vec3"
+        },
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "density": 217.39999389648438,
+        "densityMax": 10,
+        "distanceMin": 0,
+        "seed": 7,
+        "densityFactor": 1,
+        "distributeMethod": "RANDOM",
+        "selection": 1
+      }
+    },
+    {
+      "id": "Align Euler to Vector.004",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -190.8461,
+        "y": -2191.0869
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Y",
+        "factor": 1,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Align Euler to Vector.005",
+      "type": "AlignEulerToVector",
+      "position": {
+        "x": -162.1312,
+        "y": -1915.0802
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "factor",
+          "name": "factor",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "axis": "Z",
+        "factor": 1,
+        "vector": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Rotate Euler.001",
+      "type": "RotateEuler",
+      "position": {
+        "x": 317.8576,
+        "y": -1792.1301
+      },
+      "inputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "rotateBy",
+          "name": "rotateBy",
+          "type": "vec3"
+        },
+        {
+          "id": "axis",
+          "name": "Axis",
+          "type": "vec3"
+        },
+        {
+          "id": "angle",
+          "name": "Angle",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "rotationType": [
+          null,
+          null,
+          null
+        ],
+        "space": "LOCAL",
+        "rotation": [
+          null,
+          null,
+          null
+        ],
+        "rotateBy": null,
+        "axis": null,
+        "angle": 0
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Vector Math.005",
+      "type": "VectorMath",
+      "position": {
+        "x": -1394.0206,
+        "y": -2756.7949
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "vec3"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "vector",
+          "name": "vector",
+          "type": "vec3"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": [
+          0,
+          0,
+          0
+        ],
+        "b": [
+          0,
+          0,
+          1
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Separate XYZ.003",
+      "type": "SeparateVector",
+      "position": {
+        "x": -1155.1714,
+        "y": -2748.0869
+      },
+      "inputs": [
+        {
+          "id": "vec",
+          "name": "vector",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "x",
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "id": "z",
+          "name": "z",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "vec": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "ColorRamp.001",
+      "type": "ColorRamp",
+      "position": {
+        "x": -708.0097,
+        "y": -2727.0398
+      },
+      "inputs": [
+        {
+          "id": "fac",
+          "name": "fac",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "color",
+          "name": "color",
+          "type": "vec4"
+        },
+        {
+          "id": "alpha",
+          "name": "alpha",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "stops": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "fac": 0.5
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "ColorRamp",
+      "type": "ColorRamp",
+      "position": {
+        "x": -727.6522,
+        "y": -1544.6005
+      },
+      "inputs": [
+        {
+          "id": "fac",
+          "name": "fac",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "color",
+          "name": "color",
+          "type": "vec4"
+        },
+        {
+          "id": "alpha",
+          "name": "alpha",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "stops": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "fac": 0.5
+      },
+      "parentFrameId": "get_position_rotation"
+    },
+    {
+      "id": "Switch",
+      "type": "Switch",
+      "position": {
+        "x": 3064.0579,
+        "y": -546.8844
+      },
+      "inputs": [
+        {
+          "id": "switch",
+          "name": "switch",
+          "type": "float"
+        },
+        {
+          "id": "false",
+          "name": "false",
+          "type": "any"
+        },
+        {
+          "id": "true",
+          "name": "true",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "output",
+          "name": "output",
+          "type": "any"
+        },
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "switch": 1
+      }
+    },
+    {
+      "id": "Euler to Rotation",
+      "type": "EulerToRotation",
+      "position": {
+        "x": 1639.2068,
+        "y": -366.1599
+      },
+      "inputs": [
+        {
+          "id": "euler",
+          "name": "euler",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "euler": null
+      }
+    },
+    {
+      "id": "Realize Instances",
+      "type": "RealizeInstances",
+      "position": {
+        "x": 3833.6091,
+        "y": -270.0708
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "real",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 3845.5706,
+        "y": -272.0328
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "Distribute Points on Faces:Points->Instance on Points:Points",
+      "fromNodeId": "Distribute Points on Faces",
+      "fromSocketId": "points",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "points"
+    },
+    {
+      "id": "Collection Info:Instances->Instance on Points:Instance",
+      "fromNodeId": "Collection Info",
+      "fromSocketId": "geometry",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "instance"
+    },
+    {
+      "id": "Group Input:Input_0->Distribute Points on Faces:Mesh",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_0",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "mesh"
+    },
+    {
+      "id": "Group Input:Input_0->Join Geometry:Geometry",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_0",
+      "toNodeId": "Join Geometry",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "Group Input:Input_2->Distribute Points on Faces:Density",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_2",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "density"
+    },
+    {
+      "id": "Group Input:Input_3->Distribute Points on Faces:Seed",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_3",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "seed"
+    },
+    {
+      "id": "Distribute Points on Faces:Rotation->Align Euler to Vector:Rotation",
+      "fromNodeId": "Distribute Points on Faces",
+      "fromSocketId": "rotation",
+      "toNodeId": "Align Euler to Vector",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Align Euler to Vector:Rotation->Rotate Euler:Rotation",
+      "fromNodeId": "Align Euler to Vector",
+      "fromSocketId": "rotation",
+      "toNodeId": "Rotate Euler",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Reroute.003:Output->Euler to Rotation:Euler",
+      "fromNodeId": "Reroute.003",
+      "fromSocketId": "out",
+      "toNodeId": "Euler to Rotation",
+      "toSocketId": "euler"
+    },
+    {
+      "id": "ColorRamp:Color->Align Euler to Vector.001:Factor",
+      "fromNodeId": "ColorRamp",
+      "fromSocketId": "color",
+      "toNodeId": "Align Euler to Vector.001",
+      "toSocketId": "factor"
+    },
+    {
+      "id": "Align Euler to Vector.001:Rotation->Rotate Euler:Rotate By",
+      "fromNodeId": "Align Euler to Vector.001",
+      "fromSocketId": "rotation",
+      "toNodeId": "Rotate Euler",
+      "toSocketId": "rotateBy"
+    },
+    {
+      "id": "Position:Position->Vector Math:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Position:Position->Vector Math.001:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math.001",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Vector Math:Vector->Separate XYZ:Vector",
+      "fromNodeId": "Vector Math",
+      "fromSocketId": "vector",
+      "toNodeId": "Separate XYZ",
+      "toSocketId": "vec"
+    },
+    {
+      "id": "Separate XYZ:Z->ColorRamp:Fac",
+      "fromNodeId": "Separate XYZ",
+      "fromSocketId": "z",
+      "toNodeId": "ColorRamp",
+      "toSocketId": "fac"
+    },
+    {
+      "id": "Vector Math.001:Vector->Align Euler to Vector.002:Vector",
+      "fromNodeId": "Vector Math.001",
+      "fromSocketId": "vector",
+      "toNodeId": "Align Euler to Vector.002",
+      "toSocketId": "vector"
+    },
+    {
+      "id": "Align Euler to Vector.002:Rotation->Align Euler to Vector.001:Rotation",
+      "fromNodeId": "Align Euler to Vector.002",
+      "fromSocketId": "rotation",
+      "toNodeId": "Align Euler to Vector.001",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Instance on Points:Instances->Distribute Points on Faces.001:Mesh",
+      "fromNodeId": "Instance on Points",
+      "fromSocketId": "geometry",
+      "toNodeId": "Distribute Points on Faces.001",
+      "toSocketId": "mesh"
+    },
+    {
+      "id": "Instance on Points:Instances->Join Geometry:Geometry",
+      "fromNodeId": "Instance on Points",
+      "fromSocketId": "geometry",
+      "toNodeId": "Join Geometry",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "Distribute Points on Faces.001:Points->Instance on Points.001:Points",
+      "fromNodeId": "Distribute Points on Faces.001",
+      "fromSocketId": "points",
+      "toNodeId": "Instance on Points.001",
+      "toSocketId": "points"
+    },
+    {
+      "id": "Collection Info.001:Instances->Instance on Points.001:Instance",
+      "fromNodeId": "Collection Info.001",
+      "fromSocketId": "geometry",
+      "toNodeId": "Instance on Points.001",
+      "toSocketId": "instance"
+    },
+    {
+      "id": "Reroute:Output->Distribute Points on Faces.001:Density",
+      "fromNodeId": "Reroute",
+      "fromSocketId": "out",
+      "toNodeId": "Distribute Points on Faces.001",
+      "toSocketId": "density"
+    },
+    {
+      "id": "Group Input:Input_8->Math.003:Value",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_8",
+      "toNodeId": "Math.003",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Group Input:Input_9->Math.003:Value_001",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_9",
+      "toNodeId": "Math.003",
+      "toSocketId": "b"
+    },
+    {
+      "id": "leaf_scale_multiplier:Value->Instance on Points.001:Scale",
+      "fromNodeId": "leaf_scale_multiplier",
+      "fromSocketId": "val",
+      "toNodeId": "Instance on Points.001",
+      "toSocketId": "scale"
+    },
+    {
+      "id": "Group Input:Input_10->leaf_scale_multiplier:Value_001",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_10",
+      "toNodeId": "leaf_scale_multiplier",
+      "toSocketId": "b"
+    },
+    {
+      "id": "Group Input:Input_2->Distribute Points on Faces:Density Factor",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_2",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "densityFactor"
+    },
+    {
+      "id": "Group Input:Input_4->Distribute Points on Faces:Density Max",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_4",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "densityMax"
+    },
+    {
+      "id": "Group Input:Input_11->Distribute Points on Faces:Distance Min",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_11",
+      "toNodeId": "Distribute Points on Faces",
+      "toSocketId": "distanceMin"
+    },
+    {
+      "id": "Reroute.001:Output->Reroute:Input",
+      "fromNodeId": "Reroute.001",
+      "fromSocketId": "out",
+      "toNodeId": "Reroute",
+      "toSocketId": "in"
+    },
+    {
+      "id": "Math.003:Value->Reroute.001:Input",
+      "fromNodeId": "Math.003",
+      "fromSocketId": "val",
+      "toNodeId": "Reroute.001",
+      "toSocketId": "in"
+    },
+    {
+      "id": "Rotate Euler:Rotation->Reroute.003:Input",
+      "fromNodeId": "Rotate Euler",
+      "fromSocketId": "rotation",
+      "toNodeId": "Reroute.003",
+      "toSocketId": "in"
+    },
+    {
+      "id": "branch_scale_gradient:Color->Math.004:Value_001",
+      "fromNodeId": "branch_scale_gradient",
+      "fromSocketId": "color",
+      "toNodeId": "Math.004",
+      "toSocketId": "b"
+    },
+    {
+      "id": "Math.004:Value->branch_scale_multiplier:Value",
+      "fromNodeId": "Math.004",
+      "fromSocketId": "val",
+      "toNodeId": "branch_scale_multiplier",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Separate XYZ.001:Z->branch_scale_gradient:Fac",
+      "fromNodeId": "Separate XYZ.001",
+      "fromSocketId": "z",
+      "toNodeId": "branch_scale_gradient",
+      "toSocketId": "fac"
+    },
+    {
+      "id": "branch_scale_multiplier:Value->Instance on Points:Scale",
+      "fromNodeId": "branch_scale_multiplier",
+      "fromSocketId": "val",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "scale"
+    },
+    {
+      "id": "Group Input:Input_12->Distribute Points on Faces.001:Seed",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_12",
+      "toNodeId": "Distribute Points on Faces.001",
+      "toSocketId": "seed"
+    },
+    {
+      "id": "Vector Math.002:Vector->Separate XYZ.001:Vector",
+      "fromNodeId": "Vector Math.002",
+      "fromSocketId": "vector",
+      "toNodeId": "Separate XYZ.001",
+      "toSocketId": "vec"
+    },
+    {
+      "id": "Position:Position->Vector Math.002:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math.002",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Group Input:Input_15->branch_scale_multiplier:Value_001",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_15",
+      "toNodeId": "branch_scale_multiplier",
+      "toSocketId": "b"
+    },
+    {
+      "id": "Vector Math.003:Vector->Separate XYZ.002:Vector",
+      "fromNodeId": "Vector Math.003",
+      "fromSocketId": "vector",
+      "toNodeId": "Separate XYZ.002",
+      "toSocketId": "vec"
+    },
+    {
+      "id": "Position:Position->Vector Math.003:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math.003",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Instance on Points:Instances->Switch:False",
+      "fromNodeId": "Instance on Points",
+      "fromSocketId": "geometry",
+      "toNodeId": "Switch",
+      "toSocketId": "false"
+    },
+    {
+      "id": "Instance on Points.001:Instances->Switch:True",
+      "fromNodeId": "Instance on Points.001",
+      "fromSocketId": "geometry",
+      "toNodeId": "Switch",
+      "toSocketId": "true"
+    },
+    {
+      "id": "Align Euler to Vector.005:Rotation->Rotate Euler.001:Rotation",
+      "fromNodeId": "Align Euler to Vector.005",
+      "fromSocketId": "rotation",
+      "toNodeId": "Rotate Euler.001",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "ColorRamp.001:Color->Align Euler to Vector.004:Factor",
+      "fromNodeId": "ColorRamp.001",
+      "fromSocketId": "color",
+      "toNodeId": "Align Euler to Vector.004",
+      "toSocketId": "factor"
+    },
+    {
+      "id": "Align Euler to Vector.004:Rotation->Rotate Euler.001:Rotate By",
+      "fromNodeId": "Align Euler to Vector.004",
+      "fromSocketId": "rotation",
+      "toNodeId": "Rotate Euler.001",
+      "toSocketId": "rotateBy"
+    },
+    {
+      "id": "Vector Math.005:Vector->Separate XYZ.003:Vector",
+      "fromNodeId": "Vector Math.005",
+      "fromSocketId": "vector",
+      "toNodeId": "Separate XYZ.003",
+      "toSocketId": "vec"
+    },
+    {
+      "id": "Separate XYZ.003:Z->ColorRamp.001:Fac",
+      "fromNodeId": "Separate XYZ.003",
+      "fromSocketId": "z",
+      "toNodeId": "ColorRamp.001",
+      "toSocketId": "fac"
+    },
+    {
+      "id": "Vector Math.004:Vector->Align Euler to Vector.003:Vector",
+      "fromNodeId": "Vector Math.004",
+      "fromSocketId": "vector",
+      "toNodeId": "Align Euler to Vector.003",
+      "toSocketId": "vector"
+    },
+    {
+      "id": "Align Euler to Vector.003:Rotation->Align Euler to Vector.004:Rotation",
+      "fromNodeId": "Align Euler to Vector.003",
+      "fromSocketId": "rotation",
+      "toNodeId": "Align Euler to Vector.004",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Position:Position->Vector Math.004:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math.004",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Position:Position->Vector Math.005:Vector",
+      "fromNodeId": "Position",
+      "fromSocketId": "value",
+      "toNodeId": "Vector Math.005",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Distribute Points on Faces.001:Rotation->Align Euler to Vector.005:Rotation",
+      "fromNodeId": "Distribute Points on Faces.001",
+      "fromSocketId": "rotation",
+      "toNodeId": "Align Euler to Vector.005",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Rotate Euler.001:Rotation->Instance on Points.001:Rotation",
+      "fromNodeId": "Rotate Euler.001",
+      "fromSocketId": "rotation",
+      "toNodeId": "Instance on Points.001",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Euler to Rotation:Rotation->Instance on Points:Rotation",
+      "fromNodeId": "Euler to Rotation",
+      "fromSocketId": "rotation",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Join Geometry:Geometry->Realize Instances:Geometry",
+      "fromNodeId": "Join Geometry",
+      "fromSocketId": "geo_out",
+      "toNodeId": "Realize Instances",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "Realize Instances:Geometry->Group Output:Output_1_to_mesh_lod",
+      "fromNodeId": "Realize Instances",
+      "fromSocketId": "real",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "Realize Instances:Geometry->Group Output:Output_1_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "Group Output",
+      "toSocketId": "geo_in"
+    }
+  ],
+  "frames": [
+    {
+      "id": "get_position_rotation",
+      "label": "get_position_rotation",
+      "x": -1855,
+      "y": -2859,
+      "width": 2353,
+      "height": 2398,
+      "color": "#3d4758",
+      "collapsed": false
+    }
+  ],
+  "parameters": {
+    "branch_density": {
+      "type": "float",
+      "value": 2
+    },
+    "branch_seed": {
+      "type": "int",
+      "value": 0
+    },
+    "br_min_density": {
+      "type": "float",
+      "value": 0.14000000059604645
+    },
+    "br_max_density": {
+      "type": "float",
+      "value": 0.5
+    },
+    "br_size_min": {
+      "type": "float",
+      "value": 6.439999580383301
+    },
+    "br_size_max": {
+      "type": "float",
+      "value": 7.860000133514404
+    },
+    "br_scale_multiplier": {
+      "type": "float",
+      "value": 1.9399999380111694
+    },
+    "leaf_density": {
+      "type": "float",
+      "value": 217.39999389648438
+    },
+    "density_multiplier": {
+      "type": "float",
+      "value": 0.5
+    },
+    "leaf_seed": {
+      "type": "int",
+      "value": 7
+    },
+    "leaf_scale_multiplier": {
+      "type": "float",
+      "value": 0.5
+    }
+  },
+  "metadata": {
+    "coordinateSystem": "blender_z_up",
+    "source": {
+      "objectName": "island_tree_01_geometry_nodes",
+      "modifierName": "GeometryNodes",
+      "nodeGroupName": "island_tree_01_leaves"
+    },
+    "assets": {
+      "island_tree_01_leaves_LOD0": "island_tree_01_leaves_LOD0",
+      "island_tree_01_branches_LOD0": "island_tree_01_branches_LOD0",
+      "island_tree_01_trunk": "island_tree_01_trunk"
+    },
+    "gpuInstanceLayers": [
+      {
+        "nodeId": "Instance on Points.001",
+        "materialIndex": 1
+      }
+    ]
+  },
+  "name": "Island Tree Generator"
+}

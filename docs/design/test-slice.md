@@ -2,7 +2,7 @@
 
 Validation **hub + course** avant les 16 circuits. Aligné [gdd.md](gdd.md) Acte 0 (prologue) et feeling Plage ([levels.md](levels.md) § Promenade). Ton : [tone.md](tone.md).
 
-**Aucun code / mesh dans ce doc** — description scène + prompts artwork pour moodboard. **Plans cotés W3DTS** : [test-slice-plans.md](test-slice-plans.md) (1 wu = 1 m, minifig H = 1,65 m). Implémentation SceneDD / host = sprints ultérieurs (P1 / P2).
+**Aucun code / mesh dans ce doc** — description scène + prompts artwork. **Plans cotés W3DTS** : [test-slice-plans.md](test-slice-plans.md) (1 wu = 1 m, minifig H = 1,65 m). **Blockout TS** : [test-slice-blockout.md](../plans/test-slice-blockout.md) · [BRICK-BO1](../sprints/BRICK-BO1.md).
 
 **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.**
 
@@ -174,5 +174,5 @@ Style frame sheet: four swatches labeled Plaza Pastel, Garage Oil Orange, Beach 
 
 1. ~~Moodboard A1–B3~~ — canons en [art/](art/).
 2. ~~Plans cotés + images P1–P10~~ — [test-slice-plans.md](test-slice-plans.md) · [art/](art/).
-3. Modéliser / SceneDD `city-test` + `race-test` aux cotes plans.
-4. Brancher host (load hub → pad → race → retour) — après P0 kart jouable.
+3. Blockout TS `city-test` + `race-test` — plan [test-slice-blockout.md](../plans/test-slice-blockout.md) · sprint [BRICK-BO1](../sprints/BRICK-BO1.md) (pas SceneDD).
+4. Boucle course (tours, items, IA) — [BRICK-B3](../sprints/BRICK-B3.md) après BO1.

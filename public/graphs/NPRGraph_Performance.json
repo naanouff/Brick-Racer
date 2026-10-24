@@ -1,0 +1,160 @@
+{
+  "name": "NPR Pipeline — Performance (no HBAO / outlines / hatch, shadow 1024)",
+  "resources": [
+    {
+      "name": "shadowMap",
+      "format": "depth32float",
+      "sizeType": "absolute",
+      "width": 1024,
+      "height": 1024,
+      "usage": 22
+    },
+    {
+      "name": "sceneDepth",
+      "format": "depth24plus",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "sceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "normalBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ldrBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "gradingBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "lutTexture",
+      "format": "rgba8unorm",
+      "sizeType": "absolute",
+      "width": 256,
+      "height": 16,
+      "usage": 22
+    }
+  ],
+  "passes": [
+    {
+      "name": "01_Shadows",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["shadowMap"],
+      "viewType": "shadow",
+      "depthLoadOp": "clear",
+      "queueTags": ["shadow_caster"]
+    },
+    {
+      "name": "02_Opaques",
+      "type": "raster",
+      "inputs": ["shadowMap"],
+      "outputs": ["sceneColor", "sceneDepth", "normalBuffer"],
+      "viewType": "main",
+      "queueTags": ["opaque"],
+      "colorLoadOp": "clear",
+      "depthLoadOp": "clear",
+      "clearColor": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 }
+    },
+    {
+      "name": "02b_Decals",
+      "type": "decal",
+      "inputs": ["sceneDepth"],
+      "outputs": ["sceneColor"],
+      "shaderPath": "/shaders/core/decal.wgsl"
+    },
+    {
+      "name": "03_Skybox",
+      "type": "raster",
+      "inputs": [],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "builtInPipeline": "skybox",
+      "colorLoadOp": "load",
+      "depthLoadOp": "load",
+      "vertexCount": 36,
+      "skyboxParams": {
+        "sunSize": 0.05,
+        "sunBloom": 1.0,
+        "starsThreshold": 0.995,
+        "timeOfDay": 12.0,
+        "clouds": { "density": 0.5, "scale": 2.5, "speed": 0.05, "brightness": 1.0 },
+        "gradientStops": [
+          { "offset": 0.0, "color": [0.01, 0.01, 0.02] },
+          { "offset": 0.5, "color": [0.4, 0.6, 1.0] },
+          { "offset": 1.0, "color": [0.1, 0.3, 0.8] }
+        ]
+      }
+    },
+    {
+      "name": "04_Transparents",
+      "type": "raster",
+      "inputs": ["shadowMap"],
+      "outputs": ["sceneColor", "sceneDepth"],
+      "viewType": "main",
+      "queueTags": ["transparent"],
+      "colorLoadOp": "load",
+      "depthLoadOp": "load"
+    },
+    {
+      "name": "05_ToneMapping",
+      "type": "fullscreen",
+      "inputs": ["sceneColor"],
+      "outputs": ["ldrBuffer"],
+      "outputFormat": "rgba8unorm",
+      "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
+      "uniforms": { "exposure": { "type": "f32", "value": 1.0 } }
+    },
+    {
+      "name": "06_ColorGrading",
+      "type": "fullscreen",
+      "inputs": ["ldrBuffer", "lutTexture"],
+      "outputs": ["gradingBuffer"],
+      "outputFormat": "rgba8unorm",
+      "shaderPath": "/shaders/post-processing/color_grading.frag.wgsl",
+      "uniforms": {
+        "params": { "type": "struct", "value": [1.0] }
+      }
+    },
+    {
+      "name": "07_FXAA",
+      "type": "fullscreen",
+      "inputs": ["gradingBuffer"],
+      "outputs": ["FINAL_OUTPUT"],
+      "shaderPath": "/shaders/post-processing/fxaa.frag.wgsl"
+    },
+    {
+      "name": "99_DebugLines",
+      "type": "raster",
+      "inputs": ["sceneDepth"],
+      "outputs": ["FINAL_OUTPUT"],
+      "viewType": "main",
+      "colorLoadOp": "load",
+      "depthLoadOp": "load",
+      "builtInPipeline": "debug"
+    }
+  ]
+}

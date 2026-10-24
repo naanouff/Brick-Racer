@@ -1,0 +1,201 @@
+{
+  "id": "lego-moto-fairing-generator",
+  "name": "Lego Moto Fairing",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-moto"
+  },
+  "parameters": {
+    "Length": {
+      "type": "float",
+      "value": 0.38
+    },
+    "Height": {
+      "type": "float",
+      "value": 0.14
+    },
+    "Depth": {
+      "type": "float",
+      "value": 0.07
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Length",
+          "name": "Length",
+          "type": "float"
+        },
+        {
+          "id": "Height",
+          "name": "Height",
+          "type": "float"
+        },
+        {
+          "id": "Depth",
+          "name": "Depth",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "Length": 0.38,
+        "Height": 0.14,
+        "Depth": 0.07
+      }
+    },
+    {
+      "id": "part",
+      "type": "LegoMotoFairing",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "length",
+          "name": "length",
+          "type": "float"
+        },
+        {
+          "id": "height",
+          "name": "height",
+          "type": "float"
+        },
+        {
+          "id": "depth",
+          "name": "depth",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "length": 0.38,
+        "height": 0.14,
+        "depth": 0.07
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 340,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l4_to_mesh_lod",
+      "fromNodeId": "part",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l4_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    },
+    {
+      "id": "l_Length",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Length",
+      "toNodeId": "part",
+      "toSocketId": "length"
+    },
+    {
+      "id": "l_Height",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Height",
+      "toNodeId": "part",
+      "toSocketId": "height"
+    },
+    {
+      "id": "l_Depth",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Depth",
+      "toNodeId": "part",
+      "toSocketId": "depth"
+    }
+  ]
+}

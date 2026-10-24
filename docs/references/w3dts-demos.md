@@ -4,8 +4,8 @@ Démos du monorepo [w3dts](https://github.com/naanouff/w3dts) qui servent de bas
 
 | Démo | Nature | Distribution | Rôle Brick Racer |
 | ---- | ------ | ------------ | ---------------- |
-| **Lego Kart** | Circuit SceneDD + kart 4 roues raycast | Website / scenepak CDN / `?project=` / `?scene=` | **Référence primaire** — premier host jouable ([BRICK-B2](../sprints/BRICK-B2.md)) |
-| **Motocross Madness** | Terrain procédural `plateStepped` + moto 2 roues | Editor only (`/?project=MotocrossMadnessProject`) | **Référence secondaire** — terrain Lego, handling 2 roues, chase runtime |
+| **Lego Kart** | Circuit SceneDD + kart 4 roues raycast | Website / scenepak CDN / `?project=` / `?scene=` | **Référence primaire** — VP0 / [BRICK-B2](../sprints/BRICK-B2.md) · [vehicle-prototypes.md](../plans/vehicle-prototypes.md) |
+| **Motocross Madness** | Terrain procédural `plateStepped` + moto 2 roues | Editor only (`/?project=MotocrossMadnessProject`) | **Référence secondaire** — VP2 moto · [vehicle-prototypes.md](../plans/vehicle-prototypes.md) |
 
 ```mermaid
 flowchart LR
@@ -122,6 +122,6 @@ Pas de SceneDD / scenepak public — code-first, editor-only.
 
 Déjà présentes : `core`, `physics`, `gproc`, `input`, `logger`, `loader-hdr`, …
 
-À ajouter pour le host kart ([plan](../plans/lego-kart-host.md)) : `w3dts-scenedd`, `w3dts-loaders` (et/ou `loader-scenedd`), `w3dts-scripts` ; `character` si on garde le strip moteurs.
+Host kart Brick Racer : level TypeScript `sandboxKart` (pas de SceneDD) — [lego-kart-host.md](../plans/lego-kart-host.md). Mono : `w3dts-scripts` via alias.
 
 Plus tard (motocross / pistes) : `w3dts-terrain`, `fastnoise-lite`.

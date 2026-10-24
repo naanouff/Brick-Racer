@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "chess_board",
+      "name": "Chess board (chamfered)",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-board.json"
+    },
+    {
+      "id": "chess_pawn",
+      "name": "Chess pawn",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-pawn.json"
+    },
+    {
+      "id": "chess_bishop",
+      "name": "Chess bishop",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-bishop.json"
+    },
+    {
+      "id": "chess_rook",
+      "name": "Chess rook",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-rook.json"
+    },
+    {
+      "id": "chess_queen",
+      "name": "Chess queen",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-queen.json"
+    },
+    {
+      "id": "chess_king",
+      "name": "Chess king",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-king.json"
+    },
+    {
+      "id": "chess_knight",
+      "name": "Chess knight",
+      "category": "prop",
+      "subcategory": "chess",
+      "graphUrl": "/gproc/chess-knight.json"
+    }
+  ]
+}

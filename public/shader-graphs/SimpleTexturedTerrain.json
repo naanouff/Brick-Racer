@@ -1,0 +1,310 @@
+{
+  "id": "SimpleTexturedTerrain",
+  "properties": {
+    "grassAlbedo": {
+      "name": "Grass Albedo",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "rockAlbedo": {
+      "name": "Rock Albedo",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "grassRoughness": {
+      "name": "Grass Roughness",
+      "type": "f32",
+      "defaultValue": 0.95
+    },
+    "rockRoughness": {
+      "name": "Rock Roughness",
+      "type": "f32",
+      "defaultValue": 0.8
+    },
+    "metallic": {
+      "name": "Metallic",
+      "type": "f32",
+      "defaultValue": 0.0
+    }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_norm",
+      "type": "GetNormal",
+      "stage": "vertex",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Norm", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "grass_albedo_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "grassAlbedo" }
+    },
+    {
+      "id": "grass_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "Alpha", "dataType": "f32" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "rock_albedo_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "rockAlbedo" }
+    },
+    {
+      "id": "rock_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "Alpha", "dataType": "f32" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "blend_factor",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 0.5 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "grass_scaled",
+      "type": "Multiply",
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "rock_scaled",
+      "type": "Multiply",
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "albedo_blend",
+      "type": "Add",
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "grass_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "grassRoughness" }
+    },
+    {
+      "id": "rock_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "rockRoughness" }
+    },
+    {
+      "id": "rough_blend",
+      "type": "Multiply",
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "metal_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "metallic" }
+    },
+    {
+      "id": "f_master",
+      "type": "PBRMasterNode",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic", "dataType": "f32" }
+      ],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+    {
+      "fromNodeId": "get_norm",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "normal"
+    },
+
+    {
+      "fromNodeId": "grass_albedo_prop",
+      "fromSocketId": "out",
+      "toNodeId": "grass_sample",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "get_uv",
+      "fromSocketId": "uv",
+      "toNodeId": "grass_sample",
+      "toSocketId": "uv"
+    },
+
+    {
+      "fromNodeId": "rock_albedo_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rock_sample",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "get_uv", "fromSocketId": "uv", "toNodeId": "rock_sample", "toSocketId": "uv" },
+
+    {
+      "fromNodeId": "grass_sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "grass_scaled",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "blend_factor",
+      "fromSocketId": "out",
+      "toNodeId": "grass_scaled",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "rock_sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "rock_scaled",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "blend_factor",
+      "fromSocketId": "out",
+      "toNodeId": "rock_scaled",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "grass_scaled",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_blend",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "rock_scaled",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_blend",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "grass_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_blend",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "blend_factor",
+      "fromSocketId": "out",
+      "toNodeId": "rough_blend",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "albedo_blend",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "blend_factor",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "opacity"
+    },
+    {
+      "fromNodeId": "get_norm",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "normal"
+    },
+    {
+      "fromNodeId": "rough_blend",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "roughness_factor"
+    },
+    {
+      "fromNodeId": "metal_prop",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "metallic_factor"
+    }
+  ]
+}

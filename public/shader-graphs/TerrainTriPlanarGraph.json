@@ -1,0 +1,545 @@
+{
+  "id": "TerrainTriPlanarGraph_Unlit",
+  "properties": {
+    "baseColor": { "type": "vec3f", "defaultValue": [1, 1, 1], "name": "Color Tint" },
+    "baseColorTexture": { "type": "texture_2d", "defaultValue": null, "name": "Texture Herbe (Y)" },
+    "normalTexture": { "type": "texture_2d", "defaultValue": null, "name": "Texture Roche (X/Z)" },
+    "sandTexture": {
+      "type": "texture_2d",
+      "defaultValue": null,
+      "name": "Texture Sable (Sous l'eau)"
+    },
+    "texScale": { "type": "f32", "defaultValue": 2.0, "name": "Échelle Textures" },
+    "blendSharpness": { "type": "f32", "defaultValue": 8.0, "name": "Netteté Pente (Blend)" },
+    "waterLevel": { "type": "f32", "defaultValue": 0.0, "name": "Niveau de l'eau" },
+    "waterBlendDistance": { "type": "f32", "defaultValue": 2.0, "name": "Distance Blend Eau" },
+    "snowHeight": { "type": "f32", "defaultValue": 45.0, "name": "Altitude Neige" },
+    "snowBlend": { "type": "f32", "defaultValue": 5.0, "name": "Transition Neige" },
+    "snowColor": { "type": "vec3f", "defaultValue": [0.9, 0.9, 0.95], "name": "Couleur Neige" }
+  },
+  "nodes": [
+    {
+      "id": "master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1800, "y": 400 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+
+    {
+      "id": "world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 600 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Vec3", "dataType": "vec3f" }]
+    },
+    {
+      "id": "world_norm",
+      "type": "GetWorldNormal",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 700 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Vec3", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "prop_grass",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 0 },
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Texture", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "prop_rock",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 100 },
+      "data": { "propertyName": "normalTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Texture", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "prop_sand",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 200 },
+      "data": { "propertyName": "sandTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Texture", "dataType": "texture_2d" }]
+    },
+
+    {
+      "id": "prop_scale",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 400 },
+      "data": { "propertyName": "texScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_sharpness",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 500 },
+      "data": { "propertyName": "blendSharpness" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_color",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1000, "y": 500 },
+      "data": { "propertyName": "baseColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "prop_water_level",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 400, "y": 700 },
+      "data": { "propertyName": "waterLevel" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_water_blend",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 400, "y": 800 },
+      "data": { "propertyName": "waterBlendDistance" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+
+    {
+      "id": "prop_snow_h",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1000, "y": 800 },
+      "data": { "propertyName": "snowHeight" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_snow_blend",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1000, "y": 900 },
+      "data": { "propertyName": "snowBlend" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_snow_col",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 1400, "y": 600 },
+      "data": { "propertyName": "snowColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Color", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "scaled_pos",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 300, "y": 500 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "triplanar",
+      "type": "TriPlanarSample",
+      "stage": "fragment",
+      "position": { "x": 500, "y": 100 },
+      "inputs": [
+        { "id": "pos", "name": "World Pos", "dataType": "vec3f" },
+        { "id": "norm", "name": "World Norm", "dataType": "vec3f" },
+        { "id": "tex_y", "name": "Tex Top (Y)", "dataType": "texture_2d" },
+        { "id": "tex_xz", "name": "Tex Side (X/Z)", "dataType": "texture_2d" },
+        { "id": "sharpness", "name": "Sharpness", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Color", "dataType": "vec3f" }]
+    },
+    {
+      "id": "split_pos",
+      "type": "SplitVec3",
+      "stage": "common",
+      "position": { "x": 300, "y": 600 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+
+    {
+      "id": "water_blend_min",
+      "type": "Subtract",
+      "stage": "common",
+      "position": { "x": 600, "y": 700 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "water_remap",
+      "type": "Remap",
+      "stage": "fragment",
+      "position": { "x": 800, "y": 600 },
+      "data": { "clamp": true },
+      "inputs": [
+        { "id": "in", "name": "In", "dataType": "f32" },
+        { "id": "fromMin", "name": "From Min", "dataType": "f32" },
+        { "id": "fromMax", "name": "From Max", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "split_scaled_pos",
+      "type": "SplitVec3",
+      "stage": "common",
+      "position": { "x": 500, "y": 500 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "sand_uv",
+      "type": "CombineVec2",
+      "stage": "common",
+      "position": { "x": 650, "y": 300 },
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "sand_tex_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "position": { "x": 800, "y": 300 },
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Color", "dataType": "vec3f" }]
+    },
+    {
+      "id": "water_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "position": { "x": 1000, "y": 300 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "final_tint",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 1200, "y": 300 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "const_zero",
+      "type": "Constant",
+      "position": { "x": 1100, "y": 1000 },
+      "stage": "common",
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "const_one",
+      "type": "Constant",
+      "position": { "x": 1100, "y": 1050 },
+      "stage": "common",
+      "data": { "value": 1 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "snow_mask_sub",
+      "type": "Subtract",
+      "stage": "common",
+      "position": { "x": 1200, "y": 850 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "snow_mask_div",
+      "type": "Divide",
+      "stage": "common",
+      "position": { "x": 1350, "y": 850 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "snow_mask_clamp",
+      "type": "Clamp",
+      "stage": "common",
+      "position": { "x": 1500, "y": 850 },
+      "inputs": [
+        { "id": "val", "name": "Value", "dataType": "f32" },
+        { "id": "min", "name": "Min", "dataType": "f32" },
+        { "id": "max", "name": "Max", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "snow_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "position": { "x": 1600, "y": 400 },
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "world_pos",
+      "fromSocketId": "out",
+      "toNodeId": "scaled_pos",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_scale",
+      "fromSocketId": "out",
+      "toNodeId": "scaled_pos",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "scaled_pos",
+      "fromSocketId": "out",
+      "toNodeId": "triplanar",
+      "toSocketId": "pos"
+    },
+    {
+      "fromNodeId": "world_norm",
+      "fromSocketId": "out",
+      "toNodeId": "triplanar",
+      "toSocketId": "norm"
+    },
+    {
+      "fromNodeId": "prop_grass",
+      "fromSocketId": "out",
+      "toNodeId": "triplanar",
+      "toSocketId": "tex_y"
+    },
+    {
+      "fromNodeId": "prop_rock",
+      "fromSocketId": "out",
+      "toNodeId": "triplanar",
+      "toSocketId": "tex_xz"
+    },
+    {
+      "fromNodeId": "prop_sharpness",
+      "fromSocketId": "out",
+      "toNodeId": "triplanar",
+      "toSocketId": "sharpness"
+    },
+    {
+      "fromNodeId": "world_pos",
+      "fromSocketId": "out",
+      "toNodeId": "split_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "scaled_pos",
+      "fromSocketId": "out",
+      "toNodeId": "split_scaled_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "split_scaled_pos",
+      "fromSocketId": "x",
+      "toNodeId": "sand_uv",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "split_scaled_pos",
+      "fromSocketId": "z",
+      "toNodeId": "sand_uv",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "prop_sand",
+      "fromSocketId": "out",
+      "toNodeId": "sand_tex_sample",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "sand_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sand_tex_sample",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "prop_water_level",
+      "fromSocketId": "out",
+      "toNodeId": "water_blend_min",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_water_blend",
+      "fromSocketId": "out",
+      "toNodeId": "water_blend_min",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_pos",
+      "fromSocketId": "y",
+      "toNodeId": "water_remap",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "water_blend_min",
+      "fromSocketId": "out",
+      "toNodeId": "water_remap",
+      "toSocketId": "fromMin"
+    },
+    {
+      "fromNodeId": "prop_water_level",
+      "fromSocketId": "out",
+      "toNodeId": "water_remap",
+      "toSocketId": "fromMax"
+    },
+    {
+      "fromNodeId": "sand_tex_sample",
+      "fromSocketId": "out",
+      "toNodeId": "water_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "triplanar",
+      "fromSocketId": "out",
+      "toNodeId": "water_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "water_remap",
+      "fromSocketId": "out",
+      "toNodeId": "water_lerp",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "water_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "final_tint",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_color",
+      "fromSocketId": "out",
+      "toNodeId": "final_tint",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_pos",
+      "fromSocketId": "y",
+      "toNodeId": "snow_mask_sub",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_snow_h",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_sub",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "snow_mask_sub",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_div",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_snow_blend",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_div",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "snow_mask_div",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_clamp",
+      "toSocketId": "val"
+    },
+    {
+      "fromNodeId": "const_zero",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_clamp",
+      "toSocketId": "min"
+    },
+    {
+      "fromNodeId": "const_one",
+      "fromSocketId": "out",
+      "toNodeId": "snow_mask_clamp",
+      "toSocketId": "max"
+    },
+    {
+      "fromNodeId": "final_tint",
+      "fromSocketId": "out",
+      "toNodeId": "snow_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_snow_col",
+      "fromSocketId": "out",
+      "toNodeId": "snow_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "snow_mask_clamp",
+      "fromSocketId": "out",
+      "toNodeId": "snow_lerp",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "snow_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "albedo"
+    }
+  ]
+}

@@ -1,0 +1,1338 @@
+{
+  "id": "UltraTerrainHeightBlend",
+  "properties": {
+    "albedoArray": {
+      "name": "Albedo Texture Array",
+      "type": "texture_2d_array",
+      "defaultValue": null
+    },
+    "normalArray": {
+      "name": "Normal Texture Array",
+      "type": "texture_2d_array",
+      "defaultValue": null
+    },
+    "debugLayer": { "name": "Debug Layer Index", "type": "i32", "defaultValue": -1 },
+    "pathMaskTexture": {
+      "name": "Path Mask",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "textureScale": {
+      "name": "Texture Scale",
+      "type": "f32",
+      "defaultValue": 0.05
+    },
+    "heightMin": { "name": "Height Min (Grass)", "type": "f32", "defaultValue": 15.0 },
+    "heightMax": { "name": "Height Max (Rock)", "type": "f32", "defaultValue": 35.0 },
+    "waterLevel": { "name": "Water Level", "type": "f32", "defaultValue": 2.0 },
+    "wetZoneHeight": { "name": "Wet Zone Height", "type": "f32", "defaultValue": 0.25 },
+    "pathMaskUvScale": {
+      "name": "Path Mask UV Scale",
+      "type": "vec2f",
+      "defaultValue": [0.004, 0.004]
+    },
+    "pathMaskUvOffset": {
+      "name": "Path Mask UV Offset",
+      "type": "vec2f",
+      "defaultValue": [0.5, 0.5]
+    },
+    "normalStrength": { "name": "Normal Strength", "type": "f32", "defaultValue": 10.0 },
+    "emission": { "name": "Emission", "type": "vec4f", "defaultValue": [0.0, 0.0, 0.0, 0.0] }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "get_world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "wpos", "name": "World Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_world_normal",
+      "type": "GetWorldNormal",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "World Normal", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "tex_scale_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "textureScale" }
+    },
+    {
+      "id": "split_world_pos_uv",
+      "type": "SplitVec3",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "scale_x",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "scale_z",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "scaled_uv",
+      "type": "CombineVec2",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+
+    {
+      "id": "albedo_array_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d_array" }],
+      "data": { "propertyName": "albedoArray" }
+    },
+    {
+      "id": "normal_array_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d_array" }],
+      "data": { "propertyName": "normalArray" }
+    },
+
+    {
+      "id": "albedo_sample_0",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "albedo_sample_1",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "albedo_sample_2",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "albedo_sample_3",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "albedo_sample_4",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+
+    {
+      "id": "normal_sample_0",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_sample_1",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_sample_2",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_sample_3",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_sample_4",
+      "type": "TextureSampleArray",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "layer", "name": "Layer", "dataType": "i32" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "layer0",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }]
+    },
+    {
+      "id": "layer1",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 1 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }]
+    },
+    {
+      "id": "layer2",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 2 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }]
+    },
+    {
+      "id": "layer3",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 3 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }]
+    },
+    {
+      "id": "layer4",
+      "type": "Constant",
+      "stage": "common",
+      "data": { "value": 4 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }]
+    },
+
+    {
+      "id": "debug_layer_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "i32" }],
+      "data": { "propertyName": "debugLayer" }
+    },
+
+    {
+      "id": "path_mask_tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "pathMaskTexture" }
+    },
+    {
+      "id": "path_mask_uv_scale_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }],
+      "data": { "propertyName": "pathMaskUvScale" }
+    },
+    {
+      "id": "path_mask_uv_offset_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }],
+      "data": { "propertyName": "pathMaskUvOffset" }
+    },
+    {
+      "id": "path_mask_uv_mul",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec2f" },
+        { "id": "b", "name": "B", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "path_mask_uv_add",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec2f" },
+        { "id": "b", "name": "B", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "path_mask_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "split_path_mask",
+      "type": "SplitVec4",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec4f" }],
+      "outputs": [
+        { "id": "x", "name": "R", "dataType": "f32" },
+        { "id": "y", "name": "G", "dataType": "f32" },
+        { "id": "z", "name": "B", "dataType": "f32" },
+        { "id": "w", "name": "A", "dataType": "f32" }
+      ]
+    },
+
+    {
+      "id": "height_min_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "heightMin" }
+    },
+    {
+      "id": "height_max_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "heightMax" }
+    },
+    {
+      "id": "height_blend",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "water_level_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "waterLevel" }
+    },
+    {
+      "id": "wet_zone_height_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "wetZoneHeight" }
+    },
+    {
+      "id": "wet_zone_top",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "underwater_edge0",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "underwater_blend",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "one_minus",
+      "type": "OneMinus",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "f32" }],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mul_g0",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mul_g1",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_weights_0",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_weights_1",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "div_norm",
+      "type": "Divide",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "mul_albedo_0",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "mul_albedo_1",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "mul_albedo_2",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "mul_albedo_3",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "mul_albedo_4",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "add_albedo_2",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "add_albedo_3",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+
+    {
+      "id": "add_albedo_0",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "add_albedo_1",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+
+    {
+      "id": "mul_normal_0",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "mul_normal_1",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "mul_normal_2",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "mul_normal_3",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "mul_normal_4",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "add_normal_0",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "add_normal_1",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "add_normal_2",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "add_normal_3",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "f_master",
+      "type": "TerrainMasterNode",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo (RGBA)", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic", "dataType": "f32" },
+        { "id": "emission", "name": "Emission", "dataType": "vec4f" }
+      ],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_world_pos",
+      "fromSocketId": "wpos",
+      "toNodeId": "split_world_pos_uv",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "split_world_pos_uv",
+      "fromSocketId": "x",
+      "toNodeId": "scale_x",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "tex_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "scale_x",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_world_pos_uv",
+      "fromSocketId": "z",
+      "toNodeId": "scale_z",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "tex_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "scale_z",
+      "toSocketId": "b"
+    },
+    { "fromNodeId": "scale_x", "fromSocketId": "out", "toNodeId": "scaled_uv", "toSocketId": "x" },
+    { "fromNodeId": "scale_z", "fromSocketId": "out", "toNodeId": "scaled_uv", "toSocketId": "y" },
+
+    {
+      "fromNodeId": "albedo_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_0",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "albedo_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_1",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "albedo_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_2",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "albedo_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_3",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "albedo_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_4",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_0",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_1",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_2",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_3",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_4",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_0",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_1",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_2",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_3",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "albedo_sample_4",
+      "toSocketId": "layer"
+    },
+
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_0",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_1",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_2",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_3",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_4",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_0",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_1",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_2",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_3",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_4",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_0",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_1",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_2",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_3",
+      "toSocketId": "layer"
+    },
+    {
+      "fromNodeId": "debug_layer_prop",
+      "fromSocketId": "out",
+      "toNodeId": "normal_sample_4",
+      "toSocketId": "layer"
+    },
+
+    {
+      "fromNodeId": "path_mask_tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_sample",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "path_mask_uv_mul",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_add",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "path_mask_uv_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_mul",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_mul",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "path_mask_uv_offset_prop",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_add",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "path_mask_uv_add",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_sample",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "path_mask_sample",
+      "fromSocketId": "rgba",
+      "toNodeId": "split_path_mask",
+      "toSocketId": "in"
+    },
+
+    {
+      "fromNodeId": "height_min_prop",
+      "fromSocketId": "out",
+      "toNodeId": "height_blend",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "height_max_prop",
+      "fromSocketId": "out",
+      "toNodeId": "height_blend",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "split_world_pos_uv",
+      "fromSocketId": "y",
+      "toNodeId": "height_blend",
+      "toSocketId": "x"
+    },
+
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_edge0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "one_minus",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_edge0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "underwater_edge0",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "split_world_pos_uv",
+      "fromSocketId": "y",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "x"
+    },
+
+    {
+      "fromNodeId": "height_blend",
+      "fromSocketId": "out",
+      "toNodeId": "one_minus",
+      "toSocketId": "in"
+    },
+    { "fromNodeId": "one_minus", "fromSocketId": "out", "toNodeId": "mul_g0", "toSocketId": "a" },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "mul_g0",
+      "toSocketId": "b"
+    },
+    { "fromNodeId": "mul_g0", "fromSocketId": "out", "toNodeId": "mul_g1", "toSocketId": "a" },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_g1",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "height_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_g0",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "w",
+      "toNodeId": "mul_g1",
+      "toSocketId": "a"
+    },
+
+    {
+      "fromNodeId": "mul_g1",
+      "fromSocketId": "out",
+      "toNodeId": "add_weights_0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "add_weights_0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_weights_0",
+      "fromSocketId": "out",
+      "toNodeId": "add_weights_1",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "add_weights_1",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "add_weights_1",
+      "fromSocketId": "out",
+      "toNodeId": "div_norm",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "albedo_sample_0",
+      "fromSocketId": "rgba",
+      "toNodeId": "mul_albedo_0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_g1",
+      "fromSocketId": "out",
+      "toNodeId": "mul_albedo_0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "albedo_sample_1",
+      "fromSocketId": "rgba",
+      "toNodeId": "mul_albedo_1",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "mul_albedo_1",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "albedo_sample_2",
+      "fromSocketId": "rgba",
+      "toNodeId": "mul_albedo_2",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_albedo_2",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "albedo_sample_3",
+      "fromSocketId": "rgba",
+      "toNodeId": "mul_albedo_3",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "height_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_albedo_3",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "albedo_sample_4",
+      "fromSocketId": "rgba",
+      "toNodeId": "mul_albedo_4",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_albedo_4",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "mul_albedo_0",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_albedo_1",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_albedo_0",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_1",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_albedo_2",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_1",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_albedo_1",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_2",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_albedo_3",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_2",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_albedo_2",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_3",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_albedo_4",
+      "fromSocketId": "out",
+      "toNodeId": "add_albedo_3",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_albedo_3",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+
+    {
+      "fromNodeId": "normal_sample_0",
+      "fromSocketId": "rgb",
+      "toNodeId": "mul_normal_0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_g1",
+      "fromSocketId": "out",
+      "toNodeId": "mul_normal_0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "normal_sample_1",
+      "fromSocketId": "rgb",
+      "toNodeId": "mul_normal_1",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "mul_normal_1",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "normal_sample_2",
+      "fromSocketId": "rgb",
+      "toNodeId": "mul_normal_2",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_normal_2",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "normal_sample_3",
+      "fromSocketId": "rgb",
+      "toNodeId": "mul_normal_3",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "height_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_normal_3",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "normal_sample_4",
+      "fromSocketId": "rgb",
+      "toNodeId": "mul_normal_4",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "mul_normal_4",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "mul_normal_0",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_normal_1",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_normal_0",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_1",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_normal_2",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_1",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_normal_1",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_2",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_normal_3",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_2",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_normal_2",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_3",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_normal_4",
+      "fromSocketId": "out",
+      "toNodeId": "add_normal_3",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_normal_3",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "normal"
+    },
+
+    {
+      "fromNodeId": "one_minus",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "opacity"
+    },
+    {
+      "fromNodeId": "div_norm",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "roughness_factor"
+    },
+    {
+      "fromNodeId": "one_minus",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "metallic_factor"
+    },
+    {
+      "fromNodeId": "emission",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "emission"
+    }
+  ]
+}

@@ -1,0 +1,1553 @@
+{
+  "id": "UltraTerrainAtlas",
+  "properties": {
+    "diffuseArray": {
+      "name": "Diffuse Array",
+      "type": "texture_2d_array",
+      "defaultValue": null
+    },
+    "normalArray": {
+      "name": "Normal Array",
+      "type": "texture_2d_array",
+      "defaultValue": null
+    },
+    "pathMaskTexture": {
+      "name": "Path Mask",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "atlasRegion0": {
+      "name": "Grass Region (offset.xy, scale.zw)",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.0, 0.333, 0.5]
+    },
+    "atlasRegion1": {
+      "name": "Rock Region",
+      "type": "vec4f",
+      "defaultValue": [0.333, 0.0, 0.333, 0.5]
+    },
+    "atlasRegion2": {
+      "name": "Mud Region",
+      "type": "vec4f",
+      "defaultValue": [0.666, 0.0, 0.333, 0.5]
+    },
+    "atlasRegion3": {
+      "name": "Gravel Region",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.5, 0.333, 0.5]
+    },
+    "atlasRegion4": {
+      "name": "Moss Region",
+      "type": "vec4f",
+      "defaultValue": [0.333, 0.5, 0.333, 0.5]
+    },
+    "normalRegion0": {
+      "name": "Grass Normal Region",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.0, 0.5, 1.0]
+    },
+    "normalRegion1": {
+      "name": "Rock Normal Region",
+      "type": "vec4f",
+      "defaultValue": [0.5, 0.0, 0.5, 1.0]
+    },
+    "textureScale": {
+      "name": "Texture Scale",
+      "type": "f32",
+      "defaultValue": 0.05
+    },
+    "grassRoughness": {
+      "name": "Grass Roughness",
+      "type": "f32",
+      "defaultValue": 0.95
+    },
+    "rockRoughness": {
+      "name": "Rock Roughness",
+      "type": "f32",
+      "defaultValue": 0.8
+    },
+    "mudRoughness": {
+      "name": "Mud Roughness",
+      "type": "f32",
+      "defaultValue": 0.6
+    },
+    "gravelRoughness": {
+      "name": "Gravel Roughness",
+      "type": "f32",
+      "defaultValue": 0.85
+    },
+    "mossRoughness": {
+      "name": "Moss Roughness",
+      "type": "f32",
+      "defaultValue": 0.7
+    },
+    "metallic": {
+      "name": "Metallic",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "heightMin": {
+      "name": "Height Min (Grass)",
+      "type": "f32",
+      "defaultValue": 15.0
+    },
+    "heightMax": {
+      "name": "Height Max (Rock)",
+      "type": "f32",
+      "defaultValue": 35.0
+    },
+    "slopeThreshold": {
+      "name": "Slope Threshold",
+      "type": "f32",
+      "defaultValue": 0.7
+    },
+    "slopeBlendRange": {
+      "name": "Slope Blend Range",
+      "type": "f32",
+      "defaultValue": 0.2
+    },
+    "waterLevel": {
+      "name": "Water Level",
+      "type": "f32",
+      "defaultValue": 2.0
+    },
+    "wetZoneHeight": {
+      "name": "Wet Zone Height",
+      "type": "f32",
+      "defaultValue": 3.0
+    },
+    "pathMaskUvScale": {
+      "name": "Path Mask UV Scale",
+      "type": "vec2f",
+      "defaultValue": [0.004, 0.004]
+    },
+    "pathMaskUvOffset": {
+      "name": "Path Mask UV Offset",
+      "type": "vec2f",
+      "defaultValue": [0.5, 0.5]
+    },
+    "normalStrength": {
+      "name": "Normal Strength",
+      "type": "f32",
+      "defaultValue": 1.0
+    },
+    "emission": {
+      "name": "Emission",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.0, 0.0, 0.0]
+    }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "get_world_pos",
+      "type": "GetWorldPosition",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "wpos", "name": "World Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_world_normal",
+      "type": "GetWorldNormal",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "World Normal", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_normal",
+      "type": "GetNormal",
+      "stage": "vertex",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Normal", "dataType": "vec3f" }]
+    },
+    {
+      "id": "f_master",
+      "type": "PBRMasterNode",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "roughness_factor", "name": "Roughness", "dataType": "f32" },
+        { "id": "metallic_factor", "name": "Metallic", "dataType": "f32" },
+        { "id": "emission", "name": "Emission", "dataType": "vec4f" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+
+    {
+      "id": "tex_scale_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "textureScale" }
+    },
+    {
+      "id": "scale_vec2",
+      "type": "CombineXY",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "world_xz",
+      "type": "SplitXYZ",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "base_uv",
+      "type": "CombineXY",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "scaled_uv",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec2f" },
+        { "id": "b", "name": "B", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "fract_uv",
+      "type": "Fract",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec2f" }],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+
+    {
+      "id": "diffuse_array_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d_array" }],
+      "data": { "propertyName": "diffuseArray" }
+    },
+    {
+      "id": "normal_array_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d_array" }],
+      "data": { "propertyName": "normalArray" }
+    },
+
+    {
+      "id": "region0_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "atlasRegion0" }
+    },
+    {
+      "id": "region1_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "atlasRegion1" }
+    },
+    {
+      "id": "region2_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "atlasRegion2" }
+    },
+    {
+      "id": "region3_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "atlasRegion3" }
+    },
+    {
+      "id": "region4_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "atlasRegion4" }
+    },
+    {
+      "id": "normal_region0_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "normalRegion0" }
+    },
+    {
+      "id": "normal_region1_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "normalRegion1" }
+    },
+
+    {
+      "id": "sample_grass",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_rock",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_mud",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_gravel",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_moss",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_grass_normal",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "sample_rock_normal",
+      "type": "SampleAtlasRegion",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "atlas", "name": "Atlas", "dataType": "texture_2d_array" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "region", "name": "Region", "dataType": "vec4f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+
+    {
+      "id": "height_min_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "heightMin" }
+    },
+    {
+      "id": "height_max_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "heightMax" }
+    },
+    {
+      "id": "height_blend",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "up_vec",
+      "type": "ConstantVec3",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }],
+      "data": { "value": [0.0, 1.0, 0.0] }
+    },
+    {
+      "id": "slope_dot",
+      "type": "Dot",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "abs_slope",
+      "type": "Abs",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "f32" }],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "slope_threshold_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "slopeThreshold" }
+    },
+    {
+      "id": "slope_range_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "slopeBlendRange" }
+    },
+    {
+      "id": "slope_edge0",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "slope_blend_raw",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "one_const",
+      "type": "ConstantFloat",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "value": 1.0 }
+    },
+    {
+      "id": "slope_blend",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "combine_blend",
+      "type": "Max",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "base_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "water_level_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "waterLevel" }
+    },
+    {
+      "id": "wet_zone_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "wetZoneHeight" }
+    },
+    {
+      "id": "water_plus_wet",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "wet_blend_raw",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "wet_above_water",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+
+    {
+      "id": "blend_with_moss",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "path_mask_tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }],
+      "data": { "propertyName": "pathMaskTexture" }
+    },
+    {
+      "id": "path_mask_uv_scale_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }],
+      "data": { "propertyName": "pathMaskUvScale" }
+    },
+    {
+      "id": "path_mask_uv_offset_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }],
+      "data": { "propertyName": "pathMaskUvOffset" }
+    },
+    {
+      "id": "path_mask_uv_mul",
+      "type": "Multiply",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec2f" },
+        { "id": "b", "name": "B", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "path_mask_uv_add",
+      "type": "Add",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec2f" },
+        { "id": "b", "name": "B", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "sample_path_mask",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" }
+      ]
+    },
+    {
+      "id": "split_path_mask",
+      "type": "SplitXYZ",
+      "stage": "fragment",
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+
+    {
+      "id": "blend_with_gravel",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "water_minus_one",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "underwater_blend",
+      "type": "Smoothstep",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "edge0", "name": "Edge0", "dataType": "f32" },
+        { "id": "edge1", "name": "Edge1", "dataType": "f32" },
+        { "id": "x", "name": "X", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "underwater_blend_inv",
+      "type": "Subtract",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "blend_with_mud",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "grass_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "grassRoughness" }
+    },
+    {
+      "id": "rock_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "rockRoughness" }
+    },
+    {
+      "id": "mud_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "mudRoughness" }
+    },
+    {
+      "id": "gravel_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "gravelRoughness" }
+    },
+    {
+      "id": "moss_rough_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "mossRoughness" }
+    },
+    {
+      "id": "rough_base_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "rough_with_moss",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "rough_with_gravel",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "rough_with_mud",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "f32" },
+        { "id": "b", "name": "B", "dataType": "f32" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "metal_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }],
+      "data": { "propertyName": "metallic" }
+    },
+    {
+      "id": "emission_prop",
+      "type": "Property",
+      "stage": "common",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }],
+      "data": { "propertyName": "emission" }
+    },
+
+    {
+      "id": "normal_base_lerp",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_with_moss",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_with_gravel",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "normal_with_mud",
+      "type": "Lerp",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+    {
+      "fromNodeId": "get_normal",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "normal"
+    },
+
+    {
+      "fromNodeId": "get_world_pos",
+      "fromSocketId": "wpos",
+      "toNodeId": "world_xz",
+      "toSocketId": "in"
+    },
+    { "fromNodeId": "world_xz", "fromSocketId": "x", "toNodeId": "base_uv", "toSocketId": "x" },
+    { "fromNodeId": "world_xz", "fromSocketId": "z", "toNodeId": "base_uv", "toSocketId": "y" },
+    {
+      "fromNodeId": "tex_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "scale_vec2",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "tex_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "scale_vec2",
+      "toSocketId": "y"
+    },
+    { "fromNodeId": "base_uv", "fromSocketId": "out", "toNodeId": "scaled_uv", "toSocketId": "a" },
+    {
+      "fromNodeId": "scale_vec2",
+      "fromSocketId": "out",
+      "toNodeId": "scaled_uv",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "scaled_uv",
+      "fromSocketId": "out",
+      "toNodeId": "fract_uv",
+      "toSocketId": "in"
+    },
+
+    {
+      "fromNodeId": "diffuse_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "region0_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "diffuse_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "region1_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "diffuse_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_mud",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_mud",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "region2_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_mud",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "diffuse_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_gravel",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_gravel",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "region3_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_gravel",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "diffuse_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_moss",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_moss",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "region4_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_moss",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass_normal",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass_normal",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "normal_region0_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_grass_normal",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "normal_array_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock_normal",
+      "toSocketId": "atlas"
+    },
+    {
+      "fromNodeId": "fract_uv",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock_normal",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "normal_region1_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_rock_normal",
+      "toSocketId": "region"
+    },
+
+    {
+      "fromNodeId": "height_min_prop",
+      "fromSocketId": "out",
+      "toNodeId": "height_blend",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "height_max_prop",
+      "fromSocketId": "out",
+      "toNodeId": "height_blend",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "world_xz",
+      "fromSocketId": "y",
+      "toNodeId": "height_blend",
+      "toSocketId": "x"
+    },
+
+    {
+      "fromNodeId": "get_world_normal",
+      "fromSocketId": "out",
+      "toNodeId": "slope_dot",
+      "toSocketId": "a"
+    },
+    { "fromNodeId": "up_vec", "fromSocketId": "out", "toNodeId": "slope_dot", "toSocketId": "b" },
+    {
+      "fromNodeId": "slope_dot",
+      "fromSocketId": "out",
+      "toNodeId": "abs_slope",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "slope_threshold_prop",
+      "fromSocketId": "out",
+      "toNodeId": "slope_edge0",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "slope_range_prop",
+      "fromSocketId": "out",
+      "toNodeId": "slope_edge0",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "slope_edge0",
+      "fromSocketId": "out",
+      "toNodeId": "slope_blend_raw",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "slope_threshold_prop",
+      "fromSocketId": "out",
+      "toNodeId": "slope_blend_raw",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "abs_slope",
+      "fromSocketId": "out",
+      "toNodeId": "slope_blend_raw",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "slope_blend",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "slope_blend_raw",
+      "fromSocketId": "out",
+      "toNodeId": "slope_blend",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "height_blend",
+      "fromSocketId": "out",
+      "toNodeId": "combine_blend",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "slope_blend",
+      "fromSocketId": "out",
+      "toNodeId": "combine_blend",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "sample_grass",
+      "fromSocketId": "rgb",
+      "toNodeId": "base_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_rock",
+      "fromSocketId": "rgb",
+      "toNodeId": "base_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "combine_blend",
+      "fromSocketId": "out",
+      "toNodeId": "base_lerp",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "water_plus_wet",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "wet_zone_prop",
+      "fromSocketId": "out",
+      "toNodeId": "water_plus_wet",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "wet_blend_raw",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "water_plus_wet",
+      "fromSocketId": "out",
+      "toNodeId": "wet_blend_raw",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "world_xz",
+      "fromSocketId": "y",
+      "toNodeId": "wet_blend_raw",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "wet_above_water",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "wet_blend_raw",
+      "fromSocketId": "out",
+      "toNodeId": "wet_above_water",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "base_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "blend_with_moss",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_moss",
+      "fromSocketId": "rgb",
+      "toNodeId": "blend_with_moss",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "wet_above_water",
+      "fromSocketId": "out",
+      "toNodeId": "blend_with_moss",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "base_uv",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_mul",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "path_mask_uv_scale_prop",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_mul",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "path_mask_uv_mul",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_add",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "path_mask_uv_offset_prop",
+      "fromSocketId": "out",
+      "toNodeId": "path_mask_uv_add",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "path_mask_tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sample_path_mask",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "path_mask_uv_add",
+      "fromSocketId": "out",
+      "toNodeId": "sample_path_mask",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "sample_path_mask",
+      "fromSocketId": "rgb",
+      "toNodeId": "split_path_mask",
+      "toSocketId": "in"
+    },
+
+    {
+      "fromNodeId": "blend_with_moss",
+      "fromSocketId": "out",
+      "toNodeId": "blend_with_gravel",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_gravel",
+      "fromSocketId": "rgb",
+      "toNodeId": "blend_with_gravel",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "blend_with_gravel",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "water_minus_one",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "water_minus_one",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "water_minus_one",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "edge0"
+    },
+    {
+      "fromNodeId": "water_level_prop",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "edge1"
+    },
+    {
+      "fromNodeId": "world_xz",
+      "fromSocketId": "y",
+      "toNodeId": "underwater_blend",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend_inv",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "underwater_blend",
+      "fromSocketId": "out",
+      "toNodeId": "underwater_blend_inv",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "blend_with_gravel",
+      "fromSocketId": "out",
+      "toNodeId": "blend_with_mud",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_mud",
+      "fromSocketId": "rgb",
+      "toNodeId": "blend_with_mud",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "underwater_blend_inv",
+      "fromSocketId": "out",
+      "toNodeId": "blend_with_mud",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "grass_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_base_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "rock_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_base_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "combine_blend",
+      "fromSocketId": "out",
+      "toNodeId": "rough_base_lerp",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "rough_base_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_moss",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "moss_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_moss",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "wet_above_water",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_moss",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "rough_with_moss",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_gravel",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "gravel_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_gravel",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "rough_with_gravel",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "rough_with_gravel",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_mud",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mud_rough_prop",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_mud",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "underwater_blend_inv",
+      "fromSocketId": "out",
+      "toNodeId": "rough_with_mud",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "sample_grass_normal",
+      "fromSocketId": "rgb",
+      "toNodeId": "normal_base_lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_rock_normal",
+      "fromSocketId": "rgb",
+      "toNodeId": "normal_base_lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "combine_blend",
+      "fromSocketId": "out",
+      "toNodeId": "normal_base_lerp",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "normal_base_lerp",
+      "fromSocketId": "out",
+      "toNodeId": "normal_with_moss",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_grass_normal",
+      "fromSocketId": "rgb",
+      "toNodeId": "normal_with_moss",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "wet_above_water",
+      "fromSocketId": "out",
+      "toNodeId": "normal_with_moss",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "normal_with_moss",
+      "fromSocketId": "out",
+      "toNodeId": "normal_with_gravel",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_rock_normal",
+      "fromSocketId": "rgb",
+      "toNodeId": "normal_with_gravel",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "split_path_mask",
+      "fromSocketId": "x",
+      "toNodeId": "normal_with_gravel",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "normal_with_gravel",
+      "fromSocketId": "out",
+      "toNodeId": "normal_with_mud",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sample_rock_normal",
+      "fromSocketId": "rgb",
+      "toNodeId": "normal_with_mud",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "underwater_blend_inv",
+      "fromSocketId": "out",
+      "toNodeId": "normal_with_mud",
+      "toSocketId": "t"
+    },
+
+    {
+      "fromNodeId": "blend_with_mud",
+      "fromSocketId": "rgba",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "one_const",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "opacity"
+    },
+    {
+      "fromNodeId": "normal_with_mud",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "normal"
+    },
+    {
+      "fromNodeId": "rough_with_mud",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "roughness_factor"
+    },
+    {
+      "fromNodeId": "metal_prop",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "metallic_factor"
+    },
+    {
+      "fromNodeId": "emission_prop",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "emission"
+    }
+  ]
+}

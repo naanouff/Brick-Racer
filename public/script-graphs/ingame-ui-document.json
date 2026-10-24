@@ -1,0 +1,232 @@
+{
+  "id": "ingame_ui_document",
+  "name": "ingame_ui_document",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "get-el-activate-cube-1",
+      "type": "GetUiElementById",
+      "position": { "x": 40, "y": 40 },
+      "inputs": [],
+      "outputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-1" }
+    },
+    {
+      "id": "on-change-activate-cube-1",
+      "type": "EventUiElementChange",
+      "position": { "x": 300, "y": 40 },
+      "inputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "outputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "value", "name": "Value", "type": "boolean" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-1" }
+    },
+    {
+      "id": "get-script-activate-cube-1",
+      "type": "GetScriptComponentByEntityName",
+      "position": { "x": 300, "y": 150 },
+      "inputs": [],
+      "outputs": [{ "id": "entity", "name": "Entity", "type": "entity" }],
+      "properties": { "entityName": "IngameUI Cube 1" }
+    },
+    {
+      "id": "set-active-activate-cube-1",
+      "type": "SetScriptComponentActive",
+      "position": { "x": 620, "y": 40 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "entity", "name": "Entity", "type": "entity" },
+        { "id": "active", "name": "Active", "type": "boolean" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": {}
+    },
+    {
+      "id": "get-el-activate-cube-2",
+      "type": "GetUiElementById",
+      "position": { "x": 40, "y": 220 },
+      "inputs": [],
+      "outputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-2" }
+    },
+    {
+      "id": "on-change-activate-cube-2",
+      "type": "EventUiElementChange",
+      "position": { "x": 300, "y": 220 },
+      "inputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "outputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "value", "name": "Value", "type": "boolean" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-2" }
+    },
+    {
+      "id": "get-script-activate-cube-2",
+      "type": "GetScriptComponentByEntityName",
+      "position": { "x": 300, "y": 330 },
+      "inputs": [],
+      "outputs": [{ "id": "entity", "name": "Entity", "type": "entity" }],
+      "properties": { "entityName": "IngameUI Cube 2" }
+    },
+    {
+      "id": "set-active-activate-cube-2",
+      "type": "SetScriptComponentActive",
+      "position": { "x": 620, "y": 220 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "entity", "name": "Entity", "type": "entity" },
+        { "id": "active", "name": "Active", "type": "boolean" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": {}
+    },
+    {
+      "id": "get-el-activate-cube-3",
+      "type": "GetUiElementById",
+      "position": { "x": 40, "y": 400 },
+      "inputs": [],
+      "outputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-3" }
+    },
+    {
+      "id": "on-change-activate-cube-3",
+      "type": "EventUiElementChange",
+      "position": { "x": 300, "y": 400 },
+      "inputs": [
+        { "id": "element", "name": "Element", "type": "any" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "outputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "value", "name": "Value", "type": "boolean" },
+        { "id": "elementId", "name": "Element Id", "type": "string" }
+      ],
+      "properties": { "elementId": "activate-cube-3" }
+    },
+    {
+      "id": "get-script-activate-cube-3",
+      "type": "GetScriptComponentByEntityName",
+      "position": { "x": 300, "y": 510 },
+      "inputs": [],
+      "outputs": [{ "id": "entity", "name": "Entity", "type": "entity" }],
+      "properties": { "entityName": "IngameUI Cube 3" }
+    },
+    {
+      "id": "set-active-activate-cube-3",
+      "type": "SetScriptComponentActive",
+      "position": { "x": 620, "y": 400 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "entity", "name": "Entity", "type": "entity" },
+        { "id": "active", "name": "Active", "type": "boolean" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": {}
+    }
+  ],
+  "links": [
+    {
+      "id": "link-el-activate-cube-1",
+      "fromNodeId": "get-el-activate-cube-1",
+      "fromSocketId": "element",
+      "toNodeId": "on-change-activate-cube-1",
+      "toSocketId": "element"
+    },
+    {
+      "id": "link-exec-activate-cube-1",
+      "fromNodeId": "on-change-activate-cube-1",
+      "fromSocketId": "exec",
+      "toNodeId": "set-active-activate-cube-1",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "link-value-activate-cube-1",
+      "fromNodeId": "on-change-activate-cube-1",
+      "fromSocketId": "value",
+      "toNodeId": "set-active-activate-cube-1",
+      "toSocketId": "active"
+    },
+    {
+      "id": "link-entity-activate-cube-1",
+      "fromNodeId": "get-script-activate-cube-1",
+      "fromSocketId": "entity",
+      "toNodeId": "set-active-activate-cube-1",
+      "toSocketId": "entity"
+    },
+    {
+      "id": "link-el-activate-cube-2",
+      "fromNodeId": "get-el-activate-cube-2",
+      "fromSocketId": "element",
+      "toNodeId": "on-change-activate-cube-2",
+      "toSocketId": "element"
+    },
+    {
+      "id": "link-exec-activate-cube-2",
+      "fromNodeId": "on-change-activate-cube-2",
+      "fromSocketId": "exec",
+      "toNodeId": "set-active-activate-cube-2",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "link-value-activate-cube-2",
+      "fromNodeId": "on-change-activate-cube-2",
+      "fromSocketId": "value",
+      "toNodeId": "set-active-activate-cube-2",
+      "toSocketId": "active"
+    },
+    {
+      "id": "link-entity-activate-cube-2",
+      "fromNodeId": "get-script-activate-cube-2",
+      "fromSocketId": "entity",
+      "toNodeId": "set-active-activate-cube-2",
+      "toSocketId": "entity"
+    },
+    {
+      "id": "link-el-activate-cube-3",
+      "fromNodeId": "get-el-activate-cube-3",
+      "fromSocketId": "element",
+      "toNodeId": "on-change-activate-cube-3",
+      "toSocketId": "element"
+    },
+    {
+      "id": "link-exec-activate-cube-3",
+      "fromNodeId": "on-change-activate-cube-3",
+      "fromSocketId": "exec",
+      "toNodeId": "set-active-activate-cube-3",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "link-value-activate-cube-3",
+      "fromNodeId": "on-change-activate-cube-3",
+      "fromSocketId": "value",
+      "toNodeId": "set-active-activate-cube-3",
+      "toSocketId": "active"
+    },
+    {
+      "id": "link-entity-activate-cube-3",
+      "fromNodeId": "get-script-activate-cube-3",
+      "fromSocketId": "entity",
+      "toNodeId": "set-active-activate-cube-3",
+      "toSocketId": "entity"
+    }
+  ],
+  "exposedParameters": []
+}

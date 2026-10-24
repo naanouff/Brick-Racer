@@ -1,0 +1,404 @@
+{
+  "id": "cherry_tree",
+  "nodes": [
+    {
+      "id": "trunk",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "trunk_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.9,
+          4.8,
+          0.9
+        ],
+        "center": [
+          0,
+          2.4,
+          0
+        ]
+      }
+    },
+    {
+      "id": "foliage_base",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 250,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "foliage_base_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 3.2,
+        "segments": 12,
+        "rings": 8
+      }
+    },
+    {
+      "id": "transform_foliage_base",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 380,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "foliage_base_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          5.2,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "foliage_mid",
+      "type": "PrimitiveUVSphere",
+      "position": {
+        "x": 250,
+        "y": 100
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "foliage_mid_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "radius": 2.5,
+        "segments": 10,
+        "rings": 6
+      }
+    },
+    {
+      "id": "transform_foliage_mid",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 380,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "foliage_mid_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          6,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "set_trunk_mat",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "trunk_mat_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "set_foliage_mat",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "foliage_base_mat_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "set_foliage_mat2",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 500,
+        "y": 200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "foliage_mid_mat_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "join_all",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 750,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        },
+        {
+          "id": "geo3",
+          "name": "geo3",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "joined_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 1000,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 780,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "trunk",
+      "fromSocketId": "trunk_out",
+      "toNodeId": "set_trunk_mat",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "foliage_base",
+      "fromSocketId": "foliage_base_raw",
+      "toNodeId": "transform_foliage_base",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2b",
+      "fromNodeId": "transform_foliage_base",
+      "fromSocketId": "foliage_base_moved",
+      "toNodeId": "set_foliage_mat",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "foliage_mid",
+      "fromSocketId": "foliage_mid_raw",
+      "toNodeId": "transform_foliage_mid",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3b",
+      "fromNodeId": "transform_foliage_mid",
+      "fromSocketId": "foliage_mid_moved",
+      "toNodeId": "set_foliage_mat2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "set_trunk_mat",
+      "fromSocketId": "trunk_mat_out",
+      "toNodeId": "join_all",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "set_foliage_mat",
+      "fromSocketId": "foliage_base_mat_out",
+      "toNodeId": "join_all",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "set_foliage_mat2",
+      "fromSocketId": "foliage_mid_mat_out",
+      "toNodeId": "join_all",
+      "toSocketId": "geo3"
+    },
+    {
+      "id": "l7_to_mesh_lod",
+      "fromNodeId": "join_all",
+      "fromSocketId": "joined_out",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l7_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

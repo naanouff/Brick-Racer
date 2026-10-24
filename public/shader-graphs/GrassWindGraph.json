@@ -1,0 +1,287 @@
+{
+  "id": "GrassWindGraph",
+  "properties": {
+    "baseColorTexture": { "type": "texture_2d", "defaultValue": null, "name": "Texture Herbe" },
+    "windSpeed": { "type": "f32", "defaultValue": 2.0, "name": "Vitesse Vent" },
+    "windStrength": { "type": "f32", "defaultValue": 0.1, "name": "Force Vent" },
+    "alphaCutoff": { "type": "f32", "defaultValue": 0.5, "name": "Alpha Cutoff" }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "position": { "x": 1000, "y": 0 },
+      "inputs": [{ "id": "position" }],
+      "outputs": []
+    },
+
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "position": { "x": 0, "y": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "get_inst_pos",
+      "type": "GetInstancePosition",
+      "stage": "vertex",
+      "position": { "x": 0, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "split_inst",
+      "type": "SplitVec3",
+      "stage": "vertex",
+      "position": { "x": 200, "y": 100 },
+      "inputs": [{ "id": "in" }],
+      "outputs": [{ "id": "x" }, { "id": "z" }]
+    },
+
+    {
+      "id": "time",
+      "type": "Time",
+      "stage": "common",
+      "position": { "x": 0, "y": 200 },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "p_speed",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 300 },
+      "data": { "propertyName": "windSpeed" },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "mul_time",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 200, "y": 250 },
+      "inputs": [{ "id": "a" }, { "id": "b" }],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "add_phase",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 350, "y": 200 },
+      "inputs": [{ "id": "a" }, { "id": "b" }],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "sin_wave",
+      "type": "Sin",
+      "stage": "common",
+      "position": { "x": 500, "y": 200 },
+      "inputs": [{ "id": "a" }],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "split_local_pos",
+      "type": "SplitVec3",
+      "stage": "vertex",
+      "position": { "x": 200, "y": 0 },
+      "inputs": [{ "id": "in" }],
+      "outputs": [{ "id": "y" }]
+    },
+
+    {
+      "id": "p_str",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 400 },
+      "data": { "propertyName": "windStrength" },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "mul_str",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 650, "y": 200 },
+      "inputs": [{ "id": "a" }, { "id": "b" }],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "mul_mask",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 800, "y": 200 },
+      "inputs": [{ "id": "a" }, { "id": "b" }],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "split_base_pos",
+      "type": "SplitVec3",
+      "stage": "vertex",
+      "position": { "x": 200, "y": -100 },
+      "inputs": [{ "id": "in" }],
+      "outputs": [{ "id": "x" }, { "id": "y" }, { "id": "z" }]
+    },
+    {
+      "id": "add_offset_x",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 900, "y": 0 },
+      "inputs": [{ "id": "a" }, { "id": "b" }],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "combine_pos",
+      "type": "CombineVec3",
+      "stage": "vertex",
+      "position": { "x": 1100, "y": 0 },
+      "inputs": [{ "id": "x" }, { "id": "y" }, { "id": "z" }],
+      "outputs": [{ "id": "out" }]
+    },
+
+    {
+      "id": "f_master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1000, "y": 600 },
+      "inputs": [{ "id": "albedo" }, { "id": "alpha" }, { "id": "alphaCutoff" }],
+      "outputs": []
+    },
+    {
+      "id": "tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 0, "y": 600 },
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "position": { "x": 0, "y": 700 },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    },
+    {
+      "id": "sampler",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "position": { "x": 300, "y": 600 },
+      "inputs": [{ "id": "texture" }, { "id": "uv" }],
+      "outputs": [{ "id": "rgb" }, { "id": "a" }]
+    },
+    {
+      "id": "p_cutoff",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 800 },
+      "data": { "propertyName": "alphaCutoff" },
+      "inputs": [],
+      "outputs": [{ "id": "out" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "split_local_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "get_inst_pos",
+      "fromSocketId": "out",
+      "toNodeId": "split_inst",
+      "toSocketId": "in"
+    },
+    { "fromNodeId": "time", "fromSocketId": "out", "toNodeId": "mul_time", "toSocketId": "a" },
+    { "fromNodeId": "p_speed", "fromSocketId": "out", "toNodeId": "mul_time", "toSocketId": "b" },
+    { "fromNodeId": "mul_time", "fromSocketId": "out", "toNodeId": "add_phase", "toSocketId": "a" },
+    { "fromNodeId": "split_inst", "fromSocketId": "x", "toNodeId": "add_phase", "toSocketId": "b" },
+    { "fromNodeId": "add_phase", "fromSocketId": "out", "toNodeId": "sin_wave", "toSocketId": "a" },
+    { "fromNodeId": "sin_wave", "fromSocketId": "out", "toNodeId": "mul_str", "toSocketId": "a" },
+    { "fromNodeId": "p_str", "fromSocketId": "out", "toNodeId": "mul_str", "toSocketId": "b" },
+    { "fromNodeId": "mul_str", "fromSocketId": "out", "toNodeId": "mul_mask", "toSocketId": "a" },
+    {
+      "fromNodeId": "split_local_pos",
+      "fromSocketId": "y",
+      "toNodeId": "mul_mask",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "split_base_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "split_base_pos",
+      "fromSocketId": "x",
+      "toNodeId": "add_offset_x",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mul_mask",
+      "fromSocketId": "out",
+      "toNodeId": "add_offset_x",
+      "toSocketId": "b"
+    },
+
+    {
+      "fromNodeId": "add_offset_x",
+      "fromSocketId": "out",
+      "toNodeId": "combine_pos",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "split_base_pos",
+      "fromSocketId": "y",
+      "toNodeId": "combine_pos",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "split_base_pos",
+      "fromSocketId": "z",
+      "toNodeId": "combine_pos",
+      "toSocketId": "z"
+    },
+
+    {
+      "fromNodeId": "combine_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+
+    {
+      "fromNodeId": "tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "sampler",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "uv", "fromSocketId": "out", "toNodeId": "sampler", "toSocketId": "uv" },
+    {
+      "fromNodeId": "sampler",
+      "fromSocketId": "rgb",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    { "fromNodeId": "sampler", "fromSocketId": "a", "toNodeId": "f_master", "toSocketId": "alpha" },
+    {
+      "fromNodeId": "p_cutoff",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "alphaCutoff"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "id": "lego-handle-bar-generator",
+  "name": "Lego Handle Bar",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-brick"
+  },
+  "parameters": {
+    "WidthStuds": {
+      "type": "int",
+      "value": 4
+    },
+    "HeightPlates": {
+      "type": "int",
+      "value": 6
+    },
+    "BarRadius": {
+      "type": "float",
+      "value": 0.18
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "WidthStuds",
+          "name": "WidthStuds",
+          "type": "int"
+        },
+        {
+          "id": "HeightPlates",
+          "name": "HeightPlates",
+          "type": "int"
+        },
+        {
+          "id": "BarRadius",
+          "name": "BarRadius",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "WidthStuds": 4,
+        "HeightPlates": 6,
+        "BarRadius": 0.18
+      }
+    },
+    {
+      "id": "handle",
+      "type": "LegoHandleBar",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "widthStuds",
+          "name": "widthStuds",
+          "type": "int"
+        },
+        {
+          "id": "heightPlates",
+          "name": "heightPlates",
+          "type": "int"
+        },
+        {
+          "id": "barRadius",
+          "name": "barRadius",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "widthStuds": 4,
+        "heightPlates": 6,
+        "barRadius": 0.18
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 340,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "group_in",
+      "fromSocketId": "WidthStuds",
+      "toNodeId": "handle",
+      "toSocketId": "widthStuds"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "group_in",
+      "fromSocketId": "HeightPlates",
+      "toNodeId": "handle",
+      "toSocketId": "heightPlates"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "group_in",
+      "fromSocketId": "BarRadius",
+      "toNodeId": "handle",
+      "toSocketId": "barRadius"
+    },
+    {
+      "id": "l4_to_mesh_lod",
+      "fromNodeId": "handle",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l4_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

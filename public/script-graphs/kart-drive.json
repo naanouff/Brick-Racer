@@ -1,0 +1,115 @@
+{
+  "id": "kart_drive",
+  "version": 1,
+  "name": "Kart Drive (SceneDD)",
+  "nodes": [
+    {
+      "id": "begin",
+      "type": "EventBeginPlay",
+      "position": { "x": 0, "y": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }]
+    },
+    {
+      "id": "enable-gameplay",
+      "type": "InputEnableMap",
+      "position": { "x": 260, "y": 0 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "mapId", "name": "Map Id", "type": "string" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": { "mapId": "gameplay" }
+    },
+    {
+      "id": "tick",
+      "type": "EventTick",
+      "position": { "x": 0, "y": 160 },
+      "inputs": [],
+      "outputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "totalTime", "name": "Total Time", "type": "number" }
+      ]
+    },
+    {
+      "id": "axis-throttle",
+      "type": "InputGetAxis",
+      "position": { "x": 260, "y": 120 },
+      "inputs": [],
+      "outputs": [{ "id": "value", "name": "Value", "type": "number" }],
+      "properties": { "axisName": "moveForward" }
+    },
+    {
+      "id": "axis-steer",
+      "type": "InputGetAxis",
+      "position": { "x": 260, "y": 240 },
+      "inputs": [],
+      "outputs": [{ "id": "value", "name": "Value", "type": "number" }],
+      "properties": { "axisName": "moveRight" }
+    },
+    {
+      "id": "set-drive",
+      "type": "SetVehicleDrive",
+      "position": { "x": 520, "y": 160 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "throttle", "name": "Throttle", "type": "number" },
+        { "id": "steer", "name": "Steer", "type": "number" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }]
+    },
+    {
+      "id": "on-reset",
+      "type": "EventInputActionStarted",
+      "position": { "x": 0, "y": 360 },
+      "inputs": [],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": { "actionName": "resetKart" }
+    },
+    {
+      "id": "reset-vehicle",
+      "type": "ResetVehicle",
+      "position": { "x": 320, "y": 360 },
+      "inputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": { "posX": 0, "posY": 0.2, "posZ": 0 }
+    }
+  ],
+  "links": [
+    {
+      "id": "begin-enable",
+      "fromNodeId": "begin",
+      "fromSocketId": "exec",
+      "toNodeId": "enable-gameplay",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "tick-drive",
+      "fromNodeId": "tick",
+      "fromSocketId": "exec",
+      "toNodeId": "set-drive",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "throttle-in",
+      "fromNodeId": "axis-throttle",
+      "fromSocketId": "value",
+      "toNodeId": "set-drive",
+      "toSocketId": "throttle"
+    },
+    {
+      "id": "steer-in",
+      "fromNodeId": "axis-steer",
+      "fromSocketId": "value",
+      "toNodeId": "set-drive",
+      "toSocketId": "steer"
+    },
+    {
+      "id": "reset-link",
+      "fromNodeId": "on-reset",
+      "fromSocketId": "exec",
+      "toNodeId": "reset-vehicle",
+      "toSocketId": "exec"
+    }
+  ]
+}

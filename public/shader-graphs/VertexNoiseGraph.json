@@ -1,0 +1,428 @@
+{
+  "id": "VertexNoiseGraph_v5_Final",
+  "properties": {
+    "voronoiScale": {
+      "name": "Voronoi Scale",
+      "type": "f32",
+      "defaultValue": 10.0
+    },
+    "waveFrequency": {
+      "name": "Wave Frequency",
+      "type": "f32",
+      "defaultValue": 1.5
+    },
+    "waveSpeed": {
+      "name": "Wave Speed",
+      "type": "f32",
+      "defaultValue": 0.5
+    },
+    "waveAmplitude": {
+      "name": "Wave Amplitude",
+      "type": "f32",
+      "defaultValue": 0.5
+    },
+    "waterScrollSpeed": {
+      "name": "Water Scroll Speed",
+      "type": "f32",
+      "defaultValue": 0.1
+    }
+  },
+  "nodes": [
+    {
+      "id": "v_master",
+      "type": "VertexMasterNode",
+      "stage": "vertex",
+      "position": { "x": 1250, "y": 100 },
+      "inputs": [
+        { "id": "position", "name": "Position", "dataType": "vec3f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "f_master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1250, "y": 400 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_pos",
+      "type": "GetPosition",
+      "stage": "vertex",
+      "position": { "x": 100, "y": 50 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Pos", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_norm",
+      "type": "GetNormal",
+      "stage": "vertex",
+      "position": { "x": 1000, "y": 250 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Norm", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_time",
+      "type": "Time",
+      "stage": "common",
+      "position": { "x": 100, "y": 300 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Time (s)", "dataType": "f32" }]
+    },
+    {
+      "id": "node_split_pos",
+      "type": "SplitVec3",
+      "stage": "common",
+      "position": { "x": 300, "y": 50 },
+      "inputs": [{ "id": "in", "name": "In", "dataType": "vec3f" }],
+      "outputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "prop_wave_freq",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 150 },
+      "data": { "propertyName": "waveFrequency" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_wave_speed",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 300, "y": 250 },
+      "data": { "propertyName": "waveSpeed" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_wave_amp",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 700, "y": 200 },
+      "data": { "propertyName": "waveAmplitude" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_pos_x",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 500, "y": 100 },
+      "inputs": [
+        { "id": "a", "name": "pos.x", "dataType": "f32" },
+        { "id": "b", "name": "frequency", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_time",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 500, "y": 250 },
+      "inputs": [
+        { "id": "a", "name": "time", "dataType": "f32" },
+        { "id": "b", "name": "speed", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_wave_phase",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 700, "y": 100 },
+      "inputs": [
+        { "id": "a", "name": "pos*freq", "dataType": "f32" },
+        { "id": "b", "name": "time*speed", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "sin_wave",
+      "type": "Sin",
+      "stage": "common",
+      "position": { "x": 850, "y": 100 },
+      "inputs": [{ "id": "a", "name": "In", "dataType": "f32" }],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_wave_amp",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 1000, "y": 100 },
+      "inputs": [
+        { "id": "a", "name": "sin(wave)", "dataType": "f32" },
+        { "id": "b", "name": "amplitude", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_y_offset",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 1000, "y": 50 },
+      "inputs": [
+        { "id": "a", "name": "pos.y", "dataType": "f32" },
+        { "id": "b", "name": "wave_offset", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "New Y", "dataType": "f32" }]
+    },
+    {
+      "id": "combine_pos",
+      "type": "CombineVec3",
+      "stage": "common",
+      "position": { "x": 1150, "y": 50 },
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "position": { "x": 100, "y": 500 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "prop_voronoi_scale",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 100, "y": 600 },
+      "data": { "propertyName": "voronoiScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Scale", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_scroll_speed",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 100, "y": 400 },
+      "data": { "propertyName": "waterScrollSpeed" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Speed", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_scroll_time",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 300, "y": 400 },
+      "inputs": [
+        { "id": "a", "name": "time", "dataType": "f32" },
+        { "id": "b", "name": "speed", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_scroll_uv",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 500, "y": 450 },
+      "inputs": [
+        { "id": "a", "name": "UV", "dataType": "vec2f" },
+        { "id": "b", "name": "time_offset", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }]
+    },
+    {
+      "id": "node_voronoi",
+      "type": "VoronoiNoise",
+      "stage": "common",
+      "position": { "x": 700, "y": 500 },
+      "inputs": [
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "scale", "name": "Scale", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "node_f32_to_vec3",
+      "type": "CombineVec3",
+      "stage": "common",
+      "position": { "x": 950, "y": 400 },
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "node_f32_to_vec3",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    },
+    {
+      "fromNodeId": "get_uv",
+      "fromSocketId": "out",
+      "toNodeId": "add_scroll_uv",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "get_time",
+      "fromSocketId": "out",
+      "toNodeId": "mult_scroll_time",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_scroll_speed",
+      "fromSocketId": "out",
+      "toNodeId": "mult_scroll_time",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_scroll_time",
+      "fromSocketId": "out",
+      "toNodeId": "add_scroll_uv",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_scroll_uv",
+      "fromSocketId": "out",
+      "toNodeId": "node_voronoi",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "prop_voronoi_scale",
+      "fromSocketId": "out",
+      "toNodeId": "node_voronoi",
+      "toSocketId": "scale"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "z"
+    },
+    {
+      "fromNodeId": "get_pos",
+      "fromSocketId": "out",
+      "toNodeId": "node_split_pos",
+      "toSocketId": "in"
+    },
+    {
+      "fromNodeId": "node_split_pos",
+      "fromSocketId": "x",
+      "toNodeId": "mult_pos_x",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_wave_freq",
+      "fromSocketId": "out",
+      "toNodeId": "mult_pos_x",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "get_time",
+      "fromSocketId": "out",
+      "toNodeId": "mult_time",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_wave_speed",
+      "fromSocketId": "out",
+      "toNodeId": "mult_time",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_pos_x",
+      "fromSocketId": "out",
+      "toNodeId": "add_wave_phase",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mult_time",
+      "fromSocketId": "out",
+      "toNodeId": "add_wave_phase",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_wave_phase",
+      "fromSocketId": "out",
+      "toNodeId": "sin_wave",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sin_wave",
+      "fromSocketId": "out",
+      "toNodeId": "mult_wave_amp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_wave_amp",
+      "fromSocketId": "out",
+      "toNodeId": "mult_wave_amp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "node_split_pos",
+      "fromSocketId": "y",
+      "toNodeId": "add_y_offset",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mult_wave_amp",
+      "fromSocketId": "out",
+      "toNodeId": "add_y_offset",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "node_split_pos",
+      "fromSocketId": "x",
+      "toNodeId": "combine_pos",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "add_y_offset",
+      "fromSocketId": "out",
+      "toNodeId": "combine_pos",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "node_split_pos",
+      "fromSocketId": "z",
+      "toNodeId": "combine_pos",
+      "toSocketId": "z"
+    },
+    {
+      "fromNodeId": "combine_pos",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "position"
+    },
+    {
+      "fromNodeId": "get_norm",
+      "fromSocketId": "out",
+      "toNodeId": "v_master",
+      "toSocketId": "normal"
+    }
+  ]
+}

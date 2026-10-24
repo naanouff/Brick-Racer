@@ -1,0 +1,50 @@
+{
+  "id": "ingame_ui_gameplay_hud",
+  "name": "ingame_ui_gameplay_hud",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "event-tick",
+      "type": "EventTick",
+      "position": { "x": 80, "y": 100 },
+      "inputs": [],
+      "outputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "totalTime", "name": "Total Time", "type": "number" }
+      ]
+    },
+    {
+      "id": "emit-gameplay-ui",
+      "type": "EmitGameplayUiState",
+      "position": { "x": 380, "y": 100 },
+      "inputs": [
+        { "id": "exec", "name": "Exec", "type": "exec" },
+        { "id": "totalTime", "name": "Total Time", "type": "number" }
+      ],
+      "outputs": [{ "id": "exec", "name": "Exec", "type": "exec" }],
+      "properties": {
+        "objectivesJson": "[{\"id\":\"ingame-1\",\"title\":\"Enter Play\",\"description\":\"Toolbar Game : Play active les scripts (pas de menu arcade).\"},{\"id\":\"ingame-2\",\"title\":\"Observer les cubes\",\"description\":\"Orbites définies par ScriptComponent + graphe.\"},{\"id\":\"ingame-3\",\"title\":\"UIDocument checkboxes\",\"description\":\"Cases Activate Script Cube N → script UIDocument.\"}]",
+        "cyclePeriodSeconds": 5,
+        "promptPrimary": "Démo IngameUi — UIDocument",
+        "promptHint": "Play puis Active Script Cube 1/2/3"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "tick-exec-emit",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "exec",
+      "toNodeId": "emit-gameplay-ui",
+      "toSocketId": "exec"
+    },
+    {
+      "id": "tick-time-emit",
+      "fromNodeId": "event-tick",
+      "fromSocketId": "totalTime",
+      "toNodeId": "emit-gameplay-ui",
+      "toSocketId": "totalTime"
+    }
+  ],
+  "exposedParameters": []
+}

@@ -1,0 +1,977 @@
+{
+  "id": "rock-generator",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "Store Named Attribute",
+      "type": "StoreNamedAttribute",
+      "position": {
+        "x": -735.3875,
+        "y": -37.2638
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "val",
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "name": null,
+        "domain": "Point",
+        "dataType": "float",
+        "defaultValue": 0,
+        "val": [
+          0,
+          0,
+          0
+        ]
+      },
+      "parentFrameId": "Frame.001"
+    },
+    {
+      "id": "Instance on Points",
+      "type": "InstanceOnPoints",
+      "position": {
+        "x": -459.7793,
+        "y": -122.0388
+      },
+      "inputs": [
+        {
+          "id": "points",
+          "name": "points",
+          "type": "geometry"
+        },
+        {
+          "id": "instance",
+          "name": "instance",
+          "type": "geometry"
+        },
+        {
+          "id": "scale",
+          "name": "scale",
+          "type": "vec3"
+        },
+        {
+          "id": "rotation",
+          "name": "rotation",
+          "type": "vec3"
+        },
+        {
+          "id": "selection",
+          "name": "Selection",
+          "type": "float"
+        },
+        {
+          "id": "pickInstance",
+          "name": "Pick Instance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "useSpiral": false,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rotation": [
+          null,
+          null,
+          null
+        ],
+        "realizeInstances": true,
+        "selection": 1,
+        "pickInstance": 0,
+        "instance": 0
+      }
+    },
+    {
+      "id": "Mesh Boolean",
+      "type": "Boolean",
+      "position": {
+        "x": -234.1125,
+        "y": -116.2911
+      },
+      "inputs": [
+        {
+          "id": "geoA",
+          "name": "geometryA",
+          "type": "geometry"
+        },
+        {
+          "id": "geoB",
+          "name": "geometryB",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "operation": "intersect"
+      }
+    },
+    {
+      "id": "Random Value.001",
+      "type": "Random",
+      "position": {
+        "x": -707.4962,
+        "y": 212.9867
+      },
+      "inputs": [
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "int"
+        },
+        {
+          "id": "min",
+          "name": "min",
+          "type": "float"
+        },
+        {
+          "id": "max",
+          "name": "max",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ],
+        "seed": 0,
+        "data_type": "FLOAT_VECTOR"
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Random Value",
+      "type": "Random",
+      "position": {
+        "x": -1085.8127,
+        "y": 156.9367
+      },
+      "inputs": [
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "int"
+        },
+        {
+          "id": "min",
+          "name": "min",
+          "type": "float"
+        },
+        {
+          "id": "max",
+          "name": "max",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          6.2831854820251465,
+          6.2831854820251465,
+          6.2831854820251465
+        ],
+        "seed": 0,
+        "data_type": "FLOAT_VECTOR"
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Math",
+      "type": "Math",
+      "position": {
+        "x": -1090.9869,
+        "y": 492.171
+      },
+      "inputs": [
+        {
+          "id": "a",
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "id": "b",
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "val",
+          "name": "value",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "operation": "ADD",
+        "a": 0.5,
+        "b": 1
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Group Input.002",
+      "type": "GroupInput",
+      "position": {
+        "x": -1341.6412,
+        "y": 427.7353
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Input_0",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "Input_2",
+          "name": "Detail Level",
+          "type": "int"
+        },
+        {
+          "id": "Input_3",
+          "name": "Radius",
+          "type": "float"
+        },
+        {
+          "id": "Input_4",
+          "name": "Seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_5",
+          "name": "Roundness",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "parameters": [
+          "seed",
+          "scale"
+        ],
+        "seed": 0,
+        "scale": 1,
+        "Input_2": 6,
+        "Input_3": 1,
+        "Input_4": 0,
+        "Input_5": 0
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Reroute",
+      "type": "Reroute",
+      "position": {
+        "x": -1138.459,
+        "y": 463.9714
+      },
+      "inputs": [
+        {
+          "id": "in",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "name": "",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "in": 0
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Group Input.003",
+      "type": "GroupInput",
+      "position": {
+        "x": -892.8405,
+        "y": 273.2069
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Input_0",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "Input_2",
+          "name": "Detail Level",
+          "type": "int"
+        },
+        {
+          "id": "Input_3",
+          "name": "Radius",
+          "type": "float"
+        },
+        {
+          "id": "Input_4",
+          "name": "Seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_5",
+          "name": "Roundness",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "parameters": [
+          "seed",
+          "scale"
+        ],
+        "seed": 0,
+        "scale": 1,
+        "Input_2": 6,
+        "Input_3": 1,
+        "Input_4": 0,
+        "Input_5": 0
+      },
+      "parentFrameId": "Frame"
+    },
+    {
+      "id": "Group Input.001",
+      "type": "GroupInput",
+      "position": {
+        "x": -947.3239,
+        "y": -20.9639
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Input_0",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "Input_2",
+          "name": "Detail Level",
+          "type": "int"
+        },
+        {
+          "id": "Input_3",
+          "name": "Radius",
+          "type": "float"
+        },
+        {
+          "id": "Input_4",
+          "name": "Seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_5",
+          "name": "Roundness",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "parameters": [
+          "seed",
+          "scale"
+        ],
+        "seed": 0,
+        "scale": 1,
+        "Input_2": 6,
+        "Input_3": 1,
+        "Input_4": 0,
+        "Input_5": 0
+      },
+      "parentFrameId": "Frame.001"
+    },
+    {
+      "id": "Ico Sphere",
+      "type": "PrimitiveIcoSphere",
+      "position": {
+        "x": -760.3875,
+        "y": -37.2638
+      },
+      "inputs": [
+        {
+          "id": "radius",
+          "name": "Radius",
+          "type": "float"
+        },
+        {
+          "id": "subdivisions",
+          "name": "Subdivisions",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "uv_map",
+          "name": "UV Map",
+          "type": "vec3"
+        }
+      ],
+      "properties": {
+        "radius": 1,
+        "subdivisions": 1
+      },
+      "parentFrameId": "Frame.001"
+    },
+    {
+      "id": "Group Input",
+      "type": "GroupInput",
+      "position": {
+        "x": -946.2,
+        "y": -167.2075
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "Input_0",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "Input_2",
+          "name": "Detail Level",
+          "type": "int"
+        },
+        {
+          "id": "Input_3",
+          "name": "Radius",
+          "type": "float"
+        },
+        {
+          "id": "Input_4",
+          "name": "Seed",
+          "type": "int"
+        },
+        {
+          "id": "Input_5",
+          "name": "Roundness",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "parameters": [
+          "seed",
+          "scale"
+        ],
+        "seed": 0,
+        "scale": 1,
+        "Input_2": 6,
+        "Input_3": 1,
+        "Input_4": 0,
+        "Input_5": 0
+      },
+      "parentFrameId": "Frame.002"
+    },
+    {
+      "id": "Mesh Line",
+      "type": "MeshLine",
+      "position": {
+        "x": -753.9095,
+        "y": -221.8618
+      },
+      "inputs": [
+        {
+          "id": "count",
+          "name": "count",
+          "type": "int"
+        },
+        {
+          "id": "resolution",
+          "name": "resolution",
+          "type": "float"
+        },
+        {
+          "id": "startLocation",
+          "name": "startLocation",
+          "type": "vec3"
+        },
+        {
+          "id": "offset",
+          "name": "offset",
+          "type": "vec3"
+        },
+        {
+          "id": "endLocation",
+          "name": "endLocation",
+          "type": "vec3"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "mode": "OFFSET",
+        "count_mode": "TOTAL",
+        "count": 6,
+        "resolution": 1,
+        "startLocation": [
+          0,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "endLocation": [
+          0,
+          0,
+          1
+        ]
+      },
+      "parentFrameId": "Frame.002"
+    },
+    {
+      "id": "Set Material",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": -14.8672,
+        "y": -120.2556
+      },
+      "inputs": [
+        {
+          "id": "geo",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "idx",
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "id": "sel",
+          "name": "selection",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geo_out",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0,
+        "sel": 1,
+        "idx": null
+      }
+    },
+    {
+      "id": "Group Output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 182.2324,
+        "y": -107.3572
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "Merge Vertices",
+      "type": "MergeVertices",
+      "position": {
+        "x": -134.8672,
+        "y": -120.2556
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "threshold": 0.0001
+      }
+    },
+    {
+      "id": "Recalculate Normals",
+      "type": "RecalculateNormals",
+      "position": {
+        "x": 17.1328,
+        "y": -120.2556
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "Bake Mesh Maps",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 170.1328,
+        "y": -120.2556
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 2.5,
+        "aoRadius": 0.15,
+        "aoSamples": 8,
+        "heightScale": 1
+      }
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": -37.76759999999999,
+        "y": -107.3572
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "Store Named Attribute:Geometry->Instance on Points:Instance",
+      "fromNodeId": "Store Named Attribute",
+      "fromSocketId": "geo_out",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "instance"
+    },
+    {
+      "id": "Mesh Line:Mesh->Instance on Points:Points",
+      "fromNodeId": "Mesh Line",
+      "fromSocketId": "geo",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "points"
+    },
+    {
+      "id": "Random Value:Value->Instance on Points:Rotation",
+      "fromNodeId": "Random Value",
+      "fromSocketId": "val",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "rotation"
+    },
+    {
+      "id": "Instance on Points:Instances->Mesh Boolean:Mesh 2",
+      "fromNodeId": "Instance on Points",
+      "fromSocketId": "geometry",
+      "toNodeId": "Mesh Boolean",
+      "toSocketId": "geoB"
+    },
+    {
+      "id": "Random Value.001:Value->Instance on Points:Scale",
+      "fromNodeId": "Random Value.001",
+      "fromSocketId": "val",
+      "toNodeId": "Instance on Points",
+      "toSocketId": "scale"
+    },
+    {
+      "id": "Group Input:Input_2->Mesh Line:Count",
+      "fromNodeId": "Group Input",
+      "fromSocketId": "Input_2",
+      "toNodeId": "Mesh Line",
+      "toSocketId": "count"
+    },
+    {
+      "id": "Group Input.001:Input_3->Ico Sphere:Radius",
+      "fromNodeId": "Group Input.001",
+      "fromSocketId": "Input_3",
+      "toNodeId": "Ico Sphere",
+      "toSocketId": "radius"
+    },
+    {
+      "id": "Reroute:Output->Random Value:Seed",
+      "fromNodeId": "Reroute",
+      "fromSocketId": "out",
+      "toNodeId": "Random Value",
+      "toSocketId": "seed"
+    },
+    {
+      "id": "Math:Value->Random Value.001:Seed",
+      "fromNodeId": "Math",
+      "fromSocketId": "val",
+      "toNodeId": "Random Value.001",
+      "toSocketId": "seed"
+    },
+    {
+      "id": "Reroute:Output->Math:Value",
+      "fromNodeId": "Reroute",
+      "fromSocketId": "out",
+      "toNodeId": "Math",
+      "toSocketId": "a"
+    },
+    {
+      "id": "Group Input.003:Input_5->Random Value.001:Min",
+      "fromNodeId": "Group Input.003",
+      "fromSocketId": "Input_5",
+      "toNodeId": "Random Value.001",
+      "toSocketId": "min"
+    },
+    {
+      "id": "Group Input.002:Input_4->Reroute:Input",
+      "fromNodeId": "Group Input.002",
+      "fromSocketId": "Input_4",
+      "toNodeId": "Reroute",
+      "toSocketId": "in"
+    },
+    {
+      "id": "Ico Sphere:Mesh->Store Named Attribute:Geometry",
+      "fromNodeId": "Ico Sphere",
+      "fromSocketId": "geo",
+      "toNodeId": "Store Named Attribute",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "Ico Sphere:UV Map->Store Named Attribute:Value",
+      "fromNodeId": "Ico Sphere",
+      "fromSocketId": "uv_map",
+      "toNodeId": "Store Named Attribute",
+      "toSocketId": "val"
+    },
+    {
+      "id": "Mesh Boolean:Mesh->Merge Vertices:Geometry",
+      "fromNodeId": "Mesh Boolean",
+      "fromSocketId": "geo_out",
+      "toNodeId": "Merge Vertices",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "Merge Vertices:Geometry->Recalculate Normals:Geometry",
+      "fromNodeId": "Merge Vertices",
+      "fromSocketId": "geometry",
+      "toNodeId": "Recalculate Normals",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "Recalculate Normals:Geometry->Bake Mesh Maps:Geometry",
+      "fromNodeId": "Recalculate Normals",
+      "fromSocketId": "geometry",
+      "toNodeId": "Bake Mesh Maps",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "Bake Mesh Maps:Geometry->Set Material:Geometry",
+      "fromNodeId": "Bake Mesh Maps",
+      "fromSocketId": "geometry",
+      "toNodeId": "Set Material",
+      "toSocketId": "geo"
+    },
+    {
+      "id": "Set Material:Geometry->Group Output:Output_1_to_mesh_lod",
+      "fromNodeId": "Set Material",
+      "fromSocketId": "geo_out",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "Set Material:Geometry->Group Output:Output_1_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "Group Output",
+      "toSocketId": "geo_in"
+    }
+  ],
+  "frames": [
+    {
+      "id": "Frame",
+      "label": "Random Transforms",
+      "x": -1372,
+      "y": 121,
+      "width": 835,
+      "height": 425,
+      "color": "#3d4758",
+      "collapsed": false
+    },
+    {
+      "id": "Frame.001",
+      "label": "Instance",
+      "x": -977,
+      "y": -73,
+      "width": 412,
+      "height": 231,
+      "color": "#3d4758",
+      "collapsed": false
+    },
+    {
+      "id": "Frame.002",
+      "label": "Points",
+      "x": -976,
+      "y": -258,
+      "width": 392,
+      "height": 193,
+      "color": "#3d4758",
+      "collapsed": false
+    }
+  ],
+  "parameters": {
+    "Detail Level": {
+      "type": "int",
+      "value": 6
+    },
+    "Radius": {
+      "type": "float",
+      "value": 1
+    },
+    "Seed": {
+      "type": "int",
+      "value": 0
+    },
+    "Roundness": {
+      "type": "float",
+      "value": 0
+    }
+  },
+  "metadata": {
+    "coordinateSystem": "blender_z_up",
+    "source": {
+      "objectName": "Rock.1",
+      "modifierName": "GeometryNodes",
+      "nodeGroupName": "Rock Generator"
+    }
+  },
+  "name": "Rock Generator"
+}

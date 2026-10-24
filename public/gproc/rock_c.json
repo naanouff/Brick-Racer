@@ -1,0 +1,508 @@
+{
+  "id": "rock_c",
+  "nodes": [
+    {
+      "id": "rock1_cube",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "r1_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          1.2
+        ],
+        "center": [
+          0.2,
+          0.35,
+          0.1
+        ]
+      }
+    },
+    {
+      "id": "shade_r1",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r1_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_r1",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r1_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "rock2_cube",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 220
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "r2_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.8,
+          1,
+          0.6
+        ],
+        "center": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_r2",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r2_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -0.9,
+          0,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "shade_r2",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 380,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r2_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_r2",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 540,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r2_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "rock3_cube",
+      "type": "PrimitiveCube",
+      "position": {
+        "x": 0,
+        "y": 440
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "r3_raw",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "center": [
+          0,
+          0.25,
+          0
+        ]
+      }
+    },
+    {
+      "id": "transform_r3",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 200,
+        "y": 440
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r3_moved",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0.8,
+          0,
+          -0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "shade_r3",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 380,
+        "y": 440
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r3_flat",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_r3",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 540,
+        "y": 440
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "r3_geo",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "join_rock_c",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 720,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        },
+        {
+          "id": "geo3",
+          "name": "geo3",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "rock_c_joined",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "output",
+      "type": "GroupOutput",
+      "position": {
+        "x": 920,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 700,
+        "y": 220
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "fromNodeId": "rock1_cube",
+      "fromSocketId": "r1_raw",
+      "toNodeId": "shade_r1",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l2",
+      "fromNodeId": "shade_r1",
+      "fromSocketId": "r1_flat",
+      "toNodeId": "mat_r1",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l3",
+      "fromNodeId": "mat_r1",
+      "fromSocketId": "r1_geo",
+      "toNodeId": "join_rock_c",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l4",
+      "fromNodeId": "rock2_cube",
+      "fromSocketId": "r2_raw",
+      "toNodeId": "transform_r2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l5",
+      "fromNodeId": "transform_r2",
+      "fromSocketId": "r2_moved",
+      "toNodeId": "shade_r2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l6",
+      "fromNodeId": "shade_r2",
+      "fromSocketId": "r2_flat",
+      "toNodeId": "mat_r2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l7",
+      "fromNodeId": "mat_r2",
+      "fromSocketId": "r2_geo",
+      "toNodeId": "join_rock_c",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l8",
+      "fromNodeId": "rock3_cube",
+      "fromSocketId": "r3_raw",
+      "toNodeId": "transform_r3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l9",
+      "fromNodeId": "transform_r3",
+      "fromSocketId": "r3_moved",
+      "toNodeId": "shade_r3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l10",
+      "fromNodeId": "shade_r3",
+      "fromSocketId": "r3_flat",
+      "toNodeId": "mat_r3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l11",
+      "fromNodeId": "mat_r3",
+      "fromSocketId": "r3_geo",
+      "toNodeId": "join_rock_c",
+      "toSocketId": "geo3"
+    },
+    {
+      "id": "l12_to_mesh_lod",
+      "fromNodeId": "join_rock_c",
+      "fromSocketId": "rock_c_joined",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l12_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "output",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

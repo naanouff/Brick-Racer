@@ -31,5 +31,5 @@ Ce n’est **pas** un jeu enfant / family-friendly type licence LEGO officielle.
 ## Garde-fous process
 
 - Toute voiceline / texte long passe une relecture « 16+ OK / trop loin ».
-- Les maquettes hub (city, garage, boutique) valident le ton **avant** intégration client quand un nouvel écran apparaît.
+- Les maquettes hub (city, garage, boutique) valident le ton **avant** intégration client quand un nouvel écran apparaît — canon : [ui-ux.md](ui-ux.md) · [../mocup/](../mocup/).
 - Le disclaimer non officiel reste visible (README, éventuel À propos).

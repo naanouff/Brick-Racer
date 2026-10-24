@@ -1,0 +1,24 @@
+/**
+ * Design tokens — canon docs/design/ui-ux.md §2
+ */
+:root {
+  --br-plaza-pastel: #f7b8c9;
+  --br-garage-oil: #e87a3a;
+  --br-beach-mint: #5ecfbf;
+  --br-billboard-magenta: #d946a8;
+  --br-stud-yellow: #f5c518;
+  --br-ink: #1a1520;
+  --br-paper: #fff6ec;
+  --br-asphalt: #2b3040;
+  --br-danger: #e23d3d;
+  --br-safe: #3bb273;
+
+  --br-scrim: rgb(26 21 32 / 55%);
+  --br-scrim-heavy: rgb(26 21 32 / 72%);
+  --br-radius: 6px;
+  --br-border: 4px;
+  --br-hud-margin: 48px;
+  --br-font-display: "Fredoka", system-ui, sans-serif;
+  --br-font-body: "Nunito Sans", system-ui, sans-serif;
+  --br-ui-scale: 1;
+}

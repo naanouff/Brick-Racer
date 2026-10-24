@@ -1,0 +1,403 @@
+{
+  "id": "tree-generator",
+  "name": "Tree Generator",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "species": "oak",
+    "kind": "tree-generator"
+  },
+  "parameters": {
+    "Seed": {
+      "type": "int",
+      "value": 1000
+    },
+    "Scale": {
+      "type": "float",
+      "value": 1
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "seed_out",
+          "name": "Seed",
+          "type": "float"
+        },
+        {
+          "id": "species_out",
+          "name": "Species",
+          "type": "string"
+        },
+        {
+          "id": "scale_out",
+          "name": "Scale",
+          "type": "float"
+        }
+      ],
+      "properties": {
+        "Seed": 1000,
+        "Species": "oak",
+        "Scale": 1
+      }
+    },
+    {
+      "id": "skeleton",
+      "type": "TreeSkeleton",
+      "position": {
+        "x": 220,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "seed",
+          "name": "seed",
+          "type": "float"
+        },
+        {
+          "id": "species",
+          "name": "species",
+          "type": "any"
+        },
+        {
+          "id": "scale",
+          "name": "scale",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "skeleton",
+          "name": "skeleton",
+          "type": "any"
+        }
+      ],
+      "properties": {
+        "species": "oak",
+        "seed": 1000
+      }
+    },
+    {
+      "id": "branch_mesh",
+      "type": "SkeletonToBranchMesh",
+      "position": {
+        "x": 440,
+        "y": -80
+      },
+      "inputs": [
+        {
+          "id": "skeleton",
+          "name": "skeleton",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "species": "oak",
+        "radialSegments": 10
+      }
+    },
+    {
+      "id": "mat_bark",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 660,
+        "y": -80
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "bake_bark",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 840,
+        "y": -80
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 2.5,
+        "aoRadius": 0.12,
+        "aoSamples": 8,
+        "heightScale": 1
+      }
+    },
+    {
+      "id": "leaf_mesh",
+      "type": "LeafClustersToMesh",
+      "position": {
+        "x": 440,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "skeleton",
+          "name": "skeleton",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "mat_leaves",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 660,
+        "y": 120
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 1
+      }
+    },
+    {
+      "id": "join",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 1040,
+        "y": 20
+      },
+      "inputs": [
+        {
+          "id": "geometry_1",
+          "name": "Geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "geometry_2",
+          "name": "Geometry.001",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 1260,
+        "y": 20
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 1040,
+        "y": 20
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l_in_seed",
+      "fromNodeId": "group_in",
+      "fromSocketId": "seed_out",
+      "toNodeId": "skeleton",
+      "toSocketId": "seed"
+    },
+    {
+      "id": "l_in_species",
+      "fromNodeId": "group_in",
+      "fromSocketId": "species_out",
+      "toNodeId": "skeleton",
+      "toSocketId": "species"
+    },
+    {
+      "id": "l_in_scale",
+      "fromNodeId": "group_in",
+      "fromSocketId": "scale_out",
+      "toNodeId": "skeleton",
+      "toSocketId": "scale"
+    },
+    {
+      "id": "l_sk_branch",
+      "fromNodeId": "skeleton",
+      "fromSocketId": "skeleton",
+      "toNodeId": "branch_mesh",
+      "toSocketId": "skeleton"
+    },
+    {
+      "id": "l_sk_leaf",
+      "fromNodeId": "skeleton",
+      "fromSocketId": "skeleton",
+      "toNodeId": "leaf_mesh",
+      "toSocketId": "skeleton"
+    },
+    {
+      "id": "l_branch_mat",
+      "fromNodeId": "branch_mesh",
+      "fromSocketId": "geometry",
+      "toNodeId": "mat_bark",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_bark_bake",
+      "fromNodeId": "mat_bark",
+      "fromSocketId": "geometry",
+      "toNodeId": "bake_bark",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_leaf_mat",
+      "fromNodeId": "leaf_mesh",
+      "fromSocketId": "geometry",
+      "toNodeId": "mat_leaves",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_bake_join",
+      "fromNodeId": "bake_bark",
+      "fromSocketId": "geometry",
+      "toNodeId": "join",
+      "toSocketId": "geometry_1"
+    },
+    {
+      "id": "l_leaves_join",
+      "fromNodeId": "mat_leaves",
+      "fromSocketId": "geometry",
+      "toNodeId": "join",
+      "toSocketId": "geometry_2"
+    },
+    {
+      "id": "l_join_out_to_mesh_lod",
+      "fromNodeId": "join",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_join_out_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geometry"
+    }
+  ]
+}

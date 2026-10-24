@@ -1,0 +1,331 @@
+{
+  "id": "lego-wheel-generator",
+  "name": "Lego Wheel",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "lego-wheel"
+  },
+  "parameters": {
+    "OuterRadius": {
+      "type": "float",
+      "value": 1
+    },
+    "Width": {
+      "type": "float",
+      "value": 0.7
+    },
+    "Segments": {
+      "type": "int",
+      "value": 28
+    },
+    "TreadCount": {
+      "type": "int",
+      "value": 16
+    },
+    "ShowTread": {
+      "type": "bool",
+      "value": true
+    },
+    "ShowAxleCross": {
+      "type": "bool",
+      "value": true
+    },
+    "ShowSpokeHoles": {
+      "type": "bool",
+      "value": true
+    }
+  },
+  "nodes": [
+    {
+      "id": "group_in",
+      "type": "GroupInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "OuterRadius",
+          "name": "OuterRadius",
+          "type": "float"
+        },
+        {
+          "id": "Width",
+          "name": "Width",
+          "type": "float"
+        },
+        {
+          "id": "Segments",
+          "name": "Segments",
+          "type": "int"
+        },
+        {
+          "id": "TreadCount",
+          "name": "TreadCount",
+          "type": "int"
+        },
+        {
+          "id": "ShowTread",
+          "name": "ShowTread",
+          "type": "bool"
+        },
+        {
+          "id": "ShowAxleCross",
+          "name": "ShowAxleCross",
+          "type": "bool"
+        },
+        {
+          "id": "ShowSpokeHoles",
+          "name": "ShowSpokeHoles",
+          "type": "bool"
+        }
+      ],
+      "properties": {
+        "OuterRadius": 1,
+        "Width": 0.7,
+        "Segments": 28,
+        "TreadCount": 16,
+        "ShowTread": true,
+        "ShowAxleCross": true,
+        "ShowSpokeHoles": true
+      }
+    },
+    {
+      "id": "wheel",
+      "type": "LegoWheel",
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "outerRadius",
+          "name": "outerRadius",
+          "type": "float"
+        },
+        {
+          "id": "width",
+          "name": "width",
+          "type": "float"
+        },
+        {
+          "id": "segments",
+          "name": "segments",
+          "type": "int"
+        },
+        {
+          "id": "treadCount",
+          "name": "treadCount",
+          "type": "int"
+        },
+        {
+          "id": "showTread",
+          "name": "showTread",
+          "type": "any"
+        },
+        {
+          "id": "showAxleCross",
+          "name": "showAxleCross",
+          "type": "any"
+        },
+        {
+          "id": "showSpokeHoles",
+          "name": "showSpokeHoles",
+          "type": "any"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "outerRadius": 1,
+        "width": 0.7,
+        "segments": 28,
+        "treadCount": 16,
+        "showTread": true,
+        "showAxleCross": true,
+        "showSpokeHoles": true
+      }
+    },
+    {
+      "id": "bake_maps",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 540,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 3.4,
+        "aoRadius": 0.28,
+        "aoSamples": 16,
+        "heightScale": 1
+      }
+    },
+    {
+      "id": "group_out",
+      "type": "GroupOutput",
+      "position": {
+        "x": 780,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    },
+    {
+      "id": "mesh_lod",
+      "type": "MeshLOD",
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "distance",
+          "name": "distance",
+          "type": "float"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "id": "lod0",
+          "name": "lod0",
+          "type": "geometry"
+        },
+        {
+          "id": "lod1",
+          "name": "lod1",
+          "type": "geometry"
+        },
+        {
+          "id": "lod2",
+          "name": "lod2",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "thresholds": [
+          20,
+          50,
+          200
+        ],
+        "ratios": [
+          1,
+          0.55,
+          0.25
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "l_r",
+      "fromNodeId": "group_in",
+      "fromSocketId": "OuterRadius",
+      "toNodeId": "wheel",
+      "toSocketId": "outerRadius"
+    },
+    {
+      "id": "l_w",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Width",
+      "toNodeId": "wheel",
+      "toSocketId": "width"
+    },
+    {
+      "id": "l_s",
+      "fromNodeId": "group_in",
+      "fromSocketId": "Segments",
+      "toNodeId": "wheel",
+      "toSocketId": "segments"
+    },
+    {
+      "id": "l_t",
+      "fromNodeId": "group_in",
+      "fromSocketId": "TreadCount",
+      "toNodeId": "wheel",
+      "toSocketId": "treadCount"
+    },
+    {
+      "id": "l_st",
+      "fromNodeId": "group_in",
+      "fromSocketId": "ShowTread",
+      "toNodeId": "wheel",
+      "toSocketId": "showTread"
+    },
+    {
+      "id": "l_ax",
+      "fromNodeId": "group_in",
+      "fromSocketId": "ShowAxleCross",
+      "toNodeId": "wheel",
+      "toSocketId": "showAxleCross"
+    },
+    {
+      "id": "l_sh",
+      "fromNodeId": "group_in",
+      "fromSocketId": "ShowSpokeHoles",
+      "toNodeId": "wheel",
+      "toSocketId": "showSpokeHoles"
+    },
+    {
+      "id": "l_bake",
+      "fromNodeId": "wheel",
+      "fromSocketId": "geometry",
+      "toNodeId": "bake_maps",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_out_to_mesh_lod",
+      "fromNodeId": "bake_maps",
+      "fromSocketId": "geometry",
+      "toNodeId": "mesh_lod",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_out_mesh_lod_out",
+      "fromNodeId": "mesh_lod",
+      "fromSocketId": "geometry",
+      "toNodeId": "group_out",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

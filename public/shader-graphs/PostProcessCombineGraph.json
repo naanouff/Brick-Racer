@@ -1,0 +1,159 @@
+{
+  "id": "PostProcessCombineGraph",
+  "name": "PostProcessCombineGraph",
+  "metadata": { "kind": "postprocess" },
+  "properties": {
+    "sceneColor": {
+      "type": "texture_2d",
+      "defaultValue": null,
+      "name": "Base"
+    },
+    "bloomTex": {
+      "type": "texture_2d",
+      "defaultValue": null,
+      "name": "Overlay"
+    },
+    "mixAmount": {
+      "type": "f32",
+      "defaultValue": 0.5,
+      "name": "Mix"
+    }
+  },
+  "nodes": [
+    {
+      "id": "uv",
+      "type": "ScreenUV",
+      "position": { "x": 40, "y": 220 },
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "texA",
+      "type": "Property",
+      "position": { "x": 40, "y": 40 },
+      "stage": "common",
+      "data": { "propertyName": "sceneColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "texB",
+      "type": "Property",
+      "position": { "x": 40, "y": 120 },
+      "stage": "common",
+      "data": { "propertyName": "bloomTex" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "mixProp",
+      "type": "Property",
+      "position": { "x": 40, "y": 380 },
+      "stage": "common",
+      "data": { "propertyName": "mixAmount" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "sampleA",
+      "type": "TextureSample",
+      "position": { "x": 300, "y": 60 },
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" },
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "A", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "sampleB",
+      "type": "TextureSample",
+      "position": { "x": 300, "y": 220 },
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [
+        { "id": "rgba", "name": "RGBA", "dataType": "vec4f" },
+        { "id": "rgb", "name": "RGB", "dataType": "vec3f" },
+        { "id": "a", "name": "A", "dataType": "f32" }
+      ]
+    },
+    {
+      "id": "lerp",
+      "type": "Lerp",
+      "position": { "x": 560, "y": 160 },
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" },
+        { "id": "t", "name": "T", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec4f" }]
+    },
+    {
+      "id": "master",
+      "type": "PostProcessMasterNode",
+      "position": { "x": 800, "y": 160 },
+      "stage": "fragment",
+      "inputs": [{ "id": "color", "name": "Color (RGBA)", "dataType": "vec4f" }],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "texA",
+      "fromSocketId": "out",
+      "toNodeId": "sampleA",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "uv",
+      "fromSocketId": "uv",
+      "toNodeId": "sampleA",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "texB",
+      "fromSocketId": "out",
+      "toNodeId": "sampleB",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "uv",
+      "fromSocketId": "uv",
+      "toNodeId": "sampleB",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "sampleA",
+      "fromSocketId": "rgba",
+      "toNodeId": "lerp",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "sampleB",
+      "fromSocketId": "rgba",
+      "toNodeId": "lerp",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mixProp",
+      "fromSocketId": "out",
+      "toNodeId": "lerp",
+      "toSocketId": "t"
+    },
+    {
+      "fromNodeId": "lerp",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "color"
+    }
+  ]
+}

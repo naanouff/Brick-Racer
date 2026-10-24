@@ -1,0 +1,224 @@
+{
+  "id": "UVAnimationGraph_v1",
+  "properties": {
+    "tintColor": {
+      "name": "Tint Color",
+      "type": "vec3f",
+      "defaultValue": [0.1, 0.4, 1.0]
+    },
+    "tilingScale": {
+      "name": "Tiling Scale",
+      "type": "f32",
+      "defaultValue": 5.0
+    },
+    "scrollSpeed": {
+      "name": "Scroll Speed",
+      "type": "f32",
+      "defaultValue": 0.1
+    }
+  },
+  "nodes": [
+    {
+      "id": "f_master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "position": { "x": 1200, "y": 200 },
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alphaCutoff", "name": "Alpha Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "get_uv",
+      "type": "GetUV",
+      "stage": "fragment",
+      "position": { "x": 100, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "get_time",
+      "type": "Time",
+      "stage": "common",
+      "position": { "x": 100, "y": 200 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Time (s)", "dataType": "f32" }]
+    },
+    {
+      "id": "prop_speed",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 100, "y": 300 },
+      "data": { "propertyName": "scrollSpeed" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_time_speed",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 300, "y": 200 },
+      "inputs": [
+        { "id": "a", "name": "Time", "dataType": "f32" },
+        { "id": "b", "name": "Speed", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "add_scroll",
+      "type": "Add",
+      "stage": "common",
+      "position": { "x": 500, "y": 100 },
+      "inputs": [
+        { "id": "a", "name": "UV", "dataType": "vec2f" },
+        { "id": "b", "name": "Time Offset", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Scrolling UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "prop_scale",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 500, "y": 250 },
+      "data": { "propertyName": "tilingScale" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "mult_tiling",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 700, "y": 100 },
+      "inputs": [
+        { "id": "a", "name": "Scrolling UV", "dataType": "vec2f" },
+        { "id": "b", "name": "Tiling", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Tiled UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "node_voronoi",
+      "type": "VoronoiNoise",
+      "stage": "common",
+      "position": { "x": 900, "y": 100 },
+      "inputs": [
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "scale", "name": "Scale", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "node_f32_to_vec3",
+      "type": "CombineVec3",
+      "stage": "common",
+      "position": { "x": 1050, "y": 100 },
+      "inputs": [
+        { "id": "x", "name": "X", "dataType": "f32" },
+        { "id": "y", "name": "Y", "dataType": "f32" },
+        { "id": "z", "name": "Z", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out (Grey)", "dataType": "vec3f" }]
+    },
+    {
+      "id": "prop_tint",
+      "type": "Property",
+      "stage": "common",
+      "position": { "x": 900, "y": 300 },
+      "data": { "propertyName": "tintColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "mult_tint",
+      "type": "Multiply",
+      "stage": "common",
+      "position": { "x": 1100, "y": 250 },
+      "inputs": [
+        { "id": "a", "name": "Noise (Grey)", "dataType": "vec3f" },
+        { "id": "b", "name": "Tint", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "get_time",
+      "fromSocketId": "out",
+      "toNodeId": "mult_time_speed",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_speed",
+      "fromSocketId": "out",
+      "toNodeId": "mult_time_speed",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "get_uv",
+      "fromSocketId": "out",
+      "toNodeId": "add_scroll",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "mult_time_speed",
+      "fromSocketId": "out",
+      "toNodeId": "add_scroll",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "add_scroll",
+      "fromSocketId": "out",
+      "toNodeId": "mult_tiling",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_scale",
+      "fromSocketId": "out",
+      "toNodeId": "mult_tiling",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_tiling",
+      "fromSocketId": "out",
+      "toNodeId": "node_voronoi",
+      "toSocketId": "uv"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "x"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "y"
+    },
+    {
+      "fromNodeId": "node_voronoi",
+      "fromSocketId": "out",
+      "toNodeId": "node_f32_to_vec3",
+      "toSocketId": "z"
+    },
+    {
+      "fromNodeId": "node_f32_to_vec3",
+      "fromSocketId": "out",
+      "toNodeId": "mult_tint",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_tint",
+      "fromSocketId": "out",
+      "toNodeId": "mult_tint",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_tint",
+      "fromSocketId": "out",
+      "toNodeId": "f_master",
+      "toSocketId": "albedo"
+    }
+  ]
+}

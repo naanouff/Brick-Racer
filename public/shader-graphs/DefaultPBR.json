@@ -1,0 +1,441 @@
+{
+  "id": "StandardPBR",
+  "properties": {
+    "baseColor": {
+      "name": "Base Color",
+      "type": "vec4f",
+      "defaultValue": [1.0, 1.0, 1.0, 1.0]
+    },
+    "roughness": {
+      "name": "Roughness",
+      "type": "f32",
+      "defaultValue": 0.5
+    },
+    "metallic": {
+      "name": "Metallic",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "ior": {
+      "name": "IOR (dielectric)",
+      "type": "f32",
+      "defaultValue": 1.5
+    },
+    "transmissionFactor": {
+      "name": "Transmission (KHR)",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "opacity": {
+      "name": "Opacity",
+      "type": "f32",
+      "defaultValue": 1.0
+    },
+    "emissiveColor": {
+      "name": "Emissive Color",
+      "type": "vec4f",
+      "defaultValue": [0.0, 0.0, 0.0, 1.0]
+    },
+    "alphaCutoff": {
+      "name": "Alpha Cutoff",
+      "type": "f32",
+      "defaultValue": 0.5
+    },
+    "normalTexture": {
+      "name": "Normal Map",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "normalScale": {
+      "name": "Normal Scale",
+      "type": "f32",
+      "defaultValue": 1.0
+    },
+    "baseColorTexture": {
+      "name": "Albedo Map",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "metallicRoughnessTexture": {
+      "name": "ORM Map",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "emissiveTexture": {
+      "name": "Emissive Map",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "anisotropy": {
+      "name": "Anisotropy Strength",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "anisotropyRotation": {
+      "name": "Anisotropy Rotation",
+      "type": "f32",
+      "defaultValue": 0.0
+    },
+    "anisotropyTexture": {
+      "name": "Anisotropy Map",
+      "type": "texture_2d",
+      "defaultValue": null
+    },
+    "pbrDebugAnisoTex": {
+      "name": "Debug: show anisotropy map",
+      "type": "f32",
+      "defaultValue": 0.0
+    }
+  },
+  "nodes": [
+    {
+      "id": "master_node",
+      "type": "PBRMasterNode",
+      "position": { "x": 800, "y": 100 },
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec4f" },
+        { "id": "normal", "name": "Normal", "dataType": "vec3f" },
+        { "id": "metallic_factor", "name": "Metallic", "dataType": "f32" },
+        { "id": "roughness_factor", "name": "Roughness", "dataType": "f32" },
+        { "id": "opacity", "name": "Opacity", "dataType": "f32" },
+        { "id": "emission", "name": "Emission", "dataType": "vec4f" },
+        { "id": "orm_texture", "name": "ORM Texture", "dataType": "texture_2d" },
+        { "id": "anisotropy", "name": "Anisotropy", "dataType": "f32" },
+        { "id": "anisotropy_rotation", "name": "Rotation", "dataType": "f32" },
+        { "id": "anisotropy_texture", "name": "Aniso Map", "dataType": "texture_2d" },
+        { "id": "pbrDebugAnisoTex", "name": "Debug aniso tex", "dataType": "f32" }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "prop_baseColor",
+      "type": "Property",
+      "position": { "x": 0, "y": 0 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "vec4f" }],
+      "data": { "propertyName": "baseColor" }
+    },
+    {
+      "id": "prop_roughness",
+      "type": "Property",
+      "position": { "x": 0, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "roughness" }
+    },
+    {
+      "id": "prop_metallic",
+      "type": "Property",
+      "position": { "x": 0, "y": 200 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "metallic" }
+    },
+    {
+      "id": "prop_ior",
+      "type": "Property",
+      "position": { "x": 0, "y": 250 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "ior" }
+    },
+    {
+      "id": "prop_transmission",
+      "type": "Property",
+      "position": { "x": 0, "y": 275 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "transmissionFactor" }
+    },
+    {
+      "id": "prop_opacity",
+      "type": "Property",
+      "position": { "x": 0, "y": 300 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "opacity" }
+    },
+    {
+      "id": "prop_emission",
+      "type": "Property",
+      "position": { "x": 0, "y": 400 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "vec4f" }],
+      "data": { "propertyName": "emissiveColor" }
+    },
+
+    {
+      "id": "prop_tex_orm",
+      "type": "Property",
+      "position": { "x": 0, "y": 500 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "texture_2d" }],
+      "data": { "propertyName": "metallicRoughnessTexture" }
+    },
+    {
+      "id": "prop_tex_aniso",
+      "type": "Property",
+      "position": { "x": 0, "y": 600 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "texture_2d" }],
+      "data": { "propertyName": "anisotropyTexture" }
+    },
+    {
+      "id": "prop_aniso",
+      "type": "Property",
+      "position": { "x": 0, "y": 700 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "anisotropy" }
+    },
+    {
+      "id": "prop_aniso_rot",
+      "type": "Property",
+      "position": { "x": 0, "y": 800 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "anisotropyRotation" }
+    },
+    {
+      "id": "prop_pbr_debug_aniso",
+      "type": "Property",
+      "position": { "x": 0, "y": 900 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "pbrDebugAnisoTex" }
+    },
+
+    {
+      "id": "sample_albedo",
+      "type": "TextureSample",
+      "position": { "x": 300, "y": 0 },
+      "inputs": [{ "id": "texture", "name": "Tex", "dataType": "texture_2d" }],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "sample_emission",
+      "type": "TextureSample",
+      "position": { "x": 300, "y": 400 },
+      "inputs": [{ "id": "texture", "name": "Tex", "dataType": "texture_2d" }],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "sample_orm",
+      "type": "TextureSample",
+      "position": { "x": 300, "y": 500 },
+      "inputs": [{ "id": "texture", "name": "Tex", "dataType": "texture_2d" }],
+      "outputs": [{ "id": "rgba", "name": "RGBA", "dataType": "vec4f" }]
+    },
+    {
+      "id": "prop_tex_normal",
+      "type": "Property",
+      "position": { "x": 0, "y": 250 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "texture_2d" }],
+      "data": { "propertyName": "normalTexture" }
+    },
+    {
+      "id": "prop_normal_scale",
+      "type": "Property",
+      "position": { "x": 0, "y": 350 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "f32" }],
+      "data": { "propertyName": "normalScale" }
+    },
+    {
+      "id": "uv_node",
+      "type": "GetUV",
+      "position": { "x": 300, "y": 300 },
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "normal_map",
+      "type": "NormalMap",
+      "position": { "x": 520, "y": 260 },
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" },
+        { "id": "scale", "name": "Scale", "dataType": "f32" }
+      ],
+      "outputs": [{ "id": "out", "name": "N", "dataType": "vec3f" }]
+    },
+
+    {
+      "id": "prop_tex_albedo",
+      "type": "Property",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "texture_2d" }],
+      "data": { "propertyName": "baseColorTexture" }
+    },
+    {
+      "id": "prop_tex_emissive",
+      "type": "Property",
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "V", "dataType": "texture_2d" }],
+      "data": { "propertyName": "emissiveTexture" }
+    },
+
+    {
+      "id": "mult_albedo",
+      "type": "Multiply",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Res", "dataType": "vec4f" }]
+    },
+    {
+      "id": "mult_emission",
+      "type": "Multiply",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec4f" },
+        { "id": "b", "name": "B", "dataType": "vec4f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Res", "dataType": "vec4f" }]
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "prop_tex_albedo",
+      "fromSocketId": "out",
+      "toNodeId": "sample_albedo",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "sample_albedo",
+      "fromSocketId": "rgba",
+      "toNodeId": "mult_albedo",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_baseColor",
+      "fromSocketId": "out",
+      "toNodeId": "mult_albedo",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_albedo",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "albedo"
+    },
+
+    {
+      "fromNodeId": "prop_tex_emissive",
+      "fromSocketId": "out",
+      "toNodeId": "sample_emission",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "sample_emission",
+      "fromSocketId": "rgba",
+      "toNodeId": "mult_emission",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "prop_emission",
+      "fromSocketId": "out",
+      "toNodeId": "mult_emission",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "mult_emission",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "emission"
+    },
+
+    {
+      "fromNodeId": "prop_tex_orm",
+      "fromSocketId": "out",
+      "toNodeId": "sample_orm",
+      "toSocketId": "texture"
+    },
+    {
+      "fromNodeId": "sample_orm",
+      "fromSocketId": "rgba",
+      "toNodeId": "master_node",
+      "toSocketId": "orm_texture"
+    },
+
+    {
+      "fromNodeId": "prop_tex_normal",
+      "fromSocketId": "out",
+      "toNodeId": "normal_map",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "uv_node", "fromSocketId": "uv", "toNodeId": "normal_map", "toSocketId": "uv" },
+    {
+      "fromNodeId": "prop_normal_scale",
+      "fromSocketId": "out",
+      "toNodeId": "normal_map",
+      "toSocketId": "scale"
+    },
+    {
+      "fromNodeId": "normal_map",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "normal"
+    },
+
+    {
+      "fromNodeId": "prop_roughness",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "roughness_factor"
+    },
+    {
+      "fromNodeId": "prop_metallic",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "metallic_factor"
+    },
+    {
+      "fromNodeId": "prop_ior",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "ior"
+    },
+    {
+      "fromNodeId": "prop_transmission",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "transmissionFactor"
+    },
+    {
+      "fromNodeId": "prop_opacity",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "opacity"
+    },
+
+    {
+      "fromNodeId": "prop_aniso",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "anisotropy"
+    },
+    {
+      "fromNodeId": "prop_aniso_rot",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "anisotropy_rotation"
+    },
+    {
+      "fromNodeId": "prop_tex_aniso",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "anisotropy_texture"
+    },
+    {
+      "fromNodeId": "prop_pbr_debug_aniso",
+      "fromSocketId": "out",
+      "toNodeId": "master_node",
+      "toSocketId": "pbrDebugAnisoTex"
+    }
+  ]
+}

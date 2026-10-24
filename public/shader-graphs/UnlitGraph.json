@@ -1,0 +1,121 @@
+{
+  "id": "UnlitGraph_v1",
+  "properties": {
+    "baseColor": { "type": "vec3f", "defaultValue": [1, 1, 1], "name": "Color" },
+    "baseColorTexture": { "type": "texture_2d", "defaultValue": null, "name": "Texture" },
+    "alpha": { "type": "f32", "defaultValue": 1.0, "name": "Alpha" },
+    "alphaCutoff": { "type": "f32", "defaultValue": 0.5, "name": "Alpha Cutoff" }
+  },
+  "nodes": [
+    {
+      "id": "albedo_prop",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "baseColor" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "tex_sample",
+      "type": "TextureSample",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "texture", "name": "Texture", "dataType": "texture_2d" },
+        { "id": "uv", "name": "UV", "dataType": "vec2f" }
+      ],
+      "outputs": [{ "id": "rgb", "name": "RGB", "dataType": "vec3f" }]
+    },
+    {
+      "id": "tex_prop",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "baseColorTexture" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }]
+    },
+    {
+      "id": "uv_node",
+      "type": "GetUV",
+      "stage": "fragment",
+      "inputs": [],
+      "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
+    },
+    {
+      "id": "multiply_color",
+      "type": "Multiply",
+      "stage": "common",
+      "inputs": [
+        { "id": "a", "name": "A", "dataType": "vec3f" },
+        { "id": "b", "name": "B", "dataType": "vec3f" }
+      ],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "vec3f" }]
+    },
+    {
+      "id": "alpha_prop",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "alpha" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "cutoff_prop",
+      "type": "Property",
+      "stage": "common",
+      "data": { "propertyName": "alphaCutoff" },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }]
+    },
+    {
+      "id": "master",
+      "type": "UnlitMasterNode",
+      "stage": "fragment",
+      "inputs": [
+        { "id": "albedo", "name": "Albedo", "dataType": "vec3f" },
+        { "id": "alpha", "name": "Alpha", "dataType": "f32" },
+        { "id": "alpha_cutoff", "name": "Cutoff", "dataType": "f32" }
+      ],
+      "outputs": []
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "tex_prop",
+      "fromSocketId": "out",
+      "toNodeId": "tex_sample",
+      "toSocketId": "texture"
+    },
+    { "fromNodeId": "uv_node", "fromSocketId": "uv", "toNodeId": "tex_sample", "toSocketId": "uv" },
+    {
+      "fromNodeId": "tex_sample",
+      "fromSocketId": "rgb",
+      "toNodeId": "multiply_color",
+      "toSocketId": "a"
+    },
+    {
+      "fromNodeId": "albedo_prop",
+      "fromSocketId": "out",
+      "toNodeId": "multiply_color",
+      "toSocketId": "b"
+    },
+    {
+      "fromNodeId": "multiply_color",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "albedo"
+    },
+
+    {
+      "fromNodeId": "alpha_prop",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "alpha"
+    },
+    {
+      "fromNodeId": "cutoff_prop",
+      "fromSocketId": "out",
+      "toNodeId": "master",
+      "toSocketId": "alpha_cutoff"
+    }
+  ]
+}

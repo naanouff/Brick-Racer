@@ -1,0 +1,40 @@
+{
+  "id": "ToonShadingGraph",
+  "properties": {
+    "baseColor": {
+      "name": "Base Color",
+      "type": "vec3f",
+      "defaultValue": [0.8, 0.6, 0.2]
+    },
+    "rampMap": {
+      "name": "Ramp Texture",
+      "type": "texture_2d",
+      "defaultValue": null
+    }
+  },
+  "nodes": [
+    {
+      "id": "master_node_toon",
+      "type": "ToonMasterNode",
+      "position": { "x": 600, "y": 100 },
+      "inputs": [{ "id": "albedo", "name": "Albedo", "dataType": "vec3f" }],
+      "outputs": []
+    },
+    {
+      "id": "prop_base_color",
+      "type": "Property",
+      "position": { "x": 200, "y": 100 },
+      "inputs": [],
+      "outputs": [{ "id": "out", "name": "Value", "dataType": "vec3f" }],
+      "data": { "propertyName": "baseColor" }
+    }
+  ],
+  "connections": [
+    {
+      "fromNodeId": "prop_base_color",
+      "fromSocketId": "out",
+      "toNodeId": "master_node_toon",
+      "toSocketId": "albedo"
+    }
+  ]
+}
