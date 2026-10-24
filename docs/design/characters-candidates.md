@@ -4,11 +4,15 @@ Pool de **40** candidats. Le roster jouable hub / peloton (**~20**) se **fige ap
 
 Aligné [gdd.md](gdd.md), [tone.md](tone.md). **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.**
 
-| Statut | Contenu |
-| ------ | ------- |
-| **C01–C08** | PNJ arcs GDD — noyau provisoire (révisable au playtest) |
-| **C09–C40** | Candidats hub / peloton |
+
+| Statut              | Contenu                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| **C01–C08**         | PNJ arcs GDD — noyau provisoire (révisable au playtest)                                    |
+| **C09–C40**         | Candidats hub / peloton                                                                    |
 | **Après playtests** | Retenir ~20, ajuster tags conduite si besoin, mettre à jour GDD §7 + `characters.md` final |
+
+
+
 
 ## Règles peloton
 
@@ -19,20 +23,28 @@ flowchart LR
   pool -->|"7 NPC + joueur"| race
 ```
 
+
+
 - Les 20 retenus peuplent le hub (stands, cafés, pads) et alimentent l’IA course.
 - Tirage v1 d’une course biome : **1 face locale** si présente dans le roster + mix d’archétypes conduite + remplissage jusqu’à 7.
 - **Hex** : annonceur hors grille par défaut ; entre en piste seulement quand le design d’acte le prescrit.
 - Boss **1v1** : hors règle 7 NPC ([gdd.md](gdd.md) / [levels.md](levels.md)).
 
+
+
 ### Tags conduite (IA)
 
-| Tag | Valeurs |
-| --- | ------- |
-| **Aggression** | Low / Mid / High |
-| **ItemBias** | Offensive / Defensive / Chaos / Balanced |
-| **LineStyle** | Clean / RiskShortcuts / DriftHeavy / AirHungry |
-| **Consistency** | Steady / HotCold / Choker |
-| **PreferredClass** | Kart / Moto / Plane / Any |
+
+| Tag                | Valeurs                                        |
+| ------------------ | ---------------------------------------------- |
+| **Aggression**     | Low / Mid / High                               |
+| **ItemBias**       | Offensive / Defensive / Chaos / Balanced       |
+| **LineStyle**      | Clean / RiskShortcuts / DriftHeavy / AirHungry |
+| **Consistency**    | Steady / HotCold / Choker                      |
+| **PreferredClass** | Kart / Moto / Plane / Any                      |
+
+
+
 
 ### Prompt artwork — préfixe commun
 
@@ -42,52 +54,58 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## Tableau récap
 
-| ID | Nom | Hub / ancrage | Aggression | ItemBias | LineStyle | Consistency | Class |
-| -- | ---- | ------------- | ---------- | -------- | --------- | ------------ | ----- |
-| C01 | Bolt | Garage | Mid | Defensive | Clean | Steady | Kart |
-| C02 | Vinyle | Boutique | Low | Chaos | RiskShortcuts | HotCold | Any |
-| C03 | Maire Brique-Dur | Mairie | Mid | Defensive | Clean | Steady | Kart |
-| C04 | Hex | Plaza / pads | High | Offensive | DriftHeavy | HotCold | Any |
-| C05 | Capitaine Glisse | Plage / quai hub | Mid | Offensive | RiskShortcuts | HotCold | Kart |
-| C06 | Dame Mousse | Forêt / parc hub | Low | Defensive | Clean | Steady | Moto |
-| C07 | Mirage Max | Désert / douane hub | Mid | Chaos | RiskShortcuts | HotCold | Kart |
-| C08 | Coach Cime | Montagne / lodge hub | High | Offensive | AirHungry | Steady | Plane |
-| C09 | Flash Stud | Media plaza | High | Offensive | DriftHeavy | HotCold | Kart |
-| C10 | Caméra Clac | Media plaza | Low | Defensive | Clean | Steady | Kart |
-| C11 | Sponsor Or | Stands GP | Mid | Balanced | Clean | Steady | Kart |
-| C12 | Agent Négatif | Mairie | Mid | Defensive | Clean | Choker | Kart |
-| C13 | Flic Brique | Ring urbain | High | Defensive | Clean | Steady | Kart |
-| C14 | Douanier Sable | Mirage Gate | Mid | Chaos | RiskShortcuts | HotCold | Kart |
-| C15 | Pompier Mousse | Quai chantier | Mid | Defensive | Clean | Steady | Kart |
-| C16 | Bookie Zoom | Ruelle néon | Low | Chaos | RiskShortcuts | HotCold | Any |
-| C17 | DJ Overclock | Ruelle néon | High | Chaos | DriftHeavy | HotCold | Moto |
-| C18 | Livreur Turbo | Plaza | High | Offensive | RiskShortcuts | Choker | Moto |
-| C19 | Foodtruck Grease | Plaza | Low | Defensive | Clean | Steady | Kart |
-| C20 | Immo Brick | Devant mairie | Mid | Balanced | Clean | Choker | Kart |
-| C21 | Influenceuse Lag | Boutique | Mid | Chaos | AirHungry | HotCold | Plane |
-| C22 | Surfeur Concrete | Riviera Gate | Mid | Balanced | DriftHeavy | HotCold | Kart |
-| C23 | Scout Épine | Canopée Gate | Low | Defensive | Clean | Steady | Moto |
-| C24 | Prospecteur Rouille | Mirage Gate | Mid | Offensive | RiskShortcuts | Steady | Kart |
-| C25 | Moniteur Flocon | Cime Gate | High | Offensive | AirHungry | Steady | Plane |
-| C26 | Mascotte Studdy | Pads coupe | Mid | Chaos | RiskShortcuts | HotCold | Any |
-| C27 | Statue Vivante | Plaza fontaine | Low | Defensive | Clean | Steady | Kart |
-| C28 | Stagiaire Mairie | Mairie | Low | Balanced | Clean | Choker | Kart |
-| C29 | Pilote Retraité | Garage Bolt | Mid | Defensive | Clean | Steady | Kart |
-| C30 | Chimiste Pneu | Garage | Mid | Chaos | DriftHeavy | HotCold | Kart |
-| C31 | Voleuse Stud | Ruelle | High | Offensive | RiskShortcuts | HotCold | Moto |
-| C32 | Curé Circuit | Chapel brick | Low | Defensive | Clean | Steady | Kart |
-| C33 | Banquier Abs | Tour finance | Mid | Offensive | Clean | Steady | Kart |
-| C34 | Nurse Drift | Clinique hub | Mid | Defensive | Clean | Steady | Kart |
-| C35 | Squatteur Rooftop | Toits plaza | High | Chaos | AirHungry | HotCold | Plane |
-| C36 | Gamin Contrefaçon | Boutique Vinyle | High | Offensive | RiskShortcuts | HotCold | Kart |
-| C37 | Astronaute Fake | Aéroport jouet | Mid | Balanced | AirHungry | Steady | Plane |
-| C38 | Pirate Parking | Quais | High | Offensive | DriftHeavy | HotCold | Kart |
-| C39 | Oracle GPS | Pads | Low | Chaos | RiskShortcuts | Choker | Any |
-| C40 | Rival Fantôme | Débloque tardif | High | Offensive | DriftHeavy | Steady | Any |
+
+| ID  | Nom                 | Hub / ancrage        | Aggression | ItemBias  | LineStyle     | Consistency | Class |
+| --- | ------------------- | -------------------- | ---------- | --------- | ------------- | ----------- | ----- |
+| C01 | Bolt                | Garage               | Mid        | Defensive | Clean         | Steady      | Kart  |
+| C02 | Vinyle              | Boutique             | Low        | Chaos     | RiskShortcuts | HotCold     | Any   |
+| C03 | Maire Brique-Dur    | Mairie               | Mid        | Defensive | Clean         | Steady      | Kart  |
+| C04 | Hex                 | Plaza / pads         | High       | Offensive | DriftHeavy    | HotCold     | Any   |
+| C05 | Capitaine Glisse    | Plage / quai hub     | Mid        | Offensive | RiskShortcuts | HotCold     | Kart  |
+| C06 | Dame Mousse         | Forêt / parc hub     | Low        | Defensive | Clean         | Steady      | Moto  |
+| C07 | Mirage Max          | Désert / douane hub  | Mid        | Chaos     | RiskShortcuts | HotCold     | Kart  |
+| C08 | Coach Cime          | Montagne / lodge hub | High       | Offensive | AirHungry     | Steady      | Plane |
+| C09 | Flash Stud          | Media plaza          | High       | Offensive | DriftHeavy    | HotCold     | Kart  |
+| C10 | Caméra Clac         | Media plaza          | Low        | Defensive | Clean         | Steady      | Kart  |
+| C11 | Sponsor Or          | Stands GP            | Mid        | Balanced  | Clean         | Steady      | Kart  |
+| C12 | Agent Négatif       | Mairie               | Mid        | Defensive | Clean         | Choker      | Kart  |
+| C13 | Flic Brique         | Ring urbain          | High       | Defensive | Clean         | Steady      | Kart  |
+| C14 | Douanier Sable      | Mirage Gate          | Mid        | Chaos     | RiskShortcuts | HotCold     | Kart  |
+| C15 | Pompier Mousse      | Quai chantier        | Mid        | Defensive | Clean         | Steady      | Kart  |
+| C16 | Bookie Zoom         | Ruelle néon          | Low        | Chaos     | RiskShortcuts | HotCold     | Any   |
+| C17 | DJ Overclock        | Ruelle néon          | High       | Chaos     | DriftHeavy    | HotCold     | Moto  |
+| C18 | Livreur Turbo       | Plaza                | High       | Offensive | RiskShortcuts | Choker      | Moto  |
+| C19 | Foodtruck Grease    | Plaza                | Low        | Defensive | Clean         | Steady      | Kart  |
+| C20 | Immo Brick          | Devant mairie        | Mid        | Balanced  | Clean         | Choker      | Kart  |
+| C21 | Influenceuse Lag    | Boutique             | Mid        | Chaos     | AirHungry     | HotCold     | Plane |
+| C22 | Surfeur Concrete    | Riviera Gate         | Mid        | Balanced  | DriftHeavy    | HotCold     | Kart  |
+| C23 | Scout Épine         | Canopée Gate         | Low        | Defensive | Clean         | Steady      | Moto  |
+| C24 | Prospecteur Rouille | Mirage Gate          | Mid        | Offensive | RiskShortcuts | Steady      | Kart  |
+| C25 | Moniteur Flocon     | Cime Gate            | High       | Offensive | AirHungry     | Steady      | Plane |
+| C26 | Mascotte Studdy     | Pads coupe           | Mid        | Chaos     | RiskShortcuts | HotCold     | Any   |
+| C27 | Statue Vivante      | Plaza fontaine       | Low        | Defensive | Clean         | Steady      | Kart  |
+| C28 | Stagiaire Mairie    | Mairie               | Low        | Balanced  | Clean         | Choker      | Kart  |
+| C29 | Pilote Retraité     | Garage Bolt          | Mid        | Defensive | Clean         | Steady      | Kart  |
+| C30 | Chimiste Pneu       | Garage               | Mid        | Chaos     | DriftHeavy    | HotCold     | Kart  |
+| C31 | Voleuse Stud        | Ruelle               | High       | Offensive | RiskShortcuts | HotCold     | Moto  |
+| C32 | Curé Circuit        | Chapel brick         | Low        | Defensive | Clean         | Steady      | Kart  |
+| C33 | Banquier Abs        | Tour finance         | Mid        | Offensive | Clean         | Steady      | Kart  |
+| C34 | Nurse Drift         | Clinique hub         | Mid        | Defensive | Clean         | Steady      | Kart  |
+| C35 | Squatteur Rooftop   | Toits plaza          | High       | Chaos     | AirHungry     | HotCold     | Plane |
+| C36 | Gamin Contrefaçon   | Boutique Vinyle      | High       | Offensive | RiskShortcuts | HotCold     | Kart  |
+| C37 | Astronaute Fake     | Aéroport jouet       | Mid        | Balanced  | AirHungry     | Steady      | Plane |
+| C38 | Pirate Parking      | Quais                | High       | Offensive | DriftHeavy    | HotCold     | Kart  |
+| C39 | Oracle GPS          | Pads                 | Low        | Chaos     | RiskShortcuts | Choker      | Any   |
+| C40 | Rival Fantôme       | Débloque tardif      | High       | Offensive | DriftHeavy    | Steady      | Any   |
+
 
 ---
+
+
 
 ## C01 — Bolt
 
@@ -95,13 +113,17 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 **Personnalité :** Sec, juge ton build, fond attachant. Parle en couples de couples de boulons.  
 **Punchline :** « C’est pas un bolide, c’est un crime empilé. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
 ![Bolt — ref](art/characters/c01-bolt.webp)
+
+**Modèle 3D (moodboard Meshy seulement) :** [art/characters/c01-bolt.glb](art/characters/c01-bolt.glb) — GLB « Gritty Mechanic ». **Pas** la base mesh jeu. Canon in-game : [minifig-gproc.md](minifig-gproc.md) (GPROC + recipe).
 
 **Minifig (d’après ref) :** Tête jaune, sourcils noirs froncés, bouche pincée, barbe / moustache rousse orange (print stubbly). Coiffe : casquette baseball noire / gris foncé tachée d’huile. Combinaison bleu pétrole (torse + bras + jambes) couverte de taches d’huile ; print torse = clé dans poche droite + logo engrenage blanc « MECHANIC » poitrine gauche. Mains noires (gants). Accessoire : grande clé plate chrome (taches) tenue en travers du corps.
 
@@ -109,15 +131,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C02 — Vinyle
 
 **Rôle hub :** Vendeur, District Boutique.  
 **Personnalité :** Sourire commercial permanent, stock douteux, vend du rêve et du plastique.  
 **Punchline :** « Si ça brille, c’est légal *ici*. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Chaos | RiskShortcuts | HotCold | Any |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Low        | Chaos    | RiskShortcuts | HotCold     | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -129,15 +155,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C03 — Maire Brique-Dur
 
 **Rôle hub :** Mairie / ring urbain.  
 **Personnalité :** Politicien brick, langue de bois trash, sourit pour les caméras.  
 **Punchline :** « Pour votre sécurité, restez pauvres et en ville. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -149,15 +179,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C04 — Hex
 
 **Rôle hub :** Plaza / pads — rival + annonceur.  
 **Personnalité :** Showman cynique, quatrième mur, vend l’audience avant la course.  
 **Punchline :** « Souris, l’outsider — les pubs paient mieux si tu perds. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | DriftHeavy | HotCold | Any |
+
+| Aggression | ItemBias  | LineStyle  | Consistency | PreferredClass |
+| ---------- | --------- | ---------- | ----------- | -------------- |
+| High       | Offensive | DriftHeavy | HotCold     | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -169,15 +203,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C05 — Capitaine Glisse
 
 **Rôle hub :** Quai / Riviera Gate (face Plage).  
 **Personnalité :** Touriste-escroc, amendes inventées, bronzette permanente.  
 **Punchline :** « Amende maritime : t’exister. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Offensive | RiskShortcuts | HotCold | Kart |
+
+| Aggression | ItemBias  | LineStyle     | Consistency | PreferredClass |
+| ---------- | --------- | ------------- | ----------- | -------------- |
+| Mid        | Offensive | RiskShortcuts | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -189,15 +227,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C06 — Dame Mousse
 
 **Rôle hub :** Parc / Canopée Gate (face Forêt).  
 **Personnalité :** Écolo passive-agressive, chuchote des menaces biodégradables.  
 **Punchline :** « Chut. Même ta défaite doit être biodégradable. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Moto |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Moto           |
+
 
 **Artwork (ref validée) :**
 
@@ -209,15 +251,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C07 — Mirage Max
 
 **Rôle hub :** Douane / Mirage Gate (face Désert).  
 **Personnalité :** Illusionniste arnaqueur, vend des mirages comme des facts.  
 **Punchline :** « Ce boost ? Un mirage. Celui-là aussi. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Chaos | RiskShortcuts | HotCold | Kart |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Mid        | Chaos    | RiskShortcuts | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -229,15 +275,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C08 — Coach Cime
 
 **Rôle hub :** Lodge / Cime Gate (face Montagne).  
 **Personnalité :** Coach toxique motivationnel, crie « lore » sur la douleur.  
 **Punchline :** « La douleur c’est du lore, champion. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | AirHungry | Steady | Plane |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| High       | Offensive | AirHungry | Steady      | Plane          |
+
 
 **Artwork (ref validée) :**
 
@@ -249,15 +299,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C09 — Flash Stud
 
 **Rôle hub :** Media plaza — journaliste sensation.  
 **Personnalité :** Chasse le crash, ignore la vérité si le titre claque.  
 **Punchline :** « Souris pour la une — ou pleure, on croppera. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | DriftHeavy | HotCold | Kart |
+
+| Aggression | ItemBias  | LineStyle  | Consistency | PreferredClass |
+| ---------- | --------- | ---------- | ----------- | -------------- |
+| High       | Offensive | DriftHeavy | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -269,15 +323,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C10 — Caméra Clac
 
 **Rôle hub :** Media plaza — cadreur fataliste.  
 **Personnalité :** A déjà filmé trop de DNFs ; parle en focale.  
 **Punchline :** « Si ça flou, c’est artistique. Si tu flou, c’est ta faute. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -289,15 +347,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C11 — Sponsor Or
 
 **Rôle hub :** Stands GP — corporel humain.  
 **Personnalité :** Sourit, contracte, menace poliment.  
 **Punchline :** « On aime les gagnants. Les autres, on les rebrand. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Balanced | Clean | Steady | Kart |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| Mid        | Balanced | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -309,15 +371,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C12 — Agent Négatif
 
 **Rôle hub :** Couloir mairie — PR de crise.  
 **Personnalité :** Spin doctor ; chaque défaite est une « opportunité narrative ».  
 **Punchline :** « On ne perd pas. On pivote. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Choker | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Choker      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -329,15 +395,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C13 — Flic Brique
 
 **Rôle hub :** Ring urbain — « sécurité » sélective.  
 **Personnalité :** Amendes pour les outsiders, tape amicale pour les VIP.  
 **Punchline :** « Limitation ? C’est toi la limitation. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| High       | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -349,15 +419,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C14 — Douanier Sable
 
 **Rôle hub :** Mirage Gate — taxes soleil.  
 **Personnalité :** Invente des taxes ; garde un tampon comme une arme.  
 **Punchline :** « Droits de passage : un rein. Ou un tour. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Chaos | RiskShortcuts | HotCold | Kart |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Mid        | Chaos    | RiskShortcuts | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -369,15 +443,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C15 — Pompier Mousse
 
 **Rôle hub :** Quai chantier — héros fatigué.  
 **Personnalité :** Éteint des feux et des egos ; soupire beaucoup.  
 **Punchline :** « Encore un drift en flammes. Classique. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -389,15 +467,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C16 — Bookie Zoom
 
 **Rôle hub :** Ruelle néon — cotes vivantes.  
 **Personnalité :** Parie contre toi à voix haute pour te tilt.  
 **Punchline :** « Cote 12:1 que tu rates le pad. Je suis généreux. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Chaos | RiskShortcuts | HotCold | Any |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Low        | Chaos    | RiskShortcuts | HotCold     | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -409,15 +491,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C17 — DJ Overclock
 
 **Rôle hub :** Ruelle néon — drop et drift.  
 **Personnalité :** La piste est une tracklist ; les rivals sont des samples.  
 **Punchline :** « Drop dans trois… deux… crash. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Chaos | DriftHeavy | HotCold | Moto |
+
+| Aggression | ItemBias | LineStyle  | Consistency | PreferredClass |
+| ---------- | -------- | ---------- | ----------- | -------------- |
+| High       | Chaos    | DriftHeavy | HotCold     | Moto           |
+
 
 **Artwork (ref validée) :**
 
@@ -429,15 +515,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C18 — Livreur Turbo
 
 **Rôle hub :** Plaza — scooters et jurons.  
 **Personnalité :** Timer toujours rouge ; te traite comme un client 1 étoile.  
 **Punchline :** « 5 minutes ou c’est gratuit. Toi, t’es en retard. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | RiskShortcuts | Choker | Moto |
+
+| Aggression | ItemBias  | LineStyle     | Consistency | PreferredClass |
+| ---------- | --------- | ------------- | ----------- | -------------- |
+| High       | Offensive | RiskShortcuts | Choker      | Moto           |
+
 
 **Artwork (ref validée) :**
 
@@ -449,15 +539,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C19 — Foodtruck Grease
 
 **Rôle hub :** Plaza — fritures et potins.  
 **Personnalité :** Nourrit le paddock ; sait tous les secrets via les sauces.  
 **Punchline :** « Extra fromage ? Extra karma. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -469,15 +563,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C20 — Immo Brick
 
 **Rôle hub :** Devant mairie — vend des plots.  
 **Personnalité :** Tout est « loft stud avec vue sur crash ».  
 **Punchline :** « Emplacement premium : pile sur la ligne de départ. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Balanced | Clean | Choker | Kart |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| Mid        | Balanced | Clean     | Choker      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -489,15 +587,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C21 — Influenceuse Lag
 
 **Rôle hub :** Boutique / selfies pads.  
 **Personnalité :** Stream la course ; le lag est toujours la faute des autres.  
 **Punchline :** « Like si tu crash. Subscribe si c’est moi. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Chaos | AirHungry | HotCold | Plane |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| Mid        | Chaos    | AirHungry | HotCold     | Plane          |
+
 
 **Artwork (ref validée) :**
 
@@ -509,15 +611,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C22 — Surfeur Concrete
 
 **Rôle hub :** Riviera Gate — résident plage en ville.  
 **Personnalité :** Zen toxique ; « laisse couler » pendant qu’il te bloque.  
 **Punchline :** « Waves before egos, bro. Surtout le tien. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Balanced | DriftHeavy | HotCold | Kart |
+
+| Aggression | ItemBias | LineStyle  | Consistency | PreferredClass |
+| ---------- | -------- | ---------- | ----------- | -------------- |
+| Mid        | Balanced | DriftHeavy | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -529,15 +635,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C23 — Scout Épine
 
 **Rôle hub :** Canopée Gate — badges et jugement.  
 **Personnalité :** Check-lists morales ; te retire des points invisibles.  
 **Punchline :** « Badge “fair-play” : refusé. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Moto |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Moto           |
+
 
 **Artwork (ref validée) :**
 
@@ -549,15 +659,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C24 — Prospecteur Rouille
 
 **Rôle hub :** Mirage Gate — cherche studs dans le bitume.  
 **Personnalité :** Parano des mirages ; fait confiance aux aimants.  
 **Punchline :** « Si ça brille, c’est un piège. Ou un jackpot. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Offensive | RiskShortcuts | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle     | Consistency | PreferredClass |
+| ---------- | --------- | ------------- | ----------- | -------------- |
+| Mid        | Offensive | RiskShortcuts | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -569,15 +683,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C25 — Moniteur Flocon
 
 **Rôle hub :** Cime Gate — forfaits et cris.  
 **Personnalité :** Ski-bro toxique ; « piste noire ou rien ».  
 **Punchline :** « Si t’as peur du vide, reste au hub. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | AirHungry | Steady | Plane |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| High       | Offensive | AirHungry | Steady      | Plane          |
+
 
 **Artwork (ref validée) :**
 
@@ -589,15 +707,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C26 — Mascotte Studdy
 
 **Rôle hub :** Pads coupe — costume GP officiel.  
 **Personnalité :** Trop joyeux ; voix aiguë ; cache une rage pure.  
 **Punchline :** « Studdy aime tout le monde ! (Surtout pas toi.) »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Chaos | RiskShortcuts | HotCold | Any |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Mid        | Chaos    | RiskShortcuts | HotCold     | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -609,15 +731,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C27 — Statue Vivante
 
 **Rôle hub :** Plaza fontaine — mime doré.  
 **Personnalité :** Ne parle qu’en poses ; insultes en tableau vivant.  
 **Punchline :** « … » (panneau : « SILENCE IS MY INSULT »).
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -629,15 +755,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C28 — Stagiaire Mairie
 
 **Rôle hub :** Mairie — café et burnout.  
 **Personnalité :** Fait tout le travail du Maire ; rêve de DNF pour lui.  
 **Punchline :** « J’ai imprimé tes excuses. En triple. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Balanced | Clean | Choker | Kart |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| Low        | Balanced | Clean     | Choker      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -649,15 +779,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C29 — Pilote Retraité
 
 **Rôle hub :** Garage Bolt — légende cynique.  
 **Personnalité :** « De mon temps » ; lignes parfaites, ego intact.  
 **Punchline :** « Les items, c’est pour ceux qui savent pas tourner. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -669,15 +803,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C30 — Chimiste Pneu
 
 **Rôle hub :** Arrière-garage — gommes illégales.  
 **Personnalité :** Scientifique fou du grip ; parle en composés.  
 **Punchline :** « J’ai inventé un pneu qui ment. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Chaos | DriftHeavy | HotCold | Kart |
+
+| Aggression | ItemBias | LineStyle  | Consistency | PreferredClass |
+| ---------- | -------- | ---------- | ----------- | -------------- |
+| Mid        | Chaos    | DriftHeavy | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -689,15 +827,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C31 — Voleuse Stud
 
 **Rôle hub :** Ruelle — pickpocket du paddock.  
 **Personnalité :** Charmeuse ; te pique un item « pour la science ».  
 **Punchline :** « C’était déjà à moi. Spirituellement. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | RiskShortcuts | HotCold | Moto |
+
+| Aggression | ItemBias  | LineStyle     | Consistency | PreferredClass |
+| ---------- | --------- | ------------- | ----------- | -------------- |
+| High       | Offensive | RiskShortcuts | HotCold     | Moto           |
+
 
 **Artwork (ref validée) :**
 
@@ -709,15 +851,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C32 — Curé Circuit
 
 **Rôle hub :** Petite chapelle brick — bénédictions payantes.  
 **Personnalité :** Absout les coupures de trajectoire contre un don.  
 **Punchline :** « Que le checkpoint soit avec toi. Amen. Ou pas. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Low        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -729,15 +875,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C33 — Banquier Abs
 
 **Rôle hub :** Tour finance — crédit crash.  
 **Personnalité :** Calcule ton DNF en taux d’intérêt.  
 **Punchline :** « Tu dois trois tours à la banque. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Offensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Offensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -749,15 +899,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C34 — Nurse Drift
 
 **Rôle hub :** Clinique paddock — premiers secours sarcasm.  
 **Personnalité :** Pansements et verdicts ; adore les beaux crashes.  
 **Punchline :** « Respire. Ou pas. J’ai des photos. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Defensive | Clean | Steady | Kart |
+
+| Aggression | ItemBias  | LineStyle | Consistency | PreferredClass |
+| ---------- | --------- | --------- | ----------- | -------------- |
+| Mid        | Defensive | Clean     | Steady      | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -769,15 +923,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C35 — Squatteur Rooftop
 
 **Rôle hub :** Toits plaza — accès illégal aux pads air.  
 **Personnalité :** Anti-maire ; graffs et lignes aériennes.  
 **Punchline :** « La skyline est à ceux qui grimpent. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Chaos | AirHungry | HotCold | Plane |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| High       | Chaos    | AirHungry | HotCold     | Plane          |
+
 
 **Artwork (ref validée) :**
 
@@ -789,15 +947,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C36 — Gamin Contrefaçon
 
 **Rôle hub :** Devant boutique Vinyle — merch fake.  
 **Personnalité :** Gamin insolent (adulte voice acting OK) ; revend des stickers « officiels ».  
 **Punchline :** « C’est du vrai faux. Différence ? Le prix. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | RiskShortcuts | HotCold | Kart |
+
+| Aggression | ItemBias  | LineStyle     | Consistency | PreferredClass |
+| ---------- | --------- | ------------- | ----------- | -------------- |
+| High       | Offensive | RiskShortcuts | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -809,15 +971,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C37 — Astronaute Fake
 
 **Rôle hub :** Aéroport jouet hub — « missions » GP.  
 **Personnalité :** Cosplay spatial ; n’a jamais quitté le sol.  
 **Punchline :** « Un petit pas pour moi, un DNF pour toi. »
 
+
 | Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Mid | Balanced | AirHungry | Steady | Plane |
+| ---------- | -------- | --------- | ----------- | -------------- |
+| Mid        | Balanced | AirHungry | Steady      | Plane          |
+
 
 **Artwork (ref validée) :**
 
@@ -829,15 +995,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C38 — Pirate Parking
 
 **Rôle hub :** Quais — rançon de places.  
 **Personnalité :** « Droit d’ancrage » sur les pads ; œil de verre.  
 **Punchline :** « Ta place ? C’était la mienne. Toujours. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | DriftHeavy | HotCold | Kart |
+
+| Aggression | ItemBias  | LineStyle  | Consistency | PreferredClass |
+| ---------- | --------- | ---------- | ----------- | -------------- |
+| High       | Offensive | DriftHeavy | HotCold     | Kart           |
+
 
 **Artwork (ref validée) :**
 
@@ -849,15 +1019,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C39 — Oracle GPS
 
 **Rôle hub :** Pads — voix off vivante.  
 **Personnalité :** Recalcule en boucle ; gaslight directionnel.  
 **Punchline :** « Dans 200 mètres, tourne… non, reviens. Non. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| Low | Chaos | RiskShortcuts | Choker | Any |
+
+| Aggression | ItemBias | LineStyle     | Consistency | PreferredClass |
+| ---------- | -------- | ------------- | ----------- | -------------- |
+| Low        | Chaos    | RiskShortcuts | Choker      | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -869,15 +1043,19 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 
 ---
 
+
+
 ## C40 — Rival Fantôme
 
 **Rôle hub :** Apparition tardive (post-acte 2+) — rumeur paddock.  
 **Personnalité :** Silhouette du « vrai » champion disparu ; parle peu, roule juste.  
 **Punchline :** « …Tu prends ma place. Rends-la. »
 
-| Aggression | ItemBias | LineStyle | Consistency | PreferredClass |
-| ---------- | -------- | --------- | ------------ | -------------- |
-| High | Offensive | DriftHeavy | Steady | Any |
+
+| Aggression | ItemBias  | LineStyle  | Consistency | PreferredClass |
+| ---------- | --------- | ---------- | ----------- | -------------- |
+| High       | Offensive | DriftHeavy | Steady      | Any            |
+
 
 **Artwork (ref validée) :**
 
@@ -888,6 +1066,8 @@ Tous les prompts EN ci-dessous sont préfixés mentalement par :
 **Prompt (reproductible) :** `LEGO-style minifigure haunting ghost rival racer named Rival Fantome, translucent frosted pale-blue ghost plastic body, black motorcycle helmet clear visor pale gaunt skeletal face print, matte grey racing vest over translucent limbs with dripping white number 00 and RIVAL text vapor flame patterns, holding cracked broken grey stone trophy base labeled ETERNAL SECOND, studio lighting, white seamless backdrop, eerie plastic toy sheen, game character concept art, no real brand logos`
 
 ---
+
+
 
 ## Sélection (post-playtest)
 
@@ -903,43 +1083,48 @@ Quand le roster ~20 est figé : mettre à jour [gdd.md](gdd.md) §7 et créer `c
 
 ## Historique
 
-| Version | Date | Note |
-| ------- | ---- | ---- |
-| 1.0 | 2026-10-23 | 40 candidats + tags conduite + descriptions minifig + prompts artwork |
-| 1.1 | 2026-10-23 | Roster ~20 figé **après playtests** (équilibrage), pas avant |
-| 1.2 | 2026-10-23 | C01 Bolt : artwork ref validée (`art/characters/c01-bolt-*.webp`), minifig + prompt alignés |
-| 1.3 | 2026-10-23 | Règle assets : images repo en WebP uniquement ([CONTRIBUTING.md](../../CONTRIBUTING.md)) |
-| 1.4 | 2026-10-23 | C02 Vinyle : artwork ref (`art/characters/c02-vinyle.webp`), minifig + prompt alignés |
-| 1.5 | 2026-10-23 | C03 Maire Brique-Dur : artwork ref (`art/characters/c03-maire-brique-dur.webp`) |
-| 1.6 | 2026-10-23 | C04 Hex : artwork ref (`art/characters/c04-hex.webp`) |
-| 1.7 | 2026-10-23 | C05 Capitaine Glisse : artwork ref (`art/characters/c05-capitaine-glisse.webp`) |
-| 1.8 | 2026-10-23 | C06 Dame Mousse : artwork ref (`art/characters/c06-dame-mousse.webp`) |
-| 1.9 | 2026-10-23 | C07 Mirage Max : artwork ref (`art/characters/c07-mirage-max.webp`) |
-| 1.10 | 2026-10-23 | C01 Bolt : **remplace** refs A/B → `art/characters/c01-bolt.webp` (barbe rousse) |
-| 1.11 | 2026-10-23 | C08 Coach Cime : artwork ref (`art/characters/c08-coach-cime.webp`) |
-| 1.12 | 2026-10-23 | C09 Flash Stud : artwork ref (`art/characters/c09-flash-stud.webp`) |
-| 1.13 | 2026-10-23 | C10 Caméra Clac : artwork ref (`art/characters/c10-camera-clac.webp`) |
-| 1.14 | 2026-10-23 | C11 Sponsor Or : artwork ref (`art/characters/c11-sponsor-or.webp`) |
-| 1.15 | 2026-10-23 | C12 Agent Négatif : artwork ref (`art/characters/c12-agent-negatif.webp`) |
-| 1.16 | 2026-10-23 | C13 Flic Brique : artwork ref (`art/characters/c13-flic-brique.webp`) |
-| 1.17 | 2026-10-23 | C14 Douanier Sable : artwork ref (`art/characters/c14-douanier-sable.webp`) |
-| 1.18 | 2026-10-23 | C15 Pompier Mousse : artwork ref (`art/characters/c15-pompier-mousse.webp`) |
-| 1.19 | 2026-10-23 | C16 Bookie Zoom : artwork ref (`art/characters/c16-bookie-zoom.webp`) |
-| 1.20 | 2026-10-23 | C17 DJ Overclock + C18 Livreur Turbo : artwork refs |
-| 1.21 | 2026-10-23 | C19 Foodtruck Grease : artwork ref (`art/characters/c19-foodtruck-grease.webp`) |
-| 1.22 | 2026-10-23 | C20 Immo Brick : artwork ref (`art/characters/c20-immo-brick.webp`) |
-| 1.23 | 2026-10-23 | C21 Influenceuse Lag : artwork ref (`art/characters/c21-influenceuse-lag.webp`) |
-| 1.24 | 2026-10-23 | C22 Surfeur Concrete : artwork ref (`art/characters/c22-surfeur-concrete.webp`) |
-| 1.25 | 2026-10-23 | C23 Scout Épine : artwork ref (`art/characters/c23-scout-epine.webp`) |
-| 1.26 | 2026-10-23 | C24 Prospecteur Rouille : artwork ref (`art/characters/c24-prospecteur-rouille.webp`) |
-| 1.27 | 2026-10-23 | C25 Moniteur Flocon + C26 Mascotte Studdy : artwork refs |
-| 1.28 | 2026-10-23 | C27 Statue Vivante : artwork ref (`art/characters/c27-statue-vivante.webp`) |
-| 1.29 | 2026-10-23 | C28 Stagiaire Mairie : artwork ref (`art/characters/c28-stagiaire-mairie.webp`) |
-| 1.30 | 2026-10-23 | C29 Pilote Retraité + C30 Chimiste Pneu : artwork refs |
-| 1.31 | 2026-10-23 | C31 Voleuse Stud + C32 Curé Circuit : artwork refs |
-| 1.32 | 2026-10-23 | C33 Banquier Abs : artwork ref (`art/characters/c33-banquier-abs.webp`) |
-| 1.33 | 2026-10-23 | C34 Nurse Drift + C35 Squatteur Rooftop : artwork refs |
-| 1.34 | 2026-10-23 | C36 Gamin Contrefaçon : artwork ref (`art/characters/c36-gamin-contrefacon.webp`) |
-| 1.35 | 2026-10-23 | C37 Astronaute Fake : artwork ref (`art/characters/c37-astronaute-fake.webp`) |
-| 1.36 | 2026-10-23 | C38 Pirate Parking : artwork ref (`art/characters/c38-pirate-parking.webp`) |
-| 1.37 | 2026-10-23 | C39 Oracle GPS + C40 Rival Fantôme : artwork refs — **40/40 refs complètes** |
+
+| Version | Date       | Note                                                                                        |
+| ------- | ---------- | ------------------------------------------------------------------------------------------- |
+| 1.0     | 2026-10-23 | 40 candidats + tags conduite + descriptions minifig + prompts artwork                       |
+| 1.1     | 2026-10-23 | Roster ~20 figé **après playtests** (équilibrage), pas avant                                |
+| 1.2     | 2026-10-23 | C01 Bolt : artwork ref validée (`art/characters/c01-bolt-*.webp`), minifig + prompt alignés |
+| 1.3     | 2026-10-23 | Règle assets : images repo en WebP uniquement ([CONTRIBUTING.md](../../CONTRIBUTING.md))    |
+| 1.4     | 2026-10-23 | C02 Vinyle : artwork ref (`art/characters/c02-vinyle.webp`), minifig + prompt alignés       |
+| 1.5     | 2026-10-23 | C03 Maire Brique-Dur : artwork ref (`art/characters/c03-maire-brique-dur.webp`)             |
+| 1.6     | 2026-10-23 | C04 Hex : artwork ref (`art/characters/c04-hex.webp`)                                       |
+| 1.7     | 2026-10-23 | C05 Capitaine Glisse : artwork ref (`art/characters/c05-capitaine-glisse.webp`)             |
+| 1.8     | 2026-10-23 | C06 Dame Mousse : artwork ref (`art/characters/c06-dame-mousse.webp`)                       |
+| 1.9     | 2026-10-23 | C07 Mirage Max : artwork ref (`art/characters/c07-mirage-max.webp`)                         |
+| 1.10    | 2026-10-23 | C01 Bolt : **remplace** refs A/B → `art/characters/c01-bolt.webp` (barbe rousse)            |
+| 1.11    | 2026-10-23 | C08 Coach Cime : artwork ref (`art/characters/c08-coach-cime.webp`)                         |
+| 1.12    | 2026-10-23 | C09 Flash Stud : artwork ref (`art/characters/c09-flash-stud.webp`)                         |
+| 1.13    | 2026-10-23 | C10 Caméra Clac : artwork ref (`art/characters/c10-camera-clac.webp`)                       |
+| 1.14    | 2026-10-23 | C11 Sponsor Or : artwork ref (`art/characters/c11-sponsor-or.webp`)                         |
+| 1.15    | 2026-10-23 | C12 Agent Négatif : artwork ref (`art/characters/c12-agent-negatif.webp`)                   |
+| 1.16    | 2026-10-23 | C13 Flic Brique : artwork ref (`art/characters/c13-flic-brique.webp`)                       |
+| 1.17    | 2026-10-23 | C14 Douanier Sable : artwork ref (`art/characters/c14-douanier-sable.webp`)                 |
+| 1.18    | 2026-10-23 | C15 Pompier Mousse : artwork ref (`art/characters/c15-pompier-mousse.webp`)                 |
+| 1.19    | 2026-10-23 | C16 Bookie Zoom : artwork ref (`art/characters/c16-bookie-zoom.webp`)                       |
+| 1.20    | 2026-10-23 | C17 DJ Overclock + C18 Livreur Turbo : artwork refs                                         |
+| 1.21    | 2026-10-23 | C19 Foodtruck Grease : artwork ref (`art/characters/c19-foodtruck-grease.webp`)             |
+| 1.22    | 2026-10-23 | C20 Immo Brick : artwork ref (`art/characters/c20-immo-brick.webp`)                         |
+| 1.23    | 2026-10-23 | C21 Influenceuse Lag : artwork ref (`art/characters/c21-influenceuse-lag.webp`)             |
+| 1.24    | 2026-10-23 | C22 Surfeur Concrete : artwork ref (`art/characters/c22-surfeur-concrete.webp`)             |
+| 1.25    | 2026-10-23 | C23 Scout Épine : artwork ref (`art/characters/c23-scout-epine.webp`)                       |
+| 1.26    | 2026-10-23 | C24 Prospecteur Rouille : artwork ref (`art/characters/c24-prospecteur-rouille.webp`)       |
+| 1.27    | 2026-10-23 | C25 Moniteur Flocon + C26 Mascotte Studdy : artwork refs                                    |
+| 1.28    | 2026-10-23 | C27 Statue Vivante : artwork ref (`art/characters/c27-statue-vivante.webp`)                 |
+| 1.29    | 2026-10-23 | C28 Stagiaire Mairie : artwork ref (`art/characters/c28-stagiaire-mairie.webp`)             |
+| 1.30    | 2026-10-23 | C29 Pilote Retraité + C30 Chimiste Pneu : artwork refs                                      |
+| 1.31    | 2026-10-23 | C31 Voleuse Stud + C32 Curé Circuit : artwork refs                                          |
+| 1.32    | 2026-10-23 | C33 Banquier Abs : artwork ref (`art/characters/c33-banquier-abs.webp`)                     |
+| 1.33    | 2026-10-23 | C34 Nurse Drift + C35 Squatteur Rooftop : artwork refs                                      |
+| 1.34    | 2026-10-23 | C36 Gamin Contrefaçon : artwork ref (`art/characters/c36-gamin-contrefacon.webp`)           |
+| 1.35    | 2026-10-23 | C37 Astronaute Fake : artwork ref (`art/characters/c37-astronaute-fake.webp`)               |
+| 1.36    | 2026-10-23 | C38 Pirate Parking : artwork ref (`art/characters/c38-pirate-parking.webp`)                 |
+| 1.37    | 2026-10-23 | C39 Oracle GPS + C40 Rival Fantôme : artwork refs — **40/40 refs complètes**                |
+| 1.38    | 2026-10-24 | C01 Bolt : modèle 3D exemple Meshy `art/characters/c01-bolt.glb` (~4,9 Mo)                  |
+| 1.39    | 2026-10-24 | Clarifié : GLB = moodboard ; canon = [minifig-gproc.md](minifig-gproc.md) / BRICK-MF1         |
+
+

@@ -28,14 +28,14 @@ Fait quand :
 
 ## BRICK-B3b — Pack level `race-test` (TS)
 
-Fichiers : `src/racer/levels/raceTest/` (pas SceneDD / `public/scenes/`). Plan blockout : [test-slice-blockout.md](../plans/test-slice-blockout.md) · tickets [BRICK-BO1](BRICK-BO1.md) BO1b/d.
+Fichiers : pack TS [`src/racer/levels/raceTest/`](../../src/racer/levels/raceTest/) (**pas** SceneDD / `public/scenes/`). Plan blockout : [test-slice-blockout.md](../plans/test-slice-blockout.md) · livré par [BRICK-BO1](BRICK-BO1.md) BO1b/d.
 
 Fait quand :
 
 - Level chargeable via SceneDirector avec **au minimum** : sol + murs, ligne start/finish, **≥3 checkpoints** verticaux (Y 0→8), grille 4 slots ([test-slice-plans.md](../design/test-slice-plans.md)).
 - Blockout aux cotes plans (médiane ~420 wu ; ovale court OK si BO1 a livré un stub jouable).
 - IDs stables documentés (`cp.*`, slots 0–3).
-- **Si BO1 déjà merge** : ticket surtout validation + gaps (waypoints IA, etc.) pour B3e.
+- **Si BO1 déjà merge** : ticket surtout validation + gaps (waypoints IA, etc.) pour B3e — le pack TS `raceTest` est la source, pas un JSON SceneDD.
 
 ## BRICK-B3c — Lap / Checkpoint system
 

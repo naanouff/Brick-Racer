@@ -39,8 +39,7 @@ export function pinLegoKartLitGraph(projectName: string): void {
 
 /**
  * Plate floor + tire look + IBL after level spawn.
- * Collision tuning comes from `createPhysicsSystem(KART_PHYSICS_PRESET)` at boot (physics 0.0.28
- * has no `applyKartPhysicsCollisionTuning` export).
+ * Collision tuning: `applyKartPhysicsCollisionTuning()` in bootEngine (mono physics alias).
  */
 export async function applyLegoKartSceneRuntime(engine: IEngineContext): Promise<void> {
   const eng = engine as Engine;
@@ -50,10 +49,10 @@ export async function applyLegoKartSceneRuntime(engine: IEngineContext): Promise
     LEGO_KART_TILE_FLOOR_OVERRIDES
   );
   applyKartRubberToMaterials(eng);
-  eng.renderer.iblIntensity = LEGO_KART_IBL_GAIN;
 
   const projectName = eng.director.getActiveProject()?.name ?? 'SandboxProject';
   pinLegoKartLitGraph(projectName);
   await eng.reloadActiveRenderGraph();
-  eng.renderer.iblIntensity = LEGO_KART_IBL_GAIN;
+  // Modest IBL after graph reload — high values cost fill without shadows.
+  eng.renderer.iblIntensity = Math.min(LEGO_KART_IBL_GAIN, 1.1);
 }

@@ -14,6 +14,7 @@
 | [levels.md](levels.md) | Circuits, boosts, items, specs SceneDD piste |
 | [test-slice.md](test-slice.md) | Slice hub+course « Brick Proving Grounds » + prompts art |
 | [test-slice-plans.md](test-slice-plans.md) | Plans cotés W3DTS (échelle minifig, AABB, piste) |
+| [minifig-gproc.md](minifig-gproc.md) | Pipeline avatar GPROC + recipes |
 | [../plans/roadmap.md](../plans/roadmap.md) | Séquence d’implémentation P0–P5 |
 
 Ce GDD **fixe** la structure monde (hub + 4 biomes), le mode aventure, le cast PNJ et les boucles. Les tables de pistes / items détaillées restent dans [levels.md](levels.md) ; en cas d’écart sur les **noms de biomes**, ce GDD fait foi pour le mode histoire.
@@ -287,6 +288,8 @@ Custom **garage** : cosmétiques + **au plus 1–2 soft stats** (éviter meta ha
 ## 11. Avatar minifig
 
 Boutique (Vinyle) : tête, torse, jambes, coiffe, accessoire. **Cosmétiques only** en course MVP (pas d’avantage stats).
+
+**Pipeline canon :** génération **GPROC** + recettes JSON — [minifig-gproc.md](minifig-gproc.md) · sprint [BRICK-MF1](../sprints/BRICK-MF1.md). Les GLB Meshy éventuels sont moodboard uniquement.
 
 ---
 

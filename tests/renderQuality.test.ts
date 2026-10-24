@@ -9,12 +9,14 @@ describe('render quality', () => {
     expect(resolveRenderQuality('?render=showcase')).toBe('showcase');
   });
 
-  it('fast graph has no costly passes', () => {
+  it('fast graph has no costly post passes', () => {
     const graph = JSON.parse(readFileSync(`public${litRenderGraphPath('fast')}`, 'utf8')) as {
-      passes: Array<{ name: string; viewType?: string; shaderPath?: string }>;
+      passes: Array<{ name: string; viewType?: string; shaderPath?: string; builtInPipeline?: string }>;
     };
     expect(graph.passes.some((p) => p.viewType === 'shadow')).toBe(false);
+    expect(graph.passes.some((p) => p.builtInPipeline === 'skybox')).toBe(true);
     const shaders = graph.passes.map((p) => p.shaderPath ?? '').join(' ');
     expect(shaders).not.toMatch(/hbao|ssr|bloom|blur|bright|fxaa|dof/i);
+    expect(shaders).toMatch(/tonemapping/);
   });
 });
