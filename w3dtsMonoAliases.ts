@@ -18,6 +18,8 @@ const PACKAGES: Array<[string, string]> = [
   ['@naanouff/w3dts-gproc', 'gproc/src/index.ts'],
   // npm 0.0.28 lacks yawAssist / uprightStiffness / antiWheelie / applyKartPhysicsCollisionTuning.
   ['@naanouff/w3dts-physics', 'physics/src/index.ts'],
+  // npm 0.0.21 lacks HID gamepad (INP-G) — bindings + writeGamepadHardware.
+  ['@naanouff/w3dts-input', 'input/src/index.ts'],
 ];
 
 export function isW3dtsMonoAvailable(): boolean {

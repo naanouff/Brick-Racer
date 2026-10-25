@@ -14,6 +14,8 @@ export type ArcadeKartState = {
   drifting: boolean;
   driftDir: number;
   driftTime: number;
+  /** Countdown while hop may leave wheels unloaded without ending drift. */
+  hopAirTimer: number;
   boostTimer: number;
   grounded: boolean;
   speed: number;
@@ -34,6 +36,7 @@ export function createArcadeKartState(
     drifting: false,
     driftDir: 0,
     driftTime: 0,
+    hopAirTimer: 0,
     boostTimer: 0,
     grounded: false,
     speed: 0,

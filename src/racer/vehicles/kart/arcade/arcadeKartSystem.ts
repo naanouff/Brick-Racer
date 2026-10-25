@@ -116,6 +116,7 @@ export function createArcadeKartSystem(options: ArcadeKartSystemOptions): System
       vehicle.steerInput = 0;
       st.drifting = false;
       st.driftTime = 0;
+      st.hopAirTimer = 0;
       st.boostTimer = 0;
       st.insideTriggers.clear();
     }
@@ -170,7 +171,10 @@ export function createArcadeKartSystem(options: ArcadeKartSystemOptions): System
     if (st.boostTimer > 0) st.boostTimer = Math.max(0, st.boostTimer - stepDt);
     const boosting = st.boostTimer > 0;
 
-    if (st.grounded) {
+    // During hop grace, keep arcade planar drive so the hop is a pop not a wall-clear flight.
+    const arcadeDrive = st.grounded || (st.drifting && st.hopAirTimer > 0);
+
+    if (arcadeDrive) {
       vLong = stepLongitudinal(vLong, throttle, st.profile, boosting, stepDt);
       const grip = st.drifting ? st.profile.driftGrip : st.profile.grip;
       vLat = stepLateral(vLat, grip, stepDt);
@@ -188,7 +192,17 @@ export function createArcadeKartSystem(options: ArcadeKartSystemOptions): System
 
       vec3.scale(_v, _fwd, vLong);
       vec3.scaleAndAdd(_v, _v, _right, vLat);
-      _v[1] = vUp + hopVy;
+      // Hop: lift pose (beat suspension) + upward impulse once.
+      if (hopVy > 0) {
+        transform.position[1] += st.profile.driftHopLift;
+        transform.updateLocalTransform();
+        _v[1] = Math.max(vUp, 0) + hopVy;
+        body.wakeUp?.();
+      } else if (st.grounded) {
+        _v[1] = vUp;
+      } else {
+        _v[1] = vUp - G * st.profile.airGravityMul * stepDt;
+      }
       vec3.copy(body.velocity, _v);
       body.angularVelocity[1] = 0;
     } else {

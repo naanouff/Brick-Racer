@@ -52,7 +52,7 @@ flowchart TB
 **Contrat commun** (sous `src/racer/vehicles/`, à introduire au plus tard à VP1) :
 
 - `mount(engine, canvas)` / `unmount()`
-- `bindInput(gameplayMap)` — WASD + gamepad ; reset session (X)
+- `bindInput(gameplayMap)` — WASD + **gamepad HID** (w3dts `INP-G`, [w3dts-input.md](../references/w3dts-input.md)) ; reset session (X clavier — pad à étendre)
 - `getChaseTarget()` — entité châssis pour `createChaseCameraSystem`
 - `resetSession()` — respawn + clear vélocité
 - Échelle bible : **1 wu = 1 m** ; kart L 2,00 × l 1,20 × h 0,90 ([test-slice-plans.md](../design/test-slice-plans.md))
@@ -197,3 +197,4 @@ flowchart LR
 | ------- | ---- | ---- |
 | 1.0 | 2026-10-23 | Création : ladder VP0–VP3, source mono `w3dts_repos/w3dts`, liens B2 / roadmap |
 | 1.1 | 2026-10-23 | Renvois architecture.md + BRICK-B3 (P1) |
+| 1.2 | 2026-10-25 | Gamepad HID w3dts `INP-G` disponible — [w3dts-input.md](../references/w3dts-input.md) |

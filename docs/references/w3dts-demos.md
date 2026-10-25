@@ -125,3 +125,7 @@ Déjà présentes : `core`, `physics`, `gproc`, `input`, `logger`, `loader-hdr`,
 Host kart Brick Racer : level TypeScript `sandboxKart` (pas de SceneDD) — [lego-kart-host.md](../plans/lego-kart-host.md). Mono : `w3dts-scripts` via alias.
 
 Plus tard (motocross / pistes) : `w3dts-terrain`, `fastnoise-lite`.
+
+## Input / Gamepad
+
+**Gamepad HID** livré dans w3dts (`INP-G`, PR #285) — voir [w3dts-input.md](w3dts-input.md). Brick Racer (MK/DKR) : stick X braquer, A/B throttle, L1/R1 drift.

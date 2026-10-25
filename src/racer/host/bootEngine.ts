@@ -54,6 +54,7 @@ import { SceneDirector } from '../scene/SceneDirector';
 import { SessionFlow } from '../session/SessionFlow';
 import { fitCanvasBuffer } from './canvasResolution';
 import { ensureGpuInitialized } from './ensureGpuInitialized';
+import { installHidGamepadBridge } from './hidGamepadBridge';
 import { NullModelLoader } from './nullModelLoader';
 
 export type BootEngineResult = {
@@ -103,6 +104,8 @@ export async function bootEngine(
 
   engine.setInputTarget(canvas);
   canvas.focus({ preventScroll: true });
+  // HID gamepad: mono input (INP-G) + poll bridge until npm core catches up.
+  installHidGamepadBridge(engine);
   // Racing target ≥60 fps: no shadow maps for now (re-enable with showcase later).
   engine.renderer.shadowsEnabled = false;
 

@@ -37,7 +37,8 @@ const CZ = 45;
 const RX = 80;
 const RZ = 45;
 const TRACK_HALF = 6; // width 12
-const WALL_H = 0.66;
+/** Tall enough that the MK drift hop (~0.2 m) cannot clear the barrier AABB. */
+const WALL_H = 1.25;
 const WALL_VISUAL_T = 0.4;
 const WALL_COLLIDER_T = 1.0;
 /** Wall / ribbon segments around the oval (full geometry). */

@@ -25,6 +25,7 @@
 | [plans/blockout-physics.md](plans/blockout-physics.md) | Plan physique / collisions blockout (BO1f) |
 | [plans/blockout-arcade-kart.md](plans/blockout-arcade-kart.md) | Plan kart arcade + texture debug (BO1g) |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
+| [references/w3dts-input.md](references/w3dts-input.md) | Input w3dts — Gamepad HID (`INP-G`) |
 | [sprints/BRICK-B1.md](sprints/BRICK-B1.md) | Sprint workspace (fait) |
 | [sprints/BRICK-B2.md](sprints/BRICK-B2.md) | Sprint host Lego Kart |
 | [sprints/BRICK-BO1.md](sprints/BRICK-BO1.md) | Sprint blockout Proving Grounds |

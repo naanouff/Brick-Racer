@@ -140,7 +140,7 @@ export class SceneDirector {
 
       this.engine.logger.info(
         LogChannel.DataLifecycle,
-        `[BrickRacer] Level "${id}" loaded. WASD drive · Space drift · X reset.`
+        `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`
       );
     } finally {
       this.loading = false;

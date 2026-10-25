@@ -291,6 +291,14 @@ Toute ligne longue : relecture [tone.md](tone.md).
 | Naviguer listes | Flèches / stick | D-pad / stick |
 | Utiliser item (course) | `Shift` ou `F` (figer à l’impl) | X / RB |
 
+Course (actions w3dts `gameplay`, HID livré `INP-G` — [w3dts-input.md](../references/w3dts-input.md)) :
+
+| Action | Clavier | Gamepad |
+| ------ | ------- | ------- |
+| Accélérer / freiner / braquer | WASD | A / B / stick X (MK/DKR) |
+| Drift (arcade) | Espace | A |
+| Reset spawn | X | *(pas encore lié en V1 asset)* |
+
 Focus visible obligatoire sur overlays (outline stud-yellow 2 px).
 
 ---
