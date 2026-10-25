@@ -6,6 +6,7 @@
 import {
   CameraComponent,
   GameCameraControllerComponent,
+  NameComponent,
   type ComponentClass,
   type IComponent,
   type System,
@@ -35,6 +36,8 @@ export function createArcadeCameraSystem(): System {
       const cam = comps[0] as CameraComponent;
       const ctrl = comps[1] as GameCameraControllerComponent;
       if (ctrl.mode !== 'chase') continue;
+      const named = world.getComponent(entity, NameComponent);
+      if (named?.name === 'FootChaseCamera') continue;
 
       const distNow = ctrl.chaseDistance ?? 7.2;
       if (!BASE_FOV_BY_ENTITY.has(entity)) {

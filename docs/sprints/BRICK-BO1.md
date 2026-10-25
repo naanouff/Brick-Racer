@@ -99,6 +99,7 @@ Fait quand :
 
 - Lap / CP scoring, items / IA → BRICK-B3 (B3c–B3e). Boosts sol / anneaux **arcade** livrés en BO1g.
 - Transition pad → race réelle, scooter hub → P2.
+- Marche + échange kart / moto / avion sur `city-test` → [BRICK-H1](BRICK-H1.md).
 - Agrandissement piste (tour ~20 s @ 100 cc).
 - Art final, SceneDD, multi.
 

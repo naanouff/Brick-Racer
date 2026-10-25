@@ -9,6 +9,7 @@ import {
   SUSPENSION_ONLY_VEHICLE,
 } from '../../vehicles/kart/arcade/arcadeKartProfile';
 import { sandboxKartSpec } from '../sandboxKart/sandboxKartSpec';
+import { MASK_CHASSIS } from './collisionGroups';
 import type {
   GraphRef,
   LevelComponent,
@@ -235,6 +236,8 @@ export function createBlockoutKartEntities(opts: {
   yawY?: number;
   /** When false, parked display prop (no physics / camera). Default true. */
   playable?: boolean;
+  /** When false, the capsule driver is hidden (hub minifig replaces it). Default true. */
+  showDriver?: boolean;
 }): LevelEntity[] {
   const yaw = quatYawY(opts.yawY ?? 0);
   const playable = opts.playable ?? true;
@@ -276,7 +279,7 @@ export function createBlockoutKartEntities(opts: {
             size: [0.65, 0.18, 0.95],
             offset: [0, 0.12, 0],
             collisionGroup: 1,
-            collisionMask: 12,
+            collisionMask: MASK_CHASSIS,
           },
           {
             type: 'vehicle',
@@ -323,6 +326,10 @@ export function createBlockoutKartEntities(opts: {
     [0, 0.55, -0.1],
     [0.85, 0.85, 0.85]
   );
+  if (opts.showDriver === false) {
+    const rend = driver.components.find((c) => c.type === 'renderable');
+    if (rend && rend.type === 'renderable') rend.visible = false;
+  }
 
   const wheels = hardpoints.map((hp) =>
     childRenderable(

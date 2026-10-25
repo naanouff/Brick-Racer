@@ -14,13 +14,21 @@ import {
   type World,
 } from '@naanouff/w3dts-core';
 import { LogChannel } from '@naanouff/w3dts-logger';
-import { buildCityTestTriggers, CITY_TEST_SPAWN } from '../levels/cityTest';
+import { buildCityTestTriggers, CITY_HUB_SPAWNS, CITY_TEST_SPAWN } from '../levels/cityTest';
 import { buildRaceTestTriggers, raceSpawnForVehicle } from '../levels/raceTest';
 import { getLevelSpec, isLevelId, type LevelId } from '../levels/registry';
 import { spawnLevel, type LevelSpawnPose, type LevelTrigger } from '../levels/shared';
 import { setArcadeKartLevelContext } from '../vehicles/kart/arcade';
 import { applyLegoKartSceneRuntime } from '../vehicles/kart/legoKartSceneRuntime';
 import { resolveVehicleKind } from '../vehicles/selectVehicle';
+import { ensureGprocSystem, levelNeedsGproc } from '../host/ensureGproc';
+import {
+  activateHubSession,
+  deactivateHubSession,
+  FOOT_CHASE_CAMERA_NAME,
+  getHubPossession,
+  isHubActive,
+} from '../hub/hubPossession';
 
 function arcadeContextForLevel(id: LevelId): {
   spawn: LevelSpawnPose;
@@ -51,9 +59,18 @@ const CHASE_CAM_BY_VEHICLE = {
   plane: 'PlaneChaseCamera',
 } as const;
 
-function rebindChaseCamera(world: World, engine: IEngineContext): void {
+function activeChaseName(): string {
+  if (isHubActive()) {
+    const mode = getHubPossession();
+    if (mode === 'foot') return FOOT_CHASE_CAMERA_NAME;
+    return CHASE_CAM_BY_VEHICLE[mode];
+  }
+  return CHASE_CAM_BY_VEHICLE[resolveVehicleKind()];
+}
+
+export function rebindActiveChaseCamera(world: World, engine: IEngineContext): void {
   const full = engine as Engine;
-  const chaseName = CHASE_CAM_BY_VEHICLE[resolveVehicleKind()];
+  const chaseName = activeChaseName();
   const chaseId = findEntityByName(world, chaseName);
   if (chaseId === null) return;
   const camera = world.getComponent(chaseId, CameraComponent);
@@ -68,6 +85,12 @@ function rebindChaseCamera(world: World, engine: IEngineContext): void {
 
   camera.isActive = true;
   camera.isMain = true;
+  // requestResize ne met à jour que la caméra éditeur courante. Une caméra
+  // jamais liée garde aspect = 1 et étire le buffer 16:9.
+  const canvas = full.webGPUContext.canvas;
+  if (canvas.width > 0 && canvas.height > 0) {
+    camera.aspect = canvas.width / canvas.height;
+  }
   full.setGameCameraEntity(chaseId);
   full.setEditorCameraEntity(chaseId);
   full.setGameViewCameraPreference('chase');
@@ -125,7 +148,10 @@ export class SceneDirector {
       this.activeId = id;
 
       await applyLegoKartSceneRuntime(this.engine);
-      rebindChaseCamera(this.engine.ecsWorld, this.engine);
+      if (id === 'city-test') activateHubSession(CITY_HUB_SPAWNS);
+      else deactivateHubSession();
+      if (levelNeedsGproc(id)) ensureGprocSystem(this.engine);
+      rebindActiveChaseCamera(this.engine.ecsWorld, this.engine);
       const arcade = arcadeContextForLevel(id);
       setArcadeKartLevelContext(arcade.spawn, arcade.triggers);
 
@@ -140,7 +166,9 @@ export class SceneDirector {
 
       this.engine.logger.info(
         LogChannel.DataLifecycle,
-        `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`
+        id === 'city-test'
+          ? `[BrickRacer] Level "${id}" loaded. ZQSD caméra · souris / stick droit · F · X · pad Y.`
+          : `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`
       );
     } finally {
       this.loading = false;

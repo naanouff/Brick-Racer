@@ -105,6 +105,13 @@ export type LevelComponent =
       chaseFocusSmoothXZ?: number;
       chaseFocusSmoothY?: number;
       chaseYawSmooth?: number;
+      /** Minifig lab orbit. Ignored by blockout chase cameras. */
+      orbitalMinDistance?: number;
+      orbitalMaxDistance?: number;
+      orbitalZoomSensitivity?: number;
+      orbitalRotateSpeed?: number;
+      orbitalDamping?: number;
+      orbitalLeftMouseMode?: 'rotate' | 'pan' | 'zoom';
     };
 
 export type LevelEntity = {

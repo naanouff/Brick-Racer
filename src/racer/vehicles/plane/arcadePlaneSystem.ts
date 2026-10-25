@@ -41,6 +41,8 @@ export type PlaneInput = {
 
 export type ArcadePlaneSystemOptions = {
   getInput: () => PlaneInput;
+  /** When false, the parked plane is left to physics. Default: always simulate. */
+  shouldSimulate?: () => boolean;
 };
 
 function resolvePlane(world: World): Entity | null {
@@ -70,6 +72,7 @@ export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): Syst
   return function arcadePlaneSystem(world: World, dt: number): void {
     const stepDt = clamp(dt, 0, 0.05);
     if (stepDt <= 1e-8) return;
+    if (options.shouldSimulate && !options.shouldSimulate()) return;
 
     const rt = getArcadeKartRuntime() ?? initArcadeKartRuntime();
     const st = rt.state;

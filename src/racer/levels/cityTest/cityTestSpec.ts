@@ -10,12 +10,25 @@
  */
 
 // Leaf imports only — avoid shared barrel → spawnLevel → w3dts-scripts (CI without mono).
+import { assembleMinifigEntities } from '../../minifig/assembleMinifig';
+import { MINIFIG_GPROC_GRAPHS } from '../../minifig/gprocGraphs';
+import { BOLT_RECIPE } from '../../minifig/recipes/c01-bolt';
+import {
+  MINIFIG_PLASTIC_SHADER_ID,
+  MINIFIG_PLASTIC_SHADER_URL,
+} from '../../minifig/plasticMaterial';
+import { FOOT_CHASE_CAMERA_NAME, HUB_AVATAR_NAME } from '../../hub/hubPossession';
 import {
   BLOCKOUT_PRIMITIVES,
   BLOCKOUT_SHADER_GRAPHS,
   blockoutMaterials,
   makeSunEntity,
 } from '../shared/blockoutKit';
+import {
+  AVATAR_CENTER_Y,
+  AVATAR_HALF_EXTENTS,
+  GROUP_AVATAR,
+} from '../shared/collisionGroups';
 import {
   BLOCKOUT_KART_SPAWN_Y,
   blockoutKartGraphRefs,
@@ -24,6 +37,12 @@ import {
 import type { LevelEntity, LevelSpec } from '../shared/levelTypes';
 import type { LevelSpawnPose, LevelTrigger } from '../shared/levelTriggers';
 import { flushRampCenterY, quatPitchX, quatYawY, spawnStaticBox } from '../shared/staticBox';
+import { BLOCKOUT_MOTO_SPAWN_Y, createBlockoutMotoEntities } from '../../vehicles/moto/blockoutMotoKit';
+import {
+  BLOCKOUT_PLANE_SPAWN_Y,
+  createBlockoutPlaneEntities,
+} from '../../vehicles/plane/blockoutPlaneKit';
+import type { VehicleKind } from '../../vehicles/selectVehicle';
 
 export const CITY_TEST_STABLE_IDS = [
   'poi.garage',
@@ -69,6 +88,19 @@ function boxFromAabb(
 export const CITY_TEST_SPAWN: LevelSpawnPose = {
   position: [20, BLOCKOUT_KART_SPAWN_Y, 14],
   rotation: quatYawY(0),
+};
+
+/** Parked row on z=14: moto west of the kart, plane east (wing half 2 m stays clear of x=28). */
+export const CITY_HUB_SPAWNS: Record<VehicleKind, LevelSpawnPose> = {
+  kart: CITY_TEST_SPAWN,
+  moto: {
+    position: [14.5, BLOCKOUT_MOTO_SPAWN_Y, 14],
+    rotation: quatYawY(0),
+  },
+  plane: {
+    position: [24.5, BLOCKOUT_PLANE_SPAWN_Y, 14],
+    rotation: quatYawY(0),
+  },
 };
 
 export function buildCityTestTriggers(): LevelTrigger[] {
@@ -234,11 +266,89 @@ export function buildCityTestSpec(): LevelSpec {
     }
   );
 
+  const assembled = assembleMinifigEntities(BOLT_RECIPE, { origin: [0, 0, 0] });
+  const minifigRoot = assembled.entities.find((e) => e.id === assembled.rootId);
+  if (minifigRoot) {
+    minifigRoot.parentId = HUB_AVATAR_NAME;
+    minifigRoot.transform.position = [0, -AVATAR_CENTER_Y, 0];
+  }
+
   entities.push(
+    {
+      id: HUB_AVATAR_NAME,
+      name: HUB_AVATAR_NAME,
+      parentId: null,
+      transform: {
+        position: [CITY_TEST_SPAWN.position[0], AVATAR_CENTER_Y, CITY_TEST_SPAWN.position[2]],
+        rotation: [0, 0, 0, 1],
+        scale: [1, 1, 1],
+      },
+      components: [
+        {
+          type: 'rigidBody',
+          mass: 20,
+          useGravity: false,
+          isKinematic: true,
+          drag: 1,
+          angularDrag: 1,
+          restitution: 0,
+          friction: 0.6,
+        },
+        {
+          type: 'collider',
+          shape: 'box',
+          size: [AVATAR_HALF_EXTENTS[0], AVATAR_HALF_EXTENTS[1], AVATAR_HALF_EXTENTS[2]],
+          collisionGroup: GROUP_AVATAR,
+          collisionMask: 0,
+        },
+      ],
+    },
+    ...assembled.entities,
     ...createBlockoutKartEntities({
-      position: [...CITY_TEST_SPAWN.position],
+      position: [...CITY_HUB_SPAWNS.kart.position],
       yawY: 0,
-    })
+      playable: true,
+      showDriver: false,
+    }),
+    ...createBlockoutMotoEntities({
+      position: [...CITY_HUB_SPAWNS.moto.position],
+      yawY: 0,
+      playable: true,
+      showDriver: false,
+    }),
+    ...createBlockoutPlaneEntities({
+      position: [...CITY_HUB_SPAWNS.plane.position],
+      yawY: 0,
+      playable: true,
+      showDriver: false,
+    }),
+    {
+      id: FOOT_CHASE_CAMERA_NAME,
+      name: FOOT_CHASE_CAMERA_NAME,
+      parentId: null,
+      transform: {
+        position: [CITY_TEST_SPAWN.position[0], AVATAR_CENTER_Y + 2, CITY_TEST_SPAWN.position[2] - 4],
+        rotation: [0, 0, 0, 1],
+        scale: [1, 1, 1],
+      },
+      components: [
+        {
+          type: 'camera',
+          fov: 1.05,
+          near: 0.15,
+          far: 400,
+          isPrimary: false,
+          isMain: false,
+          firstPersonEyeOffsetY: 0,
+        },
+        {
+          // Orbite libre (souris / stick droit), pas une chase véhicule.
+          type: 'cameraController',
+          mode: 'none',
+          applyOn: 'play',
+        },
+      ],
+    }
   );
 
   const shaderById = new Map(
@@ -247,10 +357,13 @@ export function buildCityTestSpec(): LevelSpec {
 
   return {
     id: 'city-test',
-    shaderGraphs: [...shaderById.values()],
-    geometryGraphs: kart.geometryGraphs,
+    shaderGraphs: [
+      ...shaderById.values(),
+      { id: MINIFIG_PLASTIC_SHADER_ID, url: MINIFIG_PLASTIC_SHADER_URL },
+    ],
+    geometryGraphs: [...kart.geometryGraphs, ...MINIFIG_GPROC_GRAPHS],
     scriptGraphs: kart.scriptGraphs,
-    materials: { ...blockoutMaterials() },
+    materials: { ...blockoutMaterials(), ...assembled.materials },
     primitives: { ...BLOCKOUT_PRIMITIVES },
     entities,
   };

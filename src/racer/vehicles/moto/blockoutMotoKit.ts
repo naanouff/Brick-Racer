@@ -3,6 +3,7 @@
  * @description ~2 m blockout moto (2-wheel suspension + arcade when playable).
  */
 
+import { MASK_CHASSIS } from '../../levels/shared/collisionGroups';
 import { SUSPENSION_ONLY_VEHICLE } from '../kart/arcade/arcadeKartProfile';
 import type { LevelEntity, Quat, Vec3 } from '../../levels/shared/levelTypes';
 import { quatYawY } from '../../levels/shared/staticBox';
@@ -67,6 +68,8 @@ export function createBlockoutMotoEntities(opts: {
   position: Vec3;
   yawY?: number;
   playable?: boolean;
+  /** When false, the capsule driver is hidden. Default true. */
+  showDriver?: boolean;
 }): LevelEntity[] {
   const yaw = quatYawY(opts.yawY ?? 0);
   const playable = opts.playable ?? false;
@@ -99,7 +102,7 @@ export function createBlockoutMotoEntities(opts: {
             size: [0.22, 0.2, 0.75],
             offset: [0, 0.2, 0],
             collisionGroup: 1,
-            collisionMask: 12,
+            collisionMask: MASK_CHASSIS,
           },
           {
             type: 'vehicle',
@@ -114,6 +117,11 @@ export function createBlockoutMotoEntities(opts: {
   };
 
   const entities: LevelEntity[] = [chassis, ...VISUALS(id)];
+  if (opts.showDriver === false) {
+    const driver = entities.find((e) => e.id === 'MotoDriver');
+    const rend = driver?.components.find((c) => c.type === 'renderable');
+    if (rend && rend.type === 'renderable') rend.visible = false;
+  }
 
   if (playable) {
     entities.push({

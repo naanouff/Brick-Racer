@@ -24,11 +24,13 @@
 | [plans/test-slice-blockout.md](plans/test-slice-blockout.md) | Plan blockout city-test / race-test |
 | [plans/blockout-physics.md](plans/blockout-physics.md) | Plan physique / collisions blockout (BO1f) |
 | [plans/blockout-arcade-kart.md](plans/blockout-arcade-kart.md) | Plan kart arcade + texture debug (BO1g) |
+| [plans/hub-on-foot.md](plans/hub-on-foot.md) | Plan hub blockout : pied + échange de véhicule (H1) |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
 | [references/w3dts-input.md](references/w3dts-input.md) | Input w3dts — Gamepad HID (`INP-G`) |
 | [sprints/BRICK-B1.md](sprints/BRICK-B1.md) | Sprint workspace (fait) |
 | [sprints/BRICK-B2.md](sprints/BRICK-B2.md) | Sprint host Lego Kart |
 | [sprints/BRICK-BO1.md](sprints/BRICK-BO1.md) | Sprint blockout Proving Grounds |
+| [sprints/BRICK-H1.md](sprints/BRICK-H1.md) | Sprint hub blockout : pied + échange kart / moto / avion |
 | [sprints/BRICK-B3.md](sprints/BRICK-B3.md) | Sprint boucle course solo (P1) |
 | [sprints/BRICK-UIM1.md](sprints/BRICK-UIM1.md) | Sprint maquettes HTML `docs/mocup` |
 | [sprints/BRICK-UI1.md](sprints/BRICK-UI1.md) | Sprint coque React UI écrans MVP |

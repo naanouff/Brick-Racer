@@ -42,6 +42,11 @@ export type ArcadeKartSystemOptions = {
   };
   /** Prefer this chassis name (KartChassis / MotoChassis). */
   chassisName?: string;
+  /**
+   * Live chassis. `null` skips the system (on foot, or plane).
+   * When set, overrides `chassisName`.
+   */
+  getChassisName?: () => string | null;
 };
 
 function getTf(world: World, entity: Entity): TransformComponent | undefined {
@@ -63,6 +68,7 @@ function resolveChassis(world: World, preferredName: string): Entity | null {
 
 export function createArcadeKartSystem(options: ArcadeKartSystemOptions): System {
   let chassis: Entity | null = null;
+  let boundName: string | null = null;
 
   return function arcadeKartSystem(world: World, dt: number): void {
     const stepDt = clamp(dt, 0, 0.05);
@@ -71,13 +77,17 @@ export function createArcadeKartSystem(options: ArcadeKartSystemOptions): System
     const rt = getArcadeKartRuntime() ?? initArcadeKartRuntime();
     const st = rt.state;
 
-    const wantName =
-      options.chassisName ??
-      VEHICLE_CHASSIS_NAME[resolveVehicleKind(typeof window !== 'undefined' ? window.location.search : '')];
+    const wantName = options.getChassisName
+      ? options.getChassisName()
+      : (options.chassisName ??
+        VEHICLE_CHASSIS_NAME[resolveVehicleKind(typeof window !== 'undefined' ? window.location.search : '')]);
     // Plane uses arcadePlaneSystem — skip ground arcade when no wheeled chassis selected.
-    if (wantName === 'PlaneChassis') return;
+    if (!wantName || wantName === 'PlaneChassis') return;
 
-    if (chassis == null) chassis = resolveChassis(world, wantName);
+    if (boundName !== wantName || chassis == null) {
+      chassis = resolveChassis(world, wantName);
+      boundName = wantName;
+    }
     if (chassis == null) return;
 
     const transform = getTf(world, chassis);
