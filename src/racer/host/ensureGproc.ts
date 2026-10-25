@@ -16,6 +16,7 @@ export function ensureGprocSystem(engine: Engine): void {
   if (installed) return;
   const device = engine.webGPUContext?.device;
   if (!device) return;
-  engine.scheduler.addSystem(createGProcSystem(device) as System);
+  // gproc types against core 0.0.36; the app pins 0.0.37. A direct cast fails tsc in CI.
+  engine.scheduler.addSystem(createGProcSystem(device) as unknown as System);
   installed = true;
 }
