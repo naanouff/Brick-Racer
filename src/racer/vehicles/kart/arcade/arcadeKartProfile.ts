@@ -32,8 +32,15 @@ export type ArcadeKartProfile = {
   /** Mini-turbo durations by charge level. */
   miniTurboBlue: number;
   miniTurboOrange: number;
-  /** Drift hop up velocity. */
+  /** Drift hop up velocity (m/s) — MK-style pop on drift start. */
   driftHop: number;
+  /** Instant Y lift (m) so suspension rays miss for a beat (else hop is invisible). */
+  driftHopLift: number;
+  /**
+   * Keep drift alive this long after hop leaves the ground (s).
+   * Without it, the hop immediately cancels drift via !grounded.
+   */
+  driftHopAirGrace: number;
   /** Min speed to start drift. */
   driftMinSpeed: number;
   /** Charge thresholds (s). */
@@ -57,8 +64,11 @@ const BASE: Omit<ArcadeKartProfile, 'cc' | 'maxSpeed' | 'yawSpeedMul'> = {
   padBoostDuration: 1.2,
   miniTurboBlue: 0.6,
   miniTurboOrange: 1.0,
-  driftHop: 2.5,
-  driftMinSpeed: 8,
+  // Pop must beat suspension (k≈400); walls are 1.25 m so keep peak clearance.
+  driftHop: 3.4,
+  driftHopLift: 0.14,
+  driftHopAirGrace: 0.45,
+  driftMinSpeed: 6,
   chargeBlue: 0.8,
   chargeOrange: 1.6,
   boostSpeedMul: 1.3,

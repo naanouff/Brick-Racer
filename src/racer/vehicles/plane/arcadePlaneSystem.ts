@@ -1,6 +1,6 @@
 /**
  * @file arcadePlaneSystem.ts
- * @description Simple arcade flight for blockout PlaneChassis (WASD + Space/Shift).
+ * @description Arcade flight: banked turns, pitch climb, L1/R1 knife-edge.
  */
 
 import { quat, vec3 } from 'gl-matrix';
@@ -17,14 +17,18 @@ import { RigidBodyComponent } from '@naanouff/w3dts-physics';
 import { getArcadeKartRuntime, initArcadeKartRuntime } from '../kart/arcade/arcadeKartRuntime';
 import { publishKartTelemetry } from '../kart/arcade/kartTelemetry';
 import { clamp } from '../kart/arcade/arcadeKartMath';
+import {
+  attitudeToQuat,
+  forwardFromAttitude,
+  stepPlaneAttitude,
+  type PlaneAttitude,
+} from './arcadePlaneMath';
 
 const _fwd = vec3.create();
-const _localFwd = vec3.fromValues(0, 0, 1);
+const _q = quat.create();
 const G = 9.81;
 const MAX_SPEED = 28;
 const THRUST = 18;
-const YAW_RATE = 1.6;
-const CLIMB = 10;
 const Y_MIN = 0.6;
 const Y_MAX = 8;
 
@@ -47,9 +51,21 @@ function resolvePlane(world: World): Entity | null {
   return null;
 }
 
+/** Yaw from nose projected on XZ (spawn / reset). */
+function yawFromQuat(q: quat): number {
+  const forward = vec3.fromValues(0, 0, 1);
+  vec3.transformQuat(forward, forward, q);
+  return Math.atan2(forward[0] ?? 0, forward[2] ?? 1);
+}
+
+function createAttitudeFromSpawn(rotation: quat): PlaneAttitude {
+  return { yaw: yawFromQuat(rotation), pitch: 0, roll: 0 };
+}
+
 export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): System {
   let chassis: Entity | null = null;
   let mapEnabled = false;
+  let att: PlaneAttitude | null = null;
 
   return function arcadePlaneSystem(world: World, dt: number): void {
     const stepDt = clamp(dt, 0, 0.05);
@@ -77,6 +93,10 @@ export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): Syst
     ) as RigidBodyComponent | undefined;
     if (!transform || !body) return;
 
+    if (att == null) {
+      att = createAttitudeFromSpawn(transform.rotation);
+    }
+
     if (input.isActionJustPressed('resetKart')) {
       vec3.set(
         transform.position,
@@ -96,34 +116,38 @@ export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): Syst
       vec3.set(body.angularVelocity, 0, 0, 0);
       body.clearAccumulators?.();
       body.wakeUp?.();
+      att = createAttitudeFromSpawn(transform.rotation);
     }
 
     const throttle = input.getAxis?.('moveForward') ?? 0;
     const steer = input.getAxis?.('moveRight') ?? 0;
-    const climb =
-      (input.isActionPressed('jump') ? 1 : 0) - (input.isActionPressed('sprint') ? 1 : 0);
+    const climb = input.getAxis?.('climb') ?? 0;
+    // L1 = −1 (wings vertical left), R1 = +1 (right) — see arcadeMkDriveInput.
+    const rollSnap = input.getAxis?.('rollSnap') ?? 0;
 
-    if (Math.abs(steer) > 1e-3) {
-      // moveRight axis: +D = right; yaw so nose turns right
-      quat.rotateY(transform.rotation, transform.rotation, -steer * YAW_RATE * stepDt);
-      quat.normalize(transform.rotation, transform.rotation);
-      transform.updateLocalTransform();
-    }
+    forwardFromAttitude(_fwd, att, _q);
+    const speedAlong = vec3.dot(body.velocity, _fwd);
 
-    vec3.transformQuat(_fwd, _localFwd, transform.rotation);
-    if (vec3.sqrLen(_fwd) > 1e-8) vec3.normalize(_fwd, _fwd);
+    stepPlaneAttitude(att, {
+      steer,
+      climb,
+      rollSnap,
+      speed: speedAlong,
+      dt: stepDt,
+    });
 
-    const speed = vec3.dot(body.velocity, _fwd);
-    let next = speed + throttle * THRUST * stepDt;
-    if (Math.abs(throttle) < 1e-3) next *= Math.max(0, 1 - 0.6 * stepDt);
+    attitudeToQuat(transform.rotation, att);
+    transform.updateLocalTransform();
+    forwardFromAttitude(_fwd, att, _q);
+
+    let next = speedAlong + throttle * THRUST * stepDt;
+    if (Math.abs(throttle) < 1e-3) next *= Math.max(0, 1 - 0.55 * stepDt);
     next = clamp(next, -MAX_SPEED * 0.35, MAX_SPEED);
 
-    const lift = Math.max(0, next) * 0.35;
-    const vy =
-      (body.velocity[1] ?? 0) - G * 0.35 * stepDt + climb * CLIMB * stepDt + lift * stepDt;
-
+    // Fly along the nose — bank turns, pitch climbs (not ground-vehicle yaw).
     vec3.scale(body.velocity, _fwd, next);
-    body.velocity[1] = vy;
+    body.velocity[1] = (body.velocity[1] ?? 0) - G * 0.2 * stepDt;
+
     body.angularVelocity[0] = 0;
     body.angularVelocity[1] = 0;
     body.angularVelocity[2] = 0;
@@ -132,6 +156,10 @@ export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): Syst
     if (y < Y_MIN && (body.velocity[1] ?? 0) < 0) {
       transform.position[1] = Y_MIN;
       body.velocity[1] = 0;
+      // Level out on ground contact
+      att.pitch = approachSoft(att.pitch, 0, stepDt);
+      att.roll = approachSoft(att.roll, 0, stepDt);
+      attitudeToQuat(transform.rotation, att);
       transform.updateLocalTransform();
     } else if (y > Y_MAX && (body.velocity[1] ?? 0) > 0) {
       body.velocity[1] = 0;
@@ -143,10 +171,15 @@ export function createArcadePlaneSystem(options: ArcadePlaneSystemOptions): Syst
       speedMs: st.speed,
       speedKmh: st.speed * 3.6,
       cc: st.cc,
-      drifting: false,
+      drifting: Math.abs(rollSnap) > 0.5,
       charge: 'none',
       boostTimer: 0,
       grounded: st.grounded,
     });
   };
+}
+
+function approachSoft(current: number, target: number, dt: number): number {
+  const t = 1 - Math.exp(-8 * dt);
+  return current + (target - current) * t;
 }

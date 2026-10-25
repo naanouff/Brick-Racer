@@ -60,4 +60,6 @@ Convention : **1 wu = 1 m** ; cible **256 px/m** env (texture 1024 → tuile 4 m
 
 ## Hors scope
 
-Manette / haptique, items / IA / laps, agrandissement piste (tour ovale ≈ 20 s @ 100 cc → ticket ultérieur), feeling dans w3dts-physics (couche arcade côté Brick Racer).
+Haptique, items / IA / laps, agrandissement piste (tour ovale ≈ 20 s @ 100 cc → ticket ultérieur), feeling dans w3dts-physics (couche arcade côté Brick Racer).
+
+**Manette** : support HID désormais dans w3dts (`INP-G`) — [w3dts-input.md](../references/w3dts-input.md). Brick Racer consomme les mêmes actions `gameplay` ; brancher le npm/alias à jour pour activer stick + A en jeu.

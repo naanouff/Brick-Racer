@@ -107,6 +107,59 @@ describe('arcade drift charge', () => {
     expect(orange.releasedCharge).toBe('orange');
     expect(boostDurationForCharge('orange', p)).toBe(p.miniTurboOrange);
   });
+
+  it('applies hop and keeps drift during hop air grace', () => {
+    const p = ARCADE_PROFILES[100];
+    const state = createArcadeKartState(p, RACE_TEST_SPAWN, []);
+    const start = stepDrift({
+      wantDrift: true,
+      steer: 1,
+      speed: 12,
+      grounded: true,
+      state,
+      dt: 0.016,
+    });
+    expect(start.hopVy).toBe(p.driftHop);
+    expect(state.hopAirTimer).toBeGreaterThan(0);
+
+    const midHop = stepDrift({
+      wantDrift: true,
+      steer: 1,
+      speed: 12,
+      grounded: false,
+      state,
+      dt: 0.016,
+    });
+    expect(state.drifting).toBe(true);
+    expect(midHop.hopVy).toBe(0);
+
+    state.hopAirTimer = 0;
+    stepDrift({
+      wantDrift: true,
+      steer: 1,
+      speed: 12,
+      grounded: false,
+      state,
+      dt: 0.016,
+    });
+    expect(state.drifting).toBe(false);
+  });
+
+  it('hops on drift press even with little steer', () => {
+    const p = ARCADE_PROFILES[100];
+    const state = createArcadeKartState(p, RACE_TEST_SPAWN, []);
+    const start = stepDrift({
+      wantDrift: true,
+      steer: 0,
+      speed: 10,
+      grounded: true,
+      state,
+      dt: 0.016,
+    });
+    expect(start.hopVy).toBe(p.driftHop);
+    expect(state.drifting).toBe(true);
+    expect(state.driftDir).toBe(1);
+  });
 });
 
 describe('boost trigger OBB', () => {

@@ -93,25 +93,28 @@ export function stepDrift(input: DriftStepInput): DriftStepResult {
   let hopVy = 0;
   let released: DriftCharge = 'none';
 
-  if (
-    wantDrift &&
-    grounded &&
-    !state.drifting &&
-    speed >= p.driftMinSpeed &&
-    Math.abs(steer) > 0.2
-  ) {
+  if (state.hopAirTimer > 0) {
+    state.hopAirTimer = Math.max(0, state.hopAirTimer - dt);
+  }
+
+  // MK: hop on drift press at speed — steer optional (sets side; default last/+1).
+  if (wantDrift && grounded && !state.drifting && speed >= p.driftMinSpeed) {
     state.drifting = true;
-    state.driftDir = Math.sign(steer) || 1;
+    state.driftDir = Math.sign(steer) || state.driftDir || 1;
     state.driftTime = 0;
     hopVy = p.driftHop;
+    state.hopAirTimer = p.driftHopAirGrace;
   }
 
   if (state.drifting) {
-    if (!wantDrift || !grounded || speed < p.driftMinSpeed * 0.55) {
+    // Hop briefly unloads wheels — don't cancel drift until grace expires.
+    const airCancel = !grounded && state.hopAirTimer <= 0;
+    if (!wantDrift || airCancel || speed < p.driftMinSpeed * 0.55) {
       released = driftChargeLevel(state);
       state.drifting = false;
       state.driftTime = 0;
       state.driftDir = 0;
+      state.hopAirTimer = 0;
     } else {
       state.driftTime += dt;
       if (Math.abs(steer) > 0.15) {
