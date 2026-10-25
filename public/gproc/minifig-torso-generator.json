@@ -1,0 +1,2060 @@
+{
+  "id": "minifig-torso-generator",
+  "name": "Minifig Torso",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "minifig-torso"
+  },
+  "nodes": [
+    {
+      "id": "poly_1",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 180,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            -0.36,
+            0,
+            -0.2
+          ],
+          [
+            -0.37,
+            0,
+            -0.19
+          ],
+          [
+            -0.37,
+            0,
+            0.19
+          ],
+          [
+            -0.36,
+            0,
+            0.2
+          ],
+          [
+            0.36,
+            0,
+            0.2
+          ],
+          [
+            0.37,
+            0,
+            0.19
+          ],
+          [
+            0.37,
+            0,
+            -0.19
+          ],
+          [
+            0.36,
+            0,
+            -0.2
+          ]
+        ],
+        "fill": true
+      }
+    },
+    {
+      "id": "extrude_2",
+      "type": "ExtrudeMesh",
+      "position": {
+        "x": 360,
+        "y": 80
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "offset": 0.54,
+        "scale": 0.7297297297297298
+      }
+    },
+    {
+      "id": "flat_3",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 540,
+        "y": 160
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "xf_4",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 720,
+        "y": 240
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          -0.27,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "cbox_5",
+      "type": "PrimitiveChamferedBox",
+      "position": {
+        "x": 900,
+        "y": 320
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.74,
+          0.01,
+          0.4
+        ],
+        "center": [
+          0,
+          -0.275,
+          0
+        ],
+        "bevel": 0.0045000000000000005
+      }
+    },
+    {
+      "id": "flat_6",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 0,
+        "y": 400
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "cbox_7",
+      "type": "PrimitiveChamferedBox",
+      "position": {
+        "x": 180,
+        "y": 480
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.54,
+          0.01,
+          0.29189189189189196
+        ],
+        "center": [
+          0,
+          0.275,
+          0
+        ],
+        "bevel": 0.0045000000000000005
+      }
+    },
+    {
+      "id": "flat_8",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 360,
+        "y": 560
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_9",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 540,
+        "y": 640
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_10",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 720,
+        "y": 720
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "tri_11",
+      "type": "Triangulate",
+      "position": {
+        "x": 900,
+        "y": 800
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "poly_12",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 880
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0,
+            -0.055,
+            0
+          ],
+          [
+            0.14,
+            -0.055,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_13",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 960
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 24,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_14",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 1040
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_15",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 540,
+        "y": 1120
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.14,
+            -0.055,
+            0
+          ],
+          [
+            0.14,
+            0.055,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_16",
+      "type": "Lathe",
+      "position": {
+        "x": 720,
+        "y": 1200
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 24,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_17",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 900,
+        "y": 1280
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_18",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 1360
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.14,
+            0.055,
+            0
+          ],
+          [
+            0,
+            0.055,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_19",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 1440
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 24,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_20",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 1520
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "join_21",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 540,
+        "y": 1600
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_22",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 720,
+        "y": 1680
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "xf_23",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 900,
+        "y": 1760
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0,
+          0.3108,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "poly_24",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 1840
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0,
+            -0.055000000000000014,
+            0
+          ],
+          [
+            0.06,
+            -0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_25",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 1920
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_26",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 2000
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_27",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 540,
+        "y": 2080
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.06,
+            -0.055000000000000014,
+            0
+          ],
+          [
+            0.06,
+            0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_28",
+      "type": "Lathe",
+      "position": {
+        "x": 720,
+        "y": 2160
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_29",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 900,
+        "y": 2240
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_30",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 2320
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.06,
+            0.055000000000000014,
+            0
+          ],
+          [
+            0,
+            0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_31",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 2400
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_32",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 2480
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "join_33",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 540,
+        "y": 2560
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_34",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 720,
+        "y": 2640
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "xf_35",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 900,
+        "y": 2720
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          -0.325,
+          0.16800000000000004,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "poly_36",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 2800
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0,
+            -0.055000000000000014,
+            0
+          ],
+          [
+            0.06,
+            -0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_37",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 2880
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_38",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 2960
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_39",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 540,
+        "y": 3040
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.06,
+            -0.055000000000000014,
+            0
+          ],
+          [
+            0.06,
+            0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_40",
+      "type": "Lathe",
+      "position": {
+        "x": 720,
+        "y": 3120
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_41",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 900,
+        "y": 3200
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "poly_42",
+      "type": "PrimitivePolyline",
+      "position": {
+        "x": 0,
+        "y": 3280
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "points": [
+          [
+            0.06,
+            0.055000000000000014,
+            0
+          ],
+          [
+            0,
+            0.055000000000000014,
+            0
+          ]
+        ],
+        "fill": false
+      }
+    },
+    {
+      "id": "lathe_43",
+      "type": "Lathe",
+      "position": {
+        "x": 180,
+        "y": 3360
+      },
+      "inputs": [
+        {
+          "id": "curve",
+          "name": "curve",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "segments": 16,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "fillCaps": false
+      }
+    },
+    {
+      "id": "smooth_44",
+      "type": "SetShadeSmooth",
+      "position": {
+        "x": 360,
+        "y": 3440
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "angle": 180
+      }
+    },
+    {
+      "id": "join_45",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 540,
+        "y": 3520
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_46",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 720,
+        "y": 3600
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "xf_47",
+      "type": "TransformGeometry",
+      "position": {
+        "x": 900,
+        "y": 3680
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "translation": [
+          0.325,
+          0.16800000000000004,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "join_48",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 0,
+        "y": 3760
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_49",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 180,
+        "y": 3840
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "join_50",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 360,
+        "y": 3920
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "tri_51",
+      "type": "Triangulate",
+      "position": {
+        "x": 540,
+        "y": 4000
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "unwrap_52",
+      "type": "UnwrapMinifigPart",
+      "position": {
+        "x": 720,
+        "y": 4080
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "partKind": "minifig-torso",
+        "mirrorU": false
+      }
+    },
+    {
+      "id": "bake_53",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 900,
+        "y": 4160
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 2.4,
+        "aoRadius": 0.11,
+        "aoSamples": 12,
+        "heightScale": 1.1
+      }
+    },
+    {
+      "id": "mat_54",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 0,
+        "y": 4240
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "out_55",
+      "type": "GroupOutput",
+      "position": {
+        "x": 180,
+        "y": 4320
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    }
+  ],
+  "links": [
+    {
+      "id": "l_1",
+      "fromNodeId": "poly_1",
+      "fromSocketId": "geometry",
+      "toNodeId": "extrude_2",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_2",
+      "fromNodeId": "extrude_2",
+      "fromSocketId": "geometry",
+      "toNodeId": "flat_3",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_3",
+      "fromNodeId": "flat_3",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_4",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_4",
+      "fromNodeId": "cbox_5",
+      "fromSocketId": "geometry",
+      "toNodeId": "flat_6",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_5",
+      "fromNodeId": "cbox_7",
+      "fromSocketId": "geometry",
+      "toNodeId": "flat_8",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_6",
+      "fromNodeId": "xf_4",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_9",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_7",
+      "fromNodeId": "flat_6",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_9",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_8",
+      "fromNodeId": "join_9",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_10",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_9",
+      "fromNodeId": "flat_8",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_10",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_10",
+      "fromNodeId": "join_10",
+      "fromSocketId": "geometry",
+      "toNodeId": "tri_11",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_11",
+      "fromNodeId": "poly_12",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_13",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_12",
+      "fromNodeId": "lathe_13",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_14",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_13",
+      "fromNodeId": "poly_15",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_16",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_14",
+      "fromNodeId": "lathe_16",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_17",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_15",
+      "fromNodeId": "poly_18",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_19",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_16",
+      "fromNodeId": "lathe_19",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_20",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_17",
+      "fromNodeId": "smooth_14",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_21",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_18",
+      "fromNodeId": "smooth_17",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_21",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_19",
+      "fromNodeId": "join_21",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_22",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_20",
+      "fromNodeId": "smooth_20",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_22",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_21",
+      "fromNodeId": "join_22",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_23",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_22",
+      "fromNodeId": "poly_24",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_25",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_23",
+      "fromNodeId": "lathe_25",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_26",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_24",
+      "fromNodeId": "poly_27",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_28",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_25",
+      "fromNodeId": "lathe_28",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_29",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_26",
+      "fromNodeId": "poly_30",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_31",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_27",
+      "fromNodeId": "lathe_31",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_32",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_28",
+      "fromNodeId": "smooth_26",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_33",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_29",
+      "fromNodeId": "smooth_29",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_33",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_30",
+      "fromNodeId": "join_33",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_34",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_31",
+      "fromNodeId": "smooth_32",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_34",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_32",
+      "fromNodeId": "join_34",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_35",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_33",
+      "fromNodeId": "poly_36",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_37",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_34",
+      "fromNodeId": "lathe_37",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_38",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_35",
+      "fromNodeId": "poly_39",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_40",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_36",
+      "fromNodeId": "lathe_40",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_41",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_37",
+      "fromNodeId": "poly_42",
+      "fromSocketId": "geometry",
+      "toNodeId": "lathe_43",
+      "toSocketId": "curve"
+    },
+    {
+      "id": "l_38",
+      "fromNodeId": "lathe_43",
+      "fromSocketId": "geometry",
+      "toNodeId": "smooth_44",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_39",
+      "fromNodeId": "smooth_38",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_45",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_40",
+      "fromNodeId": "smooth_41",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_45",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_41",
+      "fromNodeId": "join_45",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_46",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_42",
+      "fromNodeId": "smooth_44",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_46",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_43",
+      "fromNodeId": "join_46",
+      "fromSocketId": "geometry",
+      "toNodeId": "xf_47",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_44",
+      "fromNodeId": "tri_11",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_48",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_45",
+      "fromNodeId": "xf_23",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_48",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_46",
+      "fromNodeId": "join_48",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_49",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_47",
+      "fromNodeId": "xf_35",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_49",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_48",
+      "fromNodeId": "join_49",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_50",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_49",
+      "fromNodeId": "xf_47",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_50",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_50",
+      "fromNodeId": "join_50",
+      "fromSocketId": "geometry",
+      "toNodeId": "tri_51",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_51",
+      "fromNodeId": "tri_51",
+      "fromSocketId": "geometry",
+      "toNodeId": "unwrap_52",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_52",
+      "fromNodeId": "unwrap_52",
+      "fromSocketId": "geometry",
+      "toNodeId": "bake_53",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_53",
+      "fromNodeId": "bake_53",
+      "fromSocketId": "geometry",
+      "toNodeId": "mat_54",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_54",
+      "fromNodeId": "mat_54",
+      "fromSocketId": "geometry",
+      "toNodeId": "out_55",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

@@ -4,6 +4,7 @@
  */
 
 import type { LevelEntity, Quat, Vec3 } from '../../levels/shared/levelTypes';
+import { MASK_CHASSIS } from '../../levels/shared/collisionGroups';
 import { quatYawY } from '../../levels/shared/staticBox';
 
 export const BLOCKOUT_PLANE_SPAWN_Y = 1.2;
@@ -42,6 +43,8 @@ export function createBlockoutPlaneEntities(opts: {
   position: Vec3;
   yawY?: number;
   playable?: boolean;
+  /** When false, the cockpit capsule is hidden. Default true. */
+  showDriver?: boolean;
 }): LevelEntity[] {
   const yaw = quatYawY(opts.yawY ?? 0);
   const playable = opts.playable ?? false;
@@ -74,13 +77,18 @@ export function createBlockoutPlaneEntities(opts: {
             size: [0.9, 0.25, 1.2],
             offset: [0, 0.15, 0],
             collisionGroup: 1,
-            collisionMask: 12,
+            collisionMask: MASK_CHASSIS,
           },
         ]
       : [],
   };
 
   const entities: LevelEntity[] = [chassis, ...VISUALS(id)];
+  if (opts.showDriver === false) {
+    const driver = entities.find((e) => e.id === 'PlaneCockpit');
+    const rend = driver?.components.find((c) => c.type === 'renderable');
+    if (rend && rend.type === 'renderable') rend.visible = false;
+  }
 
   if (playable) {
     entities.push({

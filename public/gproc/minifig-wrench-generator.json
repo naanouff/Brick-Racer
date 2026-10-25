@@ -1,0 +1,270 @@
+{
+  "id": "minifig-wrench-generator",
+  "name": "Minifig Wrench",
+  "version": 1,
+  "metadata": {
+    "coordinateSystem": "engine_y_up",
+    "kind": "minifig-wrench"
+  },
+  "nodes": [
+    {
+      "id": "cbox_1",
+      "type": "PrimitiveChamferedBox",
+      "position": {
+        "x": 180,
+        "y": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.09,
+          0.42,
+          0.09
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "bevel": 0.01
+      }
+    },
+    {
+      "id": "cbox_2",
+      "type": "PrimitiveChamferedBox",
+      "position": {
+        "x": 360,
+        "y": 80
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "size": [
+          0.2,
+          0.13,
+          0.07
+        ],
+        "center": [
+          0,
+          0.2256,
+          0
+        ],
+        "bevel": 0.01
+      }
+    },
+    {
+      "id": "join_3",
+      "type": "JoinGeometry",
+      "position": {
+        "x": 540,
+        "y": 160
+      },
+      "inputs": [
+        {
+          "id": "geo1",
+          "name": "geo1",
+          "type": "geometry"
+        },
+        {
+          "id": "geo2",
+          "name": "geo2",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "flat_4",
+      "type": "SetShadeFlat",
+      "position": {
+        "x": 720,
+        "y": 240
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": "unwrap_5",
+      "type": "UnwrapMinifigPart",
+      "position": {
+        "x": 900,
+        "y": 320
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "partKind": "minifig-wrench",
+        "mirrorU": false
+      }
+    },
+    {
+      "id": "bake_6",
+      "type": "BakeMeshMaps",
+      "position": {
+        "x": 0,
+        "y": 400
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "bakeCurvature": true,
+        "bakeAO": true,
+        "bakeHeight": true,
+        "curvatureContrast": 3.2,
+        "aoRadius": 0.055,
+        "aoSamples": 12,
+        "heightScale": 1.1
+      }
+    },
+    {
+      "id": "mat_7",
+      "type": "SetMaterialIndex",
+      "position": {
+        "x": 180,
+        "y": 480
+      },
+      "inputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "geometry",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "properties": {
+        "index": 0
+      }
+    },
+    {
+      "id": "out_8",
+      "type": "GroupOutput",
+      "position": {
+        "x": 360,
+        "y": 560
+      },
+      "inputs": [
+        {
+          "id": "geo_in",
+          "name": "geometry",
+          "type": "geometry"
+        }
+      ],
+      "outputs": [],
+      "properties": {}
+    }
+  ],
+  "links": [
+    {
+      "id": "l_1",
+      "fromNodeId": "cbox_1",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_3",
+      "toSocketId": "geo1"
+    },
+    {
+      "id": "l_2",
+      "fromNodeId": "cbox_2",
+      "fromSocketId": "geometry",
+      "toNodeId": "join_3",
+      "toSocketId": "geo2"
+    },
+    {
+      "id": "l_3",
+      "fromNodeId": "join_3",
+      "fromSocketId": "geometry",
+      "toNodeId": "flat_4",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_4",
+      "fromNodeId": "flat_4",
+      "fromSocketId": "geometry",
+      "toNodeId": "unwrap_5",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_5",
+      "fromNodeId": "unwrap_5",
+      "fromSocketId": "geometry",
+      "toNodeId": "bake_6",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_6",
+      "fromNodeId": "bake_6",
+      "fromSocketId": "geometry",
+      "toNodeId": "mat_7",
+      "toSocketId": "geometry"
+    },
+    {
+      "id": "l_7",
+      "fromNodeId": "mat_7",
+      "fromSocketId": "geometry",
+      "toNodeId": "out_8",
+      "toSocketId": "geo_in"
+    }
+  ]
+}

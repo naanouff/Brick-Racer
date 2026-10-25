@@ -24,6 +24,8 @@ import {
   type World,
 } from '@naanouff/w3dts-core';
 import { GProcComponent, bootstrapGProcRuntime, type GProcGraph } from '@naanouff/w3dts-gproc';
+import { ensureMinifigPrintTextures } from '../../minifig/loadMinifigPrintTextures';
+import { registerMinifigGprocNodes } from '../../minifig/registerMinifigGprocNodes';
 import {
   ColliderComponent,
   RigidBodyComponent,
@@ -154,11 +156,12 @@ function buildMaterial(
         needsTextureSampler = true;
       }
     } else if (Array.isArray(v) && v.length >= 2 && typeof v[0] === 'number') {
-      if ((k === 'baseColor' || k === 'emissiveColor') && v.length >= 4) {
+      // Keep vec4 (printFrame, baseColor). A 4-float array must not collapse to vec3.
+      if (v.length >= 4) {
         val = [Number(v[0]), Number(v[1]), Number(v[2]), Number(v[3])];
       } else if (v.length === 2) {
         val = [Number(v[0]), Number(v[1])];
-      } else if (v.length >= 3) {
+      } else {
         val = vec3.fromValues(Number(v[0]), Number(v[1]), Number(v[2]));
       }
     }
@@ -388,6 +391,7 @@ export async function spawnLevel(
   level: LevelSpec
 ): Promise<SpawnLevelResult> {
   bootstrapGProcRuntime();
+  registerMinifigGprocNodes();
   const full = engine as Engine;
   const { resourceManager, ecsWorld: world } = full;
 
@@ -428,6 +432,8 @@ export async function spawnLevel(
   ) {
     await ensureBlockoutDebugTexture(full);
   }
+
+  await ensureMinifigPrintTextures(full, level.materials);
 
   const device = full.webGPUContext?.device;
   const materials = new Map<string, MaterialType>();

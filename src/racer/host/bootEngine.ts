@@ -26,7 +26,22 @@ import {
   initArcadeKartRuntime,
 } from '../vehicles/kart/arcade';
 import { createArcadePlaneSystem } from '../vehicles/plane/arcadePlaneSystem';
-import { resolveVehicleKind, VEHICLE_CHASSIS_NAME } from '../vehicles/selectVehicle';
+import { resolveVehicleKind } from '../vehicles/selectVehicle';
+import { ensureGprocSystem, levelNeedsGproc } from './ensureGproc';
+import {
+  arcadeGroundChassisName,
+  isHubActive,
+  getHubPossession,
+  planeSimulationActive,
+  setHubPossessionListener,
+} from '../hub/hubPossession';
+import {
+  createHubOnFootSystem,
+  createHubSeatSnapSystem,
+  createHubThrottleGateSystem,
+} from '../hub/hubLocomotionSystem';
+import { createHubOrbitCameraSystem } from '../hub/hubOrbitCameraSystem';
+import { rebindActiveChaseCamera, SceneDirector } from '../scene/SceneDirector';
 
 /** Mono physics only (npm 0.0.28 has no export — Vite aliases to mono when available). */
 function applyKartPhysicsCollisionTuningSafe(): void {
@@ -34,13 +49,12 @@ function applyKartPhysicsCollisionTuningSafe(): void {
     .applyKartPhysicsCollisionTuning;
   fn?.();
 }
-import { createGProcSystem } from '@naanouff/w3dts-gproc';
+import { Logger, NullEventBus, type IEventEmitter } from '@naanouff/w3dts-logger';
 import {
   createScriptsSystem,
   registerInputScriptNodes,
   type ScriptGraph,
 } from '@naanouff/w3dts-scripts';
-import { Logger, NullEventBus, type IEventEmitter } from '@naanouff/w3dts-logger';
 import {
   DEFAULT_LEVEL_ID,
   resolveLevelIdFromSearch,
@@ -50,7 +64,6 @@ import {
   LEGO_KART_BOOT_PROJECT_NAME,
   LegoKartBootProject,
 } from '../vehicles/kart/LegoKartBootProject';
-import { SceneDirector } from '../scene/SceneDirector';
 import { SessionFlow } from '../session/SessionFlow';
 import { fitCanvasBuffer } from './canvasResolution';
 import { ensureGpuInitialized } from './ensureGpuInitialized';
@@ -117,24 +130,21 @@ export async function bootEngine(
   applyKartPhysicsCollisionTuningSafe();
   initArcadeKartRuntime({ search });
   const vehicleKind = resolveVehicleKind(search);
-  const chassisName = VEHICLE_CHASSIS_NAME[vehicleKind];
   engine.scheduler.prependSystems([
     asCoreSystem(createVehicleSystem()),
     asCoreSystem(
       createArcadeKartSystem({
         getInput: () => engine.inputManager,
-        chassisName,
+        getChassisName: () => arcadeGroundChassisName(vehicleKind),
       })
     ),
-    ...(vehicleKind === 'plane'
-      ? [
-          asCoreSystem(
-            createArcadePlaneSystem({
-              getInput: () => engine.inputManager,
-            })
-          ),
-        ]
-      : []),
+    asCoreSystem(
+      createArcadePlaneSystem({
+        getInput: () => engine.inputManager,
+        shouldSimulate: () => planeSimulationActive(vehicleKind),
+      })
+    ),
+    asCoreSystem(createHubOnFootSystem(() => engine.inputManager as never)),
     asCoreSystem(
       createPhysicsSystem({
         ...KART_PHYSICS_PRESET,
@@ -143,9 +153,13 @@ export async function bootEngine(
         maxStepsPerFrame: 3,
       })
     ),
+    asCoreSystem(createHubSeatSnapSystem()),
     asCoreSystem(createVehicleWheelVisualSystem()),
     createChaseCameraSystem(engine),
     asCoreSystem(createArcadeCameraSystem()),
+    asCoreSystem(
+      createHubOrbitCameraSystem(canvas, () => engine.inputManager as never)
+    ),
   ]);
 
   engine.scheduler.addSystem(
@@ -170,14 +184,17 @@ export async function bootEngine(
     )
   );
 
-  // gproc only needed for sandbox LEGO kart — skip on race/city blockout.
-  const device = engine.webGPUContext.device;
-  if (device && levelId === 'sandbox-kart') {
-    engine.scheduler.addSystem(asCoreSystem(createGProcSystem(device)));
-  }
+  engine.scheduler.addSystem(asCoreSystem(createHubThrottleGateSystem()));
+
+  if (levelNeedsGproc(levelId)) ensureGprocSystem(engine);
 
   const flow = new SessionFlow();
   const scene = new SceneDirector(engine);
+  setHubPossessionListener(() => {
+    if (isHubActive()) canvas.dataset.possession = getHubPossession();
+    else delete canvas.dataset.possession;
+    rebindActiveChaseCamera(engine.ecsWorld, engine);
+  });
 
   engine.director.register(new LegoKartBootProject(scene, flow, levelId));
   await engine.start(LEGO_KART_BOOT_PROJECT_NAME);

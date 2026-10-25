@@ -96,6 +96,8 @@ Exécuter le sprint existant sans le diluer. Branche : `feature/lego-kart-host` 
 
 Prototype **locomotion hub**, pas classe course ([gdd.md](../design/gdd.md) § 5 : pied + scooter city).
 
+La marche et l’échange des trois véhicules blockout sur `city-test` sont [BRICK-H1](../sprints/BRICK-H1.md) ([hub-on-foot.md](hub-on-foot.md)), avant ce scooter.
+
 | Travail | Approche |
 | ------- | -------- |
 | Sandbox | Scène plate 40×40 (ou `city-test` blockout) + spawn plaza |
@@ -198,3 +200,4 @@ flowchart LR
 | 1.0 | 2026-10-23 | Création : ladder VP0–VP3, source mono `w3dts_repos/w3dts`, liens B2 / roadmap |
 | 1.1 | 2026-10-23 | Renvois architecture.md + BRICK-B3 (P1) |
 | 1.2 | 2026-10-25 | Gamepad HID w3dts `INP-G` disponible — [w3dts-input.md](../references/w3dts-input.md) |
+| 1.3 | 2026-10-25 | Marche + échange kart / moto / avion = BRICK-H1, avant VP1 scooter |
