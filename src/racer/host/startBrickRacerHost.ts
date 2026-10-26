@@ -7,7 +7,7 @@
 
 import type { Engine } from '@naanouff/w3dts-core';
 import { bootEngine } from './bootEngine';
-import type { LevelId } from '../levels/registry';
+import { writeStoredLevelId, type LevelId } from '../levels/registry';
 import type { SceneDirector } from '../scene/SceneDirector';
 import type { SessionFlow } from '../session/SessionFlow';
 
@@ -17,7 +17,7 @@ export interface BrickRacerHost {
   readonly scene: SceneDirector;
   readonly flow: SessionFlow;
   readonly levelId: LevelId;
-  /** Hot-swap level (unload + spawn). Also updates SessionFlow. */
+  /** Hot-swap level (unload + spawn). Also updates SessionFlow + URL/storage. */
   loadLevel: (id: LevelId) => Promise<void>;
 }
 
@@ -25,7 +25,8 @@ export interface BrickRacerHost {
 let hostBoot: Promise<BrickRacerHost> | null = null;
 
 /**
- * Boots the W3DTS engine, loads `?level=` (default race-test), exposes SceneDirector + SessionFlow.
+ * Boots the W3DTS engine, loads `?level=` / stored choice (default race-test),
+ * exposes SceneDirector + SessionFlow.
  */
 export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<BrickRacerHost> {
   canvas.dataset.testid = 'game-view-canvas';
@@ -33,13 +34,19 @@ export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<Br
 
   hostBoot ??= bootEngine(canvas)
     .then(({ engine, scene, flow, levelId }) => {
+      writeStoredLevelId(levelId);
       const loadLevel = async (id: LevelId): Promise<void> => {
         await scene.load(id);
         flow.syncFromLevel(id);
         canvas.dataset.levelId = id;
-        const url = new URL(window.location.href);
-        url.searchParams.set('level', id);
-        window.history.replaceState({}, '', url);
+        writeStoredLevelId(id);
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('level', id);
+          window.history.replaceState({}, '', url);
+        } catch {
+          /* app:// replaceState edge cases — storage is enough */
+        }
       };
       canvas.dataset.levelId = levelId;
       return { ready: true as const, engine, scene, flow, levelId, loadLevel };

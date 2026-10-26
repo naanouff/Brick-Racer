@@ -25,8 +25,10 @@ pnpm dist
 
 | Moyen | Usage |
 | ----- | ----- |
-| HUD « Revue slice » | Boutons race-test / city-test / sandbox-kart (**reload** `?level=`) ; cc ; debugTex |
-| Query | `?level=city-test` · `?level=sandbox-kart` · `?level=race-test` |
+| HUD « Revue slice » | **Prioritaire** — boutons race / city / sandbox / **brick-lab** (**hot-swap**, pas de barre d’URL en build packagée) ; cc / véhicule / debugTex = reload |
+| Brick lab | Manuels + toggle enveloppe/plein ; stats briques ; prompt Gemini : [brick-manual-prompt.md](design/brick-manual-prompt.md) |
+| Query (`pnpm dev` seulement) | `?level=city-test` · `?level=sandbox-kart` · `?level=race-test` · `?level=brick-lab` — **indisponible** dans `pnpm preview` / installateur (`app://`, pas d’omnibox) |
+| Persistance | Dernier level HUD → `localStorage` (`brick-racer.levelId`) au prochain lancement |
 | Véhicule | `?vehicle=kart` (défaut) · `moto` · `plane` |
 | Cylindrée | `?cc=50` · `?cc=100` (défaut) · `?cc=150` |
 | Texture debug | couleurs unies (défaut) · `?debugTex=1` grille densités (coûteux) |

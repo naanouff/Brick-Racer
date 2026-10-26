@@ -20,6 +20,18 @@ import {
   type BrickRacerHost,
 } from '../racer/host/startBrickRacerHost';
 import {
+  BRICK_MANUAL_IDS,
+  brickManualLabel,
+  type BrickManualId,
+} from '../racer/hub/brick/manuals/registry';
+import {
+  readBrickLabManualId,
+  readBrickLabShell,
+  writeBrickLabManualId,
+  writeBrickLabShell,
+} from '../racer/hub/brick/manuals/labPrefs';
+import { fountainShellReport } from '../racer/hub/brick';
+import {
   getKartTelemetry,
   resolveCcTier,
   type CcTier,
@@ -47,6 +59,9 @@ function LevelReviewBar(props: {
   vehicle: VehicleKind;
   cc: CcTier;
   debugTex: boolean;
+  brickManual: BrickManualId;
+  brickShell: boolean;
+  brickStats: string | null;
   telemetry: KartTelemetrySnapshot;
   fps: number;
   frameMs: number;
@@ -60,12 +75,16 @@ function LevelReviewBar(props: {
   onSelectVehicle: (v: VehicleKind) => void;
   onSelectCc: (cc: CcTier) => void;
   onToggleDebugTex: (on: boolean) => void;
+  onSelectBrickManual: (id: BrickManualId) => void;
+  onToggleBrickShell: (on: boolean) => void;
 }): ReactElement {
   const t = props.telemetry;
   const chargeColor =
     t.charge === 'orange' ? '#f09020' : t.charge === 'blue' ? '#3aa0ff' : '#8b95a8';
-  const hint =
-    props.vehicle === 'plane'
+  const isLab = props.active === 'brick-lab';
+  const hint = isLab
+    ? 'Orbit · souris / stick · HUD manuels'
+    : props.vehicle === 'plane'
       ? 'WASD thrust/steer · Espace monter · Shift descendre · X reset'
       : 'WASD · Espace drift · X reset';
   return (
@@ -86,36 +105,78 @@ function LevelReviewBar(props: {
           </button>
         ))}
       </div>
-      <div className="br-review__levels" role="group" aria-label="Véhicule">
-        {VEHICLE_KINDS.map((v) => (
-          <button
-            key={v}
-            type="button"
-            className={
-              v === props.vehicle ? 'br-review__btn br-review__btn--active' : 'br-review__btn'
-            }
-            disabled={v === props.vehicle}
-            onClick={() => props.onSelectVehicle(v)}
-          >
-            {vehicleLabel(v)}
-          </button>
-        ))}
-      </div>
-      <div className="br-review__levels" role="group" aria-label="Cylindrée">
-        {CC_TIERS.map((cc) => (
-          <button
-            key={cc}
-            type="button"
-            className={
-              cc === props.cc ? 'br-review__btn br-review__btn--active' : 'br-review__btn'
-            }
-            disabled={cc === props.cc}
-            onClick={() => props.onSelectCc(cc)}
-          >
-            {cc} cc
-          </button>
-        ))}
-      </div>
+      {isLab ? (
+        <>
+          <div className="br-review__levels" role="group" aria-label="Manuel brick">
+            {BRICK_MANUAL_IDS.map((id) => (
+              <button
+                key={id}
+                type="button"
+                className={
+                  id === props.brickManual
+                    ? 'br-review__btn br-review__btn--active'
+                    : 'br-review__btn'
+                }
+                disabled={id === props.brickManual}
+                onClick={() => props.onSelectBrickManual(id)}
+              >
+                {brickManualLabel(id)}
+              </button>
+            ))}
+          </div>
+          <div className="br-review__levels" role="group" aria-label="Bake shell">
+            <button
+              type="button"
+              className={props.brickShell ? 'br-review__btn br-review__btn--active' : 'br-review__btn'}
+              disabled={props.brickShell}
+              onClick={() => props.onToggleBrickShell(true)}
+            >
+              enveloppe
+            </button>
+            <button
+              type="button"
+              className={!props.brickShell ? 'br-review__btn br-review__btn--active' : 'br-review__btn'}
+              disabled={!props.brickShell}
+              onClick={() => props.onToggleBrickShell(false)}
+            >
+              plein
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="br-review__levels" role="group" aria-label="Véhicule">
+            {VEHICLE_KINDS.map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={
+                  v === props.vehicle ? 'br-review__btn br-review__btn--active' : 'br-review__btn'
+                }
+                disabled={v === props.vehicle}
+                onClick={() => props.onSelectVehicle(v)}
+              >
+                {vehicleLabel(v)}
+              </button>
+            ))}
+          </div>
+          <div className="br-review__levels" role="group" aria-label="Cylindrée">
+            {CC_TIERS.map((cc) => (
+              <button
+                key={cc}
+                type="button"
+                className={
+                  cc === props.cc ? 'br-review__btn br-review__btn--active' : 'br-review__btn'
+                }
+                disabled={cc === props.cc}
+                onClick={() => props.onSelectCc(cc)}
+              >
+                {cc} cc
+              </button>
+            ))}
+          </div>
+        </>
+      )}
       <div className="br-review__levels" role="group" aria-label="Texture debug">
         <button
           type="button"
@@ -135,16 +196,22 @@ function LevelReviewBar(props: {
         </button>
       </div>
       <p className="br-review__telemetry" aria-live="polite">
-        <span className="br-review__speed">{Math.round(t.speedKmh)} km/h</span>
+        {!isLab ? (
+          <span className="br-review__speed">{Math.round(t.speedKmh)} km/h</span>
+        ) : props.brickStats ? (
+          <span className="br-review__speed">{props.brickStats}</span>
+        ) : null}
         <span className="br-review__fps">
           {Math.round(props.fps)} fps · {props.frameMs.toFixed(1)} ms ·{' '}
           {props.bufferW}×{props.bufferH} · {props.drawCalls} dc ·{' '}
           {formatCount(props.trisVisible)}/{formatCount(props.trisTotal)} tri ·{' '}
           {props.renderQuality}
         </span>
-        <span style={{ color: chargeColor }}>
-          {t.drifting ? `drift ${t.charge}` : t.boostTimer > 0 ? 'BOOST' : '—'}
-        </span>
+        {!isLab ? (
+          <span style={{ color: chargeColor }}>
+            {t.drifting ? `drift ${t.charge}` : t.boostTimer > 0 ? 'BOOST' : '—'}
+          </span>
+        ) : null}
       </p>
       <p className="br-review__hint">{hint}</p>
     </nav>
@@ -156,7 +223,7 @@ function App(): ReactElement {
   const [error, setError] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
   const [version, setVersion] = useState<string | null>(null);
-  const [levelId] = useState<LevelId>(() =>
+  const [levelId, setLevelId] = useState<LevelId>(() =>
     resolveLevelIdFromSearch(typeof window !== 'undefined' ? window.location.search : '')
   );
   const [vehicle] = useState<VehicleKind>(() =>
@@ -171,6 +238,16 @@ function App(): ReactElement {
   const [renderQuality] = useState(() =>
     resolveRenderQuality(typeof window !== 'undefined' ? window.location.search : '')
   );
+  const [brickManual, setBrickManual] = useState<BrickManualId>(() => readBrickLabManualId());
+  const [brickShell, setBrickShell] = useState(() => readBrickLabShell());
+  const [brickStats, setBrickStats] = useState<string | null>(() => {
+    try {
+      const r = fountainShellReport(readBrickLabShell());
+      return `fontaine ${r.kept}/${r.total}`;
+    } catch {
+      return null;
+    }
+  });
   const [telemetry, setTelemetry] = useState<KartTelemetrySnapshot>(() => getKartTelemetry());
   const [fps, setFps] = useState(0);
   const [frameMs, setFrameMs] = useState(0);
@@ -198,6 +275,7 @@ function App(): ReactElement {
         const host = await startBrickRacerHost(canvas);
         if (!cancelled) {
           hostRef.current = host;
+          setLevelId(host.levelId);
           setReady(true);
           canvas.dataset.levelId = host.levelId;
           canvas.focus({ preventScroll: true });
@@ -235,15 +313,27 @@ function App(): ReactElement {
     return () => window.clearInterval(id);
   }, [ready, error]);
 
+  /** Full navigation — needed for vehicle/cc/debugTex (boot-time). Prefer assign for `app://`. */
   const reloadWith = (mutate: (url: URL) => void): void => {
     const url = new URL(window.location.href);
     mutate(url);
-    window.location.search = url.search;
+    window.location.assign(url.href);
   };
 
+  /** Hot-swap via SceneDirector — works in packaged Electron (no URL bar for `?level=`). */
   const onSelectLevel = (id: LevelId): void => {
     if (id === levelId) return;
-    reloadWith((url) => url.searchParams.set('level', id));
+    const host = hostRef.current;
+    if (!host) {
+      reloadWith((url) => url.searchParams.set('level', id));
+      return;
+    }
+    void host
+      .loadLevel(id)
+      .then(() => setLevelId(id))
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : String(err));
+      });
   };
 
   const onSelectVehicle = (next: VehicleKind): void => {
@@ -265,6 +355,35 @@ function App(): ReactElement {
       if (on) url.searchParams.set('debugTex', '1');
       else url.searchParams.delete('debugTex');
     });
+  };
+
+  const reloadBrickLab = (manual: BrickManualId, shell: boolean): void => {
+    writeBrickLabManualId(manual);
+    writeBrickLabShell(shell);
+    setBrickManual(manual);
+    setBrickShell(shell);
+    try {
+      const r = fountainShellReport(shell);
+      setBrickStats(`${manual} ${r.kept}/${r.total}`);
+    } catch {
+      setBrickStats(null);
+    }
+    const host = hostRef.current;
+    if (!host) return;
+    void host
+      .loadLevel('brick-lab')
+      .then(() => setLevelId('brick-lab'))
+      .catch((err) => setError(err instanceof Error ? err.message : String(err)));
+  };
+
+  const onSelectBrickManual = (id: BrickManualId): void => {
+    if (id === brickManual && levelId === 'brick-lab') return;
+    reloadBrickLab(id, brickShell);
+  };
+
+  const onToggleBrickShell = (on: boolean): void => {
+    if (on === brickShell && levelId === 'brick-lab') return;
+    reloadBrickLab(brickManual, on);
   };
 
   return (
@@ -290,6 +409,9 @@ function App(): ReactElement {
           vehicle={vehicle}
           cc={cc}
           debugTex={debugTex}
+          brickManual={brickManual}
+          brickShell={brickShell}
+          brickStats={brickStats}
           telemetry={telemetry}
           fps={fps}
           frameMs={frameMs}
@@ -303,6 +425,8 @@ function App(): ReactElement {
           onSelectVehicle={onSelectVehicle}
           onSelectCc={onSelectCc}
           onToggleDebugTex={onToggleDebugTex}
+          onSelectBrickManual={onSelectBrickManual}
+          onToggleBrickShell={onToggleBrickShell}
         />
       ) : (
         <div className="br-shell" aria-busy="true">

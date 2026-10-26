@@ -245,7 +245,8 @@ Shell inchangé : `src/main`, `src/preload`, `src/renderer` (overlay s’abonne 
 | **UI** | Overlay React (parallèle) | [BRICK-UI1](../sprints/BRICK-UI1.md) |
 | **P1** | SessionFlow RaceActive ; RaceSystem minimal sur `race-test` | [BRICK-B3](../sprints/BRICK-B3.md) |
 | **H1** | Possession pied / véhicule sur `city-test` (pas le HubSystem complet) | [BRICK-H1](../sprints/BRICK-H1.md) |
-| **P2** | HubSystem + city ; gates ; VP1 scooter ; Progress skeleton | Ultérieur · après H1 |
+| **BW1** | Brick Module Kit + InstancedMesh landmarks hub | [BRICK-BW1](../sprints/BRICK-BW1.md) · [brick-world-rendering.md](brick-world-rendering.md) |
+| **P2** | HubSystem + city ; gates ; VP1 scooter ; Progress skeleton | Ultérieur · après H1 / BW |
 | **P3** | Garage / boutique POI + save cosmétiques | Ultérieur |
 | **P4** | VehicleModeRegistry ; moto + avion | Ultérieur |
 | **P5** | Lobby + P2P | Ultérieur |
@@ -270,3 +271,4 @@ Shell inchangé : `src/main`, `src/preload`, `src/renderer` (overlay s’abonne 
 | ------- | ---- | ---- |
 | 1.0 | 2026-10-23 | Création : couches, SessionFlow, Scene packs, véhicules, race, save, multi, arborescence, mapping P0–P5 |
 | 1.1 | 2026-10-25 | H1 : possession pied / véhicule sur `city-test`, avant le HubSystem P2 |
+| 1.2 | 2026-10-25 | BW1 : Brick Module Kit + InstancedMesh sur hub |

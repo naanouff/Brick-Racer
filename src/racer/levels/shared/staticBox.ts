@@ -32,6 +32,8 @@ export type StaticBoxOpts = {
    */
   colliderSize?: Vec3;
   castShadow?: boolean;
+  /** When false, keep collider/body but hide the box mesh (brick visuals elsewhere). */
+  visible?: boolean;
   friction?: number;
 };
 
@@ -53,6 +55,7 @@ export function spawnStaticBox(opts: StaticBoxOpts): LevelEntity {
     collider = kind !== 'none',
     colliderSize,
     castShadow = false,
+    visible = true,
     friction = 1,
   } = opts;
 
@@ -62,6 +65,7 @@ export function spawnStaticBox(opts: StaticBoxOpts): LevelEntity {
       meshId,
       materialId,
       castShadow,
+      visible,
     },
     {
       type: 'rigidBody',

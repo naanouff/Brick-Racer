@@ -2,6 +2,8 @@
 
 Authoring **blockout jouable** des scènes de validation Brick Proving Grounds. Sprint : [BRICK-BO1](../sprints/BRICK-BO1.md). Design coté : [test-slice-plans.md](../design/test-slice-plans.md). Intention : [test-slice.md](../design/test-slice.md). Contrat levels : [architecture.md](architecture.md).
 
+**Suite visuelle hub** (remplacement AABB → brick instancié) : [brick-world-rendering.md](brick-world-rendering.md) · [BRICK-BW1](../sprints/BRICK-BW1.md).
+
 ## Objectif
 
 Livrer deux modules TypeScript `raceTest` et `cityTest` (primitives + colliders, matériaux unis) aux cotes plans, branchés via SceneDirector / SessionFlow minimal. Pas d’art final, pas de scoring course.

@@ -15,6 +15,8 @@ import {
 } from '@naanouff/w3dts-core';
 import { LogChannel } from '@naanouff/w3dts-logger';
 import { buildCityTestTriggers, CITY_HUB_SPAWNS, CITY_TEST_SPAWN } from '../levels/cityTest';
+import { spawnCityTest } from '../levels/cityTest/spawnCityTest';
+import { spawnBrickLab } from '../levels/brickLab/spawnBrickLab';
 import { buildRaceTestTriggers, raceSpawnForVehicle } from '../levels/raceTest';
 import { getLevelSpec, isLevelId, type LevelId } from '../levels/registry';
 import { spawnLevel, type LevelSpawnPose, type LevelTrigger } from '../levels/shared';
@@ -29,6 +31,10 @@ import {
   getHubPossession,
   isHubActive,
 } from '../hub/hubPossession';
+import {
+  readBrickLabManualId,
+  readBrickLabShell,
+} from '../hub/brick/manuals/labPrefs';
 
 function arcadeContextForLevel(id: LevelId): {
   spawn: LevelSpawnPose;
@@ -97,6 +103,34 @@ export function rebindActiveChaseCamera(world: World, engine: IEngineContext): v
   full.cameraControllerManager.setCameraEntity(null);
 }
 
+const BRICK_LAB_CAMERA_NAME = 'BL_OrbitCamera';
+
+/** Bind orbit cam as game+editor; prefer orbital over leftover chase preference. */
+function bindBrickLabCamera(engine: Engine): boolean {
+  const world = engine.ecsWorld;
+  const cam = findEntityByName(world, BRICK_LAB_CAMERA_NAME);
+  if (cam === null) return false;
+  const camera = world.getComponent(cam, CameraComponent);
+  const transform = world.getComponent(cam, TransformComponent);
+  if (!camera || !transform) return false;
+
+  for (const [entity, [c]] of world.query<[CameraComponent]>([CameraComponent]).iter()) {
+    if (entity === cam) continue;
+    c.isMain = false;
+    c.isActive = false;
+  }
+  camera.isActive = true;
+  camera.isMain = true;
+  const canvas = engine.webGPUContext.canvas;
+  if (canvas.width > 0 && canvas.height > 0) {
+    camera.aspect = canvas.width / canvas.height;
+  }
+  engine.setGameCameraEntity(cam);
+  engine.setEditorCameraEntity(cam);
+  engine.setGameViewCameraPreference('orbital');
+  return true;
+}
+
 export class SceneDirector {
   private activeId: LevelId | null = null;
   private rootEntityIds: Entity[] = [];
@@ -142,8 +176,20 @@ export class SceneDirector {
     this.loading = true;
     try {
       await this.unload();
-      const spec = getLevelSpec(id);
-      const { rootEntityIds } = await spawnLevel(this.engine, spec);
+      let rootEntityIds: Entity[];
+      let labStats: string | null = null;
+      if (id === 'city-test') {
+        ({ rootEntityIds } = await spawnCityTest(this.engine));
+      } else if (id === 'brick-lab') {
+        const lab = await spawnBrickLab(this.engine, {
+          manualId: readBrickLabManualId(),
+          shell: readBrickLabShell(),
+        });
+        rootEntityIds = lab.rootEntityIds;
+        labStats = `${lab.manualId} shell=${lab.shell ? 1 : 0} bricks ${lab.report.kept}/${lab.report.total} batches ${lab.batches}`;
+      } else {
+        ({ rootEntityIds } = await spawnLevel(this.engine, getLevelSpec(id)));
+      }
       this.rootEntityIds = rootEntityIds;
       this.activeId = id;
 
@@ -151,7 +197,16 @@ export class SceneDirector {
       if (id === 'city-test') activateHubSession(CITY_HUB_SPAWNS);
       else deactivateHubSession();
       if (levelNeedsGproc(id)) ensureGprocSystem(this.engine);
-      rebindActiveChaseCamera(this.engine.ecsWorld, this.engine);
+      if (id === 'brick-lab') {
+        if (!bindBrickLabCamera(this.engine)) {
+          this.engine.logger.warn(
+            LogChannel.Rendering,
+            `[BrickRacer] brick-lab: camera "${BRICK_LAB_CAMERA_NAME}" missing after spawn.`
+          );
+        }
+      } else {
+        rebindActiveChaseCamera(this.engine.ecsWorld, this.engine);
+      }
       const arcade = arcadeContextForLevel(id);
       setArcadeKartLevelContext(arcade.spawn, arcade.triggers);
 
@@ -164,12 +219,16 @@ export class SceneDirector {
         iblEnabled: true,
       });
 
-      this.engine.logger.info(
-        LogChannel.DataLifecycle,
+      // Graph reload / warm can leave a stale chase preference — re-assert lab cam.
+      if (id === 'brick-lab') bindBrickLabCamera(this.engine);
+
+      const hint =
         id === 'city-test'
           ? `[BrickRacer] Level "${id}" loaded. ZQSD caméra · souris / stick droit · F · X · pad Y.`
-          : `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`
-      );
+          : id === 'brick-lab'
+            ? `[BrickRacer] Level "${id}" loaded. ${labStats ?? ''} · drag orbit · scroll zoom.`
+            : `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`;
+      this.engine.logger.info(LogChannel.DataLifecycle, hint);
     } finally {
       this.loading = false;
     }

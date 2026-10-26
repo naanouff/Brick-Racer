@@ -43,6 +43,7 @@ import {
   createBlockoutPlaneEntities,
 } from '../../vehicles/plane/blockoutPlaneKit';
 import type { VehicleKind } from '../../vehicles/selectVehicle';
+import { brickCatalogMaterials } from '../../hub/brick/brickMaterials';
 
 export const CITY_TEST_STABLE_IDS = [
   'poi.garage',
@@ -149,6 +150,7 @@ export function buildCityTestSpec(): LevelSpec {
       size: [3, 2, 3],
       materialId: 'BO_Npc',
       kind: 'wall',
+      visible: false,
     })
   );
 
@@ -363,7 +365,11 @@ export function buildCityTestSpec(): LevelSpec {
     ],
     geometryGraphs: [...kart.geometryGraphs, ...MINIFIG_GPROC_GRAPHS],
     scriptGraphs: kart.scriptGraphs,
-    materials: { ...blockoutMaterials(), ...assembled.materials },
+    materials: {
+      ...blockoutMaterials(),
+      ...assembled.materials,
+      ...brickCatalogMaterials(),
+    },
     primitives: { ...BLOCKOUT_PRIMITIVES },
     entities,
   };

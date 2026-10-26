@@ -356,6 +356,20 @@ function addComponent(
         ctrl.chaseFocusSmoothY = comp.chaseFocusSmoothY;
       }
       if (typeof comp.chaseYawSmooth === 'number') ctrl.chaseYawSmooth = comp.chaseYawSmooth;
+      if (typeof comp.orbitalMinDistance === 'number') {
+        ctrl.orbitalMinDistance = comp.orbitalMinDistance;
+      }
+      if (typeof comp.orbitalMaxDistance === 'number') {
+        ctrl.orbitalMaxDistance = comp.orbitalMaxDistance;
+      }
+      if (typeof comp.orbitalZoomSensitivity === 'number') {
+        ctrl.orbitalZoomSensitivity = comp.orbitalZoomSensitivity;
+      }
+      if (typeof comp.orbitalRotateSpeed === 'number') {
+        ctrl.orbitalRotateSpeed = comp.orbitalRotateSpeed;
+      }
+      if (typeof comp.orbitalDamping === 'number') ctrl.orbitalDamping = comp.orbitalDamping;
+      if (comp.orbitalLeftMouseMode) ctrl.orbitalLeftMouseMode = comp.orbitalLeftMouseMode;
       world.addComponent(entity, ctrl);
       break;
     }
