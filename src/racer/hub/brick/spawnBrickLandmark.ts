@@ -1,6 +1,7 @@
 /**
  * @file spawnBrickLandmark.ts
  * @description Upload InstancedMesh batches for a brick landmark (BW1).
+ * BC1: all parts use box proxy (`BRICK_MESH_ID`) until `mesh.status === 'ready'`.
  */
 
 import { mat4, vec3 } from 'gl-matrix';

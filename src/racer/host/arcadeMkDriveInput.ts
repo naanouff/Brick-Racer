@@ -71,6 +71,46 @@ export function resolveMkMoveForward(hardware: HardwareLike): number {
 }
 
 /**
+ * Steer in [-1, 1]: A/Q / D + left stick X.
+ * npm InputManager has no gamepad bindings — bridge must set this axis.
+ */
+export function resolveMkMoveRight(hardware: HardwareLike): number {
+  let v = 0;
+  const keys = hardware.keysDown;
+  if (keys) {
+    if (keys.has('d')) v += 1;
+    if (keys.has('a') || keys.has('q')) v -= 1;
+  }
+  const pad = hardware.gamepads?.[0] ?? null;
+  if (pad && pad.connected !== false && pad.axes) {
+    let lx = pad.axes[0] ?? 0;
+    if (typeof lx !== 'number' || Number.isNaN(lx)) lx = 0;
+    if (Math.abs(lx) >= STICK_DEAD_ZONE) {
+      v = mergeAbs(v, clampAxis(lx));
+    }
+  }
+  return clampAxis(v);
+}
+
+/** Drift / jump: Space or L1 / R1. */
+export function resolveMkJumpHeld(hardware: HardwareLike): boolean {
+  const keys = hardware.keysDown;
+  if (keys?.has(' ')) return true;
+  const pad = hardware.gamepads?.[0] ?? null;
+  if (!pad || pad.connected === false) return false;
+  return buttonDown(pad, GP.L1) || buttonDown(pad, GP.R1);
+}
+
+/** Reset: X or Select. */
+export function resolveMkResetHeld(hardware: HardwareLike): boolean {
+  const keys = hardware.keysDown;
+  if (keys?.has('x')) return true;
+  const pad = hardware.gamepads?.[0] ?? null;
+  if (!pad || pad.connected === false) return false;
+  return buttonDown(pad, GP.Select);
+}
+
+/**
  * Pitch / climb in [-1, 1]: Space/Shift + left stick Y (up = nose up).
  * Does not use L1/R1 so knife-edge stays on `rollSnap`.
  */

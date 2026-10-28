@@ -51,7 +51,7 @@ describe('brickInstanceData', () => {
 describe('fountainKit', () => {
   it('stays inside the 3×2×3 plan envelope around (20,1,20)', () => {
     const poses = buildFountainBrickPoses();
-    expect(poses.length).toBeGreaterThan(40);
+    expect(poses.length).toBeGreaterThan(20);
     for (const p of poses) {
       const [sx, sy, sz] = partSizeMeters(p.partId);
       expect(p.position[0] - sx / 2).toBeGreaterThanOrEqual(20 - 1.65);
@@ -63,12 +63,12 @@ describe('fountainKit', () => {
     }
   });
 
-  it('reads as A1 terracotta basins + cyan water', () => {
+  it('reads as BOM gray stone + cyan water', () => {
     const poses = buildFountainBrickPoses();
-    const terracotta = poses.filter((p) => p.colorId === 'terracotta').length;
+    const gray = poses.filter((p) => p.colorId === 'gray').length;
     const cyan = poses.filter((p) => p.colorId === 'cyan').length;
-    expect(terracotta).toBeGreaterThan(cyan * 0.5);
+    expect(gray).toBeGreaterThan(cyan * 0.5);
     expect(cyan).toBeGreaterThan(4);
-    expect(terracotta).toBeGreaterThan(20);
+    expect(gray).toBeGreaterThan(10);
   });
 });

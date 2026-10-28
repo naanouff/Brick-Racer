@@ -4,8 +4,8 @@
  */
 
 import {
-  BRICK_COLOR_IDS,
-  BRICK_PART_IDS,
+  isBrickColorId,
+  isBrickPartId,
   type BrickColorId,
   type BrickPartId,
 } from '../brickCatalog';
@@ -100,9 +100,6 @@ export type ManualValidationResult =
   | { ok: true; manual: BrickManual }
   | { ok: false; issues: ManualValidationIssue[] };
 
-const PART_SET = new Set<string>(BRICK_PART_IDS);
-const COLOR_SET = new Set<string>(BRICK_COLOR_IDS);
-
 function isInt(n: unknown): n is number {
   return typeof n === 'number' && Number.isFinite(n) && Number.isInteger(n);
 }
@@ -112,11 +109,11 @@ function isNum(n: unknown): n is number {
 }
 
 function isPart(v: unknown): v is BrickPartId {
-  return typeof v === 'string' && PART_SET.has(v);
+  return typeof v === 'string' && isBrickPartId(v);
 }
 
 function isColor(v: unknown): v is BrickColorId {
-  return typeof v === 'string' && COLOR_SET.has(v);
+  return typeof v === 'string' && isBrickColorId(v);
 }
 
 function isVec3(v: unknown): v is ManualVec3 {

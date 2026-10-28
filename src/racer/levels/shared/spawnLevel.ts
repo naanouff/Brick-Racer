@@ -24,7 +24,15 @@ import {
   type World,
 } from '@naanouff/w3dts-core';
 import { GProcComponent, bootstrapGProcRuntime, type GProcGraph } from '@naanouff/w3dts-gproc';
+import {
+  CATALOG_AGING_TEXTURE_ID,
+  ensureCatalogAgingTexture,
+} from '../../hub/brick/catalog/catalogAgingTexture';
 import { ensureMinifigPrintTextures } from '../../minifig/loadMinifigPrintTextures';
+import {
+  ensureMinifigUvGridTexture,
+  MINIFIG_UV_GRID_TEXTURE_ID,
+} from '../../minifig/minifigUvGridDebug';
 import { registerMinifigGprocNodes } from '../../minifig/registerMinifigGprocNodes';
 import {
   ColliderComponent,
@@ -448,6 +456,18 @@ export async function spawnLevel(
   }
 
   await ensureMinifigPrintTextures(full, level.materials);
+
+  const needsAgingMap = Object.values(level.materials).some(
+    (m) => m.properties?.baseColorTexture === CATALOG_AGING_TEXTURE_ID
+  );
+  if (needsAgingMap) ensureCatalogAgingTexture(full);
+
+  const needsUvGrid = Object.values(level.materials).some(
+    (m) => m.properties?.baseColorTexture === MINIFIG_UV_GRID_TEXTURE_ID
+  );
+  if (needsUvGrid) {
+    await ensureMinifigUvGridTexture(full);
+  }
 
   const device = full.webGPUContext?.device;
   const materials = new Map<string, MaterialType>();

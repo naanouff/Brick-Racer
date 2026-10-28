@@ -5,7 +5,7 @@
 - Node.js 22 ou plus récent
 - **pnpm 10** (pin `packageManager` dans `package.json` — aligné CI). Éviter pnpm 11 pour `install` : il réécrit le lockfile sans `overrides` et casse `frozen-lockfile`.
 - Un GPU qui expose **WebGPU** (Direct3D 12 sous Windows). L’application n’active pas `--enable-unsafe-webgpu`.
-- Pour le host kart (P0 / BRICK-B2 / BO1) : checkout sibling du monorepo w3dts en `../w3dts_repos/w3dts` (à jour `develop`) pour les paquets non publiés ou périmés sur npm (`scripts`, `gproc`, **`physics`**, bientôt **`input`/`core`** pour gamepad HID) — alias Vite via [`w3dtsMonoAliases.ts`](../w3dtsMonoAliases.ts). **Pas de SceneDD** : levels TypeScript sous [`src/racer/levels/`](../src/racer/levels/). Physique blockout : [blockout-physics.md](plans/blockout-physics.md).
+- Pour le host kart (P0 / BRICK-B2 / BO1) : checkout sibling du monorepo w3dts (à jour `develop`) pour les paquets non publiés ou périmés sur npm (`scripts`, `gproc`, **`physics`**, **`input`**) — alias Vite via [`w3dtsMonoAliases.ts`](../w3dtsMonoAliases.ts). Chemins reconnus : `../w3dts/w3dts`, `../w3dts_repos/w3dts`, ou `W3DTS_MONO_ROOT`. Le paquet `scripts` doit être **buildé** (`packages/scripts/dist/w3dts-scripts.es.js`). **Pas de SceneDD** : levels TypeScript sous [`src/racer/levels/`](../src/racer/levels/). Physique blockout : [blockout-physics.md](plans/blockout-physics.md).
 
 Sous inspection TLS Windows, si le postinstall Electron échoue sur le certificat : `$env:NODE_TLS_REJECT_UNAUTHORIZED="0"; pnpm install` (même contrainte que le monorepo w3dts / `.npmrc`).
 

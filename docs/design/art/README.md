@@ -39,5 +39,6 @@ Authoring landmark (artwork **structure seule** + manuel JSON) : [brick-manual-p
 | Fichier | Note |
 | ------- | ---- |
 | [ref-brick-world-chase.jpg](ref-brick-world-chase.jpg) | Chase cam — piste tiles studs, rampes, façades, plastique PBR (**réf. rendu BW**) |
-| [ref-fountain-hero.png](ref-fountain-hero.png) | Fontaine seule — hero 3/4 studio (**canon structure** `landmark.fountain`) |
-| [ref-fountain-ortho.png](ref-fountain-ortho.png) | Fontaine seule — plan + élévation cotée 3,0 × 2,0 m (**canon structure**) |
+| [ref-fountain-bom.png](ref-fountain-bom.png) | Fontaine BOM photo — gris + eau translucide (**canon matière** `landmark.fountain`) |
+| [ref-fountain-hero.png](ref-fountain-hero.png) | Fontaine seule — hero 3/4 studio (legacy A1 terracotta) |
+| [ref-fountain-ortho.png](ref-fountain-ortho.png) | Fontaine seule — plan + élévation cotée 3,0 × 2,0 m |

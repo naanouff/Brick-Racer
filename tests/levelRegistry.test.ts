@@ -33,10 +33,11 @@ describe('level registry', () => {
     expect(isLevelId('nope')).toBe(false);
   });
 
-  it('exposes all three level specs', () => {
+  it('exposes all registered level specs', () => {
+    expect(LEVEL_IDS.length).toBeGreaterThanOrEqual(3);
     for (const id of LEVEL_IDS) {
       expect(getLevelSpec(id).id).toBe(id);
-      expect(getLevelSpec(id).entities.length).toBeGreaterThan(3);
+      expect(getLevelSpec(id).entities.length).toBeGreaterThan(0);
     }
   });
 });

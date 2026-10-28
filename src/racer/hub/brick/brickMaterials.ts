@@ -1,30 +1,22 @@
 /**
  * @file brickMaterials.ts
- * @description Pastel plastic PBR specs for brick catalog colors.
+ * @description Pastel plastic PBR specs from BC1 color catalog.
  */
 
 import type { MaterialSpec } from '../../levels/shared/levelTypes';
-import { BRICK_COLOR_IDS, brickMaterialId, type BrickColorId } from './brickCatalog';
-
-const PLASTIC: Record<BrickColorId, [number, number, number]> = {
-  cyan: [0.35, 0.78, 0.88],
-  white: [0.92, 0.92, 0.94],
-  lime: [0.45, 0.82, 0.35],
-  sand: [0.82, 0.74, 0.58],
-  /** A1 plaza fountain brick (reddish-brown). */
-  terracotta: [0.72, 0.4, 0.3],
-  yellow: [0.95, 0.82, 0.18],
-  black: [0.12, 0.12, 0.14],
-};
+import { brickMaterialId, type BrickColorId } from './brickCatalog';
+import { BRICK_CATALOG, getColor } from './catalog';
 
 function plasticMat(colorId: BrickColorId): MaterialSpec {
-  const baseColor = PLASTIC[colorId];
+  const def = getColor(colorId);
+  const baseColor = def ? [...def.rgb] : [0.7, 0.7, 0.7];
+  const roughness = def?.translucent ? 0.22 : 0.38;
   return {
     shaderGraphId: 'pbr',
     name: brickMaterialId(colorId),
     properties: {
-      baseColor: [...baseColor],
-      roughness: 0.38,
+      baseColor,
+      roughness,
       metallic: 0.04,
     },
   };
@@ -33,8 +25,8 @@ function plasticMat(colorId: BrickColorId): MaterialSpec {
 /** Merge into LevelSpec.materials. */
 export function brickCatalogMaterials(): Record<string, MaterialSpec> {
   const out: Record<string, MaterialSpec> = {};
-  for (const id of BRICK_COLOR_IDS) {
-    out[brickMaterialId(id)] = plasticMat(id);
+  for (const c of BRICK_CATALOG.colors) {
+    out[brickMaterialId(c.id)] = plasticMat(c.id);
   }
   return out;
 }

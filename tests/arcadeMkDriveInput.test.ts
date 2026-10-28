@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   GP,
+  resolveMkJumpHeld,
   resolveMkMoveForward,
+  resolveMkMoveRight,
+  resolveMkResetHeld,
   resolvePlaneClimb,
 } from '../src/racer/host/arcadeMkDriveInput';
 
@@ -41,6 +44,28 @@ describe('resolveMkMoveForward', () => {
   it('ignores missing pad / empty hardware', () => {
     expect(resolveMkMoveForward({})).toBe(0);
     expect(resolveMkMoveForward({ gamepads: [null] })).toBe(0);
+  });
+});
+
+describe('resolveMkMoveRight', () => {
+  it('uses A/Q / D and left stick X', () => {
+    expect(resolveMkMoveRight({ keysDown: keys('d') })).toBe(1);
+    expect(resolveMkMoveRight({ keysDown: keys('a') })).toBe(-1);
+    expect(resolveMkMoveRight({ keysDown: keys('q') })).toBe(-1);
+    expect(resolveMkMoveRight({ gamepads: [pad({ axes: [0.9, 0] })] })).toBe(0.9);
+    expect(resolveMkMoveRight({ gamepads: [pad({ axes: [-0.7, 0] })] })).toBe(-0.7);
+    expect(resolveMkMoveRight({ gamepads: [pad({ axes: [0.05, 0] })] })).toBe(0);
+  });
+});
+
+describe('resolveMkJumpHeld / reset', () => {
+  it('maps L1/R1 to jump and Select to reset', () => {
+    const buttons = Array.from({ length: 10 }, () => ({ pressed: false, value: 0 }));
+    buttons[GP.L1] = { pressed: true, value: 1 };
+    expect(resolveMkJumpHeld({ gamepads: [pad({ buttons })] })).toBe(true);
+    buttons[GP.L1] = { pressed: false, value: 0 };
+    buttons[GP.Select] = { pressed: true, value: 1 };
+    expect(resolveMkResetHeld({ gamepads: [pad({ buttons })] })).toBe(true);
   });
 });
 

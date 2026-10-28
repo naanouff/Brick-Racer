@@ -17,6 +17,7 @@ import { LogChannel } from '@naanouff/w3dts-logger';
 import { buildCityTestTriggers, CITY_HUB_SPAWNS, CITY_TEST_SPAWN } from '../levels/cityTest';
 import { spawnCityTest } from '../levels/cityTest/spawnCityTest';
 import { spawnBrickLab } from '../levels/brickLab/spawnBrickLab';
+import { spawnCatalogLab } from '../levels/catalogLab/spawnCatalogLab';
 import { buildRaceTestTriggers, raceSpawnForVehicle } from '../levels/raceTest';
 import { getLevelSpec, isLevelId, type LevelId } from '../levels/registry';
 import { spawnLevel, type LevelSpawnPose, type LevelTrigger } from '../levels/shared';
@@ -31,6 +32,17 @@ import {
   getHubPossession,
   isHubActive,
 } from '../hub/hubPossession';
+import {
+  clearCatalogPreview,
+  catalogMeshFbx,
+  catalogMeshGlb,
+  catalogMeshObj,
+  spawnCatalogMeshPreview,
+  spawnCatalogPreview,
+  type CatalogMeshPreviewOpts,
+  type CatalogMeshPreviewResult,
+  type CatalogPreviewOpts,
+} from '../hub/brick/catalog/spawnCatalogPreview';
 import {
   readBrickLabManualId,
   readBrickLabShell,
@@ -104,11 +116,16 @@ export function rebindActiveChaseCamera(world: World, engine: IEngineContext): v
 }
 
 const BRICK_LAB_CAMERA_NAME = 'BL_OrbitCamera';
+const CATALOG_LAB_CAMERA_NAME = 'CL_OrbitCamera';
+
+function isOrbitLab(id: LevelId): boolean {
+  return id === 'brick-lab' || id === 'catalog-lab';
+}
 
 /** Bind orbit cam as game+editor; prefer orbital over leftover chase preference. */
-function bindBrickLabCamera(engine: Engine): boolean {
+function bindOrbitLabCamera(engine: Engine, cameraName: string): boolean {
   const world = engine.ecsWorld;
-  const cam = findEntityByName(world, BRICK_LAB_CAMERA_NAME);
+  const cam = findEntityByName(world, cameraName);
   if (cam === null) return false;
   const camera = world.getComponent(cam, CameraComponent);
   const transform = world.getComponent(cam, TransformComponent);
@@ -153,6 +170,7 @@ export class SceneDirector {
   }
 
   async unload(): Promise<void> {
+    clearCatalogPreview(this.engine);
     const world = this.engine.ecsWorld;
     for (const entity of this.rootEntityIds) {
       try {
@@ -163,6 +181,40 @@ export class SceneDirector {
     }
     this.rootEntityIds = [];
     this.activeId = null;
+  }
+
+  /** Catalog-lab: preview a part as bo_cube (no BC1 required). */
+  previewCatalogPart(opts: CatalogPreviewOpts): void {
+    if (this.activeId !== 'catalog-lab') return;
+    spawnCatalogPreview(this.engine, opts);
+  }
+
+  /** Catalog-lab: preview real LDraw geometry. Triangle count is 0 when nothing spawned. */
+  previewCatalogMesh(opts: CatalogMeshPreviewOpts): CatalogMeshPreviewResult {
+    if (this.activeId !== 'catalog-lab') return { triangleCount: 0, ao: null, coverage: null };
+    return spawnCatalogMeshPreview(this.engine, opts);
+  }
+
+  clearCatalogPreview(): void {
+    clearCatalogPreview(this.engine);
+  }
+
+  /** GLB of a mesh already previewed in catalog-lab. */
+  exportCatalogGlb(ldrawId: string): Uint8Array | null {
+    if (this.activeId !== 'catalog-lab') return null;
+    return catalogMeshGlb(ldrawId);
+  }
+
+  /** OBJ of a mesh already previewed in catalog-lab. UV set is UV1. */
+  exportCatalogObj(ldrawId: string): Uint8Array | null {
+    if (this.activeId !== 'catalog-lab') return null;
+    return catalogMeshObj(ldrawId);
+  }
+
+  /** FBX of a mesh already previewed in catalog-lab. UV0 and UV1. */
+  exportCatalogFbx(ldrawId: string): Uint8Array | null {
+    if (this.activeId !== 'catalog-lab') return null;
+    return catalogMeshFbx(ldrawId);
   }
 
   /**
@@ -187,6 +239,9 @@ export class SceneDirector {
         });
         rootEntityIds = lab.rootEntityIds;
         labStats = `${lab.manualId} shell=${lab.shell ? 1 : 0} bricks ${lab.report.kept}/${lab.report.total} batches ${lab.batches}`;
+      } else if (id === 'catalog-lab') {
+        ({ rootEntityIds } = await spawnCatalogLab(this.engine));
+        labStats = 'catalog preview';
       } else {
         ({ rootEntityIds } = await spawnLevel(this.engine, getLevelSpec(id)));
       }
@@ -197,11 +252,17 @@ export class SceneDirector {
       if (id === 'city-test') activateHubSession(CITY_HUB_SPAWNS);
       else deactivateHubSession();
       if (levelNeedsGproc(id)) ensureGprocSystem(this.engine);
-      if (id === 'brick-lab') {
-        if (!bindBrickLabCamera(this.engine)) {
+      const orbitCamName =
+        id === 'brick-lab'
+          ? BRICK_LAB_CAMERA_NAME
+          : id === 'catalog-lab'
+            ? CATALOG_LAB_CAMERA_NAME
+            : null;
+      if (orbitCamName) {
+        if (!bindOrbitLabCamera(this.engine, orbitCamName)) {
           this.engine.logger.warn(
             LogChannel.Rendering,
-            `[BrickRacer] brick-lab: camera "${BRICK_LAB_CAMERA_NAME}" missing after spawn.`
+            `[BrickRacer] ${id}: camera "${orbitCamName}" missing after spawn.`
           );
         }
       } else {
@@ -220,12 +281,12 @@ export class SceneDirector {
       });
 
       // Graph reload / warm can leave a stale chase preference — re-assert lab cam.
-      if (id === 'brick-lab') bindBrickLabCamera(this.engine);
+      if (orbitCamName) bindOrbitLabCamera(this.engine, orbitCamName);
 
       const hint =
         id === 'city-test'
           ? `[BrickRacer] Level "${id}" loaded. ZQSD caméra · souris / stick droit · F · X · pad Y.`
-          : id === 'brick-lab'
+          : isOrbitLab(id)
             ? `[BrickRacer] Level "${id}" loaded. ${labStats ?? ''} · drag orbit · scroll zoom.`
             : `[BrickRacer] Level "${id}" loaded. WASD · Space drift · X reset · pad A/B · L1/R1 drift.`;
       this.engine.logger.info(LogChannel.DataLifecycle, hint);

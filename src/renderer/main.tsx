@@ -43,6 +43,7 @@ import {
   VEHICLE_KINDS,
   type VehicleKind,
 } from '../racer/vehicles/selectVehicle';
+import { CatalogBrowserPanel } from './catalog/CatalogBrowserPanel';
 import './app.css';
 
 const CC_TIERS: CcTier[] = [50, 100, 150];
@@ -81,9 +82,13 @@ function LevelReviewBar(props: {
   const t = props.telemetry;
   const chargeColor =
     t.charge === 'orange' ? '#f09020' : t.charge === 'blue' ? '#3aa0ff' : '#8b95a8';
-  const isLab = props.active === 'brick-lab';
-  const hint = isLab
-    ? 'Orbit · souris / stick · HUD manuels'
+  const isBrickLab = props.active === 'brick-lab';
+  const isCatalogLab = props.active === 'catalog-lab';
+  const isLab = isBrickLab || isCatalogLab;
+  const hint = isCatalogLab
+    ? 'Orbit · panneau catalogue à droite'
+    : isBrickLab
+      ? 'Orbit · souris / stick · HUD manuels'
     : props.vehicle === 'plane'
       ? 'WASD thrust/steer · Espace monter · Shift descendre · X reset'
       : 'WASD · Espace drift · X reset';
@@ -105,7 +110,7 @@ function LevelReviewBar(props: {
           </button>
         ))}
       </div>
-      {isLab ? (
+      {isBrickLab ? (
         <>
           <div className="br-review__levels" role="group" aria-label="Manuel brick">
             {BRICK_MANUAL_IDS.map((id) => (
@@ -143,7 +148,7 @@ function LevelReviewBar(props: {
             </button>
           </div>
         </>
-      ) : (
+      ) : isCatalogLab ? null : (
         <>
           <div className="br-review__levels" role="group" aria-label="Véhicule">
             {VEHICLE_KINDS.map((v) => (
@@ -198,8 +203,10 @@ function LevelReviewBar(props: {
       <p className="br-review__telemetry" aria-live="polite">
         {!isLab ? (
           <span className="br-review__speed">{Math.round(t.speedKmh)} km/h</span>
-        ) : props.brickStats ? (
+        ) : isBrickLab && props.brickStats ? (
           <span className="br-review__speed">{props.brickStats}</span>
+        ) : isCatalogLab ? (
+          <span className="br-review__speed">proxy box</span>
         ) : null}
         <span className="br-review__fps">
           {Math.round(props.fps)} fps · {props.frameMs.toFixed(1)} ms ·{' '}
@@ -404,30 +411,35 @@ function App(): ReactElement {
           </div>
         </div>
       ) : ready ? (
-        <LevelReviewBar
-          active={levelId}
-          vehicle={vehicle}
-          cc={cc}
-          debugTex={debugTex}
-          brickManual={brickManual}
-          brickShell={brickShell}
-          brickStats={brickStats}
-          telemetry={telemetry}
-          fps={fps}
-          frameMs={frameMs}
-          drawCalls={drawCalls}
-          trisVisible={trisVisible}
-          trisTotal={trisTotal}
-          bufferW={bufferW}
-          bufferH={bufferH}
-          renderQuality={renderQuality}
-          onSelectLevel={onSelectLevel}
-          onSelectVehicle={onSelectVehicle}
-          onSelectCc={onSelectCc}
-          onToggleDebugTex={onToggleDebugTex}
-          onSelectBrickManual={onSelectBrickManual}
-          onToggleBrickShell={onToggleBrickShell}
-        />
+        <>
+          <LevelReviewBar
+            active={levelId}
+            vehicle={vehicle}
+            cc={cc}
+            debugTex={debugTex}
+            brickManual={brickManual}
+            brickShell={brickShell}
+            brickStats={brickStats}
+            telemetry={telemetry}
+            fps={fps}
+            frameMs={frameMs}
+            drawCalls={drawCalls}
+            trisVisible={trisVisible}
+            trisTotal={trisTotal}
+            bufferW={bufferW}
+            bufferH={bufferH}
+            renderQuality={renderQuality}
+            onSelectLevel={onSelectLevel}
+            onSelectVehicle={onSelectVehicle}
+            onSelectCc={onSelectCc}
+            onToggleDebugTex={onToggleDebugTex}
+            onSelectBrickManual={onSelectBrickManual}
+            onToggleBrickShell={onToggleBrickShell}
+          />
+          {levelId === 'catalog-lab' ? (
+            <CatalogBrowserPanel host={hostRef.current} />
+          ) : null}
+        </>
       ) : (
         <div className="br-shell" aria-busy="true">
           <img className="br-logo" src="/brand/logo.svg" alt="" />

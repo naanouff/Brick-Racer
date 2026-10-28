@@ -2,100 +2,113 @@
 
 Deux usages :
 
-1. **Artwork structure seule** (§ ci-dessous) — image de référence isolée (fontaine / landmark), sans plaza.
+1. **Artwork / photo structure** (§ ci-dessous) — image de référence isolée (fontaine / landmark), sans plaza.
 2. **Mode d’emploi JSON** (§ Prompt manuel) — notice d’assemblage pour le runtime.
 
-Pipeline runtime : artwork (optionnel) → prompt manuel → JSON → `validateManual` → `assembleManual` → `bakeShell` → `InstancedMesh`.  
+Pipeline runtime : réf. visuelle → prompt manuel → JSON → `validateManual` → `assembleManual` → `bakeShell` → `InstancedMesh`.  
 Gemini **ne code pas** pour le manuel ; il ne rend que le JSON.
 
-Réf. plaza complète (contexte) : [a1-hub-plaza.png](art/a1-hub-plaza.png).  
+Réf. plaza complète (contexte hub) : [a1-hub-plaza.png](art/a1-hub-plaza.png).  
 Plan cotes : [test-slice-plans.md](test-slice-plans.md) § city-test — fontaine Ø base **3,00 m**, sommet Y **2,00 m**, centre `(20, 0, 20)`.
 
 ### Canons structure fontaine (validés)
 
 | Vue | Fichier |
 | --- | ------- |
-| Hero 3/4 studio | ![Fontaine hero](art/ref-fountain-hero.png) · [ref-fountain-hero.png](art/ref-fountain-hero.png) |
-| Ortho plan + élévation | ![Fontaine ortho](art/ref-fountain-ortho.png) · [ref-fountain-ortho.png](art/ref-fountain-ortho.png) |
+| **BOM photo (canon matière)** | ![Fontaine BOM](art/ref-fountain-bom.png) · [ref-fountain-bom.png](art/ref-fountain-bom.png) |
+| Hero 3/4 studio (legacy A1) | [ref-fountain-hero.png](art/ref-fountain-hero.png) |
+| Ortho plan + élévation | [ref-fountain-ortho.png](art/ref-fountain-ortho.png) |
 
-Joindre **ces deux images** (ou au moins le hero) au prompt manuel JSON — plus A1 plaza si besoin de contexte hub.
+**Canon runtime** : photo BOM — pierre **Light Bluish Gray**, eau **Trans-Light Blue / Trans-Clear**, 3 paliers circulaires. Joindre `ref-fountain-bom.png` au prompt manuel (hero/ortho en appoint).
+
+### BOM physique → catalogue (design IDs)
+
+| Pièce réelle | Qty | Id catalogue | mesh |
+| ------------ | --- | ------------ | ---- |
+| #3128 / #41539 plaque ronde 8×8 | 1 | `41539` (alias `3128`) | missing |
+| #85080 macaroni 4×4 | 4 | `85080` | missing |
+| #3941 brique ronde 2×2 | 2 | `3941` | missing |
+| #3960 dish 4×4 | 1 | `3960` | missing |
+| #3062b brique ronde 1×1 | 1 | `3062` | missing |
+| #4740 dish 2×2 | 1 | `4740` | missing |
+| #6141 plaque ronde 1×1 TLBlue / Clear | 16+15 | `6141` | box |
+| #4589b cône 1×1 | 1 | `4589` | missing |
+
+Le manuel runtime actuel peut encore utiliser des alias box ; la **cible authoring** est d’écrire ces design IDs dès que le catalogue les connaît.  
+Manuel versionné : [`fountain.manual.json`](../../src/racer/hub/brick/manuals/fountain.manual.json).
 
 ---
 
 ## Artwork — structure seule (fontaine)
 
-Objectif : générer un **hero shot de la fontaine uniquement** (fond neutre), assez précis pour guider le manuel JSON. Pas de bâtiments, pas de minifig, pas de pad, pas de gate.
+Objectif : hero shot de la fontaine uniquement (fond neutre), aligné sur la BOM photo. Pas de plaza.
 
-### Spec structure (à respecter dans l’image)
+### Spec structure
 
 | Élément | Description |
 | ------- | ----------- |
-| Forme | **3 paliers circulaires** (bassins empilés), pas une pyramide de cubes / voxel Minecraft |
-| Emprise | Diamètre bassin bas ≈ **3 m** (~9 studs) ; hauteur totale ≈ **2 m** (~6 briques) |
-| Matériau bassins | Briques **terracotta / rouge-brun** studs visibles, joints lisibles, plastique jouet |
-| Eau | Surfaces **cyan** plates (tiles) dans chaque bassin + reflets blancs / écume |
-| Jet | Colonne centrale fine + goutte / spray blanc-cyan au sommet |
-| Style | Concept art jeu brick pastel, lumière douce studio, outlines nets |
-| Interdits | Plaza, tour, garage, panneau texte, personnages, route, ciel city, logos marques |
+| Forme | **3 paliers circulaires** (bassins empilés), pas une pyramide de cubes |
+| Emprise | Diamètre bassin bas ≈ **3 m** (~9 studs) ; hauteur totale ≈ **2 m** |
+| Matériau bassins | **Gris clair / Light Bluish Gray**, studs visibles |
+| Eau | Plaques rondes **cyan translucide** + accents **blanc / clear** |
+| Jet | Plaque cyan + cône / spray blanc au sommet |
+| Interdits | Plaza, tour, garage, personnages, logos marques |
 
 ### Prompt artwork (copier-coller)
 
 ```text
-Product-style concept art of a SINGLE LEGO-like brick fountain as a standalone prop, isolated on a seamless light grey / soft white studio backdrop, no city, no buildings, no characters, no road, no signs.
+Product-style photo or concept art of a SINGLE LEGO brick fountain as a standalone prop on a light wooden table or seamless light grey studio backdrop, no city, no buildings, no characters.
 
-Structure (exact):
-- three concentric circular basins stacked like a classic plaza fountain (NOT a square pyramid of cubes, NOT Minecraft voxels)
-- bottom basin diameter about 3 meters (~9 studs across), overall height about 2 meters
-- basin rims built from reddish-brown terracotta studded bricks with visible studs and brick seams
-- each basin holds flat cyan water tiles with white foam highlights at the edges
-- thin central terracotta spout column with a small cyan-white water spray tip on top
-- soft daylight studio lighting, plastic toy sheen, clear silhouette, game concept art, candy-pastel palette limited to terracotta + cyan + white
+Structure (exact, match BOM):
+- three concentric circular basins stacked (NOT a square pyramid of cubes)
+- bottom: Light Bluish Gray 8x8 round plate + four 4x4 macaroni bricks forming the outer ring
+- middle: Light Bluish Gray 4x4 inverted dish on two stacked 2x2 round bricks
+- top: Light Bluish Gray 2x2 inverted dish on a 1x1 round brick
+- water: Trans-Light Blue and Trans-Clear 1x1 round plates in each basin
+- jet: Trans-Light Blue 1x1 round plate + Trans-Clear 1x1 cone on top
+- soft daylight, plastic toy sheen, clear silhouette
 
-Composition: three-quarter isometric view, fountain centered, slight ground shadow only, generous empty margin around the prop.
-
-Negative: city plaza, clock tower, garage, billboard text, minifigures, yellow race pad, seashell gate, asphalt road, cluttered background, purple haze, photorealistic wet stone fountain, logos, licensed brands
+Negative: terracotta / reddish-brown bricks, city plaza, minifigures, yellow race pad, logos, licensed brands, Minecraft voxels
 ```
 
-
-
-### Variante — orthographique (notice / cotes)
-
-Utile si tu veux une vue « plan + élévation » avant le JSON :
-
-```text
-Technical orthographic concept sheet of one LEGO-style brick fountain only, white background, two views side by side: (1) top plan showing three concentric circular basin rings, (2) front elevation showing three stacked basin heights totaling 2.0 m with diameter callout 3.0 m at the base, terracotta brick rims, cyan water discs, central spout, meter dimension lines, title "landmark.fountain / city-test", no city scenery, no characters, toy brick aesthetic, clean blueprint-like presentation
-```
-
-Enchaînement recommandé : artwork structure (canons ci-dessus) → joindre les PNG au **Prompt manuel** ci-dessous.
-
-**Note catalogue runtime** : les artworks montrent des briques **courbes** et un jet multi-buses ; le catalogue BW1 n’a que des pièces orthogonales (`1x1`…`tile`). Le manuel approxime le cercle par des `ring` / `disc` — silhouette A1, pas pièce-à-pièce identique à l’image.
+**Note catalogue runtime** : pas de macaroni / dish / cône mesh — approximation orthogonale via `ring` / `disc` / `brick` + `plate_1x1`. Silhouette BOM, pas pièce-à-pièce identique.
 
 ---
 
-
-
 ## Catalogue (autorisé uniquement)
 
+Source de vérité : [`parts.json`](../../src/racer/hub/brick/catalog/data/parts.json) + [`colors.json`](../../src/racer/hub/brick/catalog/data/colors.json) (plan [brick-part-catalog.md](../plans/brick-part-catalog.md)).
 
+- Préférer les **design IDs** LEGO (`3005`, `85080`, `6141`, …).
+- Alias courts legacy toujours OK (`1x1` → `3005`, `plate_1x1` → `6141`, …).
+- Une pièce absente du JSON = **refus** `validateManual` — l’ajouter au catalogue **avant** de l’utiliser dans un manuel (même si `mesh.status: missing`).
+- Rendu actuel : proxy box tant que `mesh.status !== ready`.
 
-### Pièces (`part`)
+### Pièces (extrait — seed BC1)
 
+| Id | Alias | Emprise | Notes |
+| -- | ----- | ------- | ----- |
+| `3005` | `1x1` | 1×3×1 | Brick 1×1 (`box`) |
+| `3004` | `1x2` | 1×3×2 | |
+| `3003` | `2x2` | 2×3×2 | |
+| `3001` | `2x4` | 2×3×4 | |
+| `3020` | `plate` | 2×1×4 | |
+| `3068` | `tile` | 2×1×2 | |
+| `6141` | `plate_1x1` | 1×1×1 | Round plate — eau BOM |
+| `85080` | — | 4×3×4 | Macaroni (`missing`) |
+| `3960` / `4740` | — | dish | Bassins (`missing`) |
+| `4589` | `4589b` | 1×3×1 | Cône jet (`missing`) |
 
-| Id      | Emprise (studs × plates × studs) à rot 0 | Notes                   |
-| ------- | ---------------------------------------- | ----------------------- |
-| `1x1`   | 1 × 3 × 1                                | Brique standard         |
-| `1x2`   | 1 × 3 × 2                                |                         |
-| `2x2`   | 2 × 3 × 2                                |                         |
-| `2x4`   | 2 × 3 × 4                                |                         |
-| `plate` | 2 × 1 × 4                                | Fine (1 plate)          |
-| `tile`  | 2 × 1 × 2                                | Fine carrée — eau / sol |
-
+Liste complète = fichier JSON (70+ pièces seed, extensible).
 
 `rot` ∈ `{0, 90, 180, 270}` (yaw degrés, autour de Y). À 90°/270°, X et Z de l’emprise s’échangent.
 
 ### Couleurs (`color`)
 
-`cyan` · `white` · `lime` · `sand` · `terracotta` · `yellow` · `black`
+`white` · `black` · `yellow` · `lime` · `sand` · `gray` · `dark_gray` · `terracotta` · `cyan` · `clear`  
+(+ aliases `lbg`, `trans_light_blue`, …)
+
+Fontaine canon : **`gray` + `cyan` + `clear`/`white`**.
 
 ### Unités
 
@@ -103,20 +116,17 @@ Enchaînement recommandé : artwork structure (canons ci-dessus) → joindre les
 - **1 plate (P)** = 0,11 m — axe Y  
 - **1 brick (B)** = 3 plates = 0,33 m  
 - Coordonnées manuelles = **entiers** (studs / plates), relatives à `origin`  
-- `at: [sx, py, sz]` = coin **min** de la pièce (pas le centre), en studs / plates
-
-
+- `at: [sx, py, sz]` = coin **min** de la pièce (pas le centre), en studs / plates  
+- **Pas** de champ `center` sur `ring` / `disc` : le centre est `origin` ; `radius` et `y` suffisent
 
 ### Enveloppe fontaine (plan)
 
 - `id`: `"landmark.fountain"`  
 - `origin`: `[20, 0, 20]` (mètres monde)  
 - `envelope.size`: `[3, 2, 3]` (mètres, plein) → Ø base 3 m, sommet Y ≤ 2 m  
-- Réf. visuelle : [a1-hub-plaza.png](art/a1-hub-plaza.png) — bassins **circulaires terracotta**, eau **cyan**, jet central, 3 paliers
+- Réf. visuelle : [ref-fountain-bom.png](art/ref-fountain-bom.png)
 
 ---
-
-
 
 ## Format JSON (sortie obligatoire)
 
@@ -124,68 +134,63 @@ Enchaînement recommandé : artwork structure (canons ci-dessus) → joindre les
 {
   "id": "landmark.fountain",
   "version": 1,
-  "title": "Fontaine plaza A1",
+  "title": "Fontaine circulaire 3 paliers (BOM gris + eau)",
   "origin": [20, 0, 20],
   "envelope": { "size": [3, 2, 3] },
   "partsList": [
-    { "part": "1x2", "color": "terracotta", "qty": 32 },
-    { "part": "tile", "color": "cyan", "qty": 12 }
+    { "part": "tile", "color": "gray", "qty": 16 },
+    { "part": "2x2", "color": "gray", "qty": 11 },
+    { "part": "plate_1x1", "color": "cyan", "qty": 28 }
   ],
   "steps": [
     {
-      "title": "1 — Bassin bas",
+      "title": "1 — Plaque ronde 8×8 (base)",
       "ops": [
-        { "op": "ring", "part": "1x2", "color": "terracotta", "radius": 4, "y": 0, "courses": 2 },
-        { "op": "disc", "part": "tile", "color": "cyan", "radius": 3, "y": 0 }
+        { "op": "disc", "part": "tile", "color": "gray", "radius": 3.6, "y": 0 }
       ]
     },
     {
-      "title": "2 — Jet",
+      "title": "2 — Anneau macaroni",
       "ops": [
-        { "op": "brick", "part": "1x1", "color": "terracotta", "at": [0, 12, 0] },
-        { "op": "brick", "part": "1x1", "color": "cyan", "at": [0, 15, 0] }
+        { "op": "ring", "part": "2x2", "color": "gray", "radius": 3, "y": 1, "courses": 1, "count": 8 }
       ]
     }
   ]
 }
 ```
 
-
-
 ### Macros `ops`
 
-
-| `op`    | Champs                                                                           | Effet                                                                             |
-| ------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `brick` | `part`, `color`, `at`, `rot?`                                                    | Une pièce                                                                         |
-| `ring`  | `part`, `color`, `radius` (studs), `y` (plates), `courses?` (défaut 1), `count?` | Anneau horizontal ; `courses` empile en hauteur (×3 plates / course pour briques) |
-| `disc`  | `part`, `color`, `radius`, `y`, `filled?` (défaut true)                          | Disque / anneau plat (tiles / plates)                                             |
-| `wall`  | `part`, `color`, `from`, `to`, `y`, `heightCourses?`                             | Mur entre deux points grille                                                      |
-| `box`   | `part`, `color`, `min`, `max`                                                    | Remplissage AABB grille (le bake retire l’intérieur)                              |
-
+| `op` | Champs | Effet |
+| ---- | ------ | ----- |
+| `brick` | `part`, `color`, `at`, `rot?` | Une pièce |
+| `ring` | `part`, `color`, `radius` (studs), `y` (plates), `courses?`, `count?` | Anneau horizontal autour de `origin` |
+| `disc` | `part`, `color`, `radius`, `y`, `filled?`, `innerRadius?` | Disque / anneau plat |
+| `wall` | `part`, `color`, `from`, `to`, `y`, `heightCourses?` | Mur entre deux points grille |
+| `box` | `part`, `color`, `min`, `max` | Remplissage AABB grille (bake retire l’intérieur) |
 
 `partsList` = nomenclature récap (quantités approximatives OK) ; les `steps` font foi pour l’assemblage.
 
 ---
 
-
-
 ## Prompt manuel JSON (copier-coller)
 
-Joindre de préférence l’**artwork structure seule** (ou crop fontaine de A1).
+Joindre **`ref-fountain-bom.png`** (+ hero/ortho si besoin).
 
 ```text
 Tu es un designer LEGO pour le jeu Brick-Racer. Tu produis UNIQUEMENT un JSON valide (pas de markdown, pas de commentaire) au format « mode d'emploi brick » ci-dessous.
 
 Contraintes dures :
-- Catalogue pièces UNIQUEMENT : 1x1, 1x2, 2x2, 2x4, plate, tile
-- Couleurs UNIQUEMENT : cyan, white, lime, sand, terracotta, yellow, black
+- Catalogue pièces = design IDs LEGO présents dans parts.json (ex. 3005, 85080, 6141, 3960, 4740, 4589) ou leurs aliases documentés — N’INVENTE PAS de pièce hors catalogue
+- Couleurs = ids colors.json (gray, cyan, clear, white, …)
+- Fontaine : structure gray, eau cyan/clear — PAS terracotta
 - Coordonnées entières : X/Z en studs, Y en plates ; `at` = coin min de la pièce
 - rot ∈ {0, 90, 180, 270}
-- Tout doit tenir dans envelope.size [3, 2, 3] mètres autour de origin [20, 0, 20] (soit environ ±4,5 studs en XZ et Y plates 0..18)
-- Style structure : fontaine circulaire 3 paliers, bassins terracotta, eau cyan (tiles), jet central blanc/cyan, pas de pyramide de cubes verts
-- Utilise des macros ring / disc / brick (évite de lister 200 briques une par une)
-- Inclus partsList (nomenclature) + steps numérotés avec titres clairs (notice LEGO)
+- ring / disc : champs `radius` + `y` (PAS de `center` — le centre est origin)
+- Tout doit tenir dans envelope.size [3, 2, 3] mètres autour de origin [20, 0, 20] (± ~5 studs XZ, Y plates 0..18)
+- Style : fontaine circulaire 3 paliers selon photo BOM (base 8x8 #41539/3128, macaroni #85080, dish #3960/#4740, jet #4589)
+- Préfère les vraies design IDs BOM ; le runtime peut proxy-box tant que le mesh manque
+- Utilise des macros ring / disc / brick ; inclus partsList + steps numérotés type notice LEGO
 - Pas de chevauchement ; pas de pièce hors catalogue
 
 Format exact :
@@ -201,13 +206,9 @@ Format exact :
   ]
 }
 
-Références visuelles jointes : ref-fountain-hero.png + ref-fountain-ortho.png (fontaine seule, Ø 3.0 m × h 2.0 m).
-Suis la silhouette 3 paliers terracotta + eau cyan + jet central.
-Approxime le cercle avec les macros ring/disc du catalogue orthogonal (pas de pièce courbe au runtime).
+Référence visuelle jointe : ref-fountain-bom.png (Light Bluish Gray + Trans-Light Blue water).
 Génère le mode d'emploi complet de la fontaine.
 ```
-
-
 
 ### Boucle d’erreurs
 
@@ -221,4 +222,3 @@ Erreurs :
 ```
 
 ---
-

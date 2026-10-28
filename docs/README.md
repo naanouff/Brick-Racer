@@ -26,6 +26,13 @@
 | [plans/blockout-arcade-kart.md](plans/blockout-arcade-kart.md) | Plan kart arcade + texture debug (BO1g) |
 | [plans/hub-on-foot.md](plans/hub-on-foot.md) | Plan hub blockout : pied + échange de véhicule (H1) |
 | [plans/brick-world-rendering.md](plans/brick-world-rendering.md) | Plan rendu monde brick (manuel → enveloppe → batch) |
+| [plans/brick-part-catalog.md](plans/brick-part-catalog.md) | Catalogue pièces LEGO data-first (BC1) |
+| [sprints/BRICK-BC1.md](sprints/BRICK-BC1.md) | Sprint catalogue design IDs + mesh status |
+| [plans/catalog-lab.md](plans/catalog-lab.md) | Plan Catalog Lab (master Rebrickable×LDraw → BC1, W3DTS) |
+| [sprints/BRICK-CL1.md](sprints/BRICK-CL1.md) | Sprint niveau `catalog-lab` + browser + pont BC1 |
+| [sprints/BRICK-CL2.md](sprints/BRICK-CL2.md) | Sprint vraie géométrie LDraw à la demande dans `catalog-lab` |
+| [sprints/BRICK-CL3.md](sprints/BRICK-CL3.md) | Sprint plastique AmbientCG + couleur diffuse (preview catalogue) |
+| [sprints/BRICK-CL4.md](sprints/BRICK-CL4.md) | Sprint UV LDraw : UV0 plastique homogène + UV1 atlas 0–1 |
 | [design/brick-manual-prompt.md](design/brick-manual-prompt.md) | Prompt Gemini → mode d’emploi JSON (pièces + étapes) |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
 | [references/w3dts-input.md](references/w3dts-input.md) | Input w3dts — Gamepad HID (`INP-G`) |

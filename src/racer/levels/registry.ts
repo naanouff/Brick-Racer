@@ -4,12 +4,19 @@
  */
 
 import { brickLabSpec } from './brickLab/brickLabSpec';
+import { catalogLabSpec } from './catalogLab/catalogLabSpec';
 import { cityTestSpec } from './cityTest/cityTestSpec';
 import { raceTestSpec } from './raceTest/raceTestSpec';
 import { sandboxKartSpec } from './sandboxKart/sandboxKartSpec';
 import type { LevelSpec } from './shared/levelTypes';
 
-export const LEVEL_IDS = ['race-test', 'city-test', 'sandbox-kart', 'brick-lab'] as const;
+export const LEVEL_IDS = [
+  'race-test',
+  'city-test',
+  'sandbox-kart',
+  'brick-lab',
+  'catalog-lab',
+] as const;
 export type LevelId = (typeof LEVEL_IDS)[number];
 
 export const DEFAULT_LEVEL_ID: LevelId = 'race-test';
@@ -60,6 +67,8 @@ export function getLevelSpec(id: LevelId): LevelSpec {
       return sandboxKartSpec;
     case 'brick-lab':
       return brickLabSpec;
+    case 'catalog-lab':
+      return catalogLabSpec;
   }
 }
 
@@ -73,5 +82,7 @@ export function levelLabel(id: LevelId): string {
       return 'Sandbox kart';
     case 'brick-lab':
       return 'Brick lab';
+    case 'catalog-lab':
+      return 'Catalogue';
   }
 }

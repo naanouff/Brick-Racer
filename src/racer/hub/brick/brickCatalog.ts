@@ -1,21 +1,27 @@
 /**
  * @file brickCatalog.ts
- * @description Brick part ids, sizes (m), and pastel plastic material ids.
+ * @description Brick poses + batching — part/color ids resolved via BC1 catalog.
  */
 
-import { B, P, S } from './brickUnits';
+import {
+  catalogCanonicalColorIds,
+  catalogCanonicalPartIds,
+  catalogColorAcceptIds,
+  catalogPartAcceptIds,
+  getColor,
+  getPart,
+  isCatalogColor,
+  isCatalogPart,
+  partFootprintFromCatalog,
+  resolveColorId,
+  resolvePartId,
+} from './catalog';
+import { P, S } from './brickUnits';
 
-export type BrickPartId = '1x1' | '1x2' | '2x2' | '2x4' | 'plate' | 'tile';
-
-/** Hub pastel plastics (PBR material ids on the level). */
-export type BrickColorId =
-  | 'cyan'
-  | 'white'
-  | 'lime'
-  | 'sand'
-  | 'terracotta'
-  | 'yellow'
-  | 'black';
+/** Part id accepted in manuals = design id or alias (e.g. "3005" | "1x1"). */
+export type BrickPartId = string;
+/** Color id accepted in manuals = slug or alias (e.g. "gray" | "lbg"). */
+export type BrickColorId = string;
 
 export type BrickPose = {
   partId: BrickPartId;
@@ -29,55 +35,35 @@ export type BrickPose = {
 /** Unit mesh shared by all brick instances (scaled via instance matrix). */
 export const BRICK_MESH_ID = 'bo_cube';
 
-export const BRICK_PART_IDS: readonly BrickPartId[] = [
-  '1x1',
-  '1x2',
-  '2x2',
-  '2x4',
-  'plate',
-  'tile',
-];
+/** Canonical part ids (no aliases). */
+export const BRICK_PART_IDS: readonly string[] = catalogCanonicalPartIds();
+/** All accept keys including aliases (validateManual). */
+export const BRICK_PART_ACCEPT_IDS: readonly string[] = catalogPartAcceptIds();
 
-export const BRICK_COLOR_IDS: readonly BrickColorId[] = [
-  'cyan',
-  'white',
-  'lime',
-  'sand',
-  'terracotta',
-  'yellow',
-  'black',
-];
+/** Canonical color ids. */
+export const BRICK_COLOR_IDS: readonly string[] = catalogCanonicalColorIds();
+export const BRICK_COLOR_ACCEPT_IDS: readonly string[] = catalogColorAcceptIds();
+
+export { isCatalogColor as isBrickColorId, isCatalogPart as isBrickPartId };
+export { resolveColorId, resolvePartId, getPart, getColor };
 
 /** Full extents (m) for a part — applied as instance scale on unit cube. */
 export function partSizeMeters(partId: BrickPartId): [number, number, number] {
-  switch (partId) {
-    case '1x1':
-      return [S, B, S];
-    case '1x2':
-      return [S, B, 2 * S];
-    case '2x2':
-      return [2 * S, B, 2 * S];
-    case '2x4':
-      return [2 * S, B, 4 * S];
-    case 'plate':
-      return [2 * S, P, 4 * S];
-    case 'tile':
-      return [2 * S, P, 2 * S];
-    default: {
-      const _e: never = partId;
-      return _e;
-    }
-  }
+  const [sx, py, sz] = partFootprintFromCatalog(partId);
+  return [sx * S, py * P, sz * S];
 }
 
 export function brickMaterialId(colorId: BrickColorId): string {
-  return `BRICK_${colorId}`;
+  const id = resolveColorId(colorId) ?? colorId;
+  return `BRICK_${id}`;
 }
 
 export type BrickBatchKey = string;
 
 export function brickBatchKey(partId: BrickPartId, colorId: BrickColorId): BrickBatchKey {
-  return `${partId}|${colorId}`;
+  const p = resolvePartId(partId) ?? partId;
+  const c = resolveColorId(colorId) ?? colorId;
+  return `${p}|${c}`;
 }
 
 export function parseBrickBatchKey(key: BrickBatchKey): {

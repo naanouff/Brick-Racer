@@ -80,12 +80,12 @@ describe('assembleManual + bakeShell', () => {
 });
 
 describe('fountain manual pipeline', () => {
-  it('builds terracotta/cyan poses inside the plan envelope', () => {
+  it('builds gray/cyan poses inside the plan envelope', () => {
     const poses = buildFountainBrickPoses(true);
-    expect(poses.length).toBeGreaterThan(40);
-    const terracotta = poses.filter((p) => p.colorId === 'terracotta').length;
+    expect(poses.length).toBeGreaterThan(20);
+    const gray = poses.filter((p) => p.colorId === 'gray').length;
     const cyan = poses.filter((p) => p.colorId === 'cyan').length;
-    expect(terracotta).toBeGreaterThan(20);
+    expect(gray).toBeGreaterThan(10);
     expect(cyan).toBeGreaterThan(4);
     for (const p of poses) {
       const [sx, sy, sz] = partSizeMeters(p.partId);

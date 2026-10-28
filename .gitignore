@@ -7,3 +7,8 @@ docs/api
 .DS_Store
 tmp/
 .vercel
+
+# Rebrickable / LDraw catalog POC (large + licensed data)
+data/rebrickable/
+data/ldraw/
+data/out/

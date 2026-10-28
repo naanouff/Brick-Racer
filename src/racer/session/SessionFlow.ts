@@ -22,6 +22,7 @@ function stateForLevel(id: LevelId): SessionState {
       return 'RaceActive';
     case 'sandbox-kart':
     case 'brick-lab':
+    case 'catalog-lab':
       return 'SandboxKart';
   }
 }

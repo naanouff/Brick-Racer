@@ -1,13 +1,20 @@
 /**
  * @file hidGamepadBridge.ts
- * @description Arcade drive axes (MK/DKR + plane climb) + optional HID poll into InputManager.
+ * @description Arcade drive axes (MK/DKR + plane) + HID poll into InputManager.
+ *
+ * npm `@naanouff/w3dts-core@0.0.37` / `input@0.0.21` do not resolve gamepad bindings.
+ * We stamp `navigator.getGamepads()` onto the hardware snapshot every frame and
+ * overwrite the axes / actions the race + hub systems actually read.
  */
 
 import type { Engine } from '@naanouff/w3dts-core';
 import * as W3dtsInput from '@naanouff/w3dts-input';
 import {
   ARCADE_MK_OVERRIDES_JSON,
+  resolveMkJumpHeld,
   resolveMkMoveForward,
+  resolveMkMoveRight,
+  resolveMkResetHeld,
   resolvePlaneClimb,
   resolvePlaneRollSnap,
   type HardwareLike,
@@ -39,6 +46,7 @@ type InputPkg = {
 type InputManagerHw = {
   hardware: HardwareSnapshot;
   axes: Map<string, number>;
+  actions: Map<string, boolean>;
   resolveFromHardware: () => void;
   enableMap: (mapId: string) => void;
   applyInputOverridesJson: (raw: string) => void;
@@ -74,7 +82,7 @@ function readLivePadSlots(slotCount: number): (GamepadSlotSnapshot | null)[] {
     slots.push({
       connected: true,
       id: pad.id,
-      mapping: pad.mapping,
+      mapping: pad.mapping || 'standard',
       buttons,
       axes,
     });
@@ -82,29 +90,26 @@ function readLivePadSlots(slotCount: number): (GamepadSlotSnapshot | null)[] {
   return slots;
 }
 
-function pollGamepadsIntoHardware(
-  hardware: HardwareSnapshot,
-  pkg: Required<Pick<InputPkg, 'GAMEPAD_SLOT_COUNT' | 'writeGamepadHardware' | 'clearGamepadHardware'>>
-): void {
-  if (typeof navigator === 'undefined' || typeof navigator.getGamepads !== 'function') {
-    pkg.clearGamepadHardware(hardware);
+/**
+ * Always attach live pads on the snapshot (hub + MK resolvers read `hardware.gamepads`).
+ * Prefers mono `writeGamepadHardware` when available.
+ */
+function stampGamepadsOnHardware(hardware: HardwareSnapshot, pkg: InputPkg): void {
+  const slotCount = typeof pkg.GAMEPAD_SLOT_COUNT === 'number' ? pkg.GAMEPAD_SLOT_COUNT : 4;
+  const slots = readLivePadSlots(slotCount);
+  if (typeof pkg.writeGamepadHardware === 'function') {
+    pkg.writeGamepadHardware(hardware, slots);
     return;
   }
-  pkg.writeGamepadHardware(hardware, readLivePadSlots(pkg.GAMEPAD_SLOT_COUNT));
-}
-
-function hardwareForAxes(im: InputManagerHw, hidPolled: boolean): HardwareLike {
-  if (hidPolled) return im.hardware as HardwareLike;
-  // npm input: no gamepads on snapshot — sample navigator for A/B + stick Y.
-  return {
-    keysDown: im.hardware.keysDown,
-    gamepads: readLivePadSlots(4),
-  };
+  if (typeof navigator === 'undefined' || typeof navigator.getGamepads !== 'function') {
+    delete hardware.gamepads;
+    return;
+  }
+  hardware.gamepads = slots;
 }
 
 /**
- * Install MK/DKR axes + plane climb. Polls HID into InputManager when mono input is linked.
- * Idempotent.
+ * Install MK/DKR axes + plane climb + pad actions. Idempotent.
  */
 export function installHidGamepadBridge(engine: Engine): boolean {
   const im = engine.inputManager as unknown as InputManagerHw;
@@ -113,28 +118,22 @@ export function installHidGamepadBridge(engine: Engine): boolean {
   im.__brickRacerHidGamepad = true;
 
   const pkg = W3dtsInput as InputPkg;
-  const canPollHid =
-    typeof pkg.GAMEPAD_SLOT_COUNT === 'number' &&
-    typeof pkg.writeGamepadHardware === 'function' &&
-    typeof pkg.clearGamepadHardware === 'function';
-
-  const apis = canPollHid
-    ? {
-        GAMEPAD_SLOT_COUNT: pkg.GAMEPAD_SLOT_COUNT!,
-        writeGamepadHardware: pkg.writeGamepadHardware!,
-        clearGamepadHardware: pkg.clearGamepadHardware!,
-      }
-    : null;
 
   const original = im.resolveFromHardware.bind(engine.inputManager);
   im.resolveFromHardware = () => {
-    if (apis) pollGamepadsIntoHardware(im.hardware, apis);
+    stampGamepadsOnHardware(im.hardware, pkg);
     original();
+    const hw = im.hardware as HardwareLike;
     if (im.axes && typeof im.axes.set === 'function') {
-      const hw = hardwareForAxes(im, apis != null);
       im.axes.set('moveForward', resolveMkMoveForward(hw));
+      im.axes.set('moveRight', resolveMkMoveRight(hw));
       im.axes.set('climb', resolvePlaneClimb(hw));
       im.axes.set('rollSnap', resolvePlaneRollSnap(hw));
+    }
+    if (im.actions && typeof im.actions.set === 'function') {
+      // npm resolve drops gamepad bindings — force race actions from the live pad.
+      if (resolveMkJumpHeld(hw)) im.actions.set('jump', true);
+      if (resolveMkResetHeld(hw)) im.actions.set('resetKart', true);
     }
   };
 
@@ -142,7 +141,7 @@ export function installHidGamepadBridge(engine: Engine): boolean {
   try {
     im.applyInputOverridesJson(ARCADE_MK_OVERRIDES_JSON);
   } catch {
-    // npm asset may lack some actions — axes patch still applies
+    // npm asset may lack some actions — axes / action patch still apply
   }
 
   if (typeof window !== 'undefined') {
@@ -151,6 +150,9 @@ export function installHidGamepadBridge(engine: Engine): boolean {
     };
     window.addEventListener('gamepadconnected', kick);
     window.addEventListener('gamepaddisconnected', kick);
+    // Chromium often reports empty slots until a button is pressed; re-poll on focus.
+    window.addEventListener('focus', kick);
+    document.addEventListener('visibilitychange', kick);
   }
 
   return true;

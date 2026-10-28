@@ -1,0 +1,571 @@
+{
+  "version": 1,
+  "parts": [
+    {
+      "id": "3005",
+      "name": "Brick 1 x 1",
+      "category": "brick",
+      "footprint": [1, 3, 1],
+      "aliases": ["1x1"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3004",
+      "name": "Brick 1 x 2",
+      "category": "brick",
+      "footprint": [1, 3, 2],
+      "aliases": ["1x2"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3622",
+      "name": "Brick 1 x 3",
+      "category": "brick",
+      "footprint": [1, 3, 3],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3010",
+      "name": "Brick 1 x 4",
+      "category": "brick",
+      "footprint": [1, 3, 4],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3009",
+      "name": "Brick 1 x 6",
+      "category": "brick",
+      "footprint": [1, 3, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3008",
+      "name": "Brick 1 x 8",
+      "category": "brick",
+      "footprint": [1, 3, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "6111",
+      "name": "Brick 1 x 10",
+      "category": "brick",
+      "footprint": [1, 3, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "6112",
+      "name": "Brick 1 x 12",
+      "category": "brick",
+      "footprint": [1, 3, 12],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "2465",
+      "name": "Brick 1 x 16",
+      "category": "brick",
+      "footprint": [1, 3, 16],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3003",
+      "name": "Brick 2 x 2",
+      "category": "brick",
+      "footprint": [2, 3, 2],
+      "aliases": ["2x2"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3002",
+      "name": "Brick 2 x 3",
+      "category": "brick",
+      "footprint": [2, 3, 3],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3001",
+      "name": "Brick 2 x 4",
+      "category": "brick",
+      "footprint": [2, 3, 4],
+      "aliases": ["2x4"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "2456",
+      "name": "Brick 2 x 6",
+      "category": "brick",
+      "footprint": [2, 3, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3007",
+      "name": "Brick 2 x 8",
+      "category": "brick",
+      "footprint": [2, 3, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3006",
+      "name": "Brick 2 x 10",
+      "category": "brick",
+      "footprint": [2, 3, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "2357",
+      "name": "Brick Corner 2 x 2",
+      "category": "brick",
+      "footprint": [2, 3, 2],
+      "mesh": { "status": "missing" },
+      "notes": "L-shape; footprint AABB until mesh ready"
+    },
+    {
+      "id": "3024",
+      "name": "Plate 1 x 1",
+      "category": "plate",
+      "footprint": [1, 1, 1],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3023",
+      "name": "Plate 1 x 2",
+      "category": "plate",
+      "footprint": [1, 1, 2],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3623",
+      "name": "Plate 1 x 3",
+      "category": "plate",
+      "footprint": [1, 1, 3],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3710",
+      "name": "Plate 1 x 4",
+      "category": "plate",
+      "footprint": [1, 1, 4],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3666",
+      "name": "Plate 1 x 6",
+      "category": "plate",
+      "footprint": [1, 1, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3460",
+      "name": "Plate 1 x 8",
+      "category": "plate",
+      "footprint": [1, 1, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "4477",
+      "name": "Plate 1 x 10",
+      "category": "plate",
+      "footprint": [1, 1, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "60479",
+      "name": "Plate 1 x 12",
+      "category": "plate",
+      "footprint": [1, 1, 12],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3022",
+      "name": "Plate 2 x 2",
+      "category": "plate",
+      "footprint": [2, 1, 2],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3021",
+      "name": "Plate 2 x 3",
+      "category": "plate",
+      "footprint": [2, 1, 3],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3020",
+      "name": "Plate 2 x 4",
+      "category": "plate",
+      "footprint": [2, 1, 4],
+      "aliases": ["plate"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3795",
+      "name": "Plate 2 x 6",
+      "category": "plate",
+      "footprint": [2, 1, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3034",
+      "name": "Plate 2 x 8",
+      "category": "plate",
+      "footprint": [2, 1, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3832",
+      "name": "Plate 2 x 10",
+      "category": "plate",
+      "footprint": [2, 1, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "2445",
+      "name": "Plate 2 x 12",
+      "category": "plate",
+      "footprint": [2, 1, 12],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3031",
+      "name": "Plate 4 x 4",
+      "category": "plate",
+      "footprint": [4, 1, 4],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3032",
+      "name": "Plate 4 x 6",
+      "category": "plate",
+      "footprint": [4, 1, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3035",
+      "name": "Plate 4 x 8",
+      "category": "plate",
+      "footprint": [4, 1, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3030",
+      "name": "Plate 4 x 10",
+      "category": "plate",
+      "footprint": [4, 1, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3029",
+      "name": "Plate 4 x 12",
+      "category": "plate",
+      "footprint": [4, 1, 12],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3958",
+      "name": "Plate 6 x 6",
+      "category": "plate",
+      "footprint": [6, 1, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3036",
+      "name": "Plate 6 x 8",
+      "category": "plate",
+      "footprint": [6, 1, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3033",
+      "name": "Plate 6 x 10",
+      "category": "plate",
+      "footprint": [6, 1, 10],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3028",
+      "name": "Plate 6 x 12",
+      "category": "plate",
+      "footprint": [6, 1, 12],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "41539",
+      "name": "Plate Round 8 x 8",
+      "category": "round",
+      "footprint": [8, 1, 8],
+      "aliases": ["3128"],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain base; design often listed 41539 (alias 3128 from BOM note)"
+    },
+    {
+      "id": "3070",
+      "name": "Tile 1 x 1",
+      "category": "tile",
+      "footprint": [1, 1, 1],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3069",
+      "name": "Tile 1 x 2",
+      "category": "tile",
+      "footprint": [1, 1, 2],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "63864",
+      "name": "Tile 1 x 3",
+      "category": "tile",
+      "footprint": [1, 1, 3],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "2431",
+      "name": "Tile 1 x 4",
+      "category": "tile",
+      "footprint": [1, 1, 4],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "6636",
+      "name": "Tile 1 x 6",
+      "category": "tile",
+      "footprint": [1, 1, 6],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "4162",
+      "name": "Tile 1 x 8",
+      "category": "tile",
+      "footprint": [1, 1, 8],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "3068",
+      "name": "Tile 2 x 2",
+      "category": "tile",
+      "footprint": [2, 1, 2],
+      "aliases": ["tile"],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "87079",
+      "name": "Tile 2 x 4",
+      "category": "tile",
+      "footprint": [2, 1, 4],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "6141",
+      "name": "Plate Round 1 x 1",
+      "category": "round",
+      "footprint": [1, 1, 1],
+      "aliases": ["plate_1x1"],
+      "mesh": { "status": "box" },
+      "notes": "BOM fountain water"
+    },
+    {
+      "id": "4073",
+      "name": "Plate Round 1 x 1 (older)",
+      "category": "round",
+      "footprint": [1, 1, 1],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "4032",
+      "name": "Plate Round 2 x 2 with Rounded Bottom",
+      "category": "round",
+      "footprint": [2, 1, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "60474",
+      "name": "Plate Round 4 x 4 with 2 x 2 Hole",
+      "category": "round",
+      "footprint": [4, 1, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "3062",
+      "name": "Brick Round 1 x 1",
+      "category": "round",
+      "footprint": [1, 3, 1],
+      "aliases": ["3062b"],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain upper pillar"
+    },
+    {
+      "id": "3941",
+      "name": "Brick Round 2 x 2",
+      "category": "round",
+      "footprint": [2, 3, 2],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain lower pillar"
+    },
+    {
+      "id": "85080",
+      "name": "Brick Round Corner 4 x 4 Macaroni",
+      "category": "round",
+      "footprint": [4, 3, 4],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain outer ring ×4; AABB footprint until curved mesh"
+    },
+    {
+      "id": "3960",
+      "name": "Dish 4 x 4 Inverted (Radar)",
+      "category": "dish",
+      "footprint": [4, 1, 4],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain middle basin"
+    },
+    {
+      "id": "4740",
+      "name": "Dish 2 x 2 Inverted (Radar)",
+      "category": "dish",
+      "footprint": [2, 1, 2],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain top basin"
+    },
+    {
+      "id": "4589",
+      "name": "Cone 1 x 1",
+      "category": "cone",
+      "footprint": [1, 3, 1],
+      "aliases": ["4589b"],
+      "mesh": { "status": "missing" },
+      "notes": "BOM fountain jet tip"
+    },
+    {
+      "id": "3040",
+      "name": "Slope 45 2 x 1",
+      "category": "slope",
+      "footprint": [1, 3, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "3039",
+      "name": "Slope 45 2 x 2",
+      "category": "slope",
+      "footprint": [2, 3, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "3037",
+      "name": "Slope 45 2 x 4",
+      "category": "slope",
+      "footprint": [2, 3, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "3045",
+      "name": "Slope 45 2 x 2 Double Convex",
+      "category": "slope",
+      "footprint": [2, 3, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "54200",
+      "name": "Slope 30 1 x 1 x 2/3 (Cheese)",
+      "category": "slope",
+      "footprint": [1, 2, 1],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "85984",
+      "name": "Slope 30 1 x 2 x 2/3",
+      "category": "slope",
+      "footprint": [1, 2, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "30414",
+      "name": "Brick 1 x 4 with Studs on Side",
+      "category": "brick",
+      "footprint": [1, 3, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "87087",
+      "name": "Brick 1 x 1 with Stud on Side",
+      "category": "brick",
+      "footprint": [1, 3, 1],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "11211",
+      "name": "Brick 1 x 2 with Studs on Side",
+      "category": "brick",
+      "footprint": [1, 3, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "6091",
+      "name": "Brick 2 x 1 x 1 1/3 with Curved Top",
+      "category": "round",
+      "footprint": [1, 4, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "6192",
+      "name": "Brick 2 x 4 with Curved Top",
+      "category": "round",
+      "footprint": [2, 3, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "50950",
+      "name": "Slope Curved 3 x 1",
+      "category": "slope",
+      "footprint": [1, 3, 3],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "15068",
+      "name": "Slope Curved 2 x 2 x 2/3",
+      "category": "slope",
+      "footprint": [2, 2, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "2420",
+      "name": "Plate Corner 2 x 2",
+      "category": "plate",
+      "footprint": [2, 1, 2],
+      "mesh": { "status": "missing" },
+      "notes": "L-shape AABB"
+    },
+    {
+      "id": "2429",
+      "name": "Hinge Plate 1 x 4 Base",
+      "category": "other",
+      "footprint": [1, 1, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "2430",
+      "name": "Hinge Plate 1 x 4 Top",
+      "category": "other",
+      "footprint": [1, 1, 4],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "2412",
+      "name": "Tile 1 x 2 Grille",
+      "category": "tile",
+      "footprint": [1, 1, 2],
+      "mesh": { "status": "missing" }
+    },
+    {
+      "id": "98138",
+      "name": "Tile Round 1 x 1",
+      "category": "tile",
+      "footprint": [1, 1, 1],
+      "mesh": { "status": "box" }
+    },
+    {
+      "id": "14769",
+      "name": "Tile Round 2 x 2",
+      "category": "tile",
+      "footprint": [2, 1, 2],
+      "mesh": { "status": "missing" }
+    }
+  ]
+}

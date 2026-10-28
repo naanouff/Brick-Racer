@@ -1,33 +1,18 @@
 /**
  * @file partFootprint.ts
- * @description Stud×plate occupancy for catalogue parts (manual assemble / shell bake).
+ * @description Stud×plate occupancy from BC1 catalog (manual assemble / shell bake).
  */
 
 import type { BrickPartId } from '../brickCatalog';
+import { partFootprintFromCatalog } from '../catalog';
 import { B, P, S } from '../brickUnits';
 
 export type RotDeg = 0 | 90 | 180 | 270;
 
 /** Footprint in studs (X) × plates (Y) × studs (Z) at rot 0. */
 export function partFootprintPlates(partId: BrickPartId): [number, number, number] {
-  switch (partId) {
-    case '1x1':
-      return [1, 3, 1];
-    case '1x2':
-      return [1, 3, 2];
-    case '2x2':
-      return [2, 3, 2];
-    case '2x4':
-      return [2, 3, 4];
-    case 'plate':
-      return [2, 1, 4];
-    case 'tile':
-      return [2, 1, 2];
-    default: {
-      const _e: never = partId;
-      return _e;
-    }
-  }
+  const [sx, py, sz] = partFootprintFromCatalog(partId);
+  return [sx, py, sz];
 }
 
 /** Apply yaw: swap X/Z for 90/270. */

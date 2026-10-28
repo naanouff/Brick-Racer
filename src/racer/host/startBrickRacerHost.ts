@@ -6,6 +6,11 @@
  */
 
 import type { Engine } from '@naanouff/w3dts-core';
+import type {
+  CatalogMeshPreviewOpts,
+  CatalogMeshPreviewResult,
+  CatalogPreviewOpts,
+} from '../hub/brick/catalog/spawnCatalogPreview';
 import { bootEngine } from './bootEngine';
 import { writeStoredLevelId, type LevelId } from '../levels/registry';
 import type { SceneDirector } from '../scene/SceneDirector';
@@ -19,6 +24,16 @@ export interface BrickRacerHost {
   readonly levelId: LevelId;
   /** Hot-swap level (unload + spawn). Also updates SessionFlow + URL/storage. */
   loadLevel: (id: LevelId) => Promise<void>;
+  previewCatalogPart: (opts: CatalogPreviewOpts) => void;
+  /** Triangle count is 0 when nothing spawned. `ao` is the UV1 AO channel. */
+  previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => CatalogMeshPreviewResult;
+  clearCatalogPreview: () => void;
+  /** GLB of a part already shown as a mesh. Null if that part is not in the preview cache. */
+  exportCatalogGlb: (ldrawId: string) => Uint8Array | null;
+  /** OBJ of a part already shown as a mesh. The UV set is UV1. */
+  exportCatalogObj: (ldrawId: string) => Uint8Array | null;
+  /** FBX of a part already shown as a mesh. UV0 and UV1. */
+  exportCatalogFbx: (ldrawId: string) => Uint8Array | null;
 }
 
 /** One boot per page — React StrictMode remounts must not spawn a second Engine/WebGPUContext. */
@@ -49,7 +64,20 @@ export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<Br
         }
       };
       canvas.dataset.levelId = levelId;
-      return { ready: true as const, engine, scene, flow, levelId, loadLevel };
+      return {
+        ready: true as const,
+        engine,
+        scene,
+        flow,
+        levelId,
+        loadLevel,
+        previewCatalogPart: (opts: CatalogPreviewOpts) => scene.previewCatalogPart(opts),
+        previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => scene.previewCatalogMesh(opts),
+        clearCatalogPreview: () => scene.clearCatalogPreview(),
+        exportCatalogGlb: (ldrawId: string) => scene.exportCatalogGlb(ldrawId),
+        exportCatalogObj: (ldrawId: string) => scene.exportCatalogObj(ldrawId),
+        exportCatalogFbx: (ldrawId: string) => scene.exportCatalogFbx(ldrawId),
+      };
     })
     .catch((err) => {
       hostBoot = null;
