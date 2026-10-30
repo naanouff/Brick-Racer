@@ -17,7 +17,8 @@
     "check": "tsc --noEmit",
     "catalog:build": "python scripts/catalog/build_master_catalog.py --index-only",
     "catalog:rebuild": "python scripts/catalog/fetch_sources.py && python scripts/catalog/build_master_catalog.py",
-    "ldraw:bake": "node scripts/ldraw/bake_cache.mjs"
+    "ldraw:bake": "node scripts/ldraw/bake_cache.mjs",
+    "brick:layers": "node scripts/brick/layers-to-manual.mjs"
   },
   "dependencies": {
     "@naanouff/w3dts-animation": "0.0.14",

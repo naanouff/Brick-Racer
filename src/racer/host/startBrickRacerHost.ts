@@ -13,6 +13,7 @@ import type {
 } from '../hub/brick/catalog/spawnCatalogPreview';
 import { bootEngine } from './bootEngine';
 import { writeStoredLevelId, type LevelId } from '../levels/registry';
+import type { BrickLabView } from '../levels/brickLab/brickLabCamera';
 import type { SceneDirector } from '../scene/SceneDirector';
 import type { SessionFlow } from '../session/SessionFlow';
 
@@ -24,6 +25,8 @@ export interface BrickRacerHost {
   readonly levelId: LevelId;
   /** Hot-swap level (unload + spawn). Also updates SessionFlow + URL/storage. */
   loadLevel: (id: LevelId) => Promise<void>;
+  /** Ortho Face / Côté / Dessus or orbit — brick-lab only. */
+  setBrickLabView: (view: BrickLabView) => boolean;
   previewCatalogPart: (opts: CatalogPreviewOpts) => void;
   /** Triangle count is 0 when nothing spawned. `ao` is the UV1 AO channel. */
   previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => CatalogMeshPreviewResult;
@@ -71,6 +74,7 @@ export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<Br
         flow,
         levelId,
         loadLevel,
+        setBrickLabView: (view: BrickLabView) => scene.setBrickLabView(view),
         previewCatalogPart: (opts: CatalogPreviewOpts) => scene.previewCatalogPart(opts),
         previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => scene.previewCatalogMesh(opts),
         clearCatalogPreview: () => scene.clearCatalogPreview(),

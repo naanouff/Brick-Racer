@@ -81,11 +81,18 @@ export { spawnFountainLdraw } from './landmark/spawnFountainLdraw';
 export {
   assembleManual,
   bakeShell,
+  brickifyLayers,
+  BrickifyError,
+  formatLayersIssues,
   formatManualIssues,
   manualToLandmark,
+  validateLayers,
   validateManual,
   ManualAssembleError,
+  type BrickLayer,
+  type BrickLayers,
   type BrickManual,
+  type LayerKind,
   type ManualLandmarkResult,
   type ShellBakeReport,
 } from './manual';

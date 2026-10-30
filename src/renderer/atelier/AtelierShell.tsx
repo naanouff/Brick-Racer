@@ -7,8 +7,14 @@ import { useEffect, useRef, useState, type ReactElement, type ReactNode } from '
 import {
   BRICK_MANUAL_IDS,
   brickManualLabel,
+  brickManualOverlayUrl,
   type BrickManualId,
 } from '../../racer/hub/brick/manuals/registry';
+import {
+  BRICK_LAB_VIEWS,
+  brickLabViewLabel,
+  type BrickLabView,
+} from '../../racer/levels/brickLab/brickLabCamera';
 import {
   LEVEL_IDS,
   levelAccent,
@@ -39,7 +45,7 @@ function formatCount(n: number): string {
 
 function sceneHint(active: LevelId, vehicle: VehicleKind): string {
   if (active === 'catalog-lab') return 'Orbit · panneau catalogue à droite';
-  if (active === 'brick-lab') return 'Orbit · souris / stick · HUD manuels';
+  if (active === 'brick-lab') return 'Orbit / ortho Face·Côté·Dessus · overlay réf';
   if (active === 'minifig-lab') return 'Orbit · souris / stick';
   if (active === 'city-test') return 'WASD · F / pad Y possession · X reset';
   if (vehicle === 'plane') {
@@ -74,6 +80,8 @@ export type AtelierShellProps = {
   brickManual: BrickManualId;
   brickShell: boolean;
   brickStats: string | null;
+  brickLabView: BrickLabView;
+  brickOverlayOpacity: number;
   telemetry: KartTelemetrySnapshot;
   fps: number;
   frameMs: number;
@@ -91,6 +99,8 @@ export type AtelierShellProps = {
   onSelectRenderQuality: (q: RenderQuality) => void;
   onSelectBrickManual: (id: BrickManualId) => void;
   onToggleBrickShell: (on: boolean) => void;
+  onSelectBrickLabView: (view: BrickLabView) => void;
+  onBrickOverlayOpacity: (opacity: number) => void;
 };
 
 export function AtelierShell(props: AtelierShellProps): ReactElement {
@@ -172,6 +182,22 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
         .join(' ')}
       aria-label="Atelier Proving Grounds"
     >
+      {isBrickLab
+        ? (() => {
+            const overlay = brickManualOverlayUrl(props.brickManual);
+            if (!overlay || props.brickOverlayOpacity <= 0) return null;
+            return (
+              <div
+                className="br-atelier-ref-overlay"
+                style={{ opacity: props.brickOverlayOpacity }}
+                aria-hidden="true"
+              >
+                <img src={overlay} alt="" />
+              </div>
+            );
+          })()
+        : null}
+
       <aside className="br-atelier-rail" aria-label="Slices">
         <div className="br-atelier-rail__top">
           <p className="br-atelier-rail__brand">Atelier</p>
@@ -275,6 +301,24 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
                 </button>
               ))}
             </div>
+            <p className="br-atelier-label">Vue</p>
+            <div className="br-atelier-chips" role="group" aria-label="Vue brick-lab">
+              {BRICK_LAB_VIEWS.map((view) => (
+                <button
+                  key={view}
+                  type="button"
+                  className={
+                    view === props.brickLabView
+                      ? 'br-atelier-chip is-active'
+                      : 'br-atelier-chip'
+                  }
+                  disabled={view === props.brickLabView}
+                  onClick={() => props.onSelectBrickLabView(view)}
+                >
+                  {brickLabViewLabel(view)}
+                </button>
+              ))}
+            </div>
             <p className="br-atelier-label">Bake shell</p>
             <div className="br-atelier-chips" role="group" aria-label="Bake shell">
               <button
@@ -294,6 +338,31 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
                 plein
               </button>
             </div>
+            {(() => {
+              const overlay = brickManualOverlayUrl(props.brickManual);
+              if (!overlay) return null;
+              return (
+                <>
+                  <p className="br-atelier-label">
+                    Overlay réf ({Math.round(props.brickOverlayOpacity * 100)} %)
+                  </p>
+                  <input
+                    className="br-atelier-range"
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={Math.round(props.brickOverlayOpacity * 100)}
+                    aria-label="Opacité overlay référence"
+                    onChange={(e) =>
+                      props.onBrickOverlayOpacity(Number(e.target.value) / 100)
+                    }
+                  />
+                  <div className="br-atelier-overlay-preview">
+                    <img src={overlay} alt="" />
+                  </div>
+                </>
+              );
+            })()}
             {props.brickStats ? (
               <>
                 <p className="br-atelier-label">Stats</p>

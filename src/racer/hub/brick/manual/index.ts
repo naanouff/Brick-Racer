@@ -14,6 +14,15 @@ export {
   type ManualValidationIssue,
   type ManualValidationResult,
 } from './manualSchema';
+export {
+  formatLayersIssues,
+  validateLayers,
+  type BrickLayer,
+  type BrickLayers,
+  type LayerKind,
+  type LayersValidationResult,
+} from './layersSchema';
+export { brickifyLayers, BrickifyError } from './brickifyLayers';
 export { manualToLandmark, type ManualLandmarkResult } from './manualToLandmark';
 export {
   cellKey,

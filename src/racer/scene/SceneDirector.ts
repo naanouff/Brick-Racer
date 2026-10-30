@@ -18,6 +18,11 @@ import { buildCityTestTriggers, CITY_HUB_SPAWNS, CITY_TEST_SPAWN } from '../leve
 import { spawnCityTest } from '../levels/cityTest/spawnCityTest';
 import { spawnMinifigLab } from '../levels/minifigLab/spawnMinifigLab';
 import { MINIFIG_LAB_CAMERA_ID } from '../levels/minifigLab/minifigLabSpec';
+import {
+  applyBrickLabView,
+  BRICK_LAB_CAMERA_NAME,
+  type BrickLabView,
+} from '../levels/brickLab/brickLabCamera';
 import { spawnBrickLab } from '../levels/brickLab/spawnBrickLab';
 import { spawnCatalogLab } from '../levels/catalogLab/spawnCatalogLab';
 import { buildRaceTestTriggers, raceSpawnForVehicle } from '../levels/raceTest';
@@ -48,6 +53,7 @@ import {
 import {
   readBrickLabManualId,
   readBrickLabShell,
+  readBrickLabView,
 } from '../hub/brick/manuals/labPrefs';
 
 function arcadeContextForLevel(id: LevelId): {
@@ -117,7 +123,6 @@ export function rebindActiveChaseCamera(world: World, engine: IEngineContext): v
   full.cameraControllerManager.setCameraEntity(null);
 }
 
-const BRICK_LAB_CAMERA_NAME = 'BL_OrbitCamera';
 const CATALOG_LAB_CAMERA_NAME = 'CL_OrbitCamera';
 
 function isOrbitLab(id: LevelId): boolean {
@@ -219,6 +224,12 @@ export class SceneDirector {
     return catalogMeshFbx(ldrawId);
   }
 
+  /** Ortho Face / Côté / Dessus or restore orbit (brick-lab only). */
+  setBrickLabView(view: BrickLabView): boolean {
+    if (this.activeId !== 'brick-lab') return false;
+    return applyBrickLabView(this.engine, view);
+  }
+
   /**
    * Unloads the current level (if any) and spawns `id`.
    */
@@ -293,6 +304,9 @@ export class SceneDirector {
 
       // Graph reload / warm can leave a stale chase preference — re-assert lab cam.
       if (orbitCamName) bindOrbitLabCamera(this.engine, orbitCamName);
+      if (id === 'brick-lab') {
+        applyBrickLabView(this.engine, readBrickLabView());
+      }
 
       const hint =
         id === 'city-test'

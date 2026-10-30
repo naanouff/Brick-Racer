@@ -18,13 +18,19 @@ import {
   type BrickRacerHost,
 } from '../racer/host/startBrickRacerHost';
 import type { BrickManualId } from '../racer/hub/brick/manuals/registry';
+import { getBrickManual } from '../racer/hub/brick/manuals/registry';
 import {
   readBrickLabManualId,
+  readBrickLabOverlayOpacity,
   readBrickLabShell,
+  readBrickLabView,
   writeBrickLabManualId,
+  writeBrickLabOverlayOpacity,
   writeBrickLabShell,
+  writeBrickLabView,
 } from '../racer/hub/brick/manuals/labPrefs';
-import { fountainShellReport } from '../racer/hub/brick';
+import { manualToLandmark } from '../racer/hub/brick';
+import type { BrickLabView } from '../racer/levels/brickLab/brickLabCamera';
 import {
   getKartTelemetry,
   resolveCcTier,
@@ -38,6 +44,15 @@ import {
 import { AtelierShell } from './atelier/AtelierShell';
 import { CatalogBrowserPanel } from './catalog/CatalogBrowserPanel';
 import './app.css';
+
+function brickLabStatsLine(manual: BrickManualId, shell: boolean): string | null {
+  try {
+    const r = manualToLandmark(getBrickManual(manual), { shell }).report;
+    return `${manual} ${r.kept}/${r.total}`;
+  } catch {
+    return null;
+  }
+}
 
 function App(): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -61,14 +76,13 @@ function App(): ReactElement {
   );
   const [brickManual, setBrickManual] = useState<BrickManualId>(() => readBrickLabManualId());
   const [brickShell, setBrickShell] = useState(() => readBrickLabShell());
-  const [brickStats, setBrickStats] = useState<string | null>(() => {
-    try {
-      const r = fountainShellReport(readBrickLabShell());
-      return `fontaine ${r.kept}/${r.total}`;
-    } catch {
-      return null;
-    }
-  });
+  const [brickLabView, setBrickLabView] = useState<BrickLabView>(() => readBrickLabView());
+  const [brickOverlayOpacity, setBrickOverlayOpacity] = useState(() =>
+    readBrickLabOverlayOpacity()
+  );
+  const [brickStats, setBrickStats] = useState<string | null>(() =>
+    brickLabStatsLine(readBrickLabManualId(), readBrickLabShell())
+  );
   const [telemetry, setTelemetry] = useState<KartTelemetrySnapshot>(() => getKartTelemetry());
   const [fps, setFps] = useState(0);
   const [frameMs, setFrameMs] = useState(0);
@@ -187,17 +201,15 @@ function App(): ReactElement {
     writeBrickLabShell(shell);
     setBrickManual(manual);
     setBrickShell(shell);
-    try {
-      const r = fountainShellReport(shell);
-      setBrickStats(`${manual} ${r.kept}/${r.total}`);
-    } catch {
-      setBrickStats(null);
-    }
+    setBrickStats(brickLabStatsLine(manual, shell));
     const host = hostRef.current;
     if (!host) return;
     void host
       .loadLevel('brick-lab')
-      .then(() => setLevelId('brick-lab'))
+      .then(() => {
+        setLevelId('brick-lab');
+        host.setBrickLabView(brickLabView);
+      })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   };
 
@@ -209,6 +221,17 @@ function App(): ReactElement {
   const onToggleBrickShell = (on: boolean): void => {
     if (on === brickShell && levelId === 'brick-lab') return;
     reloadBrickLab(brickManual, on);
+  };
+
+  const onSelectBrickLabView = (view: BrickLabView): void => {
+    writeBrickLabView(view);
+    setBrickLabView(view);
+    hostRef.current?.setBrickLabView(view);
+  };
+
+  const onBrickOverlayOpacity = (opacity: number): void => {
+    writeBrickLabOverlayOpacity(opacity);
+    setBrickOverlayOpacity(opacity);
   };
 
   return (
@@ -238,6 +261,8 @@ function App(): ReactElement {
           brickManual={brickManual}
           brickShell={brickShell}
           brickStats={brickStats}
+          brickLabView={brickLabView}
+          brickOverlayOpacity={brickOverlayOpacity}
           telemetry={telemetry}
           fps={fps}
           frameMs={frameMs}
@@ -259,6 +284,8 @@ function App(): ReactElement {
           onSelectRenderQuality={onSelectRenderQuality}
           onSelectBrickManual={onSelectBrickManual}
           onToggleBrickShell={onToggleBrickShell}
+          onSelectBrickLabView={onSelectBrickLabView}
+          onBrickOverlayOpacity={onBrickOverlayOpacity}
         />
       ) : (
         <div className="br-shell" aria-busy="true">

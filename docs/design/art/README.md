@@ -34,7 +34,8 @@ Prompts P1–P10 + negative / variantes : [test-slice-plans.md](../test-slice-pl
 ### Référentiel rendu monde brick
 
 Cible visuelle **matière / densité** (pas le layout Proving Grounds). Plan : [brick-world-rendering.md](../../plans/brick-world-rendering.md) · sprint [BRICK-BW1](../../sprints/BRICK-BW1.md).  
-Authoring landmark (artwork **structure seule** + manuel JSON) : [brick-manual-prompt.md](../brick-manual-prompt.md).
+Authoring landmark : v1 [brick-manual-prompt.md](../brick-manual-prompt.md) · v2 [brick-decor-pipeline.md](../../plans/brick-decor-pipeline.md) (couches).  
+Runtime overlay brick-lab : copie `public/brick-refs/` (DC1a).
 
 | Fichier | Note |
 | ------- | ---- |

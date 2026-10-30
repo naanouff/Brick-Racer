@@ -119,8 +119,21 @@ Ordre landmarks (aligné [brick-world-rendering.md](brick-world-rendering.md)) :
 - Pipeline runtime BW1 inchangé (même `assembleManual` / `bakeShell` / LDraw).
 - Perf `city-test` : `dc` / FPS stables vs landmarks BW1 existants.
 
+## Corpus fidélité (DC1a)
+
+Cibles pour valider le workflow avant / pendant brickify :
+
+| Landmark | Réf. image | Critères « fidèle » |
+| -------- | ---------- | ------------------- |
+| **fontaine** | [ref-fountain-ortho.png](../design/art/ref-fountain-ortho.png) · overlay `/brick-refs/fountain-ortho.png` | Silhouette 3 paliers ; proportions ±1 stud ; gris + cyan |
+| **pad** | (à produire DC2 — planche ortho) | Dalle 8×6 studs ; jaune / noir ; ±1 stud |
+| **gate** | (à produire DC3) | Silhouette coquillage ; couleurs A1 ; ±1 stud |
+
+Playtest brick-lab : vues **Face / Côté / Dessus** + overlay opacité réglable vs orbit libre.
+
 ## Historique
 
 | Date | Note |
 | ---- | ---- |
 | 2026-10-30 | Consignation : diagnostic v1, format couches, incréments DC0–DC4, ouverture sprint DC1 |
+| 2026-10-30 | DC1a : corpus fidélité + overlay runtime `public/brick-refs/` |

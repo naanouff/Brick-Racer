@@ -15,9 +15,9 @@ Prérequis : BW1b–c (pipeline manuel + `brick-lab`) ; catalogue BC1 (`parts.js
 
 ---
 
-## BRICK-DC1a — Ortho + overlay + registre (DC0)
+## BRICK-DC1a — Ortho + overlay + registre (DC0) ✅
 
-Fichiers : [`spawnBrickLab.ts`](../../src/racer/levels/brickLab/spawnBrickLab.ts), HUD / tiroir Atelier brick-lab, [`registry.ts`](../../src/racer/hub/brick/manuals/registry.ts), note corpus dans le plan ou `docs/design/art/`.
+Fichiers : [`brickLabCamera.ts`](../../src/racer/levels/brickLab/brickLabCamera.ts), Atelier brick-lab, [`registry.ts`](../../src/racer/hub/brick/manuals/registry.ts), [`public/brick-refs/`](../../public/brick-refs/), corpus dans [brick-decor-pipeline.md](../plans/brick-decor-pipeline.md).
 
 Fait quand :
 
@@ -26,9 +26,9 @@ Fait quand :
 - Registre manuels : `import.meta.glob('./*.manual.json')` (plus de `switch` + `BrickManualId` figé) ; hot-swap découvre tout nouveau fichier.
 - Corpus documenté : fontaine, pad, gate — critères « fidèle » = silhouette, proportions ±1 stud, couleurs.
 
-## BRICK-DC1b — Schema couches
+## BRICK-DC1b — Schema couches ✅
 
-Fichiers : nouveau [`layersSchema.ts`](../../src/racer/hub/brick/manual/layersSchema.ts), exports [`manual/index.ts`](../../src/racer/hub/brick/manual/index.ts), tests.
+Fichiers : [`layersSchema.ts`](../../src/racer/hub/brick/manual/layersSchema.ts), exports [`manual/index.ts`](../../src/racer/hub/brick/manual/index.ts), [`tests/brickLayers.test.ts`](../../tests/brickLayers.test.ts).
 
 Fait quand :
 
@@ -37,9 +37,9 @@ Fait quand :
 - `validateLayers` : rangées même longueur = `footprint[0]` ; count = `footprint[1]` ; lettres inconnues / couleurs hors catalogue = issues path+message (même style que `validateManual`).
 - Tests unitaires : OK, longueur mismatch, légende invalide, kind inconnu.
 
-## BRICK-DC1c — brickify déterministe
+## BRICK-DC1c — brickify déterministe ✅
 
-Fichiers : nouveau [`brickifyLayers.ts`](../../src/racer/hub/brick/manual/brickifyLayers.ts), [`tests/brickLayers.test.ts`](../../tests/brickLayers.test.ts).
+Fichiers : [`brickifyLayers.ts`](../../src/racer/hub/brick/manual/brickifyLayers.ts), [`tests/brickLayers.test.ts`](../../tests/brickLayers.test.ts).
 
 Fait quand :
 
@@ -50,9 +50,9 @@ Fait quand :
 - Déterministe : même entrée → même JSON (ordre de placement stable).
 - Tests : couches → manuel → `assembleManual` sans overlap ; compte de pièces stable ; envelope contient tout.
 
-## BRICK-DC1d — CLI + fontaine couches
+## BRICK-DC1d — CLI + fontaine couches ✅
 
-Fichiers : `scripts/brick/layers-to-manual.ts` (ou `.mjs`), `package.json` script `brick:layers`, `src/racer/hub/brick/layers/fountain.layers.json`, régénération [`fountain.manual.json`](../../src/racer/hub/brick/manuals/fountain.manual.json), exports index si besoin.
+Fichiers : [`scripts/brick/layers-to-manual.mjs`](../../scripts/brick/layers-to-manual.mjs), `pnpm brick:layers`, [`layers/fountain.layers.json`](../../src/racer/hub/brick/layers/fountain.layers.json), régénération [`fountain.manual.json`](../../src/racer/hub/brick/manuals/fountain.manual.json).
 
 Fait quand :
 
