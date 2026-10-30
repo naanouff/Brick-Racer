@@ -58,6 +58,13 @@ export {
   type CatalogPreviewOpts,
 } from './spawnCatalogPreview';
 export {
+  clearLdrawMeshCache,
+  ensureLdrawUploadedMesh,
+  getCachedLdrawMesh,
+  type EnsureLdrawMeshOpts,
+  type LdrawUploadedMesh,
+} from './ldrawMeshCache';
+export {
   CATALOG_PLASTIC_SETS,
   CATALOG_UV_GRID_MATERIAL_ID,
   CATALOG_UV_GRID_UV1_MATERIAL_ID,

@@ -18,6 +18,7 @@ import {
   type MasterIndexEntry,
   type StagingPart,
 } from '../../racer/hub/brick/catalog';
+import { fetchLdrawPart, hasLdrawIpc } from '../../racer/hub/brick/catalog/ldrawMeshCache';
 import type { BrickFootprint, BrickPartCategory } from '../../racer/hub/brick/catalog/types';
 import type { BrickRacerHost } from '../../racer/host/startBrickRacerHost';
 
@@ -138,21 +139,20 @@ export function CatalogBrowserPanel(props: CatalogBrowserPanelProps): ReactEleme
         setExportId(null);
         setPreviewStatus(reason);
       };
-      const api = window.brickRacer?.ldrawPartTriangles;
       if (mode === 'box') return showBox('boîte');
       if (!entry.ldraw_id) return showBox('boîte · pas d’id LDraw');
-      if (!api) return showBox('boîte · IPC LDraw indisponible');
+      if (!hasLdrawIpc()) return showBox('boîte · IPC LDraw indisponible');
 
       const ldrawId = entry.ldraw_id;
       setPreviewStatus('mesh LDraw · chargement…');
-      void api(ldrawId)
+      void fetchLdrawPart(ldrawId, 'ground-center')
         .then((res) => {
           if (token !== previewToken.current) return;
+          if (!res) return showBox('boîte · IPC LDraw indisponible');
           if (!res.ok) return showBox(`boîte · ${res.error}`);
           const previewed = host.previewCatalogMesh({
             key: ldrawId,
-            triangles: res.triangles,
-            edges: res.edges,
+            ...res.source,
             ...look,
           });
           if (previewed.triangleCount > 0) {

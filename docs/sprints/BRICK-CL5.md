@@ -9,6 +9,8 @@ Ordre : **CL5a → CL5b → CL5c → CL5d**. Chaque ticket : `pnpm test` + `pnpm
 
 Prérequis : CL2–CL4 (`ldrawPartTriangles`, `buildLdrawPreviewGeometry`, `bakeLdrawAgingTexture`, `ensureLdrawUploadedMesh`) ; bibliothèque locale `data/ldraw` (`python scripts/catalog/fetch_sources.py`).
 
+> **Statut** : CL5a–d implémentés — `ldrawBakedMesh` + LDRC, cache `data/ldraw-cache/`, worker `ldrawBakeWorker`, IPC `ldraw-part-mesh`, appelants en `Promise.all`, `pnpm ldraw:bake`.
+
 ---
 
 ## BRICK-CL5a — Module de cuisson + format binaire
@@ -47,7 +49,7 @@ Fait quand :
 
 ## BRICK-CL5d — Préchauffage, tests cache, docs
 
-Fichiers : script `pnpm ldraw:bake` (tsx), [`tests/ldrawBakeCache.test.ts`](../../tests/ldrawBakeCache.test.ts) (ou extension de `ldrawGeometry.test.ts`), [build.md](../build.md), ce sprint + plan § CL5.
+Fichiers : script `pnpm ldraw:bake` ([`bake_cache.mjs`](../../scripts/ldraw/bake_cache.mjs) charge [`bakeJobs.ts`](../../scripts/ldraw/bakeJobs.ts) via Vite SSR), [`tests/ldrawBakeCache.test.ts`](../../tests/ldrawBakeCache.test.ts) (ou extension de `ldrawGeometry.test.ts`), [build.md](../build.md), ce sprint + plan § CL5.
 
 Fait quand :
 

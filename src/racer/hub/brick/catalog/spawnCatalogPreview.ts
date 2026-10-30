@@ -18,8 +18,6 @@ import { P, S } from '../brickUnits';
 import { BRICK_MESH_ID, brickMaterialId, type BrickColorId } from '../brickCatalog';
 import { BRICK_INSTANCE_STRIDE_F } from '../brickInstanceData';
 import { buildCatalogFbx, buildCatalogGlb, buildCatalogObj } from './catalogGlb';
-import { bakeLdrawAgingTexture, LDRAW_AGING_SIZE } from '../ldraw/ldrawAgingBake';
-import { buildLdrawPreviewGeometry } from '../ldraw/ldrawGeometry';
 import {
   neutralAgingPixels,
   uploadCatalogAgingTexture,
@@ -30,6 +28,7 @@ import {
   catalogPlasticMaterialId,
   type CatalogPlasticSet,
 } from './catalogPlasticMaterials';
+import { ensureLdrawUploadedMesh, getCachedLdrawMesh } from './ldrawMeshCache';
 import type { BrickFootprint } from './types';
 
 const PREVIEW_NAME = 'catalog.preview.box';
@@ -137,8 +136,17 @@ export function spawnCatalogPreview(
 export type CatalogMeshPreviewOpts = {
   /** Cache key (LDraw id). */
   key: string;
-  /** LDraw triangles in LDU (9 floats per triangle). */
-  triangles: Float32Array;
+  /** Pre-baked mesh from IPC `ldrawPartMesh` (CL5). */
+  baked?: {
+    vertices: Float32Array;
+    indices: Uint32Array;
+    triangleCount: number;
+    size: [number, number, number];
+    aging: Uint8Array;
+    coverage: Uint8Array;
+  };
+  /** Fallback: LDraw triangles in LDU (9 floats per triangle). */
+  triangles?: Float32Array;
   /** LDraw type-2 edges in LDU (6 floats per segment), kept as hard edges when smoothing. */
   edges?: Float32Array;
   colorId?: BrickColorId;
@@ -147,21 +155,6 @@ export type CatalogMeshPreviewOpts = {
   /** AO / cavity / edge wear from the UV1 aging texture. Default on. */
   aging?: boolean;
 };
-
-/** W3DTS has no mesh release API: keep one uploaded mesh per previewed part. */
-const ldrawMeshCache = new Map<
-  string,
-  {
-    mesh: Mesh;
-    triangleCount: number;
-    size: [number, number, number];
-    vertices: Float32Array;
-    indices: Uint32Array;
-    aging: Uint8Array;
-    /** 1 on texels covered by a chart, before gutter dilation. */
-    coverage: Uint8Array;
-  }
->();
 
 export type CatalogMeshPreviewResult = {
   triangleCount: number;
@@ -186,28 +179,13 @@ export function spawnCatalogMeshPreview(
 ): CatalogMeshPreviewResult {
   const empty: CatalogMeshPreviewResult = { triangleCount: 0, ao: null, coverage: null };
   const full = engine as Engine;
-  let entry = ldrawMeshCache.get(opts.key);
-  if (entry && entry.aging.byteLength !== LDRAW_AGING_SIZE * LDRAW_AGING_SIZE * 4) {
-    ldrawMeshCache.delete(opts.key);
-    entry = undefined;
-  }
-  if (!entry) {
-    const geo = buildLdrawPreviewGeometry(opts.triangles, opts.edges);
-    if (geo.triangleCount === 0) return empty;
-    const baked = bakeLdrawAgingTexture(geo.vertices, geo.indices, geo.triangleCount);
-    const mesh = new Mesh(geo.vertices, geo.indices, `catalog.ldraw.${opts.key}`);
-    full.resourceManager.uploadMesh(mesh);
-    entry = {
-      mesh,
-      triangleCount: geo.triangleCount,
-      size: geo.size,
-      vertices: geo.vertices,
-      indices: geo.indices,
-      aging: baked.rgba,
-      coverage: baked.coverage,
-    };
-    ldrawMeshCache.set(opts.key, entry);
-  }
+  const entry = ensureLdrawUploadedMesh(full, {
+    key: opts.key,
+    baked: opts.baked,
+    triangles: opts.triangles,
+    edges: opts.edges,
+  });
+  if (!entry) return empty;
   uploadCatalogAgingTexture(full, entry.aging);
   const [sx, sy, sz] = entry.size;
   const spawned = spawnPreviewInstance(
@@ -226,7 +204,7 @@ export function spawnCatalogMeshPreview(
 }
 
 function cachedMesh(ldrawId: string) {
-  const entry = ldrawMeshCache.get(ldrawId);
+  const entry = getCachedLdrawMesh(ldrawId);
   if (!entry) return null;
   return {
     name: ldrawId,

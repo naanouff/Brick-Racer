@@ -14,9 +14,13 @@ export type LdrawTrianglesResult =
   | { ok: true; ldrawId: string; triangles: Float32Array; edges: Float32Array }
   | { ok: false; ldrawId: string; error: string };
 
+/** Repo root: out/main or src/main → ../.. ; cwd when loaded as ESM (bake script). */
+export function resolveRepoRoot(): string {
+  return typeof __dirname !== 'undefined' ? path.join(__dirname, '../..') : process.cwd();
+}
+
 function resolveLibraryRoot(): string | null {
-  // electron-vite: __dirname = out/main → repo root is ../..
-  const data = path.join(__dirname, '../../data/ldraw');
+  const data = path.join(resolveRepoRoot(), 'data/ldraw');
   for (const candidate of [path.join(data, 'ldraw'), data]) {
     if (existsSync(path.join(candidate, 'parts'))) return candidate;
   }

@@ -24,4 +24,24 @@ contextBridge.exposeInMainWorld('brickRacer', {
     | { ok: true; ldrawId: string; triangles: Float32Array; edges: Float32Array }
     | { ok: false; ldrawId: string; error: string }
   > => ipcRenderer.invoke('ldraw-part-triangles', ldrawId),
+  /** Dev: baked mesh + UV1 aging atlas (disk-cached under data/ldraw-cache). */
+  ldrawPartMesh: (
+    ldrawId: string,
+    anchor: 'ground-center' | 'origin' = 'ground-center'
+  ): Promise<
+    | {
+        ok: true;
+        ldrawId: string;
+        anchor: 'ground-center' | 'origin';
+        mesh: {
+          vertices: Float32Array;
+          indices: Uint32Array;
+          triangleCount: number;
+          size: [number, number, number];
+          aging: Uint8Array;
+          coverage: Uint8Array;
+        };
+      }
+    | { ok: false; ldrawId: string; anchor: 'ground-center' | 'origin'; error: string }
+  > => ipcRenderer.invoke('ldraw-part-mesh', ldrawId, anchor),
 });
