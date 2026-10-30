@@ -6,6 +6,7 @@
 import { brickLabSpec } from './brickLab/brickLabSpec';
 import { catalogLabSpec } from './catalogLab/catalogLabSpec';
 import { cityTestSpec } from './cityTest/cityTestSpec';
+import { buildMinifigLabSpec } from './minifigLab/minifigLabSpec';
 import { raceTestSpec } from './raceTest/raceTestSpec';
 import { sandboxKartSpec } from './sandboxKart/sandboxKartSpec';
 import type { LevelSpec } from './shared/levelTypes';
@@ -16,6 +17,7 @@ export const LEVEL_IDS = [
   'sandbox-kart',
   'brick-lab',
   'catalog-lab',
+  'minifig-lab',
 ] as const;
 export type LevelId = (typeof LEVEL_IDS)[number];
 
@@ -69,6 +71,8 @@ export function getLevelSpec(id: LevelId): LevelSpec {
       return brickLabSpec;
     case 'catalog-lab':
       return catalogLabSpec;
+    case 'minifig-lab':
+      return buildMinifigLabSpec();
   }
 }
 
@@ -84,5 +88,74 @@ export function levelLabel(id: LevelId): string {
       return 'Brick lab';
     case 'catalog-lab':
       return 'Catalogue';
+    case 'minifig-lab':
+      return 'Minifig lab';
+  }
+}
+
+/** Atelier HUD (UIM2) — groupe rail. */
+export type LevelGroup = 'pistes' | 'labs';
+
+export function levelGroup(id: LevelId): LevelGroup {
+  switch (id) {
+    case 'brick-lab':
+    case 'catalog-lab':
+    case 'minifig-lab':
+      return 'labs';
+    default:
+      return 'pistes';
+  }
+}
+
+/** Atelier HUD — titre court sur la carte. */
+export function levelShortTitle(id: LevelId): string {
+  switch (id) {
+    case 'race-test':
+      return 'Race test';
+    case 'city-test':
+      return 'City test';
+    case 'sandbox-kart':
+      return 'Sandbox kart';
+    case 'brick-lab':
+      return 'Brick lab';
+    case 'catalog-lab':
+      return 'Catalogue';
+    case 'minifig-lab':
+      return 'Minifig lab';
+  }
+}
+
+/** Atelier HUD — une ligne de rôle sous le titre. */
+export function levelRole(id: LevelId): string {
+  switch (id) {
+    case 'race-test':
+      return 'Ovale · arcade';
+    case 'city-test':
+      return 'Hub · pied / véhicule';
+    case 'sandbox-kart':
+      return 'Legacy · sandbox';
+    case 'brick-lab':
+      return 'Manuels · enveloppe';
+    case 'catalog-lab':
+      return 'Master × BC1';
+    case 'minifig-lab':
+      return 'LDraw · orbit';
+  }
+}
+
+/** Atelier HUD — accent carte (CSS var or hex). */
+export function levelAccent(id: LevelId): string {
+  switch (id) {
+    case 'race-test':
+      return 'var(--br-stud-yellow)';
+    case 'city-test':
+      return 'var(--br-beach-mint)';
+    case 'sandbox-kart':
+      return 'var(--br-plaza-pastel)';
+    case 'brick-lab':
+    case 'catalog-lab':
+      return 'var(--br-garage-oil)';
+    case 'minifig-lab':
+      return 'var(--br-billboard-magenta)';
   }
 }

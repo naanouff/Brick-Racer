@@ -23,6 +23,7 @@ function stateForLevel(id: LevelId): SessionState {
     case 'sandbox-kart':
     case 'brick-lab':
     case 'catalog-lab':
+    case 'minifig-lab':
       return 'SandboxKart';
   }
 }

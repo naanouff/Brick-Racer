@@ -11,19 +11,23 @@ import {
   CATALOG_PLASTIC_SHADER_ID,
   CATALOG_UV_GRID_MATERIAL_ID,
   CATALOG_UV_GRID_UV1_MATERIAL_ID,
+  DEFAULT_CATALOG_PLASTIC_SET,
   catalogPlasticMaterialId,
   catalogPlasticMaterials,
+  catalogUvGridMaterials,
 } from '../src/racer/hub/brick/catalog/catalogPlasticMaterials';
+import { buildCityTestSpec } from '../src/racer/levels/cityTest/cityTestSpec';
 import { BRICK_COLOR_IDS, getColor } from '../src/racer/hub/brick/brickCatalog';
 import { MINIFIG_UV_GRID_SHADER_ID, MINIFIG_UV_GRID_TEXTURE_ID } from '../src/racer/minifig/minifigUvGridDebug';
 import { PLASTIC_MAP_SETS } from '../src/racer/minifig/plasticMapSets';
+import { buildBrickLabSpec } from '../src/racer/levels/brickLab/brickLabSpec';
 import { buildCatalogLabSpec } from '../src/racer/levels/catalogLab/catalogLabSpec';
 
 describe('catalogPlasticMaterials', () => {
   const mats = catalogPlasticMaterials();
 
   it('registers every set × BC1 color under CL_plastic_*', () => {
-    expect(CATALOG_PLASTIC_SETS).toEqual(['003', '017b', 'off']);
+    expect(CATALOG_PLASTIC_SETS).toEqual(['017b', '003', 'off']);
     for (const set of CATALOG_PLASTIC_SETS) {
       for (const color of BRICK_COLOR_IDS) {
         const id = catalogPlasticMaterialId(set, color);
@@ -31,17 +35,26 @@ describe('catalogPlasticMaterials', () => {
       }
     }
     expect(Object.keys(mats)).toHaveLength(
-      CATALOG_PLASTIC_SETS.length * BRICK_COLOR_IDS.length * 2 + 2
+      CATALOG_PLASTIC_SETS.length * BRICK_COLOR_IDS.length * 2
     );
     expect(mats[catalogPlasticMaterialId('003', 'gray', false)]?.properties.edgeWear).toBe(0);
     expect(mats[catalogPlasticMaterialId('003', 'gray', false)]?.properties.aoStrength).toBe(0);
-    expect(mats[CATALOG_UV_GRID_MATERIAL_ID]?.shaderGraphId).toBe(MINIFIG_UV_GRID_SHADER_ID);
-    expect(mats[CATALOG_UV_GRID_MATERIAL_ID]?.properties.baseColorTexture).toBe(
+    expect(mats[CATALOG_UV_GRID_MATERIAL_ID]).toBeUndefined();
+  });
+
+  it('defaults preview plastic to 017b (landmark / minifig LDraw)', () => {
+    expect(DEFAULT_CATALOG_PLASTIC_SET).toBe('017b');
+  });
+
+  it('keeps UV grid mats separate (need minifig_uv_grid shader)', () => {
+    const grids = catalogUvGridMaterials();
+    expect(grids[CATALOG_UV_GRID_MATERIAL_ID]?.shaderGraphId).toBe(MINIFIG_UV_GRID_SHADER_ID);
+    expect(grids[CATALOG_UV_GRID_MATERIAL_ID]?.properties.baseColorTexture).toBe(
       MINIFIG_UV_GRID_TEXTURE_ID
     );
-    expect(mats[CATALOG_UV_GRID_MATERIAL_ID]?.properties.uvChannel).toBe(0);
-    expect(mats[CATALOG_UV_GRID_UV1_MATERIAL_ID]?.properties.uvChannel).toBe(1);
-    expect(mats[CATALOG_UV_GRID_UV1_MATERIAL_ID]?.properties.baseColorTexture).toBe(
+    expect(grids[CATALOG_UV_GRID_MATERIAL_ID]?.properties.uvChannel).toBe(0);
+    expect(grids[CATALOG_UV_GRID_UV1_MATERIAL_ID]?.properties.uvChannel).toBe(1);
+    expect(grids[CATALOG_UV_GRID_UV1_MATERIAL_ID]?.properties.baseColorTexture).toBe(
       MINIFIG_UV_GRID_TEXTURE_ID
     );
   });
@@ -104,5 +117,23 @@ describe('catalogLabSpec plastic', () => {
     expect(spec.materials[catalogPlasticMaterialId('003', 'gray')]).toBeDefined();
     expect(spec.materials[catalogPlasticMaterialId('off', 'yellow')]).toBeDefined();
     expect(spec.materials[CATALOG_UV_GRID_MATERIAL_ID]).toBeDefined();
+  });
+});
+
+describe('brickLabSpec plastic', () => {
+  it('registers UV grid shader for CL_uv_grid materials', () => {
+    const spec = buildBrickLabSpec();
+    expect(spec.shaderGraphs.some((g) => g.id === CATALOG_PLASTIC_SHADER_ID)).toBe(true);
+    expect(spec.shaderGraphs.some((g) => g.id === MINIFIG_UV_GRID_SHADER_ID)).toBe(true);
+    expect(spec.materials[CATALOG_UV_GRID_MATERIAL_ID]?.shaderGraphId).toBe(MINIFIG_UV_GRID_SHADER_ID);
+  });
+});
+
+describe('cityTestSpec plastic', () => {
+  it('loads catalog plastic without UV grid mats (no minifig_uv_grid shader)', () => {
+    const spec = buildCityTestSpec();
+    expect(spec.materials[catalogPlasticMaterialId('017b', 'gray')]).toBeDefined();
+    expect(spec.materials[CATALOG_UV_GRID_MATERIAL_ID]).toBeUndefined();
+    expect(spec.shaderGraphs.some((g) => g.id === MINIFIG_UV_GRID_SHADER_ID)).toBe(false);
   });
 });

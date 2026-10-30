@@ -4,6 +4,7 @@
  */
 
 import type { BrickPose } from '../brickCatalog';
+import { getPart } from '../catalog';
 import {
   formatManualIssues,
   validateManual,
@@ -18,6 +19,23 @@ import {
   rotToYawRad,
   type RotDeg,
 } from './partFootprint';
+
+/**
+ * Curved / hollow catalogue AABBs (macaroni, dish, round) fill cells the real
+ * geometry leaves empty — skip occupancy so BOM stacks (pillar inside ring) assemble.
+ * Envelope checks still apply.
+ */
+function skipsOccupancy(partId: string): boolean {
+  const part = getPart(partId);
+  if (!part) return false;
+  if (part.mesh.status === 'ready') return false;
+  return (
+    part.category === 'round' ||
+    part.category === 'dish' ||
+    part.category === 'cone' ||
+    part.category === 'slope'
+  );
+}
 
 export type AssembledBrick = {
   pose: BrickPose;
@@ -98,7 +116,9 @@ function placeBrick(
   rot: RotDeg = 0
 ): void {
   assertInEnvelope(manual, sx, py, sz, partId, rot);
-  const cells = occupyBrick(occupancy, sx, py, sz, partId, rot);
+  const cells = skipsOccupancy(partId)
+    ? []
+    : occupyBrick(occupancy, sx, py, sz, partId, rot);
   const position = gridMinToWorldCenter(manual.origin, sx, py, sz, partId, rot);
   bricks.push({
     pose: { partId, colorId, position, yaw: rotToYawRad(rot) },

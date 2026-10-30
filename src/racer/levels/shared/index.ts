@@ -44,7 +44,7 @@ export {
   createPrimitiveMesh,
   spawnLevel,
 } from './spawnLevel';
-export type { SpawnLevelResult } from './spawnLevel';
+export type { SpawnLevelOpts, SpawnLevelResult } from './spawnLevel';
 export {
   BLOCKOUT_PRIMITIVES,
   BLOCKOUT_SHADER_GRAPHS,

@@ -1,5 +1,5 @@
 {
-  "name": "Brick Racer Fast: opaques + sky + transparents + tonemap (no shadows / AO / SSR / bloom / AA)",
+  "name": "Brick Racer Fast: opaques + sky + transparents + HBAO + tonemap + color grading (no shadows / SSR / bloom / AA)",
   "resources": [
     {
       "name": "sceneDepth",
@@ -15,6 +15,62 @@
       "sizeType": "relative",
       "width": 1.0,
       "height": 1.0,
+      "usage": 23
+    },
+    {
+      "name": "normalBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "hbaoRaw",
+      "format": "r8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "hbaoBlurred",
+      "format": "r8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "aoSceneColor",
+      "format": "rgba16float",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "ldrBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "gradingBuffer",
+      "format": "rgba8unorm",
+      "sizeType": "relative",
+      "width": 1.0,
+      "height": 1.0,
+      "usage": 22
+    },
+    {
+      "name": "lutTexture",
+      "format": "rgba8unorm",
+      "sizeType": "absolute",
+      "width": 256,
+      "height": 16,
       "usage": 22
     }
   ],
@@ -23,7 +79,7 @@
       "name": "02_Opaques",
       "type": "raster",
       "inputs": [],
-      "outputs": ["sceneColor", "sceneDepth"],
+      "outputs": ["sceneColor", "sceneDepth", "normalBuffer"],
       "viewType": "main",
       "queueTags": ["opaque"],
       "colorLoadOp": "clear",
@@ -57,19 +113,70 @@
       "name": "04_Transparents",
       "type": "raster",
       "inputs": [],
-      "outputs": ["sceneColor", "sceneDepth"],
+      "outputs": ["sceneColor", "sceneDepth", "normalBuffer"],
       "viewType": "main",
       "queueTags": ["transparent"],
       "colorLoadOp": "load",
       "depthLoadOp": "load"
     },
     {
-      "name": "Tone Mapping & Output",
+      "name": "04b_HBAO",
       "type": "fullscreen",
-      "inputs": ["sceneColor"],
-      "outputs": ["FINAL_OUTPUT"],
+      "inputs": ["sceneDepth", "normalBuffer"],
+      "outputs": ["hbaoRaw"],
+      "outputFormat": "r8unorm",
+      "shaderPath": "/shaders/post-processing/hbao.frag.wgsl",
+      "useFrameUniforms": true,
+      "uniforms": {
+        "hbaoParams": { "type": "struct", "value": [0.085, 1.7, 0.05, 8.0] }
+      }
+    },
+    {
+      "name": "04c_HBAO_Blur",
+      "type": "fullscreen",
+      "inputs": ["sceneDepth", "hbaoRaw"],
+      "outputs": ["hbaoBlurred"],
+      "outputFormat": "r8unorm",
+      "shaderPath": "/shaders/post-processing/hbao_blur.frag.wgsl",
+      "useFrameUniforms": true,
+      "uniforms": {
+        "blurParams": { "type": "struct", "value": [12.0, 0.0, 0.0, 0.0] }
+      }
+    },
+    {
+      "name": "04d_HBAO_Apply",
+      "type": "fullscreen",
+      "inputs": ["sceneColor", "hbaoBlurred"],
+      "outputs": ["aoSceneColor"],
+      "outputFormat": "rgba16float",
+      "shaderPath": "/shaders/post-processing/hbao_apply.frag.wgsl"
+    },
+    {
+      "name": "05_ToneMapping",
+      "type": "fullscreen",
+      "inputs": ["aoSceneColor"],
+      "outputs": ["ldrBuffer"],
+      "outputFormat": "rgba8unorm",
       "shaderPath": "/shaders/post-processing/tonemapping.frag.wgsl",
       "uniforms": { "exposure": { "type": "f32", "value": 0.85 } }
+    },
+    {
+      "name": "06_ColorGrading",
+      "type": "fullscreen",
+      "inputs": ["ldrBuffer", "lutTexture"],
+      "outputs": ["gradingBuffer"],
+      "outputFormat": "rgba8unorm",
+      "shaderPath": "/shaders/post-processing/color_grading.frag.wgsl",
+      "uniforms": {
+        "params": { "type": "struct", "value": [1.0] }
+      }
+    },
+    {
+      "name": "07_Blit",
+      "type": "fullscreen",
+      "inputs": ["gradingBuffer"],
+      "outputs": ["FINAL_OUTPUT"],
+      "shaderPath": "/shaders/post-processing/blit.frag.wgsl"
     }
   ]
 }

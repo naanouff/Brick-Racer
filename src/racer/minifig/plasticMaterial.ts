@@ -5,7 +5,7 @@
 
 import type { MaterialSpec } from '../levels/shared/levelTypes';
 import { HEAD, TORSO } from './dimensions';
-import { MINIFIG_FLAT_NORMAL_ID } from './plasticMapSets';
+import { MINIFIG_FLAT_NORMAL_ID, PLASTIC_UV_SCALE } from './plasticMapSets';
 
 export const MINIFIG_PLASTIC_SHADER_ID = 'minifig_plastic';
 export const MINIFIG_PLASTIC_SHADER_URL = '/shader-graphs/MinifigPlasticPBR.json';
@@ -98,7 +98,7 @@ export function minifigPlasticMaterial(opts: PlasticMatOpts): MaterialSpec {
       printFrame: [...printFrameForPart(opts.partId ?? opts.name)],
       baseColorTexture: opts.printTextureId ?? MINIFIG_WHITE_TEXTURE_ID,
       usePlasticMaps: 0,
-      plasticUvScale: 0.4,
+      plasticUvScale: PLASTIC_UV_SCALE,
       plasticNormalScale: 0.85,
       emissiveTexture: MINIFIG_WHITE_TEXTURE_ID,
       normalTexture: MINIFIG_FLAT_NORMAL_ID,

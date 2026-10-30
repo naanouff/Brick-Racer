@@ -8,6 +8,7 @@
 | [design/tone.md](design/tone.md) | Bible de ton 16+ |
 | [design/gdd.md](design/gdd.md) | GDD — lore, aventure, hub, 4 biomes, PNJ, boucles |
 | [design/ui-ux.md](design/ui-ux.md) | Maquette UI/UX écrans MVP (tokens, layouts, microcopy) |
+| [plans/dev-atelier.md](plans/dev-atelier.md) | Plan coque dev : lanceur de slices (maquette HTML hors app) |
 | [mocup/](mocup/) | Maquettes HTML cliquables (validation visuelle) |
 | [design/characters-candidates.md](design/characters-candidates.md) | 40 PNJ candidats ; roster ~20 figé post-playtest (équilibrage) |
 | [design/minifig-gproc.md](design/minifig-gproc.md) | Décision minifig (slots, recipes ; canon mesh LDraw MF2) |
@@ -45,6 +46,7 @@
 | [sprints/BRICK-H1.md](sprints/BRICK-H1.md) | Sprint hub blockout : pied + échange kart / moto / avion |
 | [sprints/BRICK-BW1.md](sprints/BRICK-BW1.md) | Sprint Brick Module Kit (fontaine + pad) |
 | [sprints/BRICK-B3.md](sprints/BRICK-B3.md) | Sprint boucle course solo (P1) |
-| [sprints/BRICK-UIM1.md](sprints/BRICK-UIM1.md) | Sprint maquettes HTML `docs/mocup` |
+| [sprints/BRICK-UIM1.md](sprints/BRICK-UIM1.md) | Sprint maquettes HTML `docs/mocup` (écrans joueur) |
+| [sprints/BRICK-UIM2.md](sprints/BRICK-UIM2.md) | Sprint maquette HTML Atelier dev (hors app) |
 | [sprints/BRICK-UI1.md](sprints/BRICK-UI1.md) | Sprint coque React UI écrans MVP |
 | [releases/0.1.0.md](releases/0.1.0.md) | Note de version 0.1.0 |

@@ -52,6 +52,17 @@ export {
   type BrickLandmarkSpec,
 } from './spawnBrickLandmark';
 export {
+  landmarkLdrawIds,
+  spawnLandmarkLdraw,
+} from './spawnLandmarkLdraw';
+export { isInvertedDishPart, packLdrawInstanceData } from './brickLdrawInstanceData';
+export {
+  ensureLandmarkPlasticMaterial,
+  landmarkAgingTextureId,
+  landmarkPlasticMaterialId,
+  LANDMARK_PLASTIC_SET,
+} from './landmarkPlasticMaterial';
+export {
   FOUNTAIN_ANCHOR,
   FOUNTAIN_BOUNDING_RADIUS,
   FOUNTAIN_MANUAL,
@@ -59,6 +70,14 @@ export {
   fountainBrickLandmarkSpec,
   fountainShellReport,
 } from './landmark/fountainKit';
+export {
+  FOUNTAIN_LDRAW_PARTS,
+  fountainLdrawGamePose,
+  fountainLdrawIds,
+  type FountainLdrawPart,
+  type FountainLdrawRole,
+} from './landmark/fountainLdraw';
+export { spawnFountainLdraw } from './landmark/spawnFountainLdraw';
 export {
   assembleManual,
   bakeShell,

@@ -402,11 +402,19 @@
     },
     {
       "id": "85080",
+      "name": "Brick Round Corner 2 x 2 Macaroni",
+      "category": "round",
+      "footprint": [2, 3, 2],
+      "mesh": { "status": "missing" },
+      "notes": "2×2 macaroni (BrickLink 85080). Four make a Ø4 stud ring."
+    },
+    {
+      "id": "48092",
       "name": "Brick Round Corner 4 x 4 Macaroni",
       "category": "round",
       "footprint": [4, 3, 4],
       "mesh": { "status": "missing" },
-      "notes": "BOM fountain outer ring ×4; AABB footprint until curved mesh"
+      "notes": "4×4 macaroni — larger basin ring on an 8×8 plate"
     },
     {
       "id": "3960",

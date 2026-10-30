@@ -25,6 +25,7 @@ import {
 import {
   CATALOG_UV_GRID_MATERIAL_ID,
   CATALOG_UV_GRID_UV1_MATERIAL_ID,
+  DEFAULT_CATALOG_PLASTIC_SET,
   catalogPlasticMaterialId,
   type CatalogPlasticSet,
 } from './catalogPlasticMaterials';
@@ -32,14 +33,14 @@ import { ensureLdrawUploadedMesh, getCachedLdrawMesh } from './ldrawMeshCache';
 import type { BrickFootprint } from './types';
 
 const PREVIEW_NAME = 'catalog.preview.box';
-const DEFAULT_PLASTIC: CatalogPlasticSet = '003';
+const DEFAULT_PLASTIC: CatalogPlasticSet = DEFAULT_CATALOG_PLASTIC_SET;
 
 let previewEntities: Entity[] = [];
 
 export type CatalogPreviewOpts = {
   footprint: BrickFootprint;
   colorId?: BrickColorId;
-  /** AmbientCG plastic set, or `off` for tint-only ABS. Default `003`. */
+  /** AmbientCG plastic set, or `off` for tint-only ABS. Default `017b`. */
   plasticSet?: CatalogPlasticSet;
   /** Debug: UV checkerboard on channel 0 (plastic) or 1 (aging atlas). */
   uvGrid?: 0 | 1 | false;

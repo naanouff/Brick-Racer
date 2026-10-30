@@ -7,7 +7,7 @@ Séquence : **course jouable d’abord**, puis **Lego City hub**, puis **custom*
 | Phase | Contenu | Doc / sprint |
 | ----- | ------- | ------------ |
 | **P0** | Host kart jouable (SceneDD + raycast) | [lego-kart-host.md](lego-kart-host.md) · [BRICK-B2](../sprints/BRICK-B2.md) |
-| **UI** | Maquettes HTML puis coque React (tokens, HUD) — parallèle P0/P1 | [ui-ux.md](../design/ui-ux.md) · [mocup/](../mocup/) · [BRICK-UIM1](../sprints/BRICK-UIM1.md) → [BRICK-UI1](../sprints/BRICK-UI1.md) |
+| **UI** | Maquettes HTML puis coque React (tokens, HUD) — parallèle P0/P1. Atelier dev = maquette HTML à part | [ui-ux.md](../design/ui-ux.md) · [dev-atelier.md](dev-atelier.md) · [mocup/](../mocup/) · [BRICK-UIM1](../sprints/BRICK-UIM1.md) → [BRICK-UI1](../sprints/BRICK-UI1.md) · [BRICK-UIM2](../sprints/BRICK-UIM2.md) |
 | **BO1** | Blockout `race-test` + `city-test` (TS levels) | [test-slice-blockout.md](test-slice-blockout.md) · [BRICK-BO1](../sprints/BRICK-BO1.md) |
 | **P1** | Boucle course solo minimale (1 piste, règles de base) + binding HUD | [BRICK-B3](../sprints/BRICK-B3.md) · consomme UI1c · après BO1 |
 | **H1** | Hub blockout : descendre, marcher (minifig), changer kart / moto / avion sur `city-test` | [hub-on-foot.md](hub-on-foot.md) · [BRICK-H1](../sprints/BRICK-H1.md) · après BO1 + MF1 |
@@ -45,7 +45,8 @@ flowchart LR
 - **BO1** livre le géométrie blockout `race-test` / `city-test` (TS) avant la boucle P1 ; le hub gameplay reste P2.
 - **H1** ajoute la marche et l’échange kart / moto / avion sur `city-test`. Pads, POI et scooter restent P2 / VP1.
 - **BW1** prouve le rendu brick (instances) sur le blockout hub ; P2 étend la city avec le même kit.
-- **UIM1** (HTML `docs/mocup`) valide le visuel ; **UI1** (React) porte ensuite ; les deux peuvent coexister en parallèle de P0. Binding data : P1–P3.
+- **UIM1** (HTML `docs/mocup`) valide le visuel joueur ; **UI1** (React) porte ensuite ; les deux peuvent coexister en parallèle de P0. Binding data : P1–P3.
+- **UIM2** valide la coque dev (lanceur de slices) en HTML hors app ([dev-atelier.md](dev-atelier.md)). Le port dans la barre Revue slice vient après, hors UI1.
 - P2 livre la **ville** ; P3 branche les intérieurs / UI custom sur les POI.
 - **MF1** pose le pipeline minifig GPROC (sandbox) ; **MF2** remplace le mesh Bolt par LDraw (après CL). P3 branche la boutique Vinyle dessus. MF1 peut démarrer dès B2 sans attendre P2.
 - Motocross et avion ne bloquent pas le hub ; ils enrichissent garage + pads.

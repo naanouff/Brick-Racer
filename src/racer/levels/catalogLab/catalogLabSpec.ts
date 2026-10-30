@@ -4,7 +4,12 @@
  */
 
 import { brickCatalogMaterials } from '../../hub/brick/brickMaterials';
-import { catalogPlasticMaterials, CATALOG_PLASTIC_SHADER_ID, CATALOG_PLASTIC_SHADER_URL } from '../../hub/brick/catalog/catalogPlasticMaterials';
+import {
+  catalogPlasticMaterials,
+  catalogUvGridMaterials,
+  CATALOG_PLASTIC_SHADER_ID,
+  CATALOG_PLASTIC_SHADER_URL,
+} from '../../hub/brick/catalog/catalogPlasticMaterials';
 import {
   MINIFIG_UV_GRID_SHADER_ID,
   MINIFIG_UV_GRID_SHADER_URL,
@@ -32,6 +37,7 @@ export function buildCatalogLabSpec(): LevelSpec {
       ...blockoutMaterials(),
       ...brickCatalogMaterials(),
       ...catalogPlasticMaterials(),
+      ...catalogUvGridMaterials(),
     },
     primitives: { ...BLOCKOUT_PRIMITIVES },
     entities: [

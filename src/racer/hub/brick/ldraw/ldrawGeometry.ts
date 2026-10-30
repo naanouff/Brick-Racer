@@ -429,10 +429,19 @@ function packUvCharts(rects: UvRect[]): { scale: number; margin: number } {
  * UV1 packs the same charts into [0,1]. Catalog aging reads a 256² bake of that channel.
  * A chart stops on a hard edge or a projection-axis change, so UV seams sit in creases.
  */
+/**
+ * `ground-center` — catalog preview: min Y = 0, centered on XZ.
+ * `origin` — minifig assembly: LDraw part origin stays at mesh (0,0,0) and the axis map is
+ * game (X, Y, Z) = LDraw (X, −Y, −Z), a 180° turn about X. The LDraw front (−Z) faces game +Z,
+ * where the print projection expects it, and LDraw assembly matrices keep their X rotations.
+ */
+export type LdrawMeshAnchor = 'ground-center' | 'origin';
+
 export function buildLdrawPreviewGeometry(
   trisLdu: Float32Array,
   edgesLdu: Float32Array = new Float32Array(0),
-  creaseDeg: number = LDRAW_CREASE_DEG
+  creaseDeg: number = LDRAW_CREASE_DEG,
+  anchor: LdrawMeshAnchor = 'ground-center'
 ): LdrawPreviewGeometry {
   const empty: LdrawPreviewGeometry = {
     vertices: new Float32Array(0),
@@ -448,6 +457,7 @@ export function buildLdrawPreviewGeometry(
     `${Math.round(x * WELD_PER_LDU)},${Math.round(y * WELD_PER_LDU)},${Math.round(z * WELD_PER_LDU)}`;
   const welded = new Map<string, number>();
   const gpos: number[] = [];
+  const figureAxes = anchor === 'origin';
   let minX = Infinity, minY = Infinity, minZ = Infinity;
   let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
   const weld = (x: number, y: number, z: number): number => {
@@ -456,9 +466,9 @@ export function buildLdrawPreviewGeometry(
     if (id === undefined) {
       id = gpos.length / 3;
       welded.set(k, id);
-      const gx = z * LDU_TO_GAME_XZ;
+      const gx = (figureAxes ? x : z) * LDU_TO_GAME_XZ;
       const gy = -y * LDU_TO_GAME_Y;
-      const gz = x * LDU_TO_GAME_XZ;
+      const gz = (figureAxes ? -z : x) * LDU_TO_GAME_XZ;
       gpos.push(gx, gy, gz);
       if (gx < minX) minX = gx;
       if (gx > maxX) maxX = gx;
@@ -643,9 +653,9 @@ export function buildLdrawPreviewGeometry(
     chartAxis[c] = signedAxis(sx, sy, sz);
   }
 
-  const ox = (minX + maxX) * 0.5;
-  const oz = (minZ + maxZ) * 0.5;
-  const oy = minY;
+  const ox = anchor === 'origin' ? 0 : (minX + maxX) * 0.5;
+  const oz = anchor === 'origin' ? 0 : (minZ + maxZ) * 0.5;
+  const oy = anchor === 'origin' ? 0 : minY;
   const centered = (v: number): [number, number, number] => [
     gpos[v * 3]! - ox,
     gpos[v * 3 + 1]! - oy,

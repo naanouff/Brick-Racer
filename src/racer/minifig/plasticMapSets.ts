@@ -47,6 +47,13 @@ export function resolveMinifigPlasticMap(search = ''): PlasticMapId | null {
   return '003';
 }
 
+/**
+ * Multiplier on UV0 (10 units per metre).
+ * 0.1 stretches one tile over a metre (~3 studs), so the 017B scratches read as
+ * wear on a brick. 0.4 repeated the same map every 25 cm and turned them into a web.
+ */
+export const PLASTIC_UV_SCALE = 0.1;
+
 /** Drive normal + roughness from the set. Albedo stays the minifig tint. */
 export function applyAmbientPlasticMaps(
   materials: Record<string, MaterialSpec>,
@@ -58,7 +65,7 @@ export function applyAmbientPlasticMaps(
     spec.properties = {
       ...spec.properties,
       usePlasticMaps: 1,
-      plasticUvScale: 0.4,
+      plasticUvScale: PLASTIC_UV_SCALE,
       plasticNormalScale: 0.85,
       emissiveTexture: set.surface,
       normalTexture: set.normal,

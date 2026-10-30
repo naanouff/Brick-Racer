@@ -56,13 +56,20 @@ export type MinifigCatalogEntry = {
   slot: MinifigSlot | 'print';
   kind: MinifigPartKind;
   displayName: string;
-  /** GPROC graph id (center / single part). Assemble uses a blockout proxy when unset. */
+  /** GPROC graph id (center / single part). Legacy fallback when LDraw unavailable. */
   gprocId?: string;
   /** Mirrored L/R graphs for paired parts (arms, legs). */
   gprocPair?: { left: string; right: string };
+  /**
+   * LDraw design id (e.g. `3626c`, `973`). Canon mesh source (MF2).
+   * Assemble prefers this over `gprocId` when meshes are preloaded.
+   */
+  ldrawId?: string;
+  /** Mirrored L/R LDraw ids (arms, legs). */
+  ldrawPair?: { left: string; right: string };
   /** Default tint when recipe omits one. */
   defaultTint?: string;
-  /** Rough brick AABB used by blockout assemble (full extents). */
+  /** Rough brick AABB used by blockout / LDraw fit scale (full extents). */
   proxySize?: [number, number, number];
   /** Public URL for print atlases / decals (MF3). */
   textureUrl?: string;

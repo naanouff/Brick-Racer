@@ -47,9 +47,12 @@ describe('brick part catalog (BC1)', () => {
     expect(partFootprintPlates('3005')).toEqual([1, 3, 1]);
     expect(partFootprintPlates('1x1')).toEqual([1, 3, 1]);
     const [sx, sy, sz] = partSizeMeters('85080');
-    expect(sx).toBeCloseTo(4 * S);
-    expect(sz).toBeCloseTo(4 * S);
+    expect(sx).toBeCloseTo(2 * S);
+    expect(sz).toBeCloseTo(2 * S);
     expect(sy).toBeCloseTo(S);
+    const big = partSizeMeters('48092');
+    expect(big[0]).toBeCloseTo(4 * S);
+    expect(big[2]).toBeCloseTo(4 * S);
   });
 
   it('validateManual accepts design ids and rejects unknown', () => {

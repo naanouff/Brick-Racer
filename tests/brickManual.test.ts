@@ -4,8 +4,11 @@ import {
   bakeShell,
   buildFountainBrickPoses,
   fountainShellReport,
+  isInvertedDishPart,
+  landmarkLdrawIds,
   ManualAssembleError,
   manualToLandmark,
+  packLdrawInstanceData,
   partSizeMeters,
   validateManual,
 } from '../src/racer/hub/brick';
@@ -80,19 +83,19 @@ describe('assembleManual + bakeShell', () => {
 });
 
 describe('fountain manual pipeline', () => {
-  it('builds gray/cyan poses inside the plan envelope', () => {
+  it('builds gray/cyan poses inside the BOM fountain envelope', () => {
     const poses = buildFountainBrickPoses(true);
-    expect(poses.length).toBeGreaterThan(20);
+    expect(poses.length).toBeGreaterThan(8);
     const gray = poses.filter((p) => p.colorId === 'gray').length;
     const cyan = poses.filter((p) => p.colorId === 'cyan').length;
-    expect(gray).toBeGreaterThan(10);
-    expect(cyan).toBeGreaterThan(4);
+    expect(gray).toBeGreaterThan(5);
+    expect(cyan).toBeGreaterThan(2);
     for (const p of poses) {
       const [sx, sy, sz] = partSizeMeters(p.partId);
-      expect(p.position[0] - sx / 2).toBeGreaterThanOrEqual(20 - 1.75);
-      expect(p.position[0] + sx / 2).toBeLessThanOrEqual(20 + 1.75);
-      expect(p.position[2] - sz / 2).toBeGreaterThanOrEqual(20 - 1.75);
-      expect(p.position[2] + sz / 2).toBeLessThanOrEqual(20 + 1.75);
+      expect(p.position[0] - sx / 2).toBeGreaterThanOrEqual(20 - 1.65);
+      expect(p.position[0] + sx / 2).toBeLessThanOrEqual(20 + 1.65);
+      expect(p.position[2] - sz / 2).toBeGreaterThanOrEqual(20 - 1.65);
+      expect(p.position[2] + sz / 2).toBeLessThanOrEqual(20 + 1.65);
       expect(p.position[1] - sy / 2).toBeGreaterThanOrEqual(-0.05);
       expect(p.position[1] + sy / 2).toBeLessThanOrEqual(2.2);
     }
@@ -110,5 +113,18 @@ describe('fountain manual pipeline', () => {
     expect(spec.id).toBe('landmark.fountain');
     expect(spec.poses.length).toBeGreaterThan(10);
     expect(batches).toBeGreaterThan(1);
+  });
+
+  it('exposes LDraw design ids for Brick Lab spawn', () => {
+    const { spec } = manualToLandmark(fountainManual, { shell: true });
+    const ids = landmarkLdrawIds(spec);
+    expect(ids).toContain('6141');
+    expect(ids).toContain('85080');
+    expect(ids).toContain('3960');
+    expect(ids).toContain('3941');
+    expect(isInvertedDishPart('3960')).toBe(true);
+    expect(isInvertedDishPart('3005')).toBe(false);
+    const packed = packLdrawInstanceData(spec.poses.slice(0, 2));
+    expect(packed.length).toBe(2 * 36);
   });
 });

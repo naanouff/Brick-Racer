@@ -405,12 +405,18 @@ export type SpawnLevelResult = {
   entityById: Map<string, Entity>;
 };
 
+export type SpawnLevelOpts = {
+  /** Extra meshes already uploaded (e.g. LDraw minifig parts). */
+  extraMeshes?: ReadonlyMap<string, Mesh>;
+};
+
 /**
  * Loads graphs/materials/meshes from the level spec and spawns all entities into the ECS.
  */
 export async function spawnLevel(
   engine: IEngineContext,
-  level: LevelSpec
+  level: LevelSpec,
+  opts?: SpawnLevelOpts
 ): Promise<SpawnLevelResult> {
   bootstrapGProcRuntime();
   registerMinifigGprocNodes();
@@ -472,6 +478,11 @@ export async function spawnLevel(
   const device = full.webGPUContext?.device;
   const materials = new Map<string, MaterialType>();
   for (const [id, spec] of Object.entries(level.materials)) {
+    if (!shaderGraphs.get(spec.shaderGraphId)) {
+      throw new Error(
+        `Material '${id}' references missing shaderGraph '${spec.shaderGraphId}' — add it to LevelSpec.shaderGraphs`
+      );
+    }
     const mat = buildMaterial(id, spec, shaderGraphs, resourceManager, device);
     if (!mat.shaderGraph) {
       throw new Error(`Material '${id}' has no shaderGraph (id=${spec.shaderGraphId})`);
@@ -485,6 +496,11 @@ export async function spawnLevel(
     const mesh = createPrimitiveMesh(id, entry);
     resourceManager.uploadMesh(mesh);
     meshes.set(id, mesh);
+  }
+  if (opts?.extraMeshes) {
+    for (const [id, mesh] of opts.extraMeshes) {
+      meshes.set(id, mesh);
+    }
   }
 
   const entityById = new Map<string, Entity>();

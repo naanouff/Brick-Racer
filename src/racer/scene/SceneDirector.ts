@@ -16,6 +16,8 @@ import {
 import { LogChannel } from '@naanouff/w3dts-logger';
 import { buildCityTestTriggers, CITY_HUB_SPAWNS, CITY_TEST_SPAWN } from '../levels/cityTest';
 import { spawnCityTest } from '../levels/cityTest/spawnCityTest';
+import { spawnMinifigLab } from '../levels/minifigLab/spawnMinifigLab';
+import { MINIFIG_LAB_CAMERA_ID } from '../levels/minifigLab/minifigLabSpec';
 import { spawnBrickLab } from '../levels/brickLab/spawnBrickLab';
 import { spawnCatalogLab } from '../levels/catalogLab/spawnCatalogLab';
 import { buildRaceTestTriggers, raceSpawnForVehicle } from '../levels/raceTest';
@@ -119,7 +121,7 @@ const BRICK_LAB_CAMERA_NAME = 'BL_OrbitCamera';
 const CATALOG_LAB_CAMERA_NAME = 'CL_OrbitCamera';
 
 function isOrbitLab(id: LevelId): boolean {
-  return id === 'brick-lab' || id === 'catalog-lab';
+  return id === 'brick-lab' || id === 'catalog-lab' || id === 'minifig-lab';
 }
 
 /** Bind orbit cam as game+editor; prefer orbital over leftover chase preference. */
@@ -242,6 +244,9 @@ export class SceneDirector {
       } else if (id === 'catalog-lab') {
         ({ rootEntityIds } = await spawnCatalogLab(this.engine));
         labStats = 'catalog preview';
+      } else if (id === 'minifig-lab') {
+        ({ rootEntityIds } = await spawnMinifigLab(this.engine));
+        labStats = 'minifig LDraw';
       } else {
         ({ rootEntityIds } = await spawnLevel(this.engine, getLevelSpec(id)));
       }
@@ -249,6 +254,10 @@ export class SceneDirector {
       this.activeId = id;
 
       await applyLegoKartSceneRuntime(this.engine);
+      // Graph reload / warm must not leave scripts/physics in editor Stop.
+      (
+        globalThis as unknown as { __W3DTS_SCRIPT_PLAY_STATE__?: 'playing' | 'paused' | 'stopped' }
+      ).__W3DTS_SCRIPT_PLAY_STATE__ = 'playing';
       if (id === 'city-test') activateHubSession(CITY_HUB_SPAWNS);
       else deactivateHubSession();
       if (levelNeedsGproc(id)) ensureGprocSystem(this.engine);
@@ -257,7 +266,9 @@ export class SceneDirector {
           ? BRICK_LAB_CAMERA_NAME
           : id === 'catalog-lab'
             ? CATALOG_LAB_CAMERA_NAME
-            : null;
+            : id === 'minifig-lab'
+              ? MINIFIG_LAB_CAMERA_ID
+              : null;
       if (orbitCamName) {
         if (!bindOrbitLabCamera(this.engine, orbitCamName)) {
           this.engine.logger.warn(

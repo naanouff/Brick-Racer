@@ -8,6 +8,7 @@ import {
   LitAbstractProject,
   type Engine,
   type ProjectLoadParams,
+  type RenderGraph,
 } from '@naanouff/w3dts-core';
 import { LogChannel } from '@naanouff/w3dts-logger';
 import type { LevelId } from '../../levels/registry';
@@ -37,9 +38,22 @@ export class LegoKartBootProject extends LitAbstractProject {
     return litRenderGraphPath();
   }
 
-  /** Game view must use the same lean graph (not LitAbstract production defaults). */
+  /** Game view must use the same quality graph (not LitAbstract production defaults). */
   protected override getGameRenderGraphPath(): string {
     return litRenderGraphPath();
+  }
+
+  /**
+   * Core only injects `lutTexture` for the game view. Brick Racer draws the scene graph,
+   * so color grading would sample an empty (black) LUT without this.
+   */
+  public override async configureRenderGraph(
+    graph: RenderGraph,
+    engine: Engine,
+    view: 'scene' | 'game'
+  ): Promise<void> {
+    await super.configureRenderGraph(graph, engine, view);
+    if (this.lutTexture) graph.setOutput('lutTexture', this.lutTexture);
   }
 
   protected override async initializeEnvironment(engine: Engine): Promise<void> {

@@ -50,43 +50,57 @@ type InputManagerHw = {
   resolveFromHardware: () => void;
   enableMap: (mapId: string) => void;
   applyInputOverridesJson: (raw: string) => void;
+  getElement?: () => EventTarget | null;
   __brickRacerHidGamepad?: boolean;
 };
 
-function readLivePadSlots(slotCount: number): (GamepadSlotSnapshot | null)[] {
-  const slots: (GamepadSlotSnapshot | null)[] = [];
-  if (typeof navigator === 'undefined' || typeof navigator.getGamepads !== 'function') {
-    for (let i = 0; i < slotCount; i++) slots.push(null);
-    return slots;
-  }
-  const live = navigator.getGamepads();
-  for (let i = 0; i < slotCount; i++) {
-    const pad = live[i];
-    if (!pad || !pad.connected) {
-      slots.push(null);
-      continue;
-    }
-    const buttons: { pressed: boolean; value: number }[] = [];
-    for (let b = 0; b < pad.buttons.length; b++) {
-      const btn = pad.buttons[b];
-      buttons.push({
-        pressed: btn?.pressed === true,
-        value: typeof btn?.value === 'number' ? btn.value : 0,
-      });
-    }
-    const axes: number[] = [];
-    for (let a = 0; a < pad.axes.length; a++) {
-      const v = pad.axes[a];
-      axes.push(typeof v === 'number' ? v : 0);
-    }
-    slots.push({
-      connected: true,
-      id: pad.id,
-      mapping: pad.mapping || 'standard',
-      buttons,
-      axes,
+/** Copy one live Gamepad into a plain snapshot (no live object refs). */
+export function snapshotLivePad(pad: Gamepad): GamepadSlotSnapshot {
+  const buttons: { pressed: boolean; value: number }[] = [];
+  for (let b = 0; b < pad.buttons.length; b++) {
+    const btn = pad.buttons[b];
+    buttons.push({
+      pressed: btn?.pressed === true,
+      value: typeof btn?.value === 'number' ? btn.value : 0,
     });
   }
+  const axes: number[] = [];
+  for (let a = 0; a < pad.axes.length; a++) {
+    const v = pad.axes[a];
+    axes.push(typeof v === 'number' ? v : 0);
+  }
+  return {
+    connected: true,
+    id: pad.id,
+    mapping: pad.mapping || 'standard',
+    buttons,
+    axes,
+  };
+}
+
+/**
+ * Poll `navigator.getGamepads()` into a fixed-length slot list.
+ * The first connected pad is always compacted into slot 0 so MK/hub resolvers
+ * (`gamepads[0]`) keep working when Chromium exposes the pad at a higher index.
+ */
+export function readLivePadSlots(slotCount: number): (GamepadSlotSnapshot | null)[] {
+  const slots: (GamepadSlotSnapshot | null)[] = [];
+  for (let i = 0; i < slotCount; i++) slots.push(null);
+
+  if (typeof navigator === 'undefined' || typeof navigator.getGamepads !== 'function') {
+    return slots;
+  }
+
+  const live = navigator.getGamepads();
+  let first: GamepadSlotSnapshot | null = null;
+  for (let i = 0; i < live.length; i++) {
+    const pad = live[i];
+    if (!pad || !pad.connected) continue;
+    const snap = snapshotLivePad(pad);
+    if (!first) first = snap;
+    if (i < slotCount) slots[i] = snap;
+  }
+  if (first && !slots[0]) slots[0] = first;
   return slots;
 }
 
@@ -108,6 +122,21 @@ function stampGamepadsOnHardware(hardware: HardwareSnapshot, pkg: InputPkg): voi
   hardware.gamepads = slots;
 }
 
+function applyMkAxesAndActions(im: InputManagerHw): void {
+  const hw = im.hardware as HardwareLike;
+  if (im.axes && typeof im.axes.set === 'function') {
+    im.axes.set('moveForward', resolveMkMoveForward(hw));
+    im.axes.set('moveRight', resolveMkMoveRight(hw));
+    im.axes.set('climb', resolvePlaneClimb(hw));
+    im.axes.set('rollSnap', resolvePlaneRollSnap(hw));
+  }
+  if (im.actions && typeof im.actions.set === 'function') {
+    // npm resolve drops gamepad bindings — force race actions from the live pad.
+    if (resolveMkJumpHeld(hw)) im.actions.set('jump', true);
+    if (resolveMkResetHeld(hw)) im.actions.set('resetKart', true);
+  }
+}
+
 /**
  * Install MK/DKR axes + plane climb + pad actions. Idempotent.
  */
@@ -121,20 +150,12 @@ export function installHidGamepadBridge(engine: Engine): boolean {
 
   const original = im.resolveFromHardware.bind(engine.inputManager);
   im.resolveFromHardware = () => {
+    // Stamp before resolve so npm inputRuntime (if it ever learns gamepad kinds) sees pads.
     stampGamepadsOnHardware(im.hardware, pkg);
     original();
-    const hw = im.hardware as HardwareLike;
-    if (im.axes && typeof im.axes.set === 'function') {
-      im.axes.set('moveForward', resolveMkMoveForward(hw));
-      im.axes.set('moveRight', resolveMkMoveRight(hw));
-      im.axes.set('climb', resolvePlaneClimb(hw));
-      im.axes.set('rollSnap', resolvePlaneRollSnap(hw));
-    }
-    if (im.actions && typeof im.actions.set === 'function') {
-      // npm resolve drops gamepad bindings — force race actions from the live pad.
-      if (resolveMkJumpHeld(hw)) im.actions.set('jump', true);
-      if (resolveMkResetHeld(hw)) im.actions.set('resetKart', true);
-    }
+    // Re-stamp after: npm resolve must not leave us without `hardware.gamepads`.
+    stampGamepadsOnHardware(im.hardware, pkg);
+    applyMkAxesAndActions(im);
   };
 
   im.enableMap('gameplay');
@@ -153,7 +174,20 @@ export function installHidGamepadBridge(engine: Engine): boolean {
     // Chromium often reports empty slots until a button is pressed; re-poll on focus.
     window.addEventListener('focus', kick);
     document.addEventListener('visibilitychange', kick);
+
+    // First click / pointer on the input canvas is the usual user-gesture that
+    // unlocks `getGamepads()` after a reload.
+    const el = typeof im.getElement === 'function' ? im.getElement() : null;
+    const target = el instanceof HTMLElement ? el : engine.webGPUContext?.canvas;
+    if (target) {
+      target.addEventListener('pointerdown', kick, { passive: true });
+    }
   }
+
+  // Ensure scripts / mono physics see Play (not editor Stop).
+  (
+    globalThis as unknown as { __W3DTS_SCRIPT_PLAY_STATE__?: 'playing' | 'paused' | 'stopped' }
+  ).__W3DTS_SCRIPT_PLAY_STATE__ = 'playing';
 
   return true;
 }

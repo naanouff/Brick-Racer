@@ -1,14 +1,43 @@
 /**
  * @file index.ts
- * @description Minifig GPROC foundation exports (BRICK-MF1).
+ * @description Minifig exports (MF1 recipes + MF2 LDraw).
  */
 
-export { PART_CATALOG, getCatalogEntry, requireCatalogEntry, listCatalogForSlot } from './catalog';
+export {
+  PART_CATALOG,
+  getCatalogEntry,
+  requireCatalogEntry,
+  listCatalogForSlot,
+  minifigLdrawMeshId,
+  minifigLdrawAgingTextureId,
+  collectRecipeLdrawIds,
+} from './catalog';
 export {
   assembleMinifig,
   assembleMinifigEntities,
   type AssembleMinifigResult,
+  type AssembleLdrawContext,
+  type AssembleMinifigOpts,
 } from './assembleMinifig';
+export {
+  MINIFIG_LDRAW_FEET_LDU,
+  MINIFIG_LDRAW_PLACEMENT_LDU,
+  minifigLdrawFocusY,
+  minifigLdrawGamePosition,
+  minifigLdrawPrintFrame,
+  minifigLdrawRotation,
+  type MinifigLdrawRole,
+} from './ldrawAssembly';
+export {
+  MINIFIG_LDRAW_PLASTIC_SET,
+  minifigLdrawPlasticMaterial,
+  type LdrawPlasticMatOpts,
+} from './ldrawPlasticMaterial';
+export {
+  preloadMinifigLdrawMeshes,
+  hasAnyLdrawMesh,
+  type PreloadMinifigLdrawResult,
+} from './preloadMinifigLdraw';
 export { MINIFIG_GPROC_GRAPHS, type MinifigGprocGraphId } from './gprocGraphs';
 export { unwrapMinifigPart, type MinifigUnwrapKind, type UnwrapPartOpts } from './unwrapPart';
 export { registerMinifigGprocNodes } from './registerMinifigGprocNodes';

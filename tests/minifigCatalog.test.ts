@@ -44,7 +44,7 @@ describe('minifig catalog', () => {
     expect(result.errors[0]?.slot).toBe('head');
   });
 
-  it('assembles Bolt with MF2 GPROC body slots and no Meshy', () => {
+  it('assembles Bolt with GPROC fallback when LDraw is not preloaded', () => {
     const { entities, materials, rootId } = assembleMinifigEntities(BOLT_RECIPE);
     expect(rootId).toBe('minifig.c01-bolt');
     expect(entities.length).toBeGreaterThanOrEqual(15);

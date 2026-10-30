@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atelier — Brick Racer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        font-family: var(--br-font-body);
+        font-size: 15px;
+        color: var(--br-ink);
+        background: var(--br-asphalt);
+        line-height: 1.4;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--br-stud-yellow);
+        outline-offset: 2px;
+      }
+
+      button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .atelier {
+        display: grid;
+        grid-template-columns: var(--rail-w, 280px) minmax(0, 1fr) var(--drawer-w, 320px);
+        grid-template-rows: 1fr auto;
+        height: 100vh;
+        overflow: hidden;
+        --rail-w: 280px;
+        --drawer-w: 320px;
+      }
+
+      .atelier.is-rail-collapsed {
+        --rail-w: 56px;
+      }
+
+      /* —— Rail —— */
+      .rail {
+        grid-row: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        padding: 0.75rem;
+        background: var(--br-paper);
+        color: var(--br-ink);
+        border-right: var(--br-border) solid var(--br-ink);
+        z-index: 2;
+        overflow: hidden;
+      }
+
+      .rail__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-height: 2rem;
+      }
+
+      .rail__brand {
+        margin: 0;
+        font-family: var(--br-font-display);
+        font-size: 0.95rem;
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .rail__collapse {
+        flex-shrink: 0;
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        border: 2px solid var(--br-ink);
+        border-radius: var(--br-radius);
+        background: var(--br-stud-yellow);
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+
+      .rail__collapse:hover {
+        filter: brightness(1.05);
+      }
+
+      .rail__groups {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .rail__group-label {
+        margin: 0 0 0.35rem;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #5a5260;
+      }
+
+      .scene-card {
+        display: grid;
+        grid-template-columns: 2rem 1fr auto;
+        gap: 0.45rem;
+        align-items: center;
+        width: 100%;
+        margin: 0 0 0.4rem;
+        padding: 0.45rem 0.5rem 0.45rem 0.35rem;
+        text-align: left;
+        border: 2px solid transparent;
+        border-radius: var(--br-radius);
+        background: #fff;
+        box-shadow: 2px 2px 0 rgb(26 21 32 / 12%);
+        transition: border-color 80ms ease, background 80ms ease;
+      }
+
+      .scene-card:hover {
+        border-color: rgb(26 21 32 / 35%);
+      }
+
+      .scene-card.is-active {
+        border-color: var(--br-stud-yellow);
+        background: #fffdf3;
+        box-shadow: 2px 2px 0 rgb(245 197 24 / 45%);
+      }
+
+      .scene-card__accent {
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 5px;
+        background: var(--accent, var(--br-stud-yellow));
+        color: var(--br-ink);
+      }
+
+      .scene-card__icon {
+        display: block;
+        width: 1.05rem;
+        height: 1.05rem;
+      }
+
+      .scene-card__body {
+        min-width: 0;
+      }
+
+      .scene-card__title {
+        display: block;
+        font-family: var(--br-font-display);
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .scene-card__role {
+        display: block;
+        margin-top: 0.1rem;
+        font-size: 0.72rem;
+        color: #5a5260;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .scene-card__key {
+        flex-shrink: 0;
+        min-width: 1.35rem;
+        padding: 0.15rem 0.3rem;
+        text-align: center;
+        font-size: 0.7rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        color: #5a5260;
+        border: 1px solid rgb(26 21 32 / 18%);
+        border-radius: 4px;
+        background: var(--br-paper);
+      }
+
+      .rail__back {
+        display: block;
+        margin-top: auto;
+        padding: 0.45rem 0.55rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--br-ink);
+        text-decoration: none;
+        border: 2px solid var(--br-ink);
+        border-radius: var(--br-radius);
+        background: var(--br-paper);
+        text-align: center;
+      }
+
+      .rail__back:hover {
+        background: #fff;
+        border-color: var(--br-stud-yellow);
+      }
+
+      .atelier.is-rail-collapsed .rail {
+        padding: 0.55rem 0.4rem;
+        align-items: center;
+      }
+
+      .atelier.is-rail-collapsed .rail__brand,
+      .atelier.is-rail-collapsed .rail__group-label,
+      .atelier.is-rail-collapsed .scene-card__body,
+      .atelier.is-rail-collapsed .scene-card__key,
+      .atelier.is-rail-collapsed .rail__back {
+        display: none;
+      }
+
+      .atelier.is-rail-collapsed .rail__top {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .atelier.is-rail-collapsed .scene-card {
+        grid-template-columns: 1fr;
+        padding: 0;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin: 0 auto 0.4rem;
+        place-items: center;
+        overflow: hidden;
+        background: transparent;
+        box-shadow: none;
+        border-color: transparent;
+      }
+
+      .atelier.is-rail-collapsed .scene-card.is-active {
+        background: transparent;
+        box-shadow: none;
+        border-color: transparent;
+      }
+
+      .atelier.is-rail-collapsed .scene-card__accent {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        box-shadow: 2px 2px 0 rgb(26 21 32 / 18%);
+        border: 2px solid transparent;
+      }
+
+      .atelier.is-rail-collapsed .scene-card.is-active .scene-card__accent {
+        border-color: var(--br-stud-yellow);
+        box-shadow: 2px 2px 0 rgb(245 197 24 / 45%);
+      }
+
+      .atelier.is-rail-collapsed .scene-card__icon {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      /* —— Viewport —— */
+      .viewport {
+        position: relative;
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        overflow: hidden;
+        background: var(--br-asphalt);
+      }
+
+      .viewport__world {
+        position: absolute;
+        inset: 0;
+        transition: background 180ms ease;
+      }
+
+      .viewport__world[data-family="race"] {
+        background:
+          radial-gradient(ellipse at 50% 18%, #4a5368 0%, transparent 52%),
+          linear-gradient(160deg, #1a1520 0%, var(--br-asphalt) 48%, #12151c 100%);
+      }
+
+      .viewport__world[data-family="city"] {
+        background:
+          radial-gradient(ellipse at 40% 30%, rgb(247 184 201 / 35%) 0%, transparent 50%),
+          linear-gradient(165deg, #3a4558 0%, #2b3040 40%, #1f2430 100%);
+      }
+
+      .viewport__world[data-family="lab"] {
+        background:
+          radial-gradient(ellipse at 60% 25%, rgb(232 122 58 / 28%) 0%, transparent 45%),
+          linear-gradient(155deg, #2a2430 0%, #352a28 45%, #1a1520 100%);
+      }
+
+      .viewport__label {
+        position: absolute;
+        top: 1.1rem;
+        left: 1.1rem;
+        z-index: 1;
+        margin: 0;
+        padding: 0.45rem 0.75rem;
+        font-family: var(--br-font-display);
+        font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--br-paper);
+        background: rgb(26 21 32 / 55%);
+        border: 2px solid rgb(255 246 236 / 22%);
+        border-radius: var(--br-radius);
+        pointer-events: none;
+      }
+
+      .viewport__hint {
+        position: absolute;
+        bottom: 1.1rem;
+        left: 50%;
+        z-index: 1;
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.78rem;
+        font-style: italic;
+        color: rgb(255 246 236 / 78%);
+        background: rgb(26 21 32 / 45%);
+        border-radius: var(--br-radius);
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* —— Drawer —— */
+      .drawer {
+        grid-column: 3;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.85rem;
+        background: var(--br-paper);
+        border-left: var(--br-border) solid var(--br-ink);
+        overflow-y: auto;
+        z-index: 2;
+      }
+
+      .drawer__title {
+        margin: 0;
+        font-family: var(--br-font-display);
+        font-size: 0.95rem;
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .drawer__section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .drawer__section[hidden] {
+        display: none !important;
+      }
+
+      .drawer__label {
+        margin: 0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #5a5260;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+
+      .chip {
+        margin: 0;
+        padding: 0.35rem 0.55rem;
+        border: 2px solid rgb(26 21 32 / 28%);
+        border-radius: var(--br-radius);
+        background: #fff;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .chip:hover:not(:disabled) {
+        border-color: var(--br-ink);
+      }
+
+      .chip.is-active {
+        border-color: var(--br-stud-yellow);
+        background: #fff8d6;
+      }
+
+      .chip:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+
+      .telemetry {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.85rem;
+        margin: 0;
+        padding: 0.55rem 0.65rem;
+        font-variant-numeric: tabular-nums;
+        font-size: 0.85rem;
+        background: #fff;
+        border: 2px solid rgb(26 21 32 / 18%);
+        border-radius: var(--br-radius);
+      }
+
+      .telemetry strong {
+        font-weight: 700;
+      }
+
+      .telemetry .muted {
+        color: #5a5260;
+        font-weight: 500;
+      }
+
+      .hint-box {
+        margin: 0;
+        padding: 0.55rem 0.65rem;
+        font-size: 0.78rem;
+        color: #5a5260;
+        background: #fff;
+        border: 2px dashed rgb(26 21 32 / 22%);
+        border-radius: var(--br-radius);
+      }
+
+      .atelier.is-catalog {
+        --drawer-w: min(24rem, 38vw);
+      }
+
+      .atelier.is-catalog .drawer {
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .drawer__section--catalog {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+
+      .meta {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.25rem;
+        margin: 0;
+        padding: 0.2rem 0.45rem;
+        font-size: 0.72rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        color: #5a5260;
+        background: #fff;
+        border: 2px solid rgb(26 21 32 / 14%);
+        border-radius: 4px;
+      }
+
+      .meta b {
+        color: var(--br-ink);
+        font-weight: 700;
+      }
+
+      .field-row {
+        display: flex;
+        gap: 0.4rem;
+        align-items: flex-end;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1;
+        min-width: 0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #5a5260;
+      }
+
+      .field--narrow {
+        flex: 0 0 7.5rem;
+      }
+
+      .field-input {
+        width: 100%;
+        margin: 0;
+        padding: 0.4rem 0.55rem;
+        border: 2px solid rgb(26 21 32 / 28%);
+        border-radius: var(--br-radius);
+        background: #fff;
+        color: var(--br-ink);
+        font: inherit;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0;
+        text-transform: none;
+        box-shadow: 1px 1px 0 rgb(26 21 32 / 8%);
+      }
+
+      .cat-list {
+        flex: 1 1 0;
+        min-height: 0;
+        overflow: auto;
+        border: 2px solid rgb(26 21 32 / 18%);
+        border-radius: var(--br-radius);
+        background: #fff;
+        box-shadow: 2px 2px 0 rgb(26 21 32 / 8%);
+        padding: 0.25rem;
+      }
+
+      .cat-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        width: 100%;
+        margin: 0 0 0.15rem;
+        padding: 0.28rem 0.45rem;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        background: transparent;
+        font: inherit;
+        font-size: 0.74rem;
+        text-align: left;
+        color: var(--br-ink);
+      }
+
+      .cat-row:hover {
+        border-color: rgb(26 21 32 / 18%);
+        background: rgb(232 122 58 / 10%);
+      }
+
+      .cat-row.is-active {
+        border-color: var(--br-stud-yellow);
+        background: #fff8d6;
+      }
+
+      .cat-row__id {
+        flex: 0 0 4.2rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .cat-row__name {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #5a5260;
+      }
+
+      .cat-row.is-active .cat-row__name {
+        color: var(--br-ink);
+      }
+
+      .cat-detail {
+        flex: 0 1 auto;
+        max-height: min(52%, 26rem);
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding-top: 0.4rem;
+        border-top: 2px solid rgb(26 21 32 / 12%);
+        overflow: hidden;
+      }
+
+      .cat-detail__scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding-bottom: 0.35rem;
+      }
+
+      .cat-detail__title {
+        margin: 0;
+        font-family: var(--br-font-display);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .cat-detail__actions {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-top: 0.45rem;
+        border-top: 2px solid rgb(26 21 32 / 12%);
+        background: var(--br-paper);
+      }
+
+      .swatches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+
+      .swatch {
+        width: 1.35rem;
+        height: 1.35rem;
+        padding: 0;
+        border: 2px solid rgb(26 21 32 / 28%);
+        border-radius: 4px;
+        box-shadow: 1px 1px 0 rgb(26 21 32 / 10%);
+      }
+
+      .swatch.is-active {
+        border-color: var(--br-stud-yellow);
+        outline: 2px solid var(--br-ink);
+        outline-offset: 1px;
+      }
+
+      .chip--accent {
+        background: var(--br-garage-oil);
+        color: var(--br-paper);
+        border-color: var(--br-ink);
+      }
+
+      .drawer__common {
+        margin-top: auto;
+        padding-top: 0.75rem;
+        border-top: 2px solid rgb(26 21 32 / 12%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+
+      .reload-note {
+        margin: 0;
+        font-size: 0.7rem;
+        color: #5a5260;
+      }
+
+      /* —— Status bar —— */
+      .status {
+        grid-column: 2 / 4;
+        grid-row: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 0.75rem;
+        background: rgb(18 21 28 / 92%);
+        color: var(--br-paper);
+        border-top: 2px solid rgb(255 246 236 / 12%);
+        z-index: 2;
+      }
+
+      .status__chip {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.25rem;
+        padding: 0.2rem 0.45rem;
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        background: rgb(255 246 236 / 8%);
+        border: 1px solid rgb(255 246 236 / 14%);
+        border-radius: 4px;
+      }
+
+      .status__chip b {
+        font-weight: 700;
+        color: var(--br-stud-yellow);
+      }
+
+      .status__chip span {
+        color: rgb(255 246 236 / 65%);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .status__disclaimer {
+        margin-left: auto;
+        font-size: 0.65rem;
+        color: rgb(255 246 236 / 45%);
+        max-width: 28rem;
+        text-align: right;
+      }
+
+      @media (max-width: 1100px) {
+        .atelier {
+          --drawer-w: 260px;
+        }
+
+        .status__disclaimer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="atelier" id="atelier">
+      <aside class="rail" aria-label="Slices Proving Grounds">
+        <div class="rail__top">
+          <p class="rail__brand">Atelier</p>
+          <button
+            type="button"
+            class="rail__collapse"
+            id="rail-toggle"
+            title="Replier le rail (`)"
+            aria-label="Replier le rail"
+            aria-pressed="false"
+          >
+            «
+          </button>
+        </div>
+
+        <div class="rail__groups">
+          <div>
+            <p class="rail__group-label">Pistes</p>
+            <button
+              type="button"
+              class="scene-card is-active"
+              data-scene="race-test"
+              data-family="race"
+              data-key="1"
+              style="--accent: var(--br-stud-yellow)"
+              aria-pressed="true"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V5"/><path d="M4 5h10l-2 3 2 3H4" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="3"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">Race test</span>
+                <span class="scene-card__role">Ovale · arcade</span>
+              </span>
+              <span class="scene-card__key">1</span>
+            </button>
+            <button
+              type="button"
+              class="scene-card"
+              data-scene="city-test"
+              data-family="city"
+              data-key="2"
+              style="--accent: var(--br-beach-mint)"
+              aria-pressed="false"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10h5v10"/><path d="M9 20V6h6v14"/><path d="M15 20v-7h5v7"/><path d="M6 13h1M6 16h1M11 9h1M11 12h1M11 15h1M17 15h1"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">City test</span>
+                <span class="scene-card__role">Hub · pied / véhicule</span>
+              </span>
+              <span class="scene-card__key">2</span>
+            </button>
+            <button
+              type="button"
+              class="scene-card"
+              data-scene="sandbox-kart"
+              data-family="race"
+              data-key="3"
+              style="--accent: var(--br-plaza-pastel)"
+              aria-pressed="false"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M3 9v7l9 5 9-5V9"/><path d="M12 14v7"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">Sandbox kart</span>
+                <span class="scene-card__role">Legacy · sandbox</span>
+              </span>
+              <span class="scene-card__key">3</span>
+            </button>
+          </div>
+
+          <div>
+            <p class="rail__group-label">Labs</p>
+            <button
+              type="button"
+              class="scene-card"
+              data-scene="brick-lab"
+              data-family="lab"
+              data-key="4"
+              style="--accent: var(--br-garage-oil)"
+              aria-pressed="false"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="11" rx="1.5"/><circle cx="8" cy="7" r="2.2"/><circle cx="16" cy="7" r="2.2"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">Brick lab</span>
+                <span class="scene-card__role">Manuels · enveloppe</span>
+              </span>
+              <span class="scene-card__key">4</span>
+            </button>
+            <button
+              type="button"
+              class="scene-card"
+              data-scene="catalog-lab"
+              data-family="lab"
+              data-key="5"
+              style="--accent: var(--br-garage-oil)"
+              aria-pressed="false"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5z"/><path d="M8 9h8M8 12h8M8 15h5"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">Catalogue</span>
+                <span class="scene-card__role">Master × BC1</span>
+              </span>
+              <span class="scene-card__key">5</span>
+            </button>
+            <button
+              type="button"
+              class="scene-card"
+              data-scene="minifig-lab"
+              data-family="lab"
+              data-key="6"
+              style="--accent: var(--br-billboard-magenta)"
+              aria-pressed="false"
+            >
+              <span class="scene-card__accent" aria-hidden="true">
+                <svg class="scene-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M7 20v-5a5 5 0 0 1 10 0v5"/><path d="M9 11.5h6"/></svg>
+              </span>
+              <span class="scene-card__body">
+                <span class="scene-card__title">Minifig lab</span>
+                <span class="scene-card__role">LDraw · orbit</span>
+              </span>
+              <span class="scene-card__key">6</span>
+            </button>
+          </div>
+        </div>
+
+        <a class="rail__back" href="index.html">← Maquettes joueur</a>
+      </aside>
+
+      <main class="viewport" aria-label="Viewport stub">
+        <div class="viewport__world" id="world" data-family="race" aria-hidden="true"></div>
+        <h1 class="viewport__label" id="scene-label">Race test (ovale)</h1>
+        <p class="viewport__hint" id="scene-hint">WASD · Espace drift · X reset</p>
+      </main>
+
+      <aside class="drawer" aria-label="Outils de slice">
+        <h2 class="drawer__title" id="drawer-title">Piste</h2>
+
+        <div class="drawer__section" data-panel="track" id="panel-track">
+          <p class="drawer__label">Véhicule</p>
+          <div class="chip-row" role="group" aria-label="Véhicule">
+            <button type="button" class="chip is-active" data-vehicle="kart">Kart</button>
+            <button type="button" class="chip" data-vehicle="moto">Moto</button>
+            <button type="button" class="chip" data-vehicle="plane">Avion</button>
+          </div>
+          <p class="drawer__label">Cylindrée</p>
+          <div class="chip-row" role="group" aria-label="Cylindrée">
+            <button type="button" class="chip is-active" data-cc="50">50 cc</button>
+            <button type="button" class="chip" data-cc="100">100 cc</button>
+            <button type="button" class="chip" data-cc="150">150 cc</button>
+          </div>
+          <p class="drawer__label">Télémétrie (stub)</p>
+          <p class="telemetry" aria-live="polite">
+            <span><strong id="stub-speed">87</strong> km/h</span>
+            <span class="muted" id="stub-drift">—</span>
+          </p>
+          <p class="hint-box" id="track-controls">WASD · Espace drift · X reset</p>
+        </div>
+
+        <div class="drawer__section" data-panel="brick" id="panel-brick" hidden>
+          <p class="drawer__label">Manuel</p>
+          <div class="chip-row" role="group" aria-label="Manuel brick">
+            <button type="button" class="chip is-active" data-manual="fountain">Fontaine A1</button>
+          </div>
+          <p class="drawer__label">Bake shell</p>
+          <div class="chip-row" role="group" aria-label="Bake shell">
+            <button type="button" class="chip is-active" data-shell="on">enveloppe</button>
+            <button type="button" class="chip" data-shell="off">plein</button>
+          </div>
+          <p class="drawer__label">Stats (stub)</p>
+          <p class="telemetry"><strong>142</strong> briques · <span class="muted">enveloppe</span></p>
+          <p class="hint-box">Orbit · souris / stick · HUD manuels</p>
+        </div>
+
+        <div class="drawer__section drawer__section--catalog" data-panel="catalog" id="panel-catalog" hidden>
+          <div class="meta-row">
+            <p class="meta"><b>33 721</b> / 33 721</p>
+            <p class="meta">staging <b>0</b></p>
+          </div>
+          <div class="field-row">
+            <label class="field">
+              Recherche
+              <input class="field-input" type="search" placeholder="id ou nom…" aria-label="Recherche pièce" />
+            </label>
+            <label class="field field--narrow">
+              Catégorie
+              <select class="field-input" aria-label="Catégorie">
+                <option>Toutes</option>
+                <option>cat 65</option>
+              </select>
+            </label>
+          </div>
+          <div class="cat-list" role="listbox" aria-label="Pièces">
+            <button type="button" class="cat-row" data-part="10039">
+              <span class="cat-row__id">10039</span>
+              <span class="cat-row__name">Pullback Motor 8 x 4 x 2/3</span>
+            </button>
+            <button type="button" class="cat-row is-active" data-part="10051" aria-selected="true">
+              <span class="cat-row__id">10051</span>
+              <span class="cat-row__name">Helmet Castle with Lateral Comb</span>
+            </button>
+            <button type="button" class="cat-row" data-part="10052">
+              <span class="cat-row__id">10052</span>
+              <span class="cat-row__name">Minifig Neckwear Beard, Rounded End</span>
+            </button>
+            <button type="button" class="cat-row" data-part="10053">
+              <span class="cat-row__id">10053</span>
+              <span class="cat-row__name">Weapon Sword Small</span>
+            </button>
+          </div>
+          <div class="cat-detail">
+            <div class="cat-detail__scroll">
+              <p class="cat-detail__title" id="cat-title">#10051 — Helmet Castle with Lateral Comb</p>
+              <p class="drawer__label">Preview</p>
+              <div class="chip-row" role="group" aria-label="Mode preview">
+                <button type="button" class="chip is-active" data-preview="mesh">Mesh</button>
+                <button type="button" class="chip" data-preview="box">Boîte</button>
+                <button type="button" class="chip" data-preview="uv0">UV0</button>
+                <button type="button" class="chip" data-preview="uv1">UV1</button>
+                <button type="button" class="chip is-active" data-aging="on">Vieilli</button>
+              </div>
+              <p class="drawer__label">Plastique</p>
+              <div class="chip-row" role="group" aria-label="Plastique">
+                <button type="button" class="chip is-active" data-plastic="017b">017B</button>
+                <button type="button" class="chip" data-plastic="003">003</button>
+                <button type="button" class="chip" data-plastic="off">Off</button>
+              </div>
+              <p class="drawer__label">Couleur</p>
+              <div class="swatches" role="listbox" aria-label="Couleur">
+                <button type="button" class="swatch" style="background:#f4f4f4" title="white"></button>
+                <button type="button" class="swatch" style="background:#1a1a1a" title="black"></button>
+                <button type="button" class="swatch" style="background:#f5c518" title="yellow"></button>
+                <button type="button" class="swatch" style="background:#c81e1e" title="red"></button>
+                <button type="button" class="swatch" style="background:#1d7a32" title="green"></button>
+                <button type="button" class="swatch is-active" style="background:#8a8d86" title="gray"></button>
+                <button type="button" class="swatch" style="background:#1a4f9c" title="blue"></button>
+              </div>
+              <div class="field-row">
+                <label class="field">
+                  Footprint sx,py,sz
+                  <input class="field-input" value="2,4,2" />
+                </label>
+                <label class="field field--narrow">
+                  Catégorie BC1
+                  <select class="field-input">
+                    <option>other</option>
+                    <option>brick</option>
+                  </select>
+                </label>
+              </div>
+              <p class="reload-note">LDraw 10051 · 18.66×15.68×15.48 mm · mesh · 1 614 tri</p>
+            </div>
+            <div class="cat-detail__actions">
+              <p class="drawer__label">Actions</p>
+              <div class="chip-row">
+                <button type="button" class="chip">GLB</button>
+                <button type="button" class="chip">OBJ</button>
+                <button type="button" class="chip">FBX</button>
+                <button type="button" class="chip">+ BC1</button>
+                <button type="button" class="chip" disabled>Retirer</button>
+                <button type="button" class="chip chip--accent">Écrire parts.json</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer__section" data-panel="minifig" id="panel-minifig" hidden>
+          <p class="drawer__label">Minifig</p>
+          <p class="hint-box">
+            Orbit seul pour l’instant — pas de contrôles dédiés dans le HUD actuel.
+          </p>
+        </div>
+
+        <div class="drawer__common">
+          <div class="drawer__section">
+            <p class="drawer__label">Texture debug</p>
+            <div class="chip-row" role="group" aria-label="Texture debug">
+              <button type="button" class="chip" data-tex="grid">grille</button>
+              <button type="button" class="chip is-active" data-tex="solid">unis</button>
+            </div>
+          </div>
+          <div class="drawer__section">
+            <p class="drawer__label">Qualité rendu</p>
+            <div class="chip-row" role="group" aria-label="Qualité rendu">
+              <button type="button" class="chip is-active" data-quality="fast">fast</button>
+              <button type="button" class="chip" data-quality="showcase">showcase</button>
+            </div>
+            <p class="reload-note">
+              Dans l’app, texture et qualité rechargent la page (boot-time).
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <footer class="status" aria-label="Perf stub">
+        <div class="status__chip"><b id="chip-fps">60</b> <span>fps</span></div>
+        <div class="status__chip"><b id="chip-ms">16.4</b> <span>ms</span></div>
+        <div class="status__chip"><b>1920×1080</b> <span>buffer</span></div>
+        <div class="status__chip"><b id="chip-dc">214</b> <span>dc</span></div>
+        <div class="status__chip"><b id="chip-tris">1.2M</b>/<b id="chip-tris-t">2.4M</b> <span>tri</span></div>
+        <div class="status__chip"><b id="chip-quality">fast</b> <span>qualité</span></div>
+        <p class="status__disclaimer">
+          Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo · UIM2
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var SCENES = {
+          "race-test": {
+            label: "Race test (ovale)",
+            family: "race",
+            panel: "track",
+            hint: "WASD · Espace drift · X reset",
+            drawer: "Piste",
+          },
+          "city-test": {
+            label: "City test (hub)",
+            family: "city",
+            panel: "track",
+            hint: "WASD · F / pad Y possession · X reset",
+            drawer: "Hub",
+          },
+          "sandbox-kart": {
+            label: "Sandbox kart",
+            family: "race",
+            panel: "track",
+            hint: "WASD · Espace drift · X reset",
+            drawer: "Sandbox",
+          },
+          "brick-lab": {
+            label: "Brick lab",
+            family: "lab",
+            panel: "brick",
+            hint: "Orbit · souris / stick · HUD manuels",
+            drawer: "Brick lab",
+          },
+          "catalog-lab": {
+            label: "Catalogue",
+            family: "lab",
+            panel: "catalog",
+            hint: "Orbit · panneau catalogue à droite",
+            drawer: "Catalogue",
+          },
+          "minifig-lab": {
+            label: "Minifig lab",
+            family: "lab",
+            panel: "minifig",
+            hint: "Orbit · souris / stick",
+            drawer: "Minifig",
+          },
+        };
+
+        var atelier = document.getElementById("atelier");
+        var world = document.getElementById("world");
+        var sceneLabel = document.getElementById("scene-label");
+        var sceneHint = document.getElementById("scene-hint");
+        var drawerTitle = document.getElementById("drawer-title");
+        var trackControls = document.getElementById("track-controls");
+        var railToggle = document.getElementById("rail-toggle");
+        var cards = Array.prototype.slice.call(document.querySelectorAll(".scene-card"));
+        var panels = {
+          track: document.getElementById("panel-track"),
+          brick: document.getElementById("panel-brick"),
+          catalog: document.getElementById("panel-catalog"),
+          minifig: document.getElementById("panel-minifig"),
+        };
+
+        var state = {
+          scene: "race-test",
+          vehicle: "kart",
+          railCollapsed: false,
+        };
+
+        function setExclusiveActive(selector, attr, value) {
+          document.querySelectorAll(selector).forEach(function (el) {
+            var on = el.getAttribute(attr) === value;
+            el.classList.toggle("is-active", on);
+          });
+        }
+
+        function selectScene(id) {
+          var meta = SCENES[id];
+          if (!meta) return;
+          state.scene = id;
+
+          cards.forEach(function (card) {
+            var on = card.getAttribute("data-scene") === id;
+            card.classList.toggle("is-active", on);
+            card.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+
+          world.setAttribute("data-family", meta.family);
+          atelier.classList.toggle("is-catalog", id === "catalog-lab");
+          sceneLabel.textContent = meta.label;
+          sceneHint.textContent = meta.hint;
+          drawerTitle.textContent = meta.drawer;
+          if (trackControls) trackControls.textContent = meta.hint;
+
+          Object.keys(panels).forEach(function (key) {
+            panels[key].hidden = key !== meta.panel;
+          });
+        }
+
+        function toggleRail() {
+          state.railCollapsed = !state.railCollapsed;
+          atelier.classList.toggle("is-rail-collapsed", state.railCollapsed);
+          railToggle.setAttribute("aria-pressed", state.railCollapsed ? "true" : "false");
+          railToggle.setAttribute(
+            "aria-label",
+            state.railCollapsed ? "Déplier le rail" : "Replier le rail"
+          );
+          railToggle.textContent = state.railCollapsed ? "»" : "«";
+          railToggle.title = state.railCollapsed
+            ? "Déplier le rail (`)"
+            : "Replier le rail (`)";
+        }
+
+        cards.forEach(function (card) {
+          card.addEventListener("click", function () {
+            selectScene(card.getAttribute("data-scene"));
+          });
+        });
+
+        railToggle.addEventListener("click", toggleRail);
+
+        document.querySelectorAll("[data-vehicle]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            state.vehicle = btn.getAttribute("data-vehicle");
+            setExclusiveActive("[data-vehicle]", "data-vehicle", state.vehicle);
+            var hint =
+              state.vehicle === "plane"
+                ? "WASD thrust/steer · Espace monter · Shift descendre · X reset"
+                : SCENES[state.scene].hint;
+            if (state.scene === "race-test" || state.scene === "sandbox-kart") {
+              sceneHint.textContent = hint;
+              trackControls.textContent = hint;
+            }
+          });
+        });
+
+        document.querySelectorAll("[data-cc]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setExclusiveActive("[data-cc]", "data-cc", btn.getAttribute("data-cc"));
+          });
+        });
+
+        document.querySelectorAll("[data-shell]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setExclusiveActive("[data-shell]", "data-shell", btn.getAttribute("data-shell"));
+          });
+        });
+
+        document.querySelectorAll("[data-tex]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setExclusiveActive("[data-tex]", "data-tex", btn.getAttribute("data-tex"));
+          });
+        });
+
+        document.querySelectorAll("[data-plastic]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setExclusiveActive("[data-plastic]", "data-plastic", btn.getAttribute("data-plastic"));
+          });
+        });
+
+        document.querySelectorAll("[data-preview]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setExclusiveActive("[data-preview]", "data-preview", btn.getAttribute("data-preview"));
+          });
+        });
+
+        document.querySelectorAll(".swatch").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll(".swatch").forEach(function (el) {
+              el.classList.toggle("is-active", el === btn);
+            });
+          });
+        });
+
+        document.querySelectorAll(".cat-row").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll(".cat-row").forEach(function (el) {
+              var on = el === btn;
+              el.classList.toggle("is-active", on);
+              el.setAttribute("aria-selected", on ? "true" : "false");
+            });
+            var title = document.getElementById("cat-title");
+            if (title) {
+              title.textContent =
+                "#" + btn.getAttribute("data-part") + " — " + btn.querySelector(".cat-row__name").textContent;
+            }
+          });
+        });
+
+        document.querySelectorAll("[data-quality]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var q = btn.getAttribute("data-quality");
+            setExclusiveActive("[data-quality]", "data-quality", q);
+            document.getElementById("chip-quality").textContent = q;
+          });
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+          if (e.key === "`") {
+            e.preventDefault();
+            toggleRail();
+            return;
+          }
+          if (e.key >= "1" && e.key <= "6") {
+            var card = document.querySelector('.scene-card[data-key="' + e.key + '"]');
+            if (card) {
+              e.preventDefault();
+              selectScene(card.getAttribute("data-scene"));
+            }
+          }
+        });
+
+        /* Soft stub telemetry drift */
+        var t0 = performance.now();
+        function tick(now) {
+          var t = (now - t0) / 1000;
+          var speed = 72 + Math.round(18 * Math.sin(t * 0.7) + 8 * Math.sin(t * 1.9));
+          document.getElementById("stub-speed").textContent = String(speed);
+          var drifting = Math.sin(t * 0.55) > 0.65;
+          document.getElementById("stub-drift").textContent = drifting
+            ? "drift orange"
+            : "—";
+          document.getElementById("stub-drift").style.color = drifting
+            ? "#e87a3a"
+            : "";
+          document.getElementById("chip-fps").textContent = String(
+            58 + Math.round(3 * Math.sin(t * 2.1))
+          );
+          document.getElementById("chip-ms").textContent = (
+            15.8 +
+            1.4 * Math.sin(t * 1.4)
+          ).toFixed(1);
+          document.getElementById("chip-dc").textContent = String(
+            200 + Math.round(20 * Math.abs(Math.sin(t * 0.4)))
+          );
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        selectScene("race-test");
+      })();
+    </script>
+  </body>
+</html>

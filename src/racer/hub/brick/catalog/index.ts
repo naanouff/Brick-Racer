@@ -68,8 +68,10 @@ export {
   CATALOG_PLASTIC_SETS,
   CATALOG_UV_GRID_MATERIAL_ID,
   CATALOG_UV_GRID_UV1_MATERIAL_ID,
+  DEFAULT_CATALOG_PLASTIC_SET,
   catalogPlasticMaterialId,
   catalogPlasticMaterials,
+  catalogUvGridMaterials,
   isCatalogPlasticSet,
   type CatalogPlasticSet,
 } from './catalogPlasticMaterials';

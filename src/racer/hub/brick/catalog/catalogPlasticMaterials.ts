@@ -29,11 +29,14 @@ export const CATALOG_UV_GRID_MATERIAL_ID = 'CL_uv_grid';
 /** UV1 debug grid (per-part 0–1 atlas). */
 export const CATALOG_UV_GRID_UV1_MATERIAL_ID = 'CL_uv_grid_uv1';
 
-/** Plastic preview set: AmbientCG id or tint-only ABS. */
+/** Plastic preview set: AmbientCG id or tint-only. */
 export type CatalogPlasticSet = PlasticMapId | 'off';
 
-/** UI order: AmbientCG sets first, then tint-only. */
-export const CATALOG_PLASTIC_SETS: readonly CatalogPlasticSet[] = ['003', '017b', 'off'];
+/** Default preview / lab plastic — same as landmark + minifig LDraw (017B). */
+export const DEFAULT_CATALOG_PLASTIC_SET: CatalogPlasticSet = '017b';
+
+/** UI order: preferred set first, then tint-only. */
+export const CATALOG_PLASTIC_SETS: readonly CatalogPlasticSet[] = ['017b', '003', 'off'];
 
 export function catalogPlasticMaterialId(
   set: CatalogPlasticSet,
@@ -54,7 +57,7 @@ function tintFor(colorId: BrickColorId): [number, number, number] {
  * Procedural grain / dirt / fingerprints stay off (they speckle large faces).
  * Aging on reads the UV1 256² bake (AO, cavity, edge wear). Off ignores it.
  */
-function tuneCatalogPlastic(spec: MaterialSpec, aging: boolean): void {
+export function tuneCatalogPlastic(spec: MaterialSpec, aging: boolean): void {
   spec.properties = {
     ...spec.properties,
     aoStrength: aging ? 0.85 : 0,
@@ -109,9 +112,18 @@ export function catalogPlasticMaterials(): Record<string, MaterialSpec> {
       }
     }
   }
-  out[CATALOG_UV_GRID_MATERIAL_ID] = catalogUvGridMaterial(0);
-  out[CATALOG_UV_GRID_UV1_MATERIAL_ID] = catalogUvGridMaterial(1);
   return out;
+}
+
+/**
+ * UV0 / UV1 debug grid mats — need `minifig_uv_grid` in LevelSpec.shaderGraphs.
+ * Only merge into catalog-lab / brick-lab (not city-test).
+ */
+export function catalogUvGridMaterials(): Record<string, MaterialSpec> {
+  return {
+    [CATALOG_UV_GRID_MATERIAL_ID]: catalogUvGridMaterial(0),
+    [CATALOG_UV_GRID_UV1_MATERIAL_ID]: catalogUvGridMaterial(1),
+  };
 }
 
 export function isCatalogPlasticSet(value: string): value is CatalogPlasticSet {

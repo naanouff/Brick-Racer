@@ -29,6 +29,8 @@ const NEIGHBORS: Array<[number, number, number]> = [
 ];
 
 function brickHasExposedFace(brick: AssembledBrick, occupancy: Set<string>): boolean {
+  // Occupancy-exempt parts (hollow AABB / curved) have no cells — always keep.
+  if (brick.cells.length === 0) return true;
   for (const [sx, py, sz] of brick.cells) {
     for (const [dx, dy, dz] of NEIGHBORS) {
       if (!occupancy.has(cellKey(sx + dx, py + dy, sz + dz))) return true;
