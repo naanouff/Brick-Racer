@@ -1,5 +1,7 @@
 # Prompt Gemini — mode d’emploi brick (Brick-Racer)
 
+> **Statut** : authoring **v1** (Gemini → JSON à coordonnées). Peu fidèle sur silhouette / proportions. Remplacé progressivement par le pipeline **couches → brickify** : [brick-decor-pipeline.md](../plans/brick-decor-pipeline.md) · sprint [BRICK-DC1](../sprints/BRICK-DC1.md). Ne pas étendre ce prompt ; la réécriture v2 (image ortho + fiche cotes + couches) est **DC2**.
+
 **Usage** : joindre une **image de référence** (photo / concept de la construction) + le prompt manuel ci-dessous → Gemini rend **uniquement** le JSON d’assemblage.
 
 Pipeline runtime : image → JSON → `validateManual` → `assembleManual` → `bakeShell` → **LDraw InstancedMesh** (Brick Lab) ; proxy box si l’IPC LDraw est absent.  

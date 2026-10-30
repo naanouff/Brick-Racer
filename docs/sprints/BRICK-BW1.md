@@ -94,4 +94,5 @@ flowchart LR
 
 ## Suite (hors BW1)
 
-Après validation fontaine + pad : gate → tower → garage / vinyle / billboard / mairie, puis billboards lointains (plan § couches).
+Authoring fidèle et production landmarks suivants : [brick-decor-pipeline.md](../plans/brick-decor-pipeline.md) · [BRICK-DC1](BRICK-DC1.md) (couches → brickify), puis pad / gate / façades (DC2–DC4).  
+Billboards lointains : plan rendu § couches, après la vague landmarks.

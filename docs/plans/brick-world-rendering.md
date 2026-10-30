@@ -6,7 +6,7 @@ Design : [test-slice.md](../design/test-slice.md), [test-slice-plans.md](../desi
 Blockout actuel : [test-slice-blockout.md](test-slice-blockout.md) · [BRICK-BO1](../sprints/BRICK-BO1.md).  
 Réfs moteur : [w3dts-demos.md](../references/w3dts-demos.md) (Medieval Village / LSR / Lego tile floor).  
 **Réf. visuelle rendu** (cible matière / densité, pas le layout slice) : [ref-brick-world-chase.jpg](../design/art/ref-brick-world-chase.jpg).  
-**Authoring** : [brick-manual-prompt.md](../design/brick-manual-prompt.md) (prompt Gemini → mode d’emploi JSON).
+**Authoring** : v1 [brick-manual-prompt.md](../design/brick-manual-prompt.md) (Gemini → JSON coordonnées — peu fidèle). **v2** : [brick-decor-pipeline.md](brick-decor-pipeline.md) · [BRICK-DC1](../sprints/BRICK-DC1.md) (couches ASCII → brickify → même manuel runtime).
 
 Branche prévue : `feature/brick-world-hub` depuis `develop`. PR cible : `develop`.
 
@@ -127,3 +127,4 @@ Macros v1 : `brick`, `ring`, `disc`, `wall`, `box` (plein — le bake creuse).
 | 2026-10-25 | Consignation technique + ouverture sprint BW1 |
 | 2026-10-25 | Ajout réf. visuelle chase `ref-brick-world-chase.jpg` |
 | 2026-10-25 | Authoring : prompt → manuel JSON → assemble → bake enveloppe → batch |
+| 2026-10-30 | Authoring v2 délégué à [brick-decor-pipeline.md](brick-decor-pipeline.md) (couches + brickify) ; runtime assemble/bake inchangé |
