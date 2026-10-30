@@ -1,6 +1,6 @@
 # Plan : Catalog Lab (master Rebrickable×LDraw → BC1)
 
-Sprints : [BRICK-CL1](../sprints/BRICK-CL1.md) · [BRICK-CL2](../sprints/BRICK-CL2.md) · [BRICK-CL3](../sprints/BRICK-CL3.md) · [BRICK-CL4](../sprints/BRICK-CL4.md).  
+Sprints : [BRICK-CL1](../sprints/BRICK-CL1.md) · [BRICK-CL2](../sprints/BRICK-CL2.md) · [BRICK-CL3](../sprints/BRICK-CL3.md) · [BRICK-CL4](../sprints/BRICK-CL4.md) · [BRICK-CL5](../sprints/BRICK-CL5.md).  
 Contexte : [brick-part-catalog.md](brick-part-catalog.md) (BC1) · pipeline [scripts/catalog/](../../scripts/catalog/) · lab [brick-lab](../sprints/BRICK-BW1.md) (BW1c) · plastique minifig [`plasticMapSets.ts`](../../src/racer/minifig/plasticMapSets.ts).
 
 ## Problème
@@ -158,17 +158,66 @@ Décisions :
 | Shader | `GetUV` lit UV0. UV1 est écrit ; le bake vieillissement viendra après |
 | Grille | Le bouton Grille UV prévisualise UV0 |
 
+## CL5 — Cache disque (mesh UV0/UV1 + maps géométriques)
+
+Sprint : [BRICK-CL5](../sprints/BRICK-CL5.md).
+
+CL4 + le bake UV1 (`bakeLdrawAgingTexture`) cuisent **à chaque chargement** dans le renderer : géométrie (soudure, lissage, charts, UV0/UV1, vertex colors) puis atlas 256² (cavité, arête, AO, hauteur). Le cache mémoire de [`ldrawMeshCache.ts`](../../src/racer/hub/brick/catalog/ldrawMeshCache.ts) disparaît au reload / HMR ; les préchargements (minifig, landmark, fontaine) restent séquentiels.
+
+CL5 déplace la cuisson dans le **main process** (`worker_threads`), avec un **cache disque binaire**. Le renderer n’uploade plus que des buffers déjà prêts.
+
+```mermaid
+flowchart LR
+  renderer["Renderer ensureLdrawUploadedMesh"] -->|"IPC ldraw-part-mesh"| mainProc[Main]
+  mainProc --> diskHit{"Fichier .bin valide ?"}
+  diskHit -->|oui| readBin[Lecture buffers]
+  diskHit -->|non| worker["Worker geometry + bake 256"]
+  worker --> writeBin[Ecriture .bin]
+  readBin --> renderer
+  writeBin --> renderer
+```
+
+Décisions :
+
+| Choix | Décision |
+| ----- | -------- |
+| Emplacement | `data/ldraw-cache/{anchor}/{ldrawId}.bin` (gitignoré, à côté de `data/ldraw/`) |
+| Ancres | `ground-center` (catalog / landmarks) et `origin` (minifig) — un fichier par couple |
+| Invalidation | En-tête : magic `LDRC`, `LDRAW_BAKE_VERSION`, `LDRAW_AGING_SIZE`, `LDRAW_CREASE_DEG`, hash SHA-1 des triangles + arêtes LDU. Mauvaise version / hash → re-cuisson |
+| Version algo | Constante `LDRAW_BAKE_VERSION` (exportée avec la géométrie) : **incrémenter** à toute modif de géométrie, UV ou bake |
+| Format | Little-endian, blocs bruts alignés 4 octets : vertices (20 floats), indices, aging RGBA, coverage. Pas de compression au départ |
+| Thread | Cuisson dans un `worker_thread` (main non bloqué) ; dédup des requêtes concurrentes sur la même clé |
+| IPC | Nouveau `ldraw-part-mesh(id, anchor)`. Garder `ldrawPartTriangles` pour tests / debug |
+| Renderer | `ensureLdrawUploadedMesh` accepte un mesh déjà cuit ; repli local (triangles) si IPC absente (tests) |
+| Préchargement | `Promise.all` sur les ids ; script optionnel `pnpm ldraw:bake` pour préchauffer recettes / landmarks |
+
+### Format binaire
+
+En-tête fixe puis :
+
+- `vertexFloatCount`, `indexCount`, `triangleCount`, `size[3]`, `agingSize`
+- `vertices: Float32Array` — pos, UV0, UV1, normale, tangente, bitangente, couleur
+- `indices: Uint32Array`
+- `aging: Uint8Array` — R cavité, G arête, B AO, A hauteur
+- `coverage: Uint8Array`
+
+Écriture atomique (`.tmp` puis rename). Purge manuelle : supprimer `data/ldraw-cache/`.
+
+### Gain attendu
+
+Premier chargement : coût équivalent, hors thread renderer, en parallèle. Chargements suivants (reload, HMR, relance) : lecture disque + upload GPU seulement.
+
 ## Hors scope
 
-- Export préalable des meshes LDraw / disponibilité en build packagée (CL2 = dev uniquement).
-- Remplacement manuels / fontaine ; `mesh.status: ready` dans les landmarks.
-- Commit `data/ldraw` ou dump master complet.
+- Export préalable des ~33k meshes du master / disponibilité en build packagée (CL2–CL5 = dev + cache local).
+- Remplacement manuels ; `mesh.status: ready` systématique dans tous les landmarks.
+- Commit `data/ldraw`, `data/ldraw-cache` ou dump master complet.
 - Coque UI produit (title / hub) — catalog-lab = outil lab / authoring.
-- Brancher les mats plastic sur `spawnBrickLandmark` / mondes / minifigs / véhicules.
+- Brancher les mats plastic sur mondes / véhicules hors minifig + landmarks déjà câblés ([minifig-ldraw.md](minifig-ldraw.md) · [BRICK-MF2](../sprints/BRICK-MF2.md)).
 - Utiliser les `plastic*-color.webp` comme albedo.
 - Édition runtime des propriétés matériau W3DTS.
 - Bibliothèque de dépliage type xatlas.
-- Bake AO / taches / usure d’arêtes (lit UV1, sprint suivant).
+- Compression zlib du cache (option ultérieure si le dossier grossit).
 - Lecture shader du second canal UV si `GetUV` n’expose pas de set.
 
 ## Critères de succès
@@ -181,6 +230,7 @@ Décisions :
 | Plastique | Set `003`/`017b` : grain + normal visibles ; albedo = couleur choisie (pas la map color AmbientCG) |
 | Couleur | Changer `cyan` / `yellow` / … recolorie la preview sans recharger le niveau |
 | UV | Grille UV : densité homogène sur le dessus comme sur les côtés ; coutures dans les plis, pas au milieu des faces |
+| Cache CL5 | 2ᵉ chargement d’une pièce déjà vue : pas de re-cuisson ; hit disque après reload |
 | BC1 | Add staging → badge ; write merge → entrée dans `parts.json` |
 | Moteur | Aucune dépendance 3D hors W3DTS |
 | Régression | `brick-lab`, `city-test`, H1, minifig-lab inchangés |
@@ -196,6 +246,7 @@ flowchart LR
   CL2[BRICK-CL2 LDraw mesh]
   CL3[BRICK-CL3 plastic + color]
   CL4[BRICK-CL4 dual UV]
+  CL5[BRICK-CL5 bake cache]
   Author[manuels BOM étendus]
   BC1 --> CL1
   POC --> CL1
@@ -203,5 +254,6 @@ flowchart LR
   CL2 --> CL3
   MF3 --> CL3
   CL3 --> CL4
+  CL4 --> CL5
   CL1 --> Author
 ```

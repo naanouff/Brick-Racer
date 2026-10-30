@@ -10,9 +10,11 @@
 | [design/ui-ux.md](design/ui-ux.md) | Maquette UI/UX écrans MVP (tokens, layouts, microcopy) |
 | [mocup/](mocup/) | Maquettes HTML cliquables (validation visuelle) |
 | [design/characters-candidates.md](design/characters-candidates.md) | 40 PNJ candidats ; roster ~20 figé post-playtest (équilibrage) |
-| [design/minifig-gproc.md](design/minifig-gproc.md) | Décision minifig GPROC (slots, recipes, vs Meshy) |
-| [plans/minifig-gproc.md](plans/minifig-gproc.md) | Plan fondation minifig GPROC |
+| [design/minifig-gproc.md](design/minifig-gproc.md) | Décision minifig (slots, recipes ; canon mesh LDraw MF2) |
+| [plans/minifig-gproc.md](plans/minifig-gproc.md) | Plan fondation minifig GPROC (MF1) |
 | [sprints/BRICK-MF1.md](sprints/BRICK-MF1.md) | Sprint fondation minifig GPROC |
+| [plans/minifig-ldraw.md](plans/minifig-ldraw.md) | Plan Bolt en pièces LDraw |
+| [sprints/BRICK-MF2.md](sprints/BRICK-MF2.md) | Sprint minifig LDraw (MF2a–f) |
 | [design/levels.md](design/levels.md) | 16 circuits (Plage/Forêt/Désert/Montagne), boosts, items |
 | [design/test-slice.md](design/test-slice.md) | Slice test hub+course + prompts artwork |
 | [design/test-slice-plans.md](design/test-slice-plans.md) | Plans cotés W3DTS (city-test / race-test) |
@@ -33,6 +35,7 @@
 | [sprints/BRICK-CL2.md](sprints/BRICK-CL2.md) | Sprint vraie géométrie LDraw à la demande dans `catalog-lab` |
 | [sprints/BRICK-CL3.md](sprints/BRICK-CL3.md) | Sprint plastique AmbientCG + couleur diffuse (preview catalogue) |
 | [sprints/BRICK-CL4.md](sprints/BRICK-CL4.md) | Sprint UV LDraw : UV0 plastique homogène + UV1 atlas 0–1 |
+| [sprints/BRICK-CL5.md](sprints/BRICK-CL5.md) | Sprint cache disque LDraw (mesh UV + maps géométriques) |
 | [design/brick-manual-prompt.md](design/brick-manual-prompt.md) | Prompt Gemini → mode d’emploi JSON (pièces + étapes) |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
 | [references/w3dts-input.md](references/w3dts-input.md) | Input w3dts — Gamepad HID (`INP-G`) |

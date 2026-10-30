@@ -14,7 +14,8 @@ Séquence : **course jouable d’abord**, puis **Lego City hub**, puis **custom*
 | **BW1** | Rendu brick hub : manuel JSON → enveloppe → batch ; fontaine + brick-lab + pad | [brick-world-rendering.md](brick-world-rendering.md) · [BRICK-BW1](../sprints/BRICK-BW1.md) · [brick-manual-prompt.md](../design/brick-manual-prompt.md) · après BO1 |
 | **P2** | **Lego City hub** explorabile + pads courses / défis | Sprint ultérieur · overlays UI1d · s’appuie sur H1 + BW |
 | **MF1** | Fondation minifig GPROC (generators + recipe + sandbox preview) | [minifig-gproc.md](minifig-gproc.md) · [BRICK-MF1](../sprints/BRICK-MF1.md) · avant / amont P3 |
-| **P3** | **Garage** + **boutique** (custom véhicule + minifig) dans la ville | Sprint ultérieur · consomme UI1e + MF1 |
+| **MF2** | Bolt en pièces LDraw (canon mesh catalogue, scale 2,1 m) | [minifig-ldraw.md](minifig-ldraw.md) · [BRICK-MF2](../sprints/BRICK-MF2.md) · après MF1 + CL2 |
+| **P3** | **Garage** + **boutique** (custom véhicule + minifig) dans la ville | Sprint ultérieur · consomme UI1e + MF1 / MF2 |
 | **P4** | Moto (Motocross) + avion (nouveau) | Réfs [w3dts-demos.md](../references/w3dts-demos.md) |
 | **P5** | Multi lobby + course 2–4 (P2P) | Pattern ChessMaster |
 
@@ -25,6 +26,9 @@ flowchart LR
   BO1 --> H1[H1 pied hub]
   BO1 --> BW1[BW1 brick render]
   MF1[MF1 minifig GPROC] --> H1
+  MF1 --> MF2[MF2 minifig LDraw]
+  CL[CL1-CL5 catalog-lab LDraw] --> MF2
+  MF2 --> P3
   H1 --> P2[P2 Lego City]
   BW1 --> P2
   P1 --> P2
@@ -43,6 +47,6 @@ flowchart LR
 - **BW1** prouve le rendu brick (instances) sur le blockout hub ; P2 étend la city avec le même kit.
 - **UIM1** (HTML `docs/mocup`) valide le visuel ; **UI1** (React) porte ensuite ; les deux peuvent coexister en parallèle de P0. Binding data : P1–P3.
 - P2 livre la **ville** ; P3 branche les intérieurs / UI custom sur les POI.
-- **MF1** pose le pipeline minifig GPROC (sandbox) ; P3 branche la boutique Vinyle dessus. Peut démarrer dès B2 (gproc stack) sans attendre P2.
+- **MF1** pose le pipeline minifig GPROC (sandbox) ; **MF2** remplace le mesh Bolt par LDraw (après CL). P3 branche la boutique Vinyle dessus. MF1 peut démarrer dès B2 sans attendre P2.
 - Motocross et avion ne bloquent pas le hub ; ils enrichissent garage + pads.
 - Les sprints concrets (BRICK-Bn / BRICK-UI*) se découpent à l’ouverture de chaque phase.

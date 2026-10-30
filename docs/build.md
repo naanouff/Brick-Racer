@@ -39,12 +39,14 @@ WASD pour conduire, Espace = drift, X = reset au spawn. **Gamepad** style MK/DKR
 Perf (marge pour décos / IA / autres karts) :
 
 - Cible **≥ 60 fps** avec marge ; ombres off ; backbuffer **DPR ≤ 1** et **long edge ≤ 1280** (fill-rate — le CSS reste plein écran) ; physique **60 Hz**. HUD : `W×H` = taille GPU réelle.
-- Render graph **`BrickRacerFast`** par défaut (`?render=showcase` = HBAO+SSR+bloom+FXAA). HUD : `fast|showcase`.
+- Render graph **`BrickRacerFast`** par défaut (HBAO + tonemap + color grading ; `?render=showcase` = HBAO+SSR+bloom+FXAA). HUD : `fast|showcase`.
 - Circuit : géométrie complète (**72** segments murs, **36** rubans) ; `debugTex` **off** ; CP opaques.
 - Véhicules blockout sur grille race-test : `?vehicle=kart|moto|plane` (HUD). Moto = 2 roues arcade ; avion = A/B poussée, stick X **bank**, stick Y / Espace/Shift **tangage**, **L1/R1** (C/V) knife-edge vertical.
 - gproc uniquement sur `sandbox-kart` ; `layeredRefraction=off`.
 - Au load : `warmPipelines`. HUD : `fps · ms · W×H · dc · tri · quality`.
 Assets runtime sous `public/` (depuis `w3dts` viewer-editor) : graphs lit, **`shaders/`**, **`shader-graphs/`**, gproc, script-graphs. Sans ce dossier : ciel possible mais **pas de sol/kart**. Sans `public/shaders` : `Invalid ShaderModule` / `vs_main`.
+
+LDraw (catalog-lab, minifig, landmarks) : bibliothèque locale `data/ldraw/` (gitignorée, `python scripts/catalog/fetch_sources.py`). Après [CL5](sprints/BRICK-CL5.md), les meshes cuits (UV0/UV1 + atlas usure) sont mis en cache sous `data/ldraw-cache/` (gitignoré). Purge manuelle = supprimer ce dossier ; un bump de `LDRAW_BAKE_VERSION` re-cuit automatiquement. Script optionnel `pnpm ldraw:bake` pour préchauffer les pièces des recettes / landmarks.
 
 Cohérence de versions (sinon **aucun modèle visible**, sans erreur bloquante) :
 
