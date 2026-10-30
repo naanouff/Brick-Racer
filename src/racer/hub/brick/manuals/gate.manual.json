@@ -1,0 +1,396 @@
+{
+  "id": "landmark.gate",
+  "version": 1,
+  "title": "Riviera Gate coquillage (stub 10×4)",
+  "origin": [
+    20,
+    0,
+    20
+  ],
+  "envelope": {
+    "size": [
+      3.6300000000000003,
+      1.54,
+      1.6500000000000001
+    ]
+  },
+  "partsList": [
+    {
+      "part": "11211",
+      "color": "terracotta",
+      "qty": 2
+    },
+    {
+      "part": "3001",
+      "color": "terracotta",
+      "qty": 4
+    },
+    {
+      "part": "3005",
+      "color": "sand",
+      "qty": 1
+    },
+    {
+      "part": "3005",
+      "color": "terracotta",
+      "qty": 12
+    },
+    {
+      "part": "3010",
+      "color": "sand",
+      "qty": 1
+    },
+    {
+      "part": "3010",
+      "color": "terracotta",
+      "qty": 2
+    },
+    {
+      "part": "3024",
+      "color": "sand",
+      "qty": 2
+    },
+    {
+      "part": "3040",
+      "color": "sand",
+      "qty": 2
+    },
+    {
+      "part": "3622",
+      "color": "sand",
+      "qty": 1
+    },
+    {
+      "part": "3666",
+      "color": "sand",
+      "qty": 1
+    },
+    {
+      "part": "3710",
+      "color": "black",
+      "qty": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — brick y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3001",
+          "color": "terracotta",
+          "at": [
+            -5,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3001",
+          "color": "terracotta",
+          "at": [
+            3,
+            0,
+            -2
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2 — brick y=3",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            3,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "terracotta",
+          "at": [
+            -4,
+            3,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            3,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "terracotta",
+          "at": [
+            4,
+            3,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            3,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            3,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            3,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            3,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            3,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            3,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3 — brick y=6",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3001",
+          "color": "terracotta",
+          "at": [
+            -5,
+            6,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3001",
+          "color": "terracotta",
+          "at": [
+            3,
+            6,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "sand",
+          "at": [
+            -2,
+            6,
+            -1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "4 — brick y=9",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            9,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "terracotta",
+          "at": [
+            -4,
+            9,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3040",
+          "color": "sand",
+          "at": [
+            -2,
+            9,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3040",
+          "color": "sand",
+          "at": [
+            1,
+            9,
+            -2
+          ],
+          "rot": 180
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            9,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "terracotta",
+          "at": [
+            4,
+            9,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -5,
+            9,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "sand",
+          "at": [
+            -2,
+            9,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "sand",
+          "at": [
+            -1,
+            9,
+            -1
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            3,
+            9,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5 — plate y=12",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3666",
+          "color": "sand",
+          "at": [
+            -3,
+            12,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -3,
+            12,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "black",
+          "at": [
+            -2,
+            12,
+            -1
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            2,
+            12,
+            -1
+          ]
+        }
+      ]
+    }
+  ]
+}

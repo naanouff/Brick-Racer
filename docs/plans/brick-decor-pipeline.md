@@ -1,6 +1,6 @@
 # Plan : pipeline décors brick (couches → brickify)
 
-Sprints : [BRICK-DC1](../sprints/BRICK-DC1.md) · [BRICK-DC2](../sprints/BRICK-DC2.md) · DC3–DC4 à ouvrir ensuite.  
+Sprints : [BRICK-DC1](../sprints/BRICK-DC1.md) · [BRICK-DC2](../sprints/BRICK-DC2.md) · [BRICK-DC3](../sprints/BRICK-DC3.md) · DC4 à ouvrir ensuite.  
 Rendu / instancing : [brick-world-rendering.md](brick-world-rendering.md) · [BRICK-BW1](../sprints/BRICK-BW1.md).  
 Authoring actuel (v1, à remplacer) : [brick-manual-prompt.md](../design/brick-manual-prompt.md).  
 Catalogue pièces : [brick-part-catalog.md](brick-part-catalog.md) · [parts.json](../../src/racer/hub/brick/catalog/data/parts.json).
@@ -127,7 +127,7 @@ Cibles pour valider le workflow avant / pendant brickify :
 | -------- | ---------- | ------------------- |
 | **fontaine** | [ref-fountain-ortho.png](../design/art/ref-fountain-ortho.png) · overlay `/brick-refs/fountain-ortho.png` | Silhouette 3 paliers ; proportions ±1 stud ; gris + cyan |
 | **pad** | stub [`pad-ortho.svg`](../../public/brick-refs/pad-ortho.svg) · layers [`pad.layers.json`](../../src/racer/hub/brick/layers/pad.layers.json) | Dalle 8×6 × 2P ; jaune / noir ; ±1 stud |
-| **gate** | (à produire DC3) | Silhouette coquillage ; couleurs A1 ; ±1 stud |
+| **gate** | [`gate.layers.json`](../../src/racer/hub/brick/layers/gate.layers.json) (stub) | Piliers + linteau terracotta/sand ; ±1 stud |
 
 Playtest brick-lab : vues **Face / Côté / Dessus** + overlay opacité réglable vs orbit libre.
 

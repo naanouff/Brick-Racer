@@ -15,6 +15,23 @@ export type BrickLayer = {
   rows: string[];
 };
 
+/** Modifiers allowed in rows without a legend entry (DC3). */
+export const LAYER_SLOPE_CHARS = ['/', '\\'] as const;
+export type LayerSlopeChar = (typeof LAYER_SLOPE_CHARS)[number];
+
+export function isLayerSlopeChar(ch: string): ch is LayerSlopeChar {
+  return (LAYER_SLOPE_CHARS as readonly string[]).includes(ch);
+}
+
+export type BrickLayersOptions = {
+  /** Alternate half-brick at the start of each run on odd brick courses. Default true. */
+  runningBond?: boolean;
+  /** After layers, lay tiles on the topmost filled cells. Default false. */
+  capTiles?: boolean;
+  /** Color for `/` `\\` slope cells. Default sand. */
+  slopeColor?: BrickColorId;
+};
+
 export type BrickLayers = {
   id: string;
   version?: number;
@@ -26,6 +43,7 @@ export type BrickLayers = {
   layers: BrickLayer[];
   /** Free brick ops after stacked layers (dishes, macaroni, …). */
   ops?: ManualBrickOp[];
+  options?: BrickLayersOptions;
 };
 
 export type LayersValidationResult =
@@ -124,13 +142,32 @@ export function validateLayers(raw: unknown): LayersValidationResult {
         }
         for (let ci = 0; ci < row.length; ci++) {
           const ch = row[ci]!;
-          if (ch === '.') continue;
+          if (ch === '.' || isLayerSlopeChar(ch)) continue;
           if (!(ch in legend)) {
             pushIssue(issues, rp, `unknown legend letter '${ch}' at column ${ci}`);
           }
         }
       });
     });
+  }
+
+  if (m.options !== undefined) {
+    if (!m.options || typeof m.options !== 'object' || Array.isArray(m.options)) {
+      pushIssue(issues, 'options', 'options must be an object');
+    } else {
+      const opt = m.options as Record<string, unknown>;
+      if (opt.runningBond !== undefined && typeof opt.runningBond !== 'boolean') {
+        pushIssue(issues, 'options.runningBond', 'boolean');
+      }
+      if (opt.capTiles !== undefined && typeof opt.capTiles !== 'boolean') {
+        pushIssue(issues, 'options.capTiles', 'boolean');
+      }
+      if (opt.slopeColor !== undefined) {
+        if (typeof opt.slopeColor !== 'string' || !isBrickColorId(opt.slopeColor)) {
+          pushIssue(issues, 'options.slopeColor', `unknown color '${String(opt.slopeColor)}'`);
+        }
+      }
+    }
   }
 
   if (m.ops !== undefined) {
@@ -176,6 +213,7 @@ export function validateLayers(raw: unknown): LayersValidationResult {
       legend: legend as Record<string, BrickColorId>,
       layers: m.layers as BrickLayer[],
       ops: m.ops as ManualBrickOp[] | undefined,
+      options: m.options as BrickLayersOptions | undefined,
     },
   };
 }

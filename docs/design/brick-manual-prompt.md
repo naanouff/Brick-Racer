@@ -99,10 +99,13 @@ Règles dures :
 - Caractère = 1 stud ; "." = vide ; lettres de legend uniquement
 - kind ∈ { plate, brick, tile } ; empilement bas → haut ; plate/tile = 1P, brick = 3P
 - legend → ids colors.json d’après l’image
+- Modificateurs (sans légende) : `/` et `\` = pentes slope catalogue (`options.slopeColor`, défaut sand)
+- options optionnel : `{ "runningBond": true, "capTiles": false, "slopeColor": "sand" }`
 - ops[] : uniquement des ops "brick" pour pièces spéciales (dish, macaroni, cone…) avec at [sx,py,sz] entiers relatifs au centre footprint — PAS de ring/disc/wall/box
-- Ne pas inventer d’IDs part hors catalogue ; pour le remplissage grille, brickify choisira les pièces — tu ne mets QUE des lettres couleurs dans rows
+- Ne pas inventer d’IDs part hors catalogue ; pour le remplissage grille, brickify choisira les pièces — tu mets des lettres couleurs (et `/` `\`) dans rows
 - Fidélité silhouette / couleurs à l’image ; pas de sujet substitué
 ```
+
 
 Enregistrer sous `src/racer/hub/brick/layers/<stem>.layers.json`, puis :
 

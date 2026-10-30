@@ -131,4 +131,56 @@ describe('brickifyLayers', () => {
     expect(manual.steps.length).toBe(2);
     expect(assembleManual(manual).bricks.length).toBeGreaterThan(8);
   });
+
+  it('applies running bond on odd brick courses', () => {
+    const manual = brickifyLayers({
+      id: 'landmark.bond',
+      footprint: [4, 1],
+      legend: { R: 'terracotta' },
+      options: { runningBond: true },
+      layers: [
+        { kind: 'brick', rows: ['RRRR'] },
+        { kind: 'brick', rows: ['RRRR'] },
+      ],
+    });
+    const course1 = manual.steps[1]!.ops.filter((o) => o.op === 'brick');
+    expect(course1.some((o) => o.op === 'brick' && o.part === '3005')).toBe(true);
+    expect(assembleManual(manual).bricks.length).toBeGreaterThan(2);
+  });
+
+  it('caps top with tiles when options.capTiles', () => {
+    const manual = brickifyLayers({
+      id: 'landmark.cap',
+      footprint: [2, 2],
+      legend: { Y: 'yellow' },
+      options: { runningBond: false, capTiles: true },
+      layers: [{ kind: 'brick', rows: ['YY', 'YY'] }],
+    });
+    expect(manual.steps.some((s) => s.title.includes('cap tiles'))).toBe(true);
+    expect(assembleManual(manual).bricks.length).toBeGreaterThan(1);
+  });
+
+  it('places slope modifiers / and \\', () => {
+    const manual = brickifyLayers({
+      id: 'landmark.slope',
+      footprint: [4, 2],
+      legend: { T: 'terracotta' },
+      options: { runningBond: false, slopeColor: 'sand' },
+      layers: [{ kind: 'brick', rows: ['T/\\T', '....'] }],
+    });
+    const slopes = manual.steps[0]!.ops.filter(
+      (o) => o.op === 'brick' && o.part === '3040'
+    );
+    expect(slopes.length).toBe(2);
+    expect(assembleManual(manual).bricks.length).toBeGreaterThan(2);
+  });
+
+  it('brickifies shipped gate.layers.json', () => {
+    const gate = JSON.parse(
+      readFileSync(resolve(__dirname, '../src/racer/hub/brick/layers/gate.layers.json'), 'utf8')
+    );
+    const manual = brickifyLayers(gate);
+    expect(manual.id).toBe('landmark.gate');
+    expect(assembleManual(manual).bricks.length).toBeGreaterThan(10);
+  });
 });
