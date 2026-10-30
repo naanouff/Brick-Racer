@@ -4,12 +4,18 @@
  */
 
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import {
   assembleManual,
   brickifyLayers,
   BrickifyError,
   validateLayers,
 } from '../src/racer/hub/brick';
+
+const padFromDisk = JSON.parse(
+  readFileSync(resolve(__dirname, '../src/racer/hub/brick/layers/pad.layers.json'), 'utf8')
+);
 
 const padLayers = {
   id: 'landmark.pad',
@@ -117,5 +123,12 @@ describe('brickifyLayers', () => {
     const manual = brickifyLayers(padLayers);
     const totalQty = (manual.partsList ?? []).reduce((n, e) => n + e.qty, 0);
     expect(totalQty).toBe(assembleManual(manual).bricks.length);
+  });
+
+  it('brickifies shipped pad.layers.json', () => {
+    const manual = brickifyLayers(padFromDisk);
+    expect(manual.id).toBe('landmark.pad');
+    expect(manual.steps.length).toBe(2);
+    expect(assembleManual(manual).bricks.length).toBeGreaterThan(8);
   });
 });

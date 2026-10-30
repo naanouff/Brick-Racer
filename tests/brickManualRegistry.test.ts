@@ -25,8 +25,14 @@ describe('brick manual registry', () => {
     expect(brickManualLabel('fountain').length).toBeGreaterThan(0);
   });
 
-  it('maps fountain overlay url', () => {
+  it('maps fountain and pad overlay urls', () => {
     expect(brickManualOverlayUrl('fountain')).toBe('/brick-refs/fountain-ortho.png');
+    expect(brickManualOverlayUrl('pad')).toBe('/brick-refs/pad-ortho.svg');
     expect(brickManualOverlayUrl('missing')).toBeNull();
+  });
+
+  it('discovers pad manual after brickify', () => {
+    expect(BRICK_MANUAL_IDS).toContain('pad');
+    expect(getBrickManual('pad').id).toBe('landmark.pad');
   });
 });

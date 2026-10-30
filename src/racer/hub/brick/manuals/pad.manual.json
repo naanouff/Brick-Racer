@@ -1,0 +1,243 @@
+{
+  "id": "landmark.pad",
+  "version": 1,
+  "title": "Pad départ 8×6 jaune / noir (2 plates)",
+  "origin": [
+    20,
+    0,
+    20
+  ],
+  "envelope": {
+    "size": [
+      2.97,
+      0.33,
+      2.31
+    ]
+  },
+  "partsList": [
+    {
+      "part": "2431",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "3020",
+      "color": "black",
+      "qty": 1
+    },
+    {
+      "part": "3460",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "3623",
+      "color": "yellow",
+      "qty": 2
+    },
+    {
+      "part": "3666",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "3710",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "3710",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "4162",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "87079",
+      "color": "yellow",
+      "qty": 3
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — plate y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3460",
+          "color": "black",
+          "at": [
+            -4,
+            0,
+            -3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "black",
+          "at": [
+            -4,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3666",
+          "color": "yellow",
+          "at": [
+            -3,
+            0,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "black",
+          "at": [
+            3,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "yellow",
+          "at": [
+            -3,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3020",
+          "color": "black",
+          "at": [
+            -2,
+            0,
+            -1
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "yellow",
+          "at": [
+            2,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "yellow",
+          "at": [
+            -2,
+            0,
+            1
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3460",
+          "color": "black",
+          "at": [
+            -4,
+            0,
+            2
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "2 — tile y=1",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "black",
+          "at": [
+            -4,
+            1,
+            -3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "black",
+          "at": [
+            -4,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "87079",
+          "color": "yellow",
+          "at": [
+            -3,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "87079",
+          "color": "yellow",
+          "at": [
+            -1,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "87079",
+          "color": "yellow",
+          "at": [
+            1,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "black",
+          "at": [
+            3,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "black",
+          "at": [
+            -4,
+            1,
+            2
+          ],
+          "rot": 90
+        }
+      ]
+    }
+  ]
+}

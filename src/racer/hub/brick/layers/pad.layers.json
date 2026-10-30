@@ -1,0 +1,35 @@
+{
+  "id": "landmark.pad",
+  "version": 1,
+  "title": "Pad départ 8×6 jaune / noir (2 plates)",
+  "footprint": [8, 6],
+  "legend": {
+    "Y": "yellow",
+    "K": "black"
+  },
+  "layers": [
+    {
+      "kind": "plate",
+      "rows": [
+        "KKKKKKKK",
+        "KYYYYYYK",
+        "KYKKKKYK",
+        "KYKKKKYK",
+        "KYYYYYYK",
+        "KKKKKKKK"
+      ]
+    },
+    {
+      "kind": "tile",
+      "rows": [
+        "KKKKKKKK",
+        "KYYYYYYK",
+        "KYYYYYYK",
+        "KYYYYYYK",
+        "KYYYYYYK",
+        "KKKKKKKK"
+      ]
+    }
+  ],
+  "ops": []
+}

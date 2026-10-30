@@ -12,7 +12,7 @@ Séquence : **course jouable d’abord**, puis **Lego City hub**, puis **custom*
 | **P1** | Boucle course solo minimale (1 piste, règles de base) + binding HUD | [BRICK-B3](../sprints/BRICK-B3.md) · consomme UI1c · après BO1 |
 | **H1** | Hub blockout : descendre, marcher (minifig), changer kart / moto / avion sur `city-test` | [hub-on-foot.md](hub-on-foot.md) · [BRICK-H1](../sprints/BRICK-H1.md) · après BO1 + MF1 |
 | **BW1** | Rendu brick hub : manuel JSON → enveloppe → batch ; fontaine + brick-lab + pad | [brick-world-rendering.md](brick-world-rendering.md) · [BRICK-BW1](../sprints/BRICK-BW1.md) · [brick-manual-prompt.md](../design/brick-manual-prompt.md) · après BO1 |
-| **DC** | Authoring décors : couches ASCII → brickify déterministe → manuels ; ortho + overlay brick-lab | [brick-decor-pipeline.md](brick-decor-pipeline.md) · [BRICK-DC1](../sprints/BRICK-DC1.md) · après BW1 ; débloque pad / gate / façades pour P2 |
+| **DC** | Authoring décors : couches ASCII → brickify déterministe → manuels ; ortho + overlay brick-lab | [brick-decor-pipeline.md](brick-decor-pipeline.md) · [BRICK-DC1](../sprints/BRICK-DC1.md) · [BRICK-DC2](../sprints/BRICK-DC2.md) · après BW1 ; débloque pad / gate / façades pour P2 |
 | **P2** | **Lego City hub** explorabile + pads courses / défis | Sprint ultérieur · overlays UI1d · s’appuie sur H1 + BW + DC |
 | **MF1** | Fondation minifig GPROC (generators + recipe + sandbox preview) | [minifig-gproc.md](minifig-gproc.md) · [BRICK-MF1](../sprints/BRICK-MF1.md) · avant / amont P3 |
 | **MF2** | Bolt en pièces LDraw (canon mesh catalogue, scale 2,1 m) | [minifig-ldraw.md](minifig-ldraw.md) · [BRICK-MF2](../sprints/BRICK-MF2.md) · après MF1 + CL2 |
