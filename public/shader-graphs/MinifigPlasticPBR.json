@@ -23,7 +23,7 @@
     "emissiveTexture": { "type": "texture_2d", "defaultValue": null, "name": "Plastic Surface" },
     "normalTexture": { "type": "texture_2d", "defaultValue": null, "name": "Plastic Normal" },
     "usePlasticMaps": { "type": "f32", "defaultValue": 0.0, "name": "Use Plastic Maps" },
-    "plasticUvScale": { "type": "f32", "defaultValue": 0.4, "name": "Plastic UV Scale" },
+    "plasticUvScale": { "type": "f32", "defaultValue": 0.1, "name": "Plastic UV Scale" },
     "plasticNormalScale": { "type": "f32", "defaultValue": 0.85, "name": "Plastic Normal Scale" },
     "ior": { "type": "f32", "defaultValue": 1.55, "name": "IOR" },
     "transmissionFactor": { "type": "f32", "defaultValue": 0.0, "name": "Transmission" },

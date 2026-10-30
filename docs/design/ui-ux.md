@@ -4,7 +4,8 @@
 **Canon art :** [art/](art/) · [test-slice.md](test-slice.md) B3.  
 **Ton :** [tone.md](tone.md). **Gameplay :** [gdd.md](gdd.md) §16–17.  
 **Maquettes HTML (canon visuel) :** [../mocup/](../mocup/) · sprint [../sprints/BRICK-UIM1.md](../sprints/BRICK-UIM1.md).  
-**Coque React (après maquettes) :** [../sprints/BRICK-UI1.md](../sprints/BRICK-UI1.md).
+**Coque React (après maquettes) :** [../sprints/BRICK-UI1.md](../sprints/BRICK-UI1.md).  
+**Atelier dev (hors MVP joueur) :** [../plans/dev-atelier.md](../plans/dev-atelier.md) · sprint [../sprints/BRICK-UIM2.md](../sprints/BRICK-UIM2.md).
 
 **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.**
 
@@ -322,12 +323,15 @@ Focus visible obligatoire sur overlays (outline stud-yellow 2 px).
 | Hub prompt / dialogue | P2 hub | UI1d |
 | Garage / boutique | P3 | UI1e |
 | Lobby multi | P5 | Hors UI1 |
+| Atelier dev (lanceur de slices) | Hors MVP produit | [UIM2](../sprints/BRICK-UIM2.md) — HTML seul |
 
 Ordre livrables UI :
 
 1. **[BRICK-UIM1](../sprints/BRICK-UIM1.md)** — HTML/CSS dans [`docs/mocup/`](../mocup/) (validation layout + ton).  
 2. **[BRICK-UI1](../sprints/BRICK-UI1.md)** — coque React `src/renderer` calquée sur les maquettes.  
 3. Binding data host — phases P1–P3.
+
+**[BRICK-UIM2](../sprints/BRICK-UIM2.md)** est parallèle : maquette du lanceur de slices, pas un écran de la carte ci-dessus. Il ne bloque pas UI1.
 
 ---
 
@@ -346,3 +350,4 @@ Ordre livrables UI :
 | Date | Note |
 | ---- | ---- |
 | 2026-10-23 | v1.0 — maquette MVP écrans + tokens ; sprint UI1 |
+| 2026-10-30 | Pointeur atelier dev — plan [dev-atelier.md](../plans/dev-atelier.md), sprint UIM2. Hors carte d’écrans MVP |

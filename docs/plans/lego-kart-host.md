@@ -27,7 +27,7 @@ flowchart TB
 
 1. **Boot moteur** — `GPUManager`, `EngineBuilder`, stack `createVehicleSystem` → physics `KART_PHYSICS_PRESET` → `createVehicleWheelVisualSystem` → `createChaseCameraSystem`.
 2. **Deps** — `w3dts-scripts` via mono alias ; gproc / physics / core déjà npm. **Pas de SceneDD.**
-3. **Assets** — `script-graphs/kart-drive.json`, `graphs/BrickRacerFast.json` (défaut : opaques + ciel + transparents + tonemap, sans ombres / AO / SSR / bloom / FXAA ; `?render=showcase` → `graphs/StandardLitGraphKart.json`, voir `src/racer/host/renderQuality.ts`), shader-graphs, gproc kart ×4 sous `public/`.
+3. **Assets** — `script-graphs/kart-drive.json`, `graphs/BrickRacerFast.json` (défaut : opaques + ciel + transparents + HBAO + tonemap + color grading, sans ombres / SSR / bloom / FXAA ; `?render=showcase` → `graphs/StandardLitGraphKart.json`, voir `src/racer/host/renderQuality.ts`), shader-graphs, gproc kart ×4 sous `public/`.
 4. **Level TS** — [`src/racer/levels/sandboxKart/`](../../src/racer/levels/sandboxKart/) : spec + `spawnSandboxKart` (materials, graphs, ECS).
 5. **Runtime** — `applyLegoKartSceneRuntime` / looks sol et roues.
 6. **Chase + input** — rebind `KartChaseCamera`, script play state, reset session (X).

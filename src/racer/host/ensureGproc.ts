@@ -9,7 +9,10 @@ import { createGProcSystem } from '@naanouff/w3dts-gproc';
 let installed = false;
 
 export function levelNeedsGproc(levelId: string): boolean {
-  return levelId === 'sandbox-kart' || levelId === 'city-test';
+  // city-test / minifig-lab still register GPROC as LDraw fallback.
+  return (
+    levelId === 'sandbox-kart' || levelId === 'city-test' || levelId === 'minifig-lab'
+  );
 }
 
 export function ensureGprocSystem(engine: Engine): void {

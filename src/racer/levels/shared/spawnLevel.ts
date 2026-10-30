@@ -24,7 +24,15 @@ import {
   type World,
 } from '@naanouff/w3dts-core';
 import { GProcComponent, bootstrapGProcRuntime, type GProcGraph } from '@naanouff/w3dts-gproc';
+import {
+  CATALOG_AGING_TEXTURE_ID,
+  ensureCatalogAgingTexture,
+} from '../../hub/brick/catalog/catalogAgingTexture';
 import { ensureMinifigPrintTextures } from '../../minifig/loadMinifigPrintTextures';
+import {
+  ensureMinifigUvGridTexture,
+  MINIFIG_UV_GRID_TEXTURE_ID,
+} from '../../minifig/minifigUvGridDebug';
 import { registerMinifigGprocNodes } from '../../minifig/registerMinifigGprocNodes';
 import {
   ColliderComponent,
@@ -356,6 +364,20 @@ function addComponent(
         ctrl.chaseFocusSmoothY = comp.chaseFocusSmoothY;
       }
       if (typeof comp.chaseYawSmooth === 'number') ctrl.chaseYawSmooth = comp.chaseYawSmooth;
+      if (typeof comp.orbitalMinDistance === 'number') {
+        ctrl.orbitalMinDistance = comp.orbitalMinDistance;
+      }
+      if (typeof comp.orbitalMaxDistance === 'number') {
+        ctrl.orbitalMaxDistance = comp.orbitalMaxDistance;
+      }
+      if (typeof comp.orbitalZoomSensitivity === 'number') {
+        ctrl.orbitalZoomSensitivity = comp.orbitalZoomSensitivity;
+      }
+      if (typeof comp.orbitalRotateSpeed === 'number') {
+        ctrl.orbitalRotateSpeed = comp.orbitalRotateSpeed;
+      }
+      if (typeof comp.orbitalDamping === 'number') ctrl.orbitalDamping = comp.orbitalDamping;
+      if (comp.orbitalLeftMouseMode) ctrl.orbitalLeftMouseMode = comp.orbitalLeftMouseMode;
       world.addComponent(entity, ctrl);
       break;
     }
@@ -383,12 +405,18 @@ export type SpawnLevelResult = {
   entityById: Map<string, Entity>;
 };
 
+export type SpawnLevelOpts = {
+  /** Extra meshes already uploaded (e.g. LDraw minifig parts). */
+  extraMeshes?: ReadonlyMap<string, Mesh>;
+};
+
 /**
  * Loads graphs/materials/meshes from the level spec and spawns all entities into the ECS.
  */
 export async function spawnLevel(
   engine: IEngineContext,
-  level: LevelSpec
+  level: LevelSpec,
+  opts?: SpawnLevelOpts
 ): Promise<SpawnLevelResult> {
   bootstrapGProcRuntime();
   registerMinifigGprocNodes();
@@ -435,9 +463,26 @@ export async function spawnLevel(
 
   await ensureMinifigPrintTextures(full, level.materials);
 
+  const needsAgingMap = Object.values(level.materials).some(
+    (m) => m.properties?.baseColorTexture === CATALOG_AGING_TEXTURE_ID
+  );
+  if (needsAgingMap) ensureCatalogAgingTexture(full);
+
+  const needsUvGrid = Object.values(level.materials).some(
+    (m) => m.properties?.baseColorTexture === MINIFIG_UV_GRID_TEXTURE_ID
+  );
+  if (needsUvGrid) {
+    await ensureMinifigUvGridTexture(full);
+  }
+
   const device = full.webGPUContext?.device;
   const materials = new Map<string, MaterialType>();
   for (const [id, spec] of Object.entries(level.materials)) {
+    if (!shaderGraphs.get(spec.shaderGraphId)) {
+      throw new Error(
+        `Material '${id}' references missing shaderGraph '${spec.shaderGraphId}' — add it to LevelSpec.shaderGraphs`
+      );
+    }
     const mat = buildMaterial(id, spec, shaderGraphs, resourceManager, device);
     if (!mat.shaderGraph) {
       throw new Error(`Material '${id}' has no shaderGraph (id=${spec.shaderGraphId})`);
@@ -451,6 +496,11 @@ export async function spawnLevel(
     const mesh = createPrimitiveMesh(id, entry);
     resourceManager.uploadMesh(mesh);
     meshes.set(id, mesh);
+  }
+  if (opts?.extraMeshes) {
+    for (const [id, mesh] of opts.extraMeshes) {
+      meshes.set(id, mesh);
+    }
   }
 
   const entityById = new Map<string, Entity>();

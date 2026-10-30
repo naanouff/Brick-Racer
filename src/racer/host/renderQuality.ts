@@ -1,7 +1,7 @@
 /**
  * @file renderQuality.ts
  * @project brick-racer
- * @description Lit render graph selection: lean graph by default, showcase opt-in (`?render=showcase`).
+ * @description Lit render graph selection: HBAO+grading by default, full showcase opt-in (`?render=showcase`).
  */
 
 export type RenderQuality = 'fast' | 'showcase';

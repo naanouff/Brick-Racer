@@ -9,6 +9,9 @@ import { app, BrowserWindow, Menu, ipcMain, net, protocol, screen } from 'electr
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { mergeBc1PartsFile, type MergePartPayload } from './bc1Merge';
+import { ldrawPartMesh } from './ldrawBakeCache';
+import { ldrawPartTriangles } from './ldrawMain';
 import { loadWindowBounds, saveWindowBounds, type WindowBounds } from './windowBounds';
 
 const APP_SCHEME = 'app';
@@ -121,6 +124,16 @@ app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
   if (!process.env.ELECTRON_RENDERER_URL) registerAppProtocol();
   ipcMain.handle('app-version', () => app.getVersion());
+  ipcMain.handle('bc1-merge-parts', (_evt, staging: unknown) => {
+    const list = Array.isArray(staging) ? (staging as MergePartPayload[]) : [];
+    return mergeBc1PartsFile(list);
+  });
+  ipcMain.handle('ldraw-part-triangles', (_evt, ldrawId: unknown) =>
+    ldrawPartTriangles(String(ldrawId ?? ''))
+  );
+  ipcMain.handle('ldraw-part-mesh', (_evt, ldrawId: unknown, anchor: unknown) =>
+    ldrawPartMesh(String(ldrawId ?? ''), anchor)
+  );
   createWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

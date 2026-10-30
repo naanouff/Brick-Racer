@@ -6,6 +6,7 @@
     "metallic": { "type": "f32", "defaultValue": 0.0, "name": "Metallic" },
     "opacity": { "type": "f32", "defaultValue": 1.0, "name": "Opacity" },
     "baseColorTexture": { "type": "texture_2d", "defaultValue": null, "name": "UV Grid" },
+    "uvChannel": { "type": "f32", "defaultValue": 0.0, "name": "UV channel (0 = UV0, 1 = UV1)" },
     "ior": { "type": "f32", "defaultValue": 1.5, "name": "IOR" },
     "transmissionFactor": { "type": "f32", "defaultValue": 0.0, "name": "Transmission" },
     "anisotropy": { "type": "f32", "defaultValue": 0.0, "name": "Anisotropy" },
@@ -21,6 +22,9 @@
       "inputs": [],
       "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }]
     },
+    { "id": "uv1_node", "type": "GetUV", "stage": "fragment", "data": { "uvSet": 1 }, "inputs": [], "outputs": [{ "id": "uv", "name": "UV", "dataType": "vec2f" }] },
+    { "id": "prop_uv_ch", "type": "Property", "stage": "common", "data": { "propertyName": "uvChannel" }, "inputs": [], "outputs": [{ "id": "out", "name": "Out", "dataType": "f32" }] },
+    { "id": "lerp_grid_uv", "type": "Lerp", "stage": "fragment", "inputs": [{ "id": "a", "name": "A", "dataType": "vec2f" }, { "id": "b", "name": "B", "dataType": "vec2f" }, { "id": "t", "name": "T", "dataType": "f32" }], "outputs": [{ "id": "out", "name": "Out", "dataType": "vec2f" }] },
     { "id": "tex_prop", "type": "Property", "stage": "common", "data": { "propertyName": "baseColorTexture" }, "inputs": [], "outputs": [{ "id": "out", "name": "Out", "dataType": "texture_2d" }] },
     {
       "id": "tex_sample",
@@ -61,7 +65,10 @@
     }
   ],
   "connections": [
-    { "fromNodeId": "tf_uv_albedo", "fromSocketId": "uv", "toNodeId": "tex_sample", "toSocketId": "uv" },
+    { "fromNodeId": "tf_uv_albedo", "fromSocketId": "uv", "toNodeId": "lerp_grid_uv", "toSocketId": "a" },
+    { "fromNodeId": "uv1_node", "fromSocketId": "uv", "toNodeId": "lerp_grid_uv", "toSocketId": "b" },
+    { "fromNodeId": "prop_uv_ch", "fromSocketId": "out", "toNodeId": "lerp_grid_uv", "toSocketId": "t" },
+    { "fromNodeId": "lerp_grid_uv", "fromSocketId": "out", "toNodeId": "tex_sample", "toSocketId": "uv" },
     { "fromNodeId": "tex_prop", "fromSocketId": "out", "toNodeId": "tex_sample", "toSocketId": "texture" },
     { "fromNodeId": "tex_sample", "fromSocketId": "rgba", "toNodeId": "master", "toSocketId": "albedo" },
     { "fromNodeId": "world_normal", "fromSocketId": "norm", "toNodeId": "master", "toSocketId": "normal" },

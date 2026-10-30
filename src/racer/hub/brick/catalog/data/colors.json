@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "colors": [
+    {
+      "id": "white",
+      "name": "White",
+      "rgb": [0.92, 0.92, 0.94],
+      "blId": 1
+    },
+    {
+      "id": "black",
+      "name": "Black",
+      "rgb": [0.12, 0.12, 0.14],
+      "blId": 11
+    },
+    {
+      "id": "yellow",
+      "name": "Yellow",
+      "rgb": [0.95, 0.82, 0.18],
+      "blId": 14
+    },
+    {
+      "id": "red",
+      "name": "Red",
+      "rgb": [0.77, 0.13, 0.16],
+      "blId": 5
+    },
+    {
+      "id": "green",
+      "name": "Green",
+      "rgb": [0.16, 0.5, 0.2],
+      "blId": 6
+    },
+    {
+      "id": "lime",
+      "name": "Lime",
+      "rgb": [0.45, 0.82, 0.35],
+      "blId": 27
+    },
+    {
+      "id": "sand",
+      "name": "Tan",
+      "rgb": [0.82, 0.74, 0.58],
+      "blId": 2,
+      "aliases": ["tan"]
+    },
+    {
+      "id": "gray",
+      "name": "Light Bluish Gray",
+      "rgb": [0.63, 0.66, 0.7],
+      "blId": 86,
+      "aliases": ["light_bluish_gray", "lbg"]
+    },
+    {
+      "id": "dark_gray",
+      "name": "Dark Bluish Gray",
+      "rgb": [0.35, 0.38, 0.42],
+      "blId": 85,
+      "aliases": ["dark_bluish_gray", "dbg"]
+    },
+    {
+      "id": "terracotta",
+      "name": "Reddish Brown",
+      "rgb": [0.72, 0.4, 0.3],
+      "blId": 88,
+      "aliases": ["reddish_brown"]
+    },
+    {
+      "id": "cyan",
+      "name": "Trans-Light Blue",
+      "rgb": [0.35, 0.78, 0.88],
+      "blId": 41,
+      "translucent": true,
+      "aliases": ["trans_light_blue", "tlb"]
+    },
+    {
+      "id": "clear",
+      "name": "Trans-Clear",
+      "rgb": [0.88, 0.92, 0.95],
+      "blId": 40,
+      "translucent": true,
+      "aliases": ["trans_clear"]
+    }
+  ]
+}

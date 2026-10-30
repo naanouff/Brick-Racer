@@ -1,13 +1,16 @@
-# Minifig GPROC — décision & architecture
+# Minifig — décision & architecture
 
-**Canon in-game :** génération procédurale **W3DTS GPROC** + recettes JSON.  
-**Pas** de meshes Meshy / GLB uniques comme base personnage.
+**Canon in-game (MF2+) :** meshes **LDraw** (design IDs catalogue) + recettes JSON + pivots / poses.  
+**Legacy MF1 :** generators GPROC minifig — conservés en repo, plus la source mesh de Bolt.  
+**Pas** de meshes Meshy / GLB uniques comme base personnage.  
+**Pas** de conversion du catalogue LEGO entier en GPROC.
 
 Aligné [vision.md](vision.md) (boutique, pièces swappables), [gdd.md](gdd.md) §11, [characters-candidates.md](characters-candidates.md).  
 Réfs GPROC kart : [w3dts-demos.md](../references/w3dts-demos.md).  
-Plan / sprint : [minifig-gproc.md](../plans/minifig-gproc.md) · [BRICK-MF1](../sprints/BRICK-MF1.md).
+Plans / sprints : [minifig-gproc.md](../plans/minifig-gproc.md) · [BRICK-MF1](../sprints/BRICK-MF1.md) → [minifig-ldraw.md](../plans/minifig-ldraw.md) · [BRICK-MF2](../sprints/BRICK-MF2.md).  
+Catalogue / lab : [catalog-lab.md](../plans/catalog-lab.md).
 
-**Brick Racer n’est pas affilié à The LEGO Group.** Look « brick-like » maison.
+**Brick Racer n’est pas affilié à The LEGO Group.**
 
 ---
 
@@ -15,12 +18,15 @@ Plan / sprint : [minifig-gproc.md](../plans/minifig-gproc.md) · [BRICK-MF1](../
 
 | | |
 | - | - |
-| **Oui** | Éditeur / runtime minifig basé sur **GPROC** + catalogue de slots. |
+| **Oui (MF2)** | Corps minifig = **pièces LDraw** du master catalogue ; recipes + slots inchangés. |
+| **Oui** | Unités **mètres** (LDU → `S`/`P`). Pas de remise à l’échelle : taille native LDraw. |
+| **Non** | Convertir tout le catalogue LEGO en GPROC. |
 | **Non** | 20–40 GLB photoréalistes comme pipeline personnage. |
 | **Meshy / GLB** | Moodboard optionnel (`docs/design/art/characters/*.glb`) — **jamais** chargé en jeu. |
 | **Artwork WebP** | Refs art / marketing ; les PNJ en jeu = **recettes**. |
+| **GPROC** | Kart / formes custom ; generators minifig MF1 = legacy. |
 
-Pourquoi : même grammaire visuelle que le kart GPROC ; cast scalable ; boutique joueur = même outil que presets PNJ ; pas de pastiche mesh licence.
+Pourquoi LDraw : fidélité catalogue, un seul pipeline mesh avec `catalog-lab`, pas de double maintenance GPROC×65k pièces.
 
 ---
 
@@ -68,20 +74,20 @@ C01–C40 (retenus post-playtest) = fichiers recipe sous `public/` ou `src/racer
 
 ```mermaid
 flowchart LR
-  catalog[PartCatalog_slots]
-  gproc[GPROC_generators]
+  catalog[PartCatalog_slots_ldrawId]
+  ldraw[LDraw_library]
   recipe[MinifigRecipe_JSON]
   editor[Boutique_UI]
   runtime[Hub_Race_spawn]
   catalog --> editor
-  gproc --> editor
+  ldraw --> runtime
   editor --> recipe
   recipe --> runtime
-  gproc --> runtime
+  catalog --> runtime
 ```
 
-1. **Catalogue** — ids de pièces + generators GPROC associés + métadonnées UI.  
-2. **GPROC** — generators minifig (nouveau set ; distinct des `lego-*-generator` kart).  
+1. **Catalogue** — ids slots + `ldrawId` / `ldrawPair` + métadonnées UI (teintes, prints).  
+2. **LDraw** — géométrie via IPC `ldrawPartTriangles` + `buildLdrawPreviewGeometry` (même stack que catalog-lab).  
 3. **Éditeur** — React (coque Electron) → preview WebGPU, regen debounce à chaque swap.  
 4. **Runtime** — spawn hub / grille course depuis recipe (cosmétiques only en course MVP).
 
@@ -91,9 +97,10 @@ flowchart LR
 
 | Risque | Mitigation |
 | ------ | ---------- |
-| GPROC kart ≠ corps articulé | Nouveau set generators + assemblage par sockets / slots |
+| Origines LDraw ≠ sockets jeu | Table d’offsets × `MINIFIG_LDRAW_SCALE` (MF2c) |
+| `data/ldraw` absent | Proxy / log ; même contrainte que catalog-lab |
 | Visages | Atlas `facePrint` ; pas de morph procédural |
-| Perf hub (~20 PNJ) | Mesh légers ; regen seulement à l’édition ; instance / LOD plus tard |
+| Perf hub (~20 PNJ) | Cache mesh upload ; regen seulement à l’édition ; instance / LOD plus tard |
 | Anim | Rig / sockets stables ; pièces attachées ou skinnées après coup |
 | Drift Meshy réaliste | Doc + CONTRIBUTING : Meshy = moodboard only |
 

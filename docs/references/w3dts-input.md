@@ -16,12 +16,12 @@ Source : monorepo `w3dts_repos/w3dts` (`develop`, merge [PR #285](https://github
 
 **Gamepad HID livré** dans w3dts (`INP-G0` … `INP-G5`) : orthogonal au gamepad WebXR. Haptique hors scope. Tactile avancé = backlog.
 
-Brick Racer pin npm `input@0.0.21` / `core@0.0.37` (sans poll HID). En local avec mono `develop` :
+Brick Racer pin npm `input@0.0.21` / `core@0.0.37` (pas de bindings gamepad dans le resolve npm). En local avec mono `develop` :
 
 - alias Vite `@naanouff/w3dts-input` → `packages/input/src` ([w3dtsMonoAliases.ts](../../w3dtsMonoAliases.ts))
-- bridge [`hidGamepadBridge.ts`](../../src/racer/host/hidGamepadBridge.ts) poll `getGamepads` dans `InputManager` (le core npm n’a pas encore `INP-G4`)
+- bridge [`hidGamepadBridge.ts`](../../src/racer/host/hidGamepadBridge.ts) : **chaque frame** `navigator.getGamepads()` → `hardware.gamepads`, puis overwrite `moveForward` / `moveRight` / `climb` / `rollSnap` + actions `jump` / `resetKart` (le resolve npm ignore encore les kinds gamepad)
 
-Sans mono (CI) : le bridge no-op ; clavier seul.
+Chromium / Electron : le pad n’apparaît souvent qu’**après un premier bouton** pressé ; cliquer le canvas pour le focus.
 
 ## Contrat V1 (HID)
 

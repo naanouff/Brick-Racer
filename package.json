@@ -14,7 +14,10 @@
     "preview": "electron-vite preview",
     "dist": "pnpm build && electron-builder --win nsis --publish never",
     "test": "vitest --run",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "catalog:build": "python scripts/catalog/build_master_catalog.py --index-only",
+    "catalog:rebuild": "python scripts/catalog/fetch_sources.py && python scripts/catalog/build_master_catalog.py",
+    "ldraw:bake": "node scripts/ldraw/bake_cache.mjs"
   },
   "dependencies": {
     "@naanouff/w3dts-animation": "0.0.14",

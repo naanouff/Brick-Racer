@@ -5,7 +5,7 @@
 - Node.js 22 ou plus récent
 - **pnpm 10** (pin `packageManager` dans `package.json` — aligné CI). Éviter pnpm 11 pour `install` : il réécrit le lockfile sans `overrides` et casse `frozen-lockfile`.
 - Un GPU qui expose **WebGPU** (Direct3D 12 sous Windows). L’application n’active pas `--enable-unsafe-webgpu`.
-- Pour le host kart (P0 / BRICK-B2 / BO1) : checkout sibling du monorepo w3dts en `../w3dts_repos/w3dts` (à jour `develop`) pour les paquets non publiés ou périmés sur npm (`scripts`, `gproc`, **`physics`**, bientôt **`input`/`core`** pour gamepad HID) — alias Vite via [`w3dtsMonoAliases.ts`](../w3dtsMonoAliases.ts). **Pas de SceneDD** : levels TypeScript sous [`src/racer/levels/`](../src/racer/levels/). Physique blockout : [blockout-physics.md](plans/blockout-physics.md).
+- Pour le host kart (P0 / BRICK-B2 / BO1) : checkout sibling du monorepo w3dts (à jour `develop`) pour les paquets non publiés ou périmés sur npm (`scripts`, `gproc`, **`physics`**, **`input`**) — alias Vite via [`w3dtsMonoAliases.ts`](../w3dtsMonoAliases.ts). Chemins reconnus : `../w3dts/w3dts`, `../w3dts_repos/w3dts`, ou `W3DTS_MONO_ROOT`. Le paquet `scripts` doit être **buildé** (`packages/scripts/dist/w3dts-scripts.es.js`). **Pas de SceneDD** : levels TypeScript sous [`src/racer/levels/`](../src/racer/levels/). Physique blockout : [blockout-physics.md](plans/blockout-physics.md).
 
 Sous inspection TLS Windows, si le postinstall Electron échoue sur le certificat : `$env:NODE_TLS_REJECT_UNAUTHORIZED="0"; pnpm install` (même contrainte que le monorepo w3dts / `.npmrc`).
 
@@ -25,8 +25,10 @@ pnpm dist
 
 | Moyen | Usage |
 | ----- | ----- |
-| HUD « Revue slice » | Boutons race-test / city-test / sandbox-kart (**reload** `?level=`) ; cc ; debugTex |
-| Query | `?level=city-test` · `?level=sandbox-kart` · `?level=race-test` |
+| HUD « Revue slice » | **Prioritaire** — boutons race / city / sandbox / **brick-lab** (**hot-swap**, pas de barre d’URL en build packagée) ; cc / véhicule / debugTex = reload |
+| Brick lab | Manuels + toggle enveloppe/plein ; stats briques ; prompt Gemini : [brick-manual-prompt.md](design/brick-manual-prompt.md) |
+| Query (`pnpm dev` seulement) | `?level=city-test` · `?level=sandbox-kart` · `?level=race-test` · `?level=brick-lab` — **indisponible** dans `pnpm preview` / installateur (`app://`, pas d’omnibox) |
+| Persistance | Dernier level HUD → `localStorage` (`brick-racer.levelId`) au prochain lancement |
 | Véhicule | `?vehicle=kart` (défaut) · `moto` · `plane` |
 | Cylindrée | `?cc=50` · `?cc=100` (défaut) · `?cc=150` |
 | Texture debug | couleurs unies (défaut) · `?debugTex=1` grille densités (coûteux) |
@@ -37,12 +39,14 @@ WASD pour conduire, Espace = drift, X = reset au spawn. **Gamepad** style MK/DKR
 Perf (marge pour décos / IA / autres karts) :
 
 - Cible **≥ 60 fps** avec marge ; ombres off ; backbuffer **DPR ≤ 1** et **long edge ≤ 1280** (fill-rate — le CSS reste plein écran) ; physique **60 Hz**. HUD : `W×H` = taille GPU réelle.
-- Render graph **`BrickRacerFast`** par défaut (`?render=showcase` = HBAO+SSR+bloom+FXAA). HUD : `fast|showcase`.
+- Render graph **`BrickRacerFast`** par défaut (HBAO + tonemap + color grading ; `?render=showcase` = HBAO+SSR+bloom+FXAA). HUD : `fast|showcase`.
 - Circuit : géométrie complète (**72** segments murs, **36** rubans) ; `debugTex` **off** ; CP opaques.
 - Véhicules blockout sur grille race-test : `?vehicle=kart|moto|plane` (HUD). Moto = 2 roues arcade ; avion = A/B poussée, stick X **bank**, stick Y / Espace/Shift **tangage**, **L1/R1** (C/V) knife-edge vertical.
 - gproc uniquement sur `sandbox-kart` ; `layeredRefraction=off`.
 - Au load : `warmPipelines`. HUD : `fps · ms · W×H · dc · tri · quality`.
 Assets runtime sous `public/` (depuis `w3dts` viewer-editor) : graphs lit, **`shaders/`**, **`shader-graphs/`**, gproc, script-graphs. Sans ce dossier : ciel possible mais **pas de sol/kart**. Sans `public/shaders` : `Invalid ShaderModule` / `vs_main`.
+
+LDraw (catalog-lab, minifig, landmarks) : bibliothèque locale `data/ldraw/` (gitignorée, `python scripts/catalog/fetch_sources.py`). Après [CL5](sprints/BRICK-CL5.md), les meshes cuits (UV0/UV1 + atlas usure) sont mis en cache sous `data/ldraw-cache/` (gitignoré). Purge manuelle = supprimer ce dossier ; un bump de `LDRAW_BAKE_VERSION` re-cuit automatiquement. Script optionnel `pnpm ldraw:bake` pour préchauffer les pièces des recettes / landmarks.
 
 Cohérence de versions (sinon **aucun modèle visible**, sans erreur bloquante) :
 

@@ -3,10 +3,18 @@
  * @description Sandbox preview for minifig editor (BRICK-MF1e).
  */
 
-import { assembleMinifigEntities } from '../../minifig/assembleMinifig';
-import { layoutY } from '../../minifig/dimensions';
+import {
+  assembleMinifigEntities,
+  type AssembleLdrawContext,
+} from '../../minifig/assembleMinifig';
+import {
+  CATALOG_PLASTIC_SHADER_ID,
+  CATALOG_PLASTIC_SHADER_URL,
+} from '../../hub/brick/catalog/catalogPlasticMaterials';
+import { minifigLdrawFocusY } from '../../minifig/ldrawAssembly';
 import { MINIFIG_GPROC_GRAPHS } from '../../minifig/gprocGraphs';
 import { loadStoredRecipe } from '../../minifig/recipeStorage';
+import type { MinifigRecipe } from '../../minifig/types';
 import {
   applyAmbientPlasticMaps,
   resolveMinifigPlasticMap,
@@ -35,16 +43,20 @@ const PEDESTAL_HEIGHT = 0.1;
 /** Minifig root sits on top of the pedestal. */
 export const MINIFIG_LAB_ORIGIN = [0, PEDESTAL_HEIGHT, 0] as const;
 export const MINIFIG_LAB_CAMERA_ID = 'MinifigLabCamera';
-/** Orbit pivot: mid-torso of the lab figure. */
+/** Orbit pivot: mid-torso of the native LDraw figure. */
 export const MINIFIG_LAB_ORBIT_TARGET: readonly [number, number, number] = [
   0,
-  PEDESTAL_HEIGHT + layoutY().torsoCenter,
+  PEDESTAL_HEIGHT + minifigLdrawFocusY(),
   0,
 ];
 
 export type MinifigLabSpecOpts = {
   /** Sample mesh UV0 with the 0–1 debug grid instead of plastic/prints. */
   uvGrid?: boolean;
+  /** Preloaded LDraw meshes (MF2). When set, body parts prefer LDraw over GPROC. */
+  ldraw?: AssembleLdrawContext | null;
+  /** Override recipe (defaults to session storage / Bolt). */
+  recipe?: MinifigRecipe;
 };
 
 /** Fresh spec each load so editor swaps (sessionStorage) apply. */
@@ -53,9 +65,11 @@ export function buildMinifigLabSpec(opts?: MinifigLabSpecOpts): LevelSpec {
     opts?.uvGrid ??
     (typeof window !== 'undefined' && resolveMinifigUvGridEnabled(window.location.search));
 
-  const recipe = loadStoredRecipe();
+  const recipe = opts?.recipe ?? loadStoredRecipe();
+  const useLdraw = opts?.ldraw && opts.ldraw.readyIds.size > 0 ? opts.ldraw : null;
   const assembled = assembleMinifigEntities(recipe, {
     origin: [...MINIFIG_LAB_ORIGIN],
+    ldraw: useLdraw,
   });
 
   const materials = {
@@ -140,10 +154,12 @@ export function buildMinifigLabSpec(opts?: MinifigLabSpecOpts): LevelSpec {
     shaderGraphs: [
       ...BLOCKOUT_SHADER_GRAPHS,
       { id: MINIFIG_PLASTIC_SHADER_ID, url: MINIFIG_PLASTIC_SHADER_URL },
+      { id: CATALOG_PLASTIC_SHADER_ID, url: CATALOG_PLASTIC_SHADER_URL },
       ...(uvGrid
         ? [{ id: MINIFIG_UV_GRID_SHADER_ID, url: MINIFIG_UV_GRID_SHADER_URL }]
         : []),
     ],
+    // Keep GPROC graphs registered so missing LDraw falls back cleanly.
     geometryGraphs: [...MINIFIG_GPROC_GRAPHS],
     scriptGraphs: [],
     materials,

@@ -99,6 +99,7 @@ Fait quand :
 ## Hors de ce sprint
 
 - Intégration React / Electron ([BRICK-UI1](BRICK-UI1.md)).
+- Coque dev / lanceur de slices — [BRICK-UIM2](BRICK-UIM2.md) · [dev-atelier.md](../plans/dev-atelier.md).
 - Binding host course / SceneDD.
 - Responsive mobile (cible desktop 1920×1080 ; largeur mini ~1280 OK).
 - Lobby multi, inventaire réel, audio.

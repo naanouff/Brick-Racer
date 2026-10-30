@@ -1,3 +1,4 @@
+/** Spec only — spawn lives in `spawnMinifigLab.ts` (pulls w3dts-scripts). */
 export {
   buildMinifigLabSpec,
   MINIFIG_LAB_CAMERA_ID,

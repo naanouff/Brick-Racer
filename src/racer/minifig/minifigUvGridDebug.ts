@@ -11,6 +11,9 @@ export const MINIFIG_UV_GRID_TEXTURE_ID = 'mf_uv_grid';
 export const MINIFIG_UV_GRID_SHADER_ID = 'minifig_uv_grid';
 export const MINIFIG_UV_GRID_SHADER_URL = '/shader-graphs/MinifigUVGridDebug.json';
 
+/** GPROC parts use `minifig_plastic`; LDraw parts use the catalog graph. */
+const UV_GRID_SOURCE_SHADERS = new Set([MINIFIG_PLASTIC_SHADER_ID, 'catalog_plastic']);
+
 /** One texture tile = UV square [0,1]². */
 export const MINIFIG_UV_GRID_SIZE = 1024;
 
@@ -135,7 +138,7 @@ export function resolveMinifigUvGridEnabled(search = ''): boolean {
 /** Swaps minifig plastic mats to flat UV-grid preview (all body gproc parts). */
 export function applyMinifigUvGridDebugMaterials(materials: Record<string, MaterialSpec>): void {
   for (const spec of Object.values(materials)) {
-    if (spec.shaderGraphId !== MINIFIG_PLASTIC_SHADER_ID) continue;
+    if (!UV_GRID_SOURCE_SHADERS.has(spec.shaderGraphId)) continue;
     spec.shaderGraphId = MINIFIG_UV_GRID_SHADER_ID;
     spec.properties = {
       baseColor: [1, 1, 1, 1],

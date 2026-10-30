@@ -4,6 +4,8 @@ Porter un **pipeline minifig procédural** (GPROC + recettes) dans la coque Elec
 Design : [../design/minifig-gproc.md](../design/minifig-gproc.md). Sprint : [../sprints/BRICK-MF1.md](../sprints/BRICK-MF1.md).  
 Réfs GPROC kart : [../references/w3dts-demos.md](../references/w3dts-demos.md).
 
+> **Suite MF2** : le canon mesh Bolt passe aux **pièces LDraw** — [minifig-ldraw.md](minifig-ldraw.md) · [BRICK-MF2](../sprints/BRICK-MF2.md). Ce plan MF1 reste la fondation recipes / slots / sandbox.
+
 ## Objectif
 
 Livrer un **sandbox minifig** jouable en preview : assembler tête + torso + jambes (+ coiffe / accessoire si ready) via GPROC, charger une **recipe** (ex. preset Bolt), swap de pièces depuis un panneau debug / stub UI. **Pas** la boutique hub Vinyle complète (P3).

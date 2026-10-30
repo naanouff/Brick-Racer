@@ -6,8 +6,13 @@
  */
 
 import type { Engine } from '@naanouff/w3dts-core';
+import type {
+  CatalogMeshPreviewOpts,
+  CatalogMeshPreviewResult,
+  CatalogPreviewOpts,
+} from '../hub/brick/catalog/spawnCatalogPreview';
 import { bootEngine } from './bootEngine';
-import type { LevelId } from '../levels/registry';
+import { writeStoredLevelId, type LevelId } from '../levels/registry';
 import type { SceneDirector } from '../scene/SceneDirector';
 import type { SessionFlow } from '../session/SessionFlow';
 
@@ -17,15 +22,26 @@ export interface BrickRacerHost {
   readonly scene: SceneDirector;
   readonly flow: SessionFlow;
   readonly levelId: LevelId;
-  /** Hot-swap level (unload + spawn). Also updates SessionFlow. */
+  /** Hot-swap level (unload + spawn). Also updates SessionFlow + URL/storage. */
   loadLevel: (id: LevelId) => Promise<void>;
+  previewCatalogPart: (opts: CatalogPreviewOpts) => void;
+  /** Triangle count is 0 when nothing spawned. `ao` is the UV1 AO channel. */
+  previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => CatalogMeshPreviewResult;
+  clearCatalogPreview: () => void;
+  /** GLB of a part already shown as a mesh. Null if that part is not in the preview cache. */
+  exportCatalogGlb: (ldrawId: string) => Uint8Array | null;
+  /** OBJ of a part already shown as a mesh. The UV set is UV1. */
+  exportCatalogObj: (ldrawId: string) => Uint8Array | null;
+  /** FBX of a part already shown as a mesh. UV0 and UV1. */
+  exportCatalogFbx: (ldrawId: string) => Uint8Array | null;
 }
 
 /** One boot per page — React StrictMode remounts must not spawn a second Engine/WebGPUContext. */
 let hostBoot: Promise<BrickRacerHost> | null = null;
 
 /**
- * Boots the W3DTS engine, loads `?level=` (default race-test), exposes SceneDirector + SessionFlow.
+ * Boots the W3DTS engine, loads `?level=` / stored choice (default race-test),
+ * exposes SceneDirector + SessionFlow.
  */
 export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<BrickRacerHost> {
   canvas.dataset.testid = 'game-view-canvas';
@@ -33,16 +49,35 @@ export async function startBrickRacerHost(canvas: HTMLCanvasElement): Promise<Br
 
   hostBoot ??= bootEngine(canvas)
     .then(({ engine, scene, flow, levelId }) => {
+      writeStoredLevelId(levelId);
       const loadLevel = async (id: LevelId): Promise<void> => {
         await scene.load(id);
         flow.syncFromLevel(id);
         canvas.dataset.levelId = id;
-        const url = new URL(window.location.href);
-        url.searchParams.set('level', id);
-        window.history.replaceState({}, '', url);
+        writeStoredLevelId(id);
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('level', id);
+          window.history.replaceState({}, '', url);
+        } catch {
+          /* app:// replaceState edge cases — storage is enough */
+        }
       };
       canvas.dataset.levelId = levelId;
-      return { ready: true as const, engine, scene, flow, levelId, loadLevel };
+      return {
+        ready: true as const,
+        engine,
+        scene,
+        flow,
+        levelId,
+        loadLevel,
+        previewCatalogPart: (opts: CatalogPreviewOpts) => scene.previewCatalogPart(opts),
+        previewCatalogMesh: (opts: CatalogMeshPreviewOpts) => scene.previewCatalogMesh(opts),
+        clearCatalogPreview: () => scene.clearCatalogPreview(),
+        exportCatalogGlb: (ldrawId: string) => scene.exportCatalogGlb(ldrawId),
+        exportCatalogObj: (ldrawId: string) => scene.exportCatalogObj(ldrawId),
+        exportCatalogFbx: (ldrawId: string) => scene.exportCatalogFbx(ldrawId),
+      };
     })
     .catch((err) => {
       hostBoot = null;

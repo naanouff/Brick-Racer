@@ -10,13 +10,21 @@
  */
 
 // Leaf imports only — avoid shared barrel → spawnLevel → w3dts-scripts (CI without mono).
-import { assembleMinifigEntities } from '../../minifig/assembleMinifig';
+import {
+  assembleMinifigEntities,
+  type AssembleLdrawContext,
+} from '../../minifig/assembleMinifig';
 import { MINIFIG_GPROC_GRAPHS } from '../../minifig/gprocGraphs';
 import { BOLT_RECIPE } from '../../minifig/recipes/c01-bolt';
 import {
   MINIFIG_PLASTIC_SHADER_ID,
   MINIFIG_PLASTIC_SHADER_URL,
 } from '../../minifig/plasticMaterial';
+import {
+  CATALOG_PLASTIC_SHADER_ID,
+  CATALOG_PLASTIC_SHADER_URL,
+  catalogPlasticMaterials,
+} from '../../hub/brick/catalog/catalogPlasticMaterials';
 import { FOOT_CHASE_CAMERA_NAME, HUB_AVATAR_NAME } from '../../hub/hubPossession';
 import {
   BLOCKOUT_PRIMITIVES,
@@ -43,6 +51,7 @@ import {
   createBlockoutPlaneEntities,
 } from '../../vehicles/plane/blockoutPlaneKit';
 import type { VehicleKind } from '../../vehicles/selectVehicle';
+import { brickCatalogMaterials } from '../../hub/brick/brickMaterials';
 
 export const CITY_TEST_STABLE_IDS = [
   'poi.garage',
@@ -115,7 +124,12 @@ export function buildCityTestTriggers(): LevelTrigger[] {
   ];
 }
 
-export function buildCityTestSpec(): LevelSpec {
+export type CityTestSpecOpts = {
+  /** Preloaded LDraw meshes for the hub avatar (MF2). */
+  ldraw?: AssembleLdrawContext | null;
+};
+
+export function buildCityTestSpec(opts?: CityTestSpecOpts): LevelSpec {
   const kart = blockoutKartGraphRefs();
   const entities: LevelEntity[] = [makeSunEntity('CT_Sun')];
 
@@ -149,6 +163,7 @@ export function buildCityTestSpec(): LevelSpec {
       size: [3, 2, 3],
       materialId: 'BO_Npc',
       kind: 'wall',
+      visible: false,
     })
   );
 
@@ -266,7 +281,11 @@ export function buildCityTestSpec(): LevelSpec {
     }
   );
 
-  const assembled = assembleMinifigEntities(BOLT_RECIPE, { origin: [0, 0, 0] });
+  const useLdraw = opts?.ldraw && opts.ldraw.readyIds.size > 0 ? opts.ldraw : null;
+  const assembled = assembleMinifigEntities(BOLT_RECIPE, {
+    origin: [0, 0, 0],
+    ldraw: useLdraw,
+  });
   const minifigRoot = assembled.entities.find((e) => e.id === assembled.rootId);
   if (minifigRoot) {
     minifigRoot.parentId = HUB_AVATAR_NAME;
@@ -360,10 +379,16 @@ export function buildCityTestSpec(): LevelSpec {
     shaderGraphs: [
       ...shaderById.values(),
       { id: MINIFIG_PLASTIC_SHADER_ID, url: MINIFIG_PLASTIC_SHADER_URL },
+      { id: CATALOG_PLASTIC_SHADER_ID, url: CATALOG_PLASTIC_SHADER_URL },
     ],
     geometryGraphs: [...kart.geometryGraphs, ...MINIFIG_GPROC_GRAPHS],
     scriptGraphs: kart.scriptGraphs,
-    materials: { ...blockoutMaterials(), ...assembled.materials },
+    materials: {
+      ...blockoutMaterials(),
+      ...assembled.materials,
+      ...brickCatalogMaterials(),
+      ...catalogPlasticMaterials(),
+    },
     primitives: { ...BLOCKOUT_PRIMITIVES },
     entities,
   };

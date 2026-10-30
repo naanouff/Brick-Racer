@@ -30,3 +30,15 @@ Prompts P1–P10 + negative / variantes : [test-slice-plans.md](../test-slice-pl
 | [axon-city-dim.png](axon-city-dim.png) | P8 copie = canon (compat chemins) |
 | [module-stud-grid.png](module-stud-grid.png) | P9 module stud 0,33 m (**canon**) |
 | [profile-race-centerline.png](profile-race-centerline.png) | P10 profil médiane (**canon**) |
+
+### Référentiel rendu monde brick
+
+Cible visuelle **matière / densité** (pas le layout Proving Grounds). Plan : [brick-world-rendering.md](../../plans/brick-world-rendering.md) · sprint [BRICK-BW1](../../sprints/BRICK-BW1.md).  
+Authoring landmark (artwork **structure seule** + manuel JSON) : [brick-manual-prompt.md](../brick-manual-prompt.md).
+
+| Fichier | Note |
+| ------- | ---- |
+| [ref-brick-world-chase.jpg](ref-brick-world-chase.jpg) | Chase cam — piste tiles studs, rampes, façades, plastique PBR (**réf. rendu BW**) |
+| [ref-fountain-bom.png](ref-fountain-bom.png) | Fontaine BOM photo — gris + eau translucide (**canon matière** `landmark.fountain`) |
+| [ref-fountain-hero.png](ref-fountain-hero.png) | Fontaine seule — hero 3/4 studio (legacy A1 terracotta) |
+| [ref-fountain-ortho.png](ref-fountain-ortho.png) | Fontaine seule — plan + élévation cotée 3,0 × 2,0 m |

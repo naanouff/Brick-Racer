@@ -1,0 +1,686 @@
+/**
+ * Atelier dev shell — tokens alignés docs/design/ui-ux.md §2 / mocup UIM2.
+ */
+
+.br-atelier {
+  --br-plaza-pastel: #f7b8c9;
+  --br-garage-oil: #e87a3a;
+  --br-beach-mint: #5ecfbf;
+  --br-billboard-magenta: #d946a8;
+  --br-stud-yellow: #f5c518;
+  --br-ink: #1a1520;
+  --br-paper: #fff6ec;
+  --br-asphalt: #2b3040;
+  --br-radius: 6px;
+  --br-border: 4px;
+  --br-font-display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --br-font-body: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+  --rail-w: 280px;
+  --drawer-w: 320px;
+
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--drawer-w);
+  grid-template-rows: 1fr auto;
+  pointer-events: none;
+  z-index: 2;
+  font-family: var(--br-font-body);
+  font-size: 15px;
+  color: var(--br-ink);
+  line-height: 1.4;
+}
+
+.br-atelier.is-rail-collapsed {
+  --rail-w: 56px;
+}
+
+.br-atelier.is-catalog {
+  --drawer-w: min(24rem, 38vw);
+}
+
+.br-atelier-rail,
+.br-atelier-drawer,
+.br-atelier-status,
+.br-atelier-rail button,
+.br-atelier-drawer button {
+  pointer-events: auto;
+}
+
+/* —— Rail —— */
+.br-atelier-rail {
+  grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  background: var(--br-paper);
+  border-right: var(--br-border) solid var(--br-ink);
+  overflow: hidden;
+}
+
+.br-atelier-rail__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.br-atelier-rail__brand {
+  margin: 0;
+  font-family: var(--br-font-display);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.br-atelier-rail__collapse {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--br-ink);
+  border-radius: var(--br-radius);
+  background: var(--br-stud-yellow);
+  color: var(--br-ink);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.br-atelier-rail__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.br-atelier-rail__group {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5a5260;
+}
+
+.br-atelier-card {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.45rem;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 0.4rem;
+  padding: 0.45rem 0.5rem 0.45rem 0.35rem;
+  text-align: left;
+  border: 2px solid transparent;
+  border-radius: var(--br-radius);
+  background: #fff;
+  color: var(--br-ink);
+  box-shadow: 2px 2px 0 rgb(26 21 32 / 12%);
+  font: inherit;
+  cursor: pointer;
+}
+
+.br-atelier-card:hover:not(:disabled) {
+  border-color: rgb(26 21 32 / 35%);
+}
+
+.br-atelier-card.is-active,
+.br-atelier-card:disabled {
+  border-color: var(--br-stud-yellow);
+  background: #fffdf3;
+  box-shadow: 2px 2px 0 rgb(245 197 24 / 45%);
+  cursor: default;
+  opacity: 1;
+}
+
+.br-atelier-card__accent {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  background: var(--accent, var(--br-stud-yellow));
+  color: var(--br-ink);
+}
+
+.br-atelier-card__icon {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.br-atelier-card__body {
+  min-width: 0;
+}
+
+.br-atelier-card__title {
+  display: block;
+  font-family: var(--br-font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.br-atelier-card__role {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.72rem;
+  color: #5a5260;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.br-atelier-card__key {
+  flex-shrink: 0;
+  min-width: 1.35rem;
+  padding: 0.15rem 0.3rem;
+  text-align: center;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #5a5260;
+  border: 1px solid rgb(26 21 32 / 18%);
+  border-radius: 4px;
+  background: var(--br-paper);
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-rail {
+  padding: 0.55rem 0.4rem;
+  align-items: center;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-rail__brand,
+.br-atelier.is-rail-collapsed .br-atelier-rail__group,
+.br-atelier.is-rail-collapsed .br-atelier-card__body,
+.br-atelier.is-rail-collapsed .br-atelier-card__key {
+  display: none;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-rail__top {
+  justify-content: center;
+  width: 100%;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-card {
+  grid-template-columns: 1fr;
+  padding: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0 auto 0.4rem;
+  place-items: center;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-card.is-active,
+.br-atelier.is-rail-collapsed .br-atelier-card:disabled {
+  background: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-card__accent {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 rgb(26 21 32 / 18%);
+  border: 2px solid transparent;
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-card.is-active .br-atelier-card__accent,
+.br-atelier.is-rail-collapsed .br-atelier-card:disabled .br-atelier-card__accent {
+  border-color: var(--br-stud-yellow);
+  box-shadow: 2px 2px 0 rgb(245 197 24 / 45%);
+}
+
+.br-atelier.is-rail-collapsed .br-atelier-card__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* —— Scene chrome (over canvas) —— */
+.br-atelier-scene-label {
+  position: absolute;
+  top: 1.1rem;
+  left: calc(var(--rail-w) + 1.1rem);
+  z-index: 1;
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  font-family: var(--br-font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--br-paper);
+  background: rgb(26 21 32 / 55%);
+  border: 2px solid rgb(255 246 236 / 22%);
+  border-radius: var(--br-radius);
+  pointer-events: none;
+}
+
+.br-atelier-scene-hint {
+  position: absolute;
+  bottom: calc(2.6rem + 0.5rem);
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: rgb(255 246 236 / 78%);
+  background: rgb(26 21 32 / 45%);
+  border-radius: var(--br-radius);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* —— Drawer —— */
+.br-atelier-drawer {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  background: var(--br-paper);
+  border-left: var(--br-border) solid var(--br-ink);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.br-atelier-drawer--catalog {
+  padding: 0.7rem 0.75rem 0.55rem;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.br-atelier-drawer--catalog .br-atelier-section--grow {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.br-atelier-drawer__title {
+  margin: 0;
+  font-family: var(--br-font-display);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.br-atelier-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.br-atelier-section--grow {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.br-atelier-label {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5a5260;
+}
+
+.br-atelier-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.br-atelier-chip {
+  margin: 0;
+  padding: 0.35rem 0.55rem;
+  border: 2px solid rgb(26 21 32 / 28%);
+  border-radius: var(--br-radius);
+  background: #fff;
+  color: var(--br-ink);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.br-atelier-chip:hover:not(:disabled) {
+  border-color: var(--br-ink);
+}
+
+.br-atelier-chip.is-active,
+.br-atelier-chip:disabled.is-active {
+  border-color: var(--br-stud-yellow);
+  background: #fff8d6;
+  opacity: 1;
+  cursor: default;
+}
+
+.br-atelier-chip:disabled:not(.is-active) {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.br-atelier-telemetry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  margin: 0;
+  padding: 0.55rem 0.65rem;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  background: #fff;
+  border: 2px solid rgb(26 21 32 / 18%);
+  border-radius: var(--br-radius);
+}
+
+.br-atelier-telemetry strong {
+  font-weight: 700;
+}
+
+.br-atelier-telemetry__muted {
+  color: #5a5260;
+  font-weight: 500;
+}
+
+.br-atelier-hint-box {
+  margin: 0;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.78rem;
+  color: #5a5260;
+  background: #fff;
+  border: 2px dashed rgb(26 21 32 / 22%);
+  border-radius: var(--br-radius);
+}
+
+.br-atelier-catalog-slot {
+  flex: 1;
+  min-height: 8rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #5a5260;
+  background: #fff;
+  border: 3px dashed rgb(232 122 58 / 55%);
+  border-radius: var(--br-radius);
+}
+
+.br-atelier-common {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 2px solid rgb(26 21 32 / 12%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.br-atelier-drawer--catalog .br-atelier-common {
+  flex-shrink: 0;
+}
+
+.br-atelier-reload-note {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #5a5260;
+}
+
+/* —— Shared widgets (design system) —— */
+.br-atelier-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.br-atelier-field--row {
+  flex: 1;
+}
+
+.br-atelier-input,
+.br-atelier-select {
+  width: 100%;
+  margin: 0;
+  padding: 0.4rem 0.55rem;
+  border: 2px solid rgb(26 21 32 / 28%);
+  border-radius: var(--br-radius, 6px);
+  background: #fff;
+  color: var(--br-ink, #1a1520);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 1px 1px 0 rgb(26 21 32 / 8%);
+}
+
+.br-atelier-input:hover,
+.br-atelier-select:hover {
+  border-color: var(--br-ink, #1a1520);
+}
+
+.br-atelier-input:focus,
+.br-atelier-select:focus {
+  outline: 2px solid var(--br-stud-yellow, #f5c518);
+  outline-offset: 1px;
+  border-color: var(--br-ink, #1a1520);
+}
+
+.br-atelier-select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--br-ink, #1a1520) 50%),
+    linear-gradient(135deg, var(--br-ink, #1a1520) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% - 2px),
+    calc(100% - 9px) calc(50% - 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.6rem;
+  cursor: pointer;
+}
+
+.br-atelier-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.br-atelier-meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #5a5260;
+  background: #fff;
+  border: 2px solid rgb(26 21 32 / 14%);
+  border-radius: 4px;
+}
+
+.br-atelier-meta b {
+  color: var(--br-ink, #1a1520);
+  font-weight: 700;
+}
+
+.br-atelier-meta--accent {
+  border-color: var(--br-garage-oil, #e87a3a);
+  background: rgb(232 122 58 / 12%);
+}
+
+.br-atelier-empty {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.8rem;
+  color: #5a5260;
+  text-align: center;
+  background: #fff;
+  border: 2px dashed rgb(26 21 32 / 22%);
+  border-radius: var(--br-radius, 6px);
+}
+
+.br-atelier-chip--accent {
+  background: var(--br-garage-oil, #e87a3a);
+  color: var(--br-paper, #fff6ec);
+  border-color: var(--br-ink, #1a1520);
+}
+
+.br-atelier-chip--accent.is-active,
+.br-atelier-chip--accent:disabled {
+  background: var(--br-garage-oil, #e87a3a);
+  border-color: var(--br-stud-yellow, #f5c518);
+  color: var(--br-paper, #fff6ec);
+}
+
+.br-atelier-chip--ghost {
+  background: transparent;
+}
+
+.br-atelier-common--compact {
+  gap: 0.45rem;
+  padding-top: 0.55rem;
+}
+
+.br-atelier-common--compact .br-atelier-section {
+  gap: 0.3rem;
+}
+
+.br-atelier-common--compact .br-atelier-chip {
+  padding: 0.28rem 0.45rem;
+  font-size: 0.72rem;
+}
+
+/* —— Status —— */
+.br-atelier-status {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  background: rgb(18 21 28 / 92%);
+  color: var(--br-paper);
+  border-top: 2px solid rgb(255 246 236 / 12%);
+}
+
+.br-atelier-status__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  background: rgb(255 246 236 / 8%);
+  border: 1px solid rgb(255 246 236 / 14%);
+  border-radius: 4px;
+}
+
+.br-atelier-status__chip b {
+  font-weight: 700;
+  color: var(--br-stud-yellow);
+}
+
+.br-atelier-status__chip span {
+  color: rgb(255 246 236 / 65%);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.br-atelier-status__ver {
+  margin: 0 0 0 0.5rem;
+  font-size: 0.72rem;
+  color: rgb(255 246 236 / 45%);
+}
+
+/* Embedded catalog fills the drawer. Specificity beats `.br-catalog` absolute overlay. */
+.br-atelier .br-catalog--embedded {
+  --br-paper: #fff6ec;
+  --br-ink: #1a1520;
+  --br-garage: #e87a3a;
+  --br-stud-yellow: #f5c518;
+  --br-garage-oil: #e87a3a;
+  --br-radius: 6px;
+  position: relative;
+  inset: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--br-ink);
+  font-family: var(--br-font-body, 'Nunito Sans', system-ui, sans-serif);
+  z-index: auto;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.br-atelier .br-catalog--embedded .br-catalog__list {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+}
+
+.br-atelier .br-catalog--embedded .br-catalog__detail {
+  flex: 0 1 auto;
+  max-height: min(52%, 26rem);
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 0.4rem;
+}
+
+.br-atelier .br-catalog--embedded .br-catalog__detail-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-bottom: 0.35rem;
+}
+
+.br-atelier .br-catalog--embedded .br-catalog__detail-actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 0.45rem;
+  border-top: 2px solid rgb(26 21 32 / 12%);
+  background: var(--br-paper);
+}
