@@ -1,0 +1,17 @@
+{
+  "id": "landmark.tower",
+  "version": 1,
+  "title": "Tour penchée (base + fût)",
+  "modules": [
+    {
+      "id": "base",
+      "file": "tower-base.layers.json",
+      "offset": [0, 0, 0]
+    },
+    {
+      "id": "shaft",
+      "file": "tower-shaft.layers.json",
+      "offset": [0, 7, 0]
+    }
+  ]
+}

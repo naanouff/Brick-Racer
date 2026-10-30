@@ -1,0 +1,44 @@
+{
+  "id": "module.tower-base",
+  "version": 1,
+  "title": "Tour — socle 4×4",
+  "footprint": [4, 4],
+  "legend": {
+    "G": "gray",
+    "D": "dark_gray"
+  },
+  "options": {
+    "runningBond": true,
+    "capTiles": false
+  },
+  "layers": [
+    {
+      "kind": "plate",
+      "rows": [
+        "DDDD",
+        "DGGD",
+        "DGGD",
+        "DDDD"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "GGGG",
+        "G..G",
+        "G..G",
+        "GGGG"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "GGGG",
+        "G..G",
+        "G..G",
+        "GGGG"
+      ]
+    }
+  ],
+  "ops": []
+}

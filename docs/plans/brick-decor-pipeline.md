@@ -1,6 +1,7 @@
 # Plan : pipeline décors brick (couches → brickify)
 
-Sprints : [BRICK-DC1](../sprints/BRICK-DC1.md) · [BRICK-DC2](../sprints/BRICK-DC2.md) · [BRICK-DC3](../sprints/BRICK-DC3.md) · DC4 à ouvrir ensuite.  
+Sprints : [BRICK-DC1](../sprints/BRICK-DC1.md) · [BRICK-DC2](../sprints/BRICK-DC2.md) · [BRICK-DC3](../sprints/BRICK-DC3.md) · [BRICK-DC4](../sprints/BRICK-DC4.md).  
+Checklist prod : [brick-decor-checklist.md](../design/brick-decor-checklist.md).  
 Rendu / instancing : [brick-world-rendering.md](brick-world-rendering.md) · [BRICK-BW1](../sprints/BRICK-BW1.md).  
 Authoring actuel (v1, à remplacer) : [brick-manual-prompt.md](../design/brick-manual-prompt.md).  
 Catalogue pièces : [brick-part-catalog.md](brick-part-catalog.md) · [parts.json](../../src/racer/hub/brick/catalog/data/parts.json).
@@ -138,3 +139,4 @@ Playtest brick-lab : vues **Face / Côté / Dessus** + overlay opacité réglabl
 | 2026-10-30 | Consignation : diagnostic v1, format couches, incréments DC0–DC4, ouverture sprint DC1 |
 | 2026-10-30 | DC1a : corpus fidélité + overlay runtime `public/brick-refs/` |
 | 2026-10-30 | DC2 : prompts v2 + `landmark.pad` (couches → manuel) |
+| 2026-10-30 | DC4 : `*.assembly.json` + tour + checklist prod |

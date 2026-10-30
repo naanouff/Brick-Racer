@@ -1,0 +1,53 @@
+{
+  "id": "module.tower-shaft",
+  "version": 1,
+  "title": "Tour — fût penché (stub)",
+  "footprint": [4, 4],
+  "legend": {
+    "G": "gray",
+    "T": "terracotta"
+  },
+  "options": {
+    "runningBond": true,
+    "slopeColor": "terracotta"
+  },
+  "layers": [
+    {
+      "kind": "brick",
+      "rows": [
+        "GGGG",
+        "G..G",
+        "G..G",
+        "GGGG"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        ".GGG",
+        "G..G",
+        "G..G",
+        "GGG."
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "..GG",
+        ".G.G",
+        "G.G.",
+        "GG.."
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "T/\\T",
+        "T..T",
+        "....",
+        "...."
+      ]
+    }
+  ],
+  "ops": []
+}
