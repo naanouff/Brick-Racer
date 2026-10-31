@@ -4,17 +4,8 @@
  */
 
 import { useEffect, useRef, useState, type ReactElement, type ReactNode } from 'react';
-import {
-  BRICK_MANUAL_IDS,
-  brickManualLabel,
-  brickManualOverlayUrl,
-  type BrickManualId,
-} from '../../racer/hub/brick/manuals/registry';
-import {
-  BRICK_LAB_VIEWS,
-  brickLabViewLabel,
-  type BrickLabView,
-} from '../../racer/levels/brickLab/brickLabCamera';
+import type { BrickManualId } from '../../racer/hub/brick/manuals/registry';
+import type { BrickLabView } from '../../racer/levels/brickLab/brickLabCamera';
 import {
   LEVEL_IDS,
   levelAccent,
@@ -31,6 +22,7 @@ import {
   VEHICLE_KINDS,
   type VehicleKind,
 } from '../../racer/vehicles/selectVehicle';
+import { BrickLabMenuBar } from '../brickLab/BrickLabMenuBar';
 import { SceneIcon } from './sceneIcons';
 import './atelier.css';
 
@@ -45,7 +37,9 @@ function formatCount(n: number): string {
 
 function sceneHint(active: LevelId, vehicle: VehicleKind): string {
   if (active === 'catalog-lab') return 'Orbit · panneau catalogue à droite';
-  if (active === 'brick-lab') return 'Orbit / ortho Face·Côté·Dessus · overlay réf';
+  if (active === 'brick-lab') {
+    return 'V sélection · B pinceau · glisser pour déplacer · R rot · Suppr · Ctrl+Z';
+  }
   if (active === 'minifig-lab') return 'Orbit · souris / stick';
   if (active === 'city-test') return 'WASD · F / pad Y possession · X reset';
   if (vehicle === 'plane') {
@@ -92,6 +86,13 @@ export type AtelierShellProps = {
   bufferH: number;
   version: string | null;
   catalogSlot?: ReactNode;
+  /** Invisible brick-lab controller (portals into toolbar / catalog hosts). */
+  brickBuildSlot?: ReactNode;
+  brickToolbarHost?: ReactNode;
+  brickCatalogHost?: ReactNode;
+  onBrickNewStructure?: () => void;
+  onBrickSaveStructure?: () => void;
+  onBrickLoadStructure?: () => void;
   onSelectLevel: (id: LevelId) => void;
   onSelectVehicle: (v: VehicleKind) => void;
   onSelectCc: (cc: CcTier) => void;
@@ -104,12 +105,16 @@ export type AtelierShellProps = {
 };
 
 export function AtelierShell(props: AtelierShellProps): ReactElement {
-  const [railCollapsed, setRailCollapsed] = useState(false);
-  const t = props.telemetry;
   const isBrickLab = props.active === 'brick-lab';
+  const [railCollapsed, setRailCollapsed] = useState(isBrickLab);
+  const t = props.telemetry;
   const isCatalogLab = props.active === 'catalog-lab';
   const isMinifigLab = props.active === 'minifig-lab';
   const isTrack = !isBrickLab && !isCatalogLab && !isMinifigLab;
+
+  useEffect(() => {
+    if (isBrickLab) setRailCollapsed(true);
+  }, [isBrickLab]);
   const hint = sceneHint(props.active, props.vehicle);
   const chargeColor =
     t.charge === 'orange' ? '#e87a3a' : t.charge === 'blue' ? '#3aa0ff' : undefined;
@@ -177,26 +182,24 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
         'br-atelier',
         railCollapsed ? 'is-rail-collapsed' : '',
         isCatalogLab ? 'is-catalog' : '',
+        isBrickLab ? 'is-brick-lab' : '',
       ]
         .filter(Boolean)
         .join(' ')}
       aria-label="Atelier Proving Grounds"
     >
-      {isBrickLab
-        ? (() => {
-            const overlay = brickManualOverlayUrl(props.brickManual);
-            if (!overlay || props.brickOverlayOpacity <= 0) return null;
-            return (
-              <div
-                className="br-atelier-ref-overlay"
-                style={{ opacity: props.brickOverlayOpacity }}
-                aria-hidden="true"
-              >
-                <img src={overlay} alt="" />
-              </div>
-            );
-          })()
-        : null}
+      {isBrickLab ? (
+        <header className="br-atelier-menubar" aria-label="Menu brick-lab">
+          <BrickLabMenuBar
+            onNew={() => props.onBrickNewStructure?.()}
+            onSave={() => props.onBrickSaveStructure?.()}
+            onLoad={() => props.onBrickLoadStructure?.()}
+          />
+        </header>
+      ) : null}
+
+      {isBrickLab ? props.brickToolbarHost : null}
+      {isBrickLab ? props.brickBuildSlot : null}
 
       <aside className="br-atelier-rail" aria-label="Slices">
         <div className="br-atelier-rail__top">
@@ -225,18 +228,24 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
         </div>
       </aside>
 
-      <p className="br-atelier-scene-label" aria-live="polite">
-        {levelLabel(props.active)}
-      </p>
+      {isBrickLab ? null : (
+        <p className="br-atelier-scene-label" aria-live="polite">
+          {levelLabel(props.active)}
+        </p>
+      )}
       <p className="br-atelier-scene-hint">{hint}</p>
 
       <aside
         className={
-          isCatalogLab ? 'br-atelier-drawer br-atelier-drawer--catalog' : 'br-atelier-drawer'
+          isCatalogLab || isBrickLab
+            ? 'br-atelier-drawer br-atelier-drawer--catalog'
+            : 'br-atelier-drawer'
         }
         aria-label="Outils de slice"
       >
-        <h2 className="br-atelier-drawer__title">{drawerTitle(props.active)}</h2>
+        {isBrickLab ? null : (
+          <h2 className="br-atelier-drawer__title">{drawerTitle(props.active)}</h2>
+        )}
 
         {isTrack ? (
           <div className="br-atelier-section">
@@ -284,94 +293,10 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
         ) : null}
 
         {isBrickLab ? (
-          <div className="br-atelier-section">
-            <p className="br-atelier-label">Manuel</p>
-            <div className="br-atelier-chips" role="group" aria-label="Manuel brick">
-              {BRICK_MANUAL_IDS.map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  className={
-                    id === props.brickManual ? 'br-atelier-chip is-active' : 'br-atelier-chip'
-                  }
-                  disabled={id === props.brickManual}
-                  onClick={() => props.onSelectBrickManual(id)}
-                >
-                  {brickManualLabel(id)}
-                </button>
-              ))}
-            </div>
-            <p className="br-atelier-label">Vue</p>
-            <div className="br-atelier-chips" role="group" aria-label="Vue brick-lab">
-              {BRICK_LAB_VIEWS.map((view) => (
-                <button
-                  key={view}
-                  type="button"
-                  className={
-                    view === props.brickLabView
-                      ? 'br-atelier-chip is-active'
-                      : 'br-atelier-chip'
-                  }
-                  disabled={view === props.brickLabView}
-                  onClick={() => props.onSelectBrickLabView(view)}
-                >
-                  {brickLabViewLabel(view)}
-                </button>
-              ))}
-            </div>
-            <p className="br-atelier-label">Bake shell</p>
-            <div className="br-atelier-chips" role="group" aria-label="Bake shell">
-              <button
-                type="button"
-                className={props.brickShell ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
-                disabled={props.brickShell}
-                onClick={() => props.onToggleBrickShell(true)}
-              >
-                enveloppe
-              </button>
-              <button
-                type="button"
-                className={!props.brickShell ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
-                disabled={!props.brickShell}
-                onClick={() => props.onToggleBrickShell(false)}
-              >
-                plein
-              </button>
-            </div>
-            {(() => {
-              const overlay = brickManualOverlayUrl(props.brickManual);
-              if (!overlay) return null;
-              return (
-                <>
-                  <p className="br-atelier-label">
-                    Overlay réf ({Math.round(props.brickOverlayOpacity * 100)} %)
-                  </p>
-                  <input
-                    className="br-atelier-range"
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={Math.round(props.brickOverlayOpacity * 100)}
-                    aria-label="Opacité overlay référence"
-                    onChange={(e) =>
-                      props.onBrickOverlayOpacity(Number(e.target.value) / 100)
-                    }
-                  />
-                  <div className="br-atelier-overlay-preview">
-                    <img src={overlay} alt="" />
-                  </div>
-                </>
-              );
-            })()}
-            {props.brickStats ? (
-              <>
-                <p className="br-atelier-label">Stats</p>
-                <p className="br-atelier-telemetry">
-                  <strong>{props.brickStats}</strong>
-                </p>
-              </>
-            ) : null}
-            <p className="br-atelier-hint-box">{hint}</p>
+          <div className="br-atelier-section br-atelier-section--grow">
+            {props.brickCatalogHost ?? (
+              <p className="br-atelier-empty">Catalogue indisponible.</p>
+            )}
           </div>
         ) : null}
 
@@ -393,65 +318,63 @@ export function AtelierShell(props: AtelierShellProps): ReactElement {
           </div>
         ) : null}
 
-        <div
-          className={
-            isCatalogLab ? 'br-atelier-common br-atelier-common--compact' : 'br-atelier-common'
-          }
-        >
-          <div className="br-atelier-section">
-            <p className="br-atelier-label">Texture debug</p>
-            <div className="br-atelier-chips" role="group" aria-label="Texture debug">
-              <button
-                type="button"
-                className={props.debugTex ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
-                disabled={props.debugTex}
-                onClick={() => props.onToggleDebugTex(true)}
-              >
-                grille
-              </button>
-              <button
-                type="button"
-                className={!props.debugTex ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
-                disabled={!props.debugTex}
-                onClick={() => props.onToggleDebugTex(false)}
-              >
-                unis
-              </button>
+        {isCatalogLab || isBrickLab ? null : (
+          <div className="br-atelier-common">
+            <div className="br-atelier-section">
+              <p className="br-atelier-label">Texture debug</p>
+              <div className="br-atelier-chips" role="group" aria-label="Texture debug">
+                <button
+                  type="button"
+                  className={props.debugTex ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
+                  disabled={props.debugTex}
+                  onClick={() => props.onToggleDebugTex(true)}
+                >
+                  grille
+                </button>
+                <button
+                  type="button"
+                  className={!props.debugTex ? 'br-atelier-chip is-active' : 'br-atelier-chip'}
+                  disabled={!props.debugTex}
+                  onClick={() => props.onToggleDebugTex(false)}
+                >
+                  unis
+                </button>
+              </div>
+            </div>
+            <div className="br-atelier-section">
+              <p className="br-atelier-label">Qualité rendu</p>
+              <div className="br-atelier-chips" role="group" aria-label="Qualité rendu">
+                <button
+                  type="button"
+                  className={
+                    props.renderQuality === 'fast'
+                      ? 'br-atelier-chip is-active'
+                      : 'br-atelier-chip'
+                  }
+                  disabled={props.renderQuality === 'fast'}
+                  onClick={() => props.onSelectRenderQuality('fast')}
+                >
+                  fast
+                </button>
+                <button
+                  type="button"
+                  className={
+                    props.renderQuality === 'showcase'
+                      ? 'br-atelier-chip is-active'
+                      : 'br-atelier-chip'
+                  }
+                  disabled={props.renderQuality === 'showcase'}
+                  onClick={() => props.onSelectRenderQuality('showcase')}
+                >
+                  showcase
+                </button>
+              </div>
+              <p className="br-atelier-reload-note">
+                Texture et qualité rechargent la page (boot-time).
+              </p>
             </div>
           </div>
-          <div className="br-atelier-section">
-            <p className="br-atelier-label">Qualité rendu</p>
-            <div className="br-atelier-chips" role="group" aria-label="Qualité rendu">
-              <button
-                type="button"
-                className={
-                  props.renderQuality === 'fast'
-                    ? 'br-atelier-chip is-active'
-                    : 'br-atelier-chip'
-                }
-                disabled={props.renderQuality === 'fast'}
-                onClick={() => props.onSelectRenderQuality('fast')}
-              >
-                fast
-              </button>
-              <button
-                type="button"
-                className={
-                  props.renderQuality === 'showcase'
-                    ? 'br-atelier-chip is-active'
-                    : 'br-atelier-chip'
-                }
-                disabled={props.renderQuality === 'showcase'}
-                onClick={() => props.onSelectRenderQuality('showcase')}
-              >
-                showcase
-              </button>
-            </div>
-            <p className="br-atelier-reload-note">
-              Texture et qualité rechargent la page (boot-time).
-            </p>
-          </div>
-        </div>
+        )}
       </aside>
 
       <footer className="br-atelier-status" aria-label="Perf">

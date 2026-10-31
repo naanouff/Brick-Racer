@@ -1,0 +1,195 @@
+{
+  "id": "landmark.mairie",
+  "version": 1,
+  "title": "Mairie — socle + statue tête manquante (24×12 × 24P)",
+  "footprint": [
+    24,
+    12
+  ],
+  "legend": {
+    "S": "sand",
+    "W": "white",
+    "D": "dark_gray",
+    "K": "black",
+    "R": "red",
+    "Y": "yellow"
+  },
+  "options": {
+    "runningBond": false,
+    "capTiles": false
+  },
+  "layers": [
+    {
+      "kind": "plate",
+      "rows": [
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD",
+        "DDDDDDDDDDDDDDDDDDDDDDDD"
+      ]
+    },
+    {
+      "kind": "plate",
+      "rows": [
+        "........................",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        ".WWWWWWWWWWWWWWWWWWWWWW.",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        ".......WKWKWKWKWW.......",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "..SSSSSSSSSSSSSSSSSSSS..",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "plate",
+      "rows": [
+        "........................",
+        "........................",
+        "........................",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "...WWWWWWWWWWWWWWWWWW...",
+        "........................",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "...........KR...........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "..........YKRY..........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "...........Y............",
+        "..........RYYW..........",
+        "............Y...........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "...........D............",
+        "..........YYYY..........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................"
+      ]
+    }
+  ],
+  "ops": [],
+  "notes": "Plaque MAIRIE: tuiles blanches + barres ; print ultérieur. Statue sans tête (FC4)."
+}

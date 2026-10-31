@@ -4,6 +4,7 @@
  */
 
 import type { Engine, Entity, IEngineContext } from '@naanouff/w3dts-core';
+import type { BrickManual } from '../../hub/brick/manual/manualSchema';
 import { manualToLandmark } from '../../hub/brick/manual/manualToLandmark';
 import {
   getBrickManual,
@@ -16,17 +17,21 @@ import { brickLabSpec } from './brickLabSpec';
 
 export type BrickLabSpawnOpts = {
   manualId?: BrickManualId;
+  /** In-memory manual (editor). Wins over manualId when set. */
+  manual?: BrickManual;
   /** When false, show full assembly (no shell cull). Default true. */
   shell?: boolean;
+  /** Skip level geometry (ground/lights) — refresh bricks only. */
+  bricksOnly?: boolean;
 };
 
 export type BrickLabSpawnResult = SpawnLevelResult & {
   brickEntityIds: Entity[];
   report: { total: number; kept: number; culled: number };
   batches: number;
-  manualId: BrickManualId;
+  manualId: string;
   shell: boolean;
-  /** True when real LDraw .dat meshes were used. */
+  /** True when at least one LDraw batch was spawned. */
   ldraw: boolean;
 };
 
@@ -34,9 +39,11 @@ export async function spawnBrickLab(
   engine: IEngineContext,
   opts?: BrickLabSpawnOpts
 ): Promise<BrickLabSpawnResult> {
-  const manualId = opts?.manualId ?? 'fountain';
+  const manualId = opts?.manualId ?? opts?.manual?.id?.replace(/^landmark\./, '') ?? 'fountain';
   const shell = opts?.shell !== false;
-  const result = await spawnLevel(engine, brickLabSpec);
+  const result = opts?.bricksOnly
+    ? { rootEntityIds: [] as Entity[], entityById: new Map<string, Entity>() }
+    : await spawnLevel(engine, brickLabSpec);
 
   const full = engine as Engine;
   const probe = full.resourceManager.getMaterialByName('CL_plastic_017b_gray');
@@ -50,10 +57,10 @@ export async function spawnBrickLab(
     );
   }
 
-  const manual = getBrickManual(manualId);
+  const source = opts?.manual ?? getBrickManual(manualId as BrickManualId);
   // Lab centers the build at world origin for orbit framing.
   const labManual = {
-    ...manual,
+    ...source,
     origin: [0, 0, 0] as [number, number, number],
   };
   const built = manualToLandmark(labManual, { shell });
@@ -62,7 +69,7 @@ export async function spawnBrickLab(
   if (!ldrawEntities) {
     console.warn(`[BrickLab] LDraw unavailable — box proxies for ${manualId}`);
   } else {
-    console.info(`[BrickLab] LDraw fountain with catalog plastic (017B + UV1 aging)`);
+    console.info(`[BrickLab] LDraw landmark ${manualId} with catalog plastic (017B + UV1 aging)`);
   }
   result.rootEntityIds.push(...brickEntityIds);
 

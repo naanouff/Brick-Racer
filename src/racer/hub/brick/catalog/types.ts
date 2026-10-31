@@ -14,7 +14,26 @@ export type BrickPartCategory =
   | 'slope'
   | 'dish'
   | 'cone'
+  | 'arch'
+  | 'bracket'
+  | 'plant'
+  | 'technic'
   | 'other';
+
+export const BRICK_PART_CATEGORIES: readonly BrickPartCategory[] = [
+  'brick',
+  'plate',
+  'tile',
+  'round',
+  'slope',
+  'dish',
+  'cone',
+  'arch',
+  'bracket',
+  'plant',
+  'technic',
+  'other',
+] as const;
 
 export type BrickMeshStatus = 'missing' | 'box' | 'ready';
 
@@ -27,6 +46,10 @@ export type BrickPartDef = {
   /** Short ids accepted in manuals (legacy BW1). */
   aliases?: readonly string[];
   mesh: { status: BrickMeshStatus; asset?: string };
+  /** LDraw design id when different from `id` (else omit — use `id`). */
+  ldrawId?: string;
+  /** Free-form search tags (ED). */
+  tags?: readonly string[];
   /** Optional notes (BOM mapping, LDraw file, …). */
   notes?: string;
 };

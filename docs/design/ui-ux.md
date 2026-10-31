@@ -5,7 +5,8 @@
 **Ton :** [tone.md](tone.md). **Gameplay :** [gdd.md](gdd.md) §16–17.  
 **Maquettes HTML (canon visuel) :** [../mocup/](../mocup/) · sprint [../sprints/BRICK-UIM1.md](../sprints/BRICK-UIM1.md).  
 **Coque React (après maquettes) :** [../sprints/BRICK-UI1.md](../sprints/BRICK-UI1.md).  
-**Atelier dev (hors MVP joueur) :** [../plans/dev-atelier.md](../plans/dev-atelier.md) · sprint [../sprints/BRICK-UIM2.md](../sprints/BRICK-UIM2.md).
+**Atelier dev (hors MVP joueur) :** [../plans/dev-atelier.md](../plans/dev-atelier.md) · sprint [../sprints/BRICK-UIM2.md](../sprints/BRICK-UIM2.md).  
+**Anti-régression :** [`tests/uiUxRegression.test.ts`](../../tests/uiUxRegression.test.ts) · canon machine [`src/renderer/ui/designTokens.ts`](../../src/renderer/ui/designTokens.ts) (`pnpm test`).
 
 **Brick Racer n’est pas affilié à The LEGO Group ni à Nintendo.**
 

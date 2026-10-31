@@ -13,3 +13,9 @@ data/rebrickable/
 data/ldraw/
 data/ldraw-cache/
 data/out/
+
+# Dev MCP bus token (written by Electron under pnpm dev)
+data/brick-lab-mcp.token
+data/brick-lab-captures/
+
+scripts/**/__pycache__/

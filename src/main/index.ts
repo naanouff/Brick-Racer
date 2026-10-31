@@ -10,6 +10,13 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mergeBc1PartsFile, type MergePartPayload } from './bc1Merge';
+import {
+  listBrickManualFiles,
+  readBrickManualFile,
+  writeBrickManualFile,
+} from './brickManualWrite';
+import { startBrickLabMcpBus, stopBrickLabMcpBus } from './brickLabMcpBus';
+import { writeCatalogThumb } from './catalogThumbs';
 import { ldrawPartMesh } from './ldrawBakeCache';
 import { ldrawPartTriangles } from './ldrawMain';
 import { loadWindowBounds, saveWindowBounds, type WindowBounds } from './windowBounds';
@@ -134,6 +141,15 @@ app.whenReady().then(() => {
   ipcMain.handle('ldraw-part-mesh', (_evt, ldrawId: unknown, anchor: unknown) =>
     ldrawPartMesh(String(ldrawId ?? ''), anchor)
   );
+  ipcMain.handle('catalog-write-thumb', (_evt, ldrawId: unknown, pngBytes: unknown) =>
+    writeCatalogThumb(ldrawId, pngBytes)
+  );
+  ipcMain.handle('brick-manual-write', (_evt, stem: unknown, json: unknown) =>
+    writeBrickManualFile(stem, json)
+  );
+  ipcMain.handle('brick-manual-list', () => listBrickManualFiles());
+  ipcMain.handle('brick-manual-read', (_evt, stem: unknown) => readBrickManualFile(stem));
+  startBrickLabMcpBus();
   createWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -141,5 +157,6 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
+  stopBrickLabMcpBus();
   if (process.platform !== 'darwin') app.quit();
 });

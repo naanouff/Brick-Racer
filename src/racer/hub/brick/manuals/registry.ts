@@ -51,7 +51,13 @@ export function brickManualLabel(id: BrickManualId): string {
 /** Optional overlay image URL (public/) keyed by manual stem. */
 const OVERLAY_BY_ID: Readonly<Record<string, string>> = {
   fountain: '/brick-refs/fountain-ortho.png',
-  pad: '/brick-refs/pad-ortho.svg',
+  pad: '/brick-refs/pad-ortho.png',
+  gate: '/brick-refs/gate-ortho.png',
+  tower: '/brick-refs/tower-ortho.png',
+  billboard: '/brick-refs/billboard-ortho.png',
+  garage: '/brick-refs/garage-ortho.png',
+  vinyle: '/brick-refs/vinyle-ortho.png',
+  mairie: '/brick-refs/mairie-ortho.png',
 };
 
 export function brickManualOverlayUrl(id: BrickManualId): string | null {

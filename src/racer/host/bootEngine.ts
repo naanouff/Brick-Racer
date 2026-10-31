@@ -28,6 +28,7 @@ import {
 import { createArcadePlaneSystem } from '../vehicles/plane/arcadePlaneSystem';
 import { resolveVehicleKind } from '../vehicles/selectVehicle';
 import { ensureGprocSystem, levelNeedsGproc } from './ensureGproc';
+import { createOrthoClipSystem } from './orthoClipSystem';
 import {
   arcadeGroundChassisName,
   isHubActive,
@@ -82,6 +83,21 @@ export type BootEngineResult = {
  */
 function asCoreSystem(system: unknown): System {
   return system as System;
+}
+
+/** After the engine camera system, before frustum culling. */
+function installOrthoClipAfterCamera(engine: Engine): void {
+  const system = asCoreSystem(createOrthoClipSystem());
+  const list = (engine.scheduler as unknown as { systems?: System[] }).systems;
+  if (!list) {
+    engine.scheduler.addSystem(system);
+    return;
+  }
+  const cameraIdx = list.findIndex((entry) =>
+    Function.prototype.toString.call(entry).includes('firstPersonEyeOffsetY')
+  );
+  if (cameraIdx >= 0) list.splice(cameraIdx + 1, 0, system);
+  else engine.scheduler.addSystem(system);
 }
 
 export type BootEngineOptions = {
@@ -185,6 +201,7 @@ export async function bootEngine(
   );
 
   engine.scheduler.addSystem(asCoreSystem(createHubThrottleGateSystem()));
+  installOrthoClipAfterCamera(engine);
 
   if (levelNeedsGproc(levelId)) ensureGprocSystem(engine);
 

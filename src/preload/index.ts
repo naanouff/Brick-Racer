@@ -44,4 +44,60 @@ contextBridge.exposeInMainWorld('brickRacer', {
       }
     | { ok: false; ldrawId: string; anchor: 'ground-center' | 'origin'; error: string }
   > => ipcRenderer.invoke('ldraw-part-mesh', ldrawId, anchor),
+  /** Dev: write PNG thumb under public/catalog/thumbs/<id>.png */
+  writeCatalogThumb: (
+    ldrawId: string,
+    pngBytes: Uint8Array | ArrayBuffer | number[]
+  ): Promise<{ ok: boolean; path?: string; error?: string }> => {
+    // Prefer a plain number[] — most reliable across Electron structured clone.
+    const payload =
+      pngBytes instanceof Uint8Array
+        ? Array.from(pngBytes)
+        : pngBytes instanceof ArrayBuffer
+          ? Array.from(new Uint8Array(pngBytes))
+          : pngBytes;
+    return ipcRenderer.invoke('catalog-write-thumb', ldrawId, payload);
+  },
+  /** Dev: write manuals/<stem>.manual.json */
+  writeBrickManual: (
+    stem: string,
+    json: unknown
+  ): Promise<{ ok: boolean; path?: string; error?: string }> =>
+    ipcRenderer.invoke('brick-manual-write', stem, json),
+  /** Dev: list stems under manuals/*.manual.json */
+  listBrickManuals: (): Promise<
+    { ok: true; stems: string[] } | { ok: false; error: string }
+  > => ipcRenderer.invoke('brick-manual-list'),
+  /** Dev: read one manuals/<stem>.manual.json */
+  readBrickManual: (
+    stem: string
+  ): Promise<
+    | { ok: true; stem: string; manual: unknown; path: string }
+    | { ok: false; error: string }
+  > => ipcRenderer.invoke('brick-manual-read', stem),
+  /**
+   * Dev MCP bus: register a command handler. Main sends `brick-lab-mcp-cmd` (id, cmd);
+   * reply with `brick-lab-mcp-reply` (id, result).
+   */
+  onBrickLabMcpCommand: (
+    handler: (cmd: unknown) => unknown | Promise<unknown>
+  ): (() => void) => {
+    const listener = (_evt: Electron.IpcRendererEvent, id: number, cmd: unknown): void => {
+      void Promise.resolve()
+        .then(() => handler(cmd))
+        .then((result) => {
+          ipcRenderer.send('brick-lab-mcp-reply', id, result);
+        })
+        .catch((err: unknown) => {
+          ipcRenderer.send('brick-lab-mcp-reply', id, {
+            ok: false,
+            error: err instanceof Error ? err.message : String(err),
+          });
+        });
+    };
+    ipcRenderer.on('brick-lab-mcp-cmd', listener);
+    return () => {
+      ipcRenderer.removeListener('brick-lab-mcp-cmd', listener);
+    };
+  },
 });

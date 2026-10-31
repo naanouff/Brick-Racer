@@ -34,7 +34,7 @@ Prompts P1–P10 + negative / variantes : [test-slice-plans.md](../test-slice-pl
 ### Référentiel rendu monde brick
 
 Cible visuelle **matière / densité** (pas le layout Proving Grounds). Plan : [brick-world-rendering.md](../../plans/brick-world-rendering.md) · sprint [BRICK-BW1](../../sprints/BRICK-BW1.md).  
-Authoring landmark : v1 [brick-manual-prompt.md](../brick-manual-prompt.md) · v2 [brick-decor-pipeline.md](../../plans/brick-decor-pipeline.md) (couches).  
+Authoring landmark : [brick-manual-prompt.md](../brick-manual-prompt.md) (Prompt 0 + sujets city-test) · [brick-decor-pipeline.md](../../plans/brick-decor-pipeline.md) (couches).  
 Runtime overlay brick-lab : copie `public/brick-refs/` (DC1a).
 
 | Fichier | Note |
@@ -42,4 +42,19 @@ Runtime overlay brick-lab : copie `public/brick-refs/` (DC1a).
 | [ref-brick-world-chase.jpg](ref-brick-world-chase.jpg) | Chase cam — piste tiles studs, rampes, façades, plastique PBR (**réf. rendu BW**) |
 | [ref-fountain-bom.png](ref-fountain-bom.png) | Fontaine BOM photo — gris + eau translucide (**canon matière** `landmark.fountain`) |
 | [ref-fountain-hero.png](ref-fountain-hero.png) | Fontaine seule — hero 3/4 studio (legacy A1 terracotta) |
-| [ref-fountain-ortho.png](ref-fountain-ortho.png) | Fontaine seule — plan + élévation cotée 3,0 × 2,0 m |
+| [ref-fountain-ortho.png](ref-fountain-ortho.png) | Fontaine seule — plan + élévation cotée 3,0 × 2,0 m (**canon** — ne pas regénérer) |
+
+### Planches ortho landmarks city-test
+
+Prompts collables : [brick-manual-prompt.md](../brick-manual-prompt.md) § Sujets Prompt 0 — city-test.  
+Puis copie sous `public/brick-refs/<stem>-ortho.*` pour overlay. A1/A2 ne remplacent pas ces planches.
+
+| Fichier cible | Landmark | Emprise / H (cible) | Statut |
+| ------------- | -------- | ------------------- | ------ |
+| [ref-pad-ortho.png](ref-pad-ortho.png) | `landmark.pad` | 24×18 studs × 2P | **Livré** (Prompt 0) · overlay `/brick-refs/pad-ortho.png` |
+| [ref-gate-ortho.png](ref-gate-ortho.png) | `landmark.gate` | 18×4 studs × 45P | **Livré** (Prompt 0) · overlay `/brick-refs/gate-ortho.png` |
+| [ref-tower-ortho.png](ref-tower-ortho.png) | `landmark.tower` | 12×18 studs × 72P, lean ~2S | **Livré** (Prompt 0) · overlay `/brick-refs/tower-ortho.png` |
+| [ref-billboard-ortho.png](ref-billboard-ortho.png) | `landmark.billboard` | 24×6 studs × 50P | **Livré** (Prompt 0) · overlay `/brick-refs/billboard-ortho.png` |
+| [ref-garage-ortho.png](ref-garage-ortho.png) | `landmark.garage` | 24×24 studs × 42P | **Livré** (Prompt 0) · overlay `/brick-refs/garage-ortho.png` |
+| [ref-vinyle-ortho.png](ref-vinyle-ortho.png) | `landmark.vinyle` | 18×18 studs × 36P | **Livré** (Prompt 0) · overlay `/brick-refs/vinyle-ortho.png` |
+| [ref-mairie-ortho.png](ref-mairie-ortho.png) | `landmark.mairie` | 24×12 studs × 24P + statue brick | **Livré** (Prompt 0) · overlay `/brick-refs/mairie-ortho.png` |

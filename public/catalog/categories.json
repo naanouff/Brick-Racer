@@ -1,0 +1,513 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "id": "bricks",
+      "name": "Briques"
+    },
+    {
+      "id": "plates",
+      "name": "Plaques"
+    },
+    {
+      "id": "tiles",
+      "name": "Tuiles"
+    },
+    {
+      "id": "rounds",
+      "name": "Ronds et dômes"
+    },
+    {
+      "id": "slopes",
+      "name": "Pentes"
+    },
+    {
+      "id": "arches",
+      "name": "Arches et courbes"
+    },
+    {
+      "id": "brackets",
+      "name": "Supports et charnières"
+    },
+    {
+      "id": "technic",
+      "name": "Technic"
+    },
+    {
+      "id": "plant",
+      "name": "Végétal et décor"
+    },
+    {
+      "id": "light",
+      "name": "Transparent et lumière"
+    },
+    {
+      "id": "minifig",
+      "name": "Minifig"
+    },
+    {
+      "id": "other",
+      "name": "Autres"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Baseplates",
+      "family": "other"
+    },
+    {
+      "id": "3",
+      "name": "Bricks Sloped",
+      "family": "slopes"
+    },
+    {
+      "id": "4",
+      "name": "Duplo, Quatro and Primo",
+      "family": "other"
+    },
+    {
+      "id": "5",
+      "name": "Bricks Special",
+      "family": "bricks"
+    },
+    {
+      "id": "6",
+      "name": "Bricks Wedged",
+      "family": "bricks"
+    },
+    {
+      "id": "7",
+      "name": "Containers",
+      "family": "other"
+    },
+    {
+      "id": "8",
+      "name": "Technic Bricks",
+      "family": "technic"
+    },
+    {
+      "id": "9",
+      "name": "Plates Special",
+      "family": "plates"
+    },
+    {
+      "id": "11",
+      "name": "Bricks",
+      "family": "bricks"
+    },
+    {
+      "id": "12",
+      "name": "Technic Connectors",
+      "family": "technic"
+    },
+    {
+      "id": "13",
+      "name": "Minifigs",
+      "family": "minifig"
+    },
+    {
+      "id": "14",
+      "name": "Plates",
+      "family": "plates"
+    },
+    {
+      "id": "15",
+      "name": "Tiles Special",
+      "family": "tiles"
+    },
+    {
+      "id": "16",
+      "name": "Windows and Doors",
+      "family": "other"
+    },
+    {
+      "id": "17",
+      "name": "Gear Parts",
+      "family": "technic"
+    },
+    {
+      "id": "18",
+      "name": "Hinges, Arms and Turntables",
+      "family": "brackets"
+    },
+    {
+      "id": "19",
+      "name": "Tiles",
+      "family": "tiles"
+    },
+    {
+      "id": "20",
+      "name": "Bricks Round and Cones",
+      "family": "rounds"
+    },
+    {
+      "id": "21",
+      "name": "Plates Round Curved and Dishes",
+      "family": "rounds"
+    },
+    {
+      "id": "22",
+      "name": "Pneumatics",
+      "family": "technic"
+    },
+    {
+      "id": "23",
+      "name": "Panels",
+      "family": "other"
+    },
+    {
+      "id": "24",
+      "name": "Other",
+      "family": "other"
+    },
+    {
+      "id": "25",
+      "name": "Technic Steering, Suspension and Engine",
+      "family": "technic"
+    },
+    {
+      "id": "26",
+      "name": "Technic Special",
+      "family": "technic"
+    },
+    {
+      "id": "27",
+      "name": "Minifig Accessories",
+      "family": "minifig"
+    },
+    {
+      "id": "28",
+      "name": "Animals / Creatures",
+      "family": "plant"
+    },
+    {
+      "id": "29",
+      "name": "Wheels and Tyres",
+      "family": "other"
+    },
+    {
+      "id": "30",
+      "name": "Tubes and Hoses",
+      "family": "other"
+    },
+    {
+      "id": "31",
+      "name": "String, Bands and Reels",
+      "family": "other"
+    },
+    {
+      "id": "32",
+      "name": "Bars, Ladders and Fences",
+      "family": "other"
+    },
+    {
+      "id": "33",
+      "name": "Rock",
+      "family": "plant"
+    },
+    {
+      "id": "34",
+      "name": "Supports, Girders and Cranes",
+      "family": "brackets"
+    },
+    {
+      "id": "35",
+      "name": "Transportation - Sea and Air",
+      "family": "other"
+    },
+    {
+      "id": "36",
+      "name": "Transportation - Land",
+      "family": "other"
+    },
+    {
+      "id": "37",
+      "name": "Bricks Curved",
+      "family": "arches"
+    },
+    {
+      "id": "38",
+      "name": "Flags, Banners and Signs",
+      "family": "plant"
+    },
+    {
+      "id": "39",
+      "name": "Magnets and Holders",
+      "family": "other"
+    },
+    {
+      "id": "40",
+      "name": "Technic Panels",
+      "family": "technic"
+    },
+    {
+      "id": "41",
+      "name": "Large Buildable Figures",
+      "family": "other"
+    },
+    {
+      "id": "42",
+      "name": "Belville, Scala and Fabuland",
+      "family": "other"
+    },
+    {
+      "id": "43",
+      "name": "Znap",
+      "family": "other"
+    },
+    {
+      "id": "44",
+      "name": "Mechanical",
+      "family": "other"
+    },
+    {
+      "id": "45",
+      "name": "Electronics",
+      "family": "light"
+    },
+    {
+      "id": "46",
+      "name": "Technic Axles",
+      "family": "technic"
+    },
+    {
+      "id": "47",
+      "name": "Windscreens and Fuselage",
+      "family": "other"
+    },
+    {
+      "id": "48",
+      "name": "Clikits",
+      "family": "other"
+    },
+    {
+      "id": "49",
+      "name": "Plates Wedged",
+      "family": "plates"
+    },
+    {
+      "id": "50",
+      "name": "HO Scale",
+      "family": "other"
+    },
+    {
+      "id": "51",
+      "name": "Technic Beams",
+      "family": "technic"
+    },
+    {
+      "id": "52",
+      "name": "Technic Gears",
+      "family": "technic"
+    },
+    {
+      "id": "53",
+      "name": "Technic Pins",
+      "family": "technic"
+    },
+    {
+      "id": "54",
+      "name": "Technic Bushes",
+      "family": "technic"
+    },
+    {
+      "id": "55",
+      "name": "Technic Beams Special",
+      "family": "technic"
+    },
+    {
+      "id": "56",
+      "name": "Tools",
+      "family": "other"
+    },
+    {
+      "id": "57",
+      "name": "Non-Buildable Figures (Duplo, Fabuland, etc)",
+      "family": "other"
+    },
+    {
+      "id": "58",
+      "name": "Stickers",
+      "family": "other"
+    },
+    {
+      "id": "59",
+      "name": "Minifig Heads",
+      "family": "minifig"
+    },
+    {
+      "id": "60",
+      "name": "Minifig Upper Body",
+      "family": "minifig"
+    },
+    {
+      "id": "61",
+      "name": "Minifig Lower Body",
+      "family": "minifig"
+    },
+    {
+      "id": "62",
+      "name": "Minidoll Heads",
+      "family": "minifig"
+    },
+    {
+      "id": "63",
+      "name": "Minidoll Upper Body",
+      "family": "minifig"
+    },
+    {
+      "id": "64",
+      "name": "Minidoll Lower Body",
+      "family": "minifig"
+    },
+    {
+      "id": "65",
+      "name": "Minifig Headwear",
+      "family": "minifig"
+    },
+    {
+      "id": "66",
+      "name": "Modulex",
+      "family": "other"
+    },
+    {
+      "id": "67",
+      "name": "Tiles Round and Curved",
+      "family": "tiles"
+    },
+    {
+      "id": "68",
+      "name": "Projectiles / Launchers",
+      "family": "other"
+    },
+    {
+      "id": "69",
+      "name": "Energy Effects",
+      "family": "light"
+    },
+    {
+      "id": "70",
+      "name": "Minifig Hipwear",
+      "family": "minifig"
+    },
+    {
+      "id": "71",
+      "name": "Minifig Neckwear",
+      "family": "minifig"
+    },
+    {
+      "id": "72",
+      "name": "Minifig Headwear Accessories",
+      "family": "minifig"
+    },
+    {
+      "id": "73",
+      "name": "Minifig Shields, Weapons, & Tools",
+      "family": "minifig"
+    },
+    {
+      "id": "74",
+      "name": "Animal / Creature Accessories",
+      "family": "plant"
+    },
+    {
+      "id": "75",
+      "name": "Animal / Creature Body Parts",
+      "family": "plant"
+    },
+    {
+      "id": "76",
+      "name": "Plants & Trees",
+      "family": "plant"
+    },
+    {
+      "id": "77",
+      "name": "Non-System Parts",
+      "family": "other"
+    },
+    {
+      "id": "78",
+      "name": "Pen & Watch",
+      "family": "other"
+    }
+  ],
+  "familyByCategoryId": {
+    "1": "other",
+    "3": "slopes",
+    "4": "other",
+    "5": "bricks",
+    "6": "bricks",
+    "7": "other",
+    "8": "technic",
+    "9": "plates",
+    "11": "bricks",
+    "12": "technic",
+    "13": "minifig",
+    "14": "plates",
+    "15": "tiles",
+    "16": "other",
+    "17": "technic",
+    "18": "brackets",
+    "19": "tiles",
+    "20": "rounds",
+    "21": "rounds",
+    "22": "technic",
+    "23": "other",
+    "24": "other",
+    "25": "technic",
+    "26": "technic",
+    "27": "minifig",
+    "28": "plant",
+    "29": "other",
+    "30": "other",
+    "31": "other",
+    "32": "other",
+    "33": "plant",
+    "34": "brackets",
+    "35": "other",
+    "36": "other",
+    "37": "arches",
+    "38": "plant",
+    "39": "other",
+    "40": "technic",
+    "41": "other",
+    "42": "other",
+    "43": "other",
+    "44": "other",
+    "45": "light",
+    "46": "technic",
+    "47": "other",
+    "48": "other",
+    "49": "plates",
+    "50": "other",
+    "51": "technic",
+    "52": "technic",
+    "53": "technic",
+    "54": "technic",
+    "55": "technic",
+    "56": "other",
+    "57": "other",
+    "58": "other",
+    "59": "minifig",
+    "60": "minifig",
+    "61": "minifig",
+    "62": "minifig",
+    "63": "minifig",
+    "64": "minifig",
+    "65": "minifig",
+    "66": "other",
+    "67": "tiles",
+    "68": "other",
+    "69": "light",
+    "70": "minifig",
+    "71": "minifig",
+    "72": "minifig",
+    "73": "minifig",
+    "74": "plant",
+    "75": "plant",
+    "76": "plant",
+    "77": "other",
+    "78": "other"
+  }
+}

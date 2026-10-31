@@ -32,6 +32,15 @@ export type LdrawPartMeshResult =
   | { ok: true; ldrawId: string; anchor: LdrawMeshAnchorIpc; mesh: LdrawBakedMeshIpc }
   | { ok: false; ldrawId: string; anchor: LdrawMeshAnchorIpc; error: string };
 
+export type CatalogThumbWriteResult = { ok: boolean; path?: string; error?: string };
+export type BrickManualWriteResult = { ok: boolean; path?: string; error?: string };
+export type BrickManualListResult =
+  | { ok: true; stems: string[] }
+  | { ok: false; error: string };
+export type BrickManualReadResult =
+  | { ok: true; stem: string; manual: unknown; path: string }
+  | { ok: false; error: string };
+
 export interface BrickRacerApi {
   version: () => Promise<string>;
   mergeBc1Parts?: (staging: unknown) => Promise<Bc1MergeResult>;
@@ -40,6 +49,17 @@ export interface BrickRacerApi {
     ldrawId: string,
     anchor?: LdrawMeshAnchorIpc
   ) => Promise<LdrawPartMeshResult>;
+  writeCatalogThumb?: (
+    ldrawId: string,
+    pngBytes: Uint8Array | ArrayBuffer | number[]
+  ) => Promise<CatalogThumbWriteResult>;
+  writeBrickManual?: (stem: string, json: unknown) => Promise<BrickManualWriteResult>;
+  listBrickManuals?: () => Promise<BrickManualListResult>;
+  readBrickManual?: (stem: string) => Promise<BrickManualReadResult>;
+  /** Dev MCP: subscribe to bus commands; returns unsubscribe. */
+  onBrickLabMcpCommand?: (
+    handler: (cmd: unknown) => unknown | Promise<unknown>
+  ) => () => void;
 }
 
 declare global {

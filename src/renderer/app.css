@@ -244,6 +244,12 @@ body,
   border-color: var(--br-garage);
 }
 
+.br-catalog__badge--fav {
+  background: rgb(224 122 40 / 18%);
+  border-color: rgb(224 122 40 / 55%);
+  color: #c45f12;
+}
+
 .br-catalog__detail {
   display: flex;
   flex-direction: column;

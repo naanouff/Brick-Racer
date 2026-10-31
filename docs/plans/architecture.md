@@ -1,6 +1,7 @@
 # Architecture — Brick Racer
 
-Bible technique du client. Complète [roadmap.md](roadmap.md), [vehicle-prototypes.md](vehicle-prototypes.md), [lego-kart-host.md](lego-kart-host.md) — ne les remplace pas.
+Bible technique du client. Complète [roadmap.md](roadmap.md), [vehicle-prototypes.md](vehicle-prototypes.md), [lego-kart-host.md](lego-kart-host.md) — ne les remplace pas.  
+Snapshot code vs intention : [status.md](status.md) (cette bible peut être en retard sur le workspace).
 
 Design : [gdd.md](../design/gdd.md), [levels.md](../design/levels.md), [test-slice.md](../design/test-slice.md).  
 Sprints d’implémentation : [BRICK-B2](../sprints/BRICK-B2.md) (P0) → [BRICK-B3](../sprints/BRICK-B3.md) (P1).

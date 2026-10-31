@@ -25,9 +25,15 @@ describe('brick manual registry', () => {
     expect(brickManualLabel('fountain').length).toBeGreaterThan(0);
   });
 
-  it('maps fountain and pad overlay urls', () => {
+  it('maps Prompt 0 city-test overlay urls', () => {
     expect(brickManualOverlayUrl('fountain')).toBe('/brick-refs/fountain-ortho.png');
-    expect(brickManualOverlayUrl('pad')).toBe('/brick-refs/pad-ortho.svg');
+    expect(brickManualOverlayUrl('pad')).toBe('/brick-refs/pad-ortho.png');
+    expect(brickManualOverlayUrl('gate')).toBe('/brick-refs/gate-ortho.png');
+    expect(brickManualOverlayUrl('tower')).toBe('/brick-refs/tower-ortho.png');
+    expect(brickManualOverlayUrl('billboard')).toBe('/brick-refs/billboard-ortho.png');
+    expect(brickManualOverlayUrl('garage')).toBe('/brick-refs/garage-ortho.png');
+    expect(brickManualOverlayUrl('vinyle')).toBe('/brick-refs/vinyle-ortho.png');
+    expect(brickManualOverlayUrl('mairie')).toBe('/brick-refs/mairie-ortho.png');
     expect(brickManualOverlayUrl('missing')).toBeNull();
   });
 
@@ -35,4 +41,16 @@ describe('brick manual registry', () => {
     expect(BRICK_MANUAL_IDS).toContain('pad');
     expect(getBrickManual('pad').id).toBe('landmark.pad');
   });
+
+  it('discovers garage / vinyle / mairie façades (FC)', () => {
+    for (const stem of ['garage', 'vinyle', 'mairie'] as const) {
+      expect(BRICK_MANUAL_IDS).toContain(stem);
+      expect(getBrickManual(stem).id).toBe(`landmark.${stem}`);
+    }
+    expect(getBrickManual('garage').envelope?.size?.[1]).toBeGreaterThan(4);
+    expect(getBrickManual('vinyle').envelope?.size?.[0]).toBeGreaterThan(5);
+    expect(getBrickManual('mairie').envelope?.size?.[2]).toBeGreaterThan(3);
+  });
 });
+
+

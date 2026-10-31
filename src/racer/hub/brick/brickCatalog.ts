@@ -58,6 +58,15 @@ export function brickMaterialId(colorId: BrickColorId): string {
   return `BRICK_${id}`;
 }
 
+/** Semi-transparent brush ghost (same tint as `BRICK_*`). */
+export function brickGhostMaterialId(colorId: BrickColorId): string {
+  const id = resolveColorId(colorId) ?? colorId;
+  return `BRICK_ghost_${id}`;
+}
+
+/** Default brush-ghost opacity (0–1). */
+export const BRICK_GHOST_OPACITY = 0.42;
+
 export type BrickBatchKey = string;
 
 export function brickBatchKey(partId: BrickPartId, colorId: BrickColorId): BrickBatchKey {

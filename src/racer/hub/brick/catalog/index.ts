@@ -11,6 +11,18 @@ export type {
   BrickPartCategory,
   BrickPartDef,
 } from './types';
+export { BRICK_PART_CATEGORIES } from './types';
+export {
+  clearCatalogCategoriesCache,
+  FAMILY_MAP_CATEGORY_IDS,
+  categoryName,
+  familyForCategoryId,
+  loadCatalogCategories,
+  type CatalogCategoriesFile,
+  type CatalogCategoryDef,
+  type CatalogFamilyDef,
+  type CatalogFamilyId,
+} from './catalogFamilies';
 export {
   BRICK_CATALOG,
   FOUNTAIN_BOM_PART_IDS,
@@ -50,6 +62,18 @@ export {
   type StagingPart,
 } from './bc1Staging';
 export {
+  CATALOG_FAVORITES_KEY,
+  addFavorite,
+  favoritesByCategory,
+  favoritesInCategory,
+  isFavorite,
+  readFavorites,
+  removeFavorite,
+  toggleFavorite,
+  writeFavorites,
+  type CatalogFavorite,
+} from './catalogFavorites';
+export {
   clearCatalogPreview,
   spawnCatalogMeshPreview,
   spawnCatalogPreview,
@@ -60,8 +84,11 @@ export {
 export {
   clearLdrawMeshCache,
   ensureLdrawUploadedMesh,
+  fetchLdrawPart,
   getCachedLdrawMesh,
+  hasLdrawIpc,
   type EnsureLdrawMeshOpts,
+  type FetchLdrawPartResult,
   type LdrawUploadedMesh,
 } from './ldrawMeshCache';
 export {

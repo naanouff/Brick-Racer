@@ -21,6 +21,7 @@
 | [design/test-slice-plans.md](design/test-slice-plans.md) | Plans cotés W3DTS (city-test / race-test) |
 | [design/art/](design/art/) | Moodboard PNG (Proving Grounds) |
 | [plans/roadmap.md](plans/roadmap.md) | Roadmap phases P0–P5 |
+| [plans/status.md](plans/status.md) | État des lieux workspace / code vs roadmap |
 | [plans/architecture.md](plans/architecture.md) | Bible tech (levels TS, SessionFlow) |
 | [plans/workspace.md](plans/workspace.md) | Plan d’amorçage du workspace |
 | [plans/lego-kart-host.md](plans/lego-kart-host.md) | Plan host Lego Kart |
@@ -32,12 +33,21 @@
 | [plans/brick-part-catalog.md](plans/brick-part-catalog.md) | Catalogue pièces LEGO data-first (BC1) |
 | [sprints/BRICK-BC1.md](sprints/BRICK-BC1.md) | Sprint catalogue design IDs + mesh status |
 | [plans/catalog-lab.md](plans/catalog-lab.md) | Plan Catalog Lab (master Rebrickable×LDraw → BC1, W3DTS) |
+| [plans/brick-lab-tools.md](plans/brick-lab-tools.md) | Plan outils brick-lab (fantôme yaw, caméra, Lucide, MCP) |
+| [plans/brick-lab-mcp.md](plans/brick-lab-mcp.md) | Plan MCP agent → éditeur brick-lab (bus localhost, lot 1) |
+| [sprints/BRICK-LT.md](sprints/BRICK-LT.md) | Sprint LT1–LT5 outils brick-lab |
+| [plans/brick-lab-agent.md](plans/brick-lab-agent.md) | Plan agent constructeur (image/notice → brick-lab, MCP lot 2) |
+| [sprints/BRICK-BA.md](sprints/BRICK-BA.md) | Sprint BA1–BA5 agent constructeur |
+| [plans/brick-lab-facades.md](plans/brick-lab-facades.md) | Plan façades city-test (garage / vinyle / mairie) |
+| [sprints/BRICK-FC.md](sprints/BRICK-FC.md) | Sprint FC1–FC4 façades |
+| [plans/brick-materials.md](plans/brick-materials.md) | Plan matériaux LEGO : palette LDConfig, presets, stickers decals |
+| [sprints/BRICK-MT.md](sprints/BRICK-MT.md) | Sprint MT1–MT6 matériaux + stickers |
 | [sprints/BRICK-CL1.md](sprints/BRICK-CL1.md) | Sprint niveau `catalog-lab` + browser + pont BC1 |
 | [sprints/BRICK-CL2.md](sprints/BRICK-CL2.md) | Sprint vraie géométrie LDraw à la demande dans `catalog-lab` |
 | [sprints/BRICK-CL3.md](sprints/BRICK-CL3.md) | Sprint plastique AmbientCG + couleur diffuse (preview catalogue) |
 | [sprints/BRICK-CL4.md](sprints/BRICK-CL4.md) | Sprint UV LDraw : UV0 plastique homogène + UV1 atlas 0–1 |
 | [sprints/BRICK-CL5.md](sprints/BRICK-CL5.md) | Sprint cache disque LDraw (mesh UV + maps géométriques) |
-| [design/brick-manual-prompt.md](design/brick-manual-prompt.md) | Prompt Gemini → mode d’emploi JSON (pièces + étapes) |
+| [design/brick-manual-prompt.md](design/brick-manual-prompt.md) | Prompts ortho Prompt 0 (sujets city-test) + fiches / couches Gemini |
 | [references/w3dts-demos.md](references/w3dts-demos.md) | Réfs démos Lego Kart & Motocross |
 | [references/w3dts-input.md](references/w3dts-input.md) | Input w3dts — Gamepad HID (`INP-G`) |
 | [sprints/BRICK-B1.md](sprints/BRICK-B1.md) | Sprint workspace (fait) |

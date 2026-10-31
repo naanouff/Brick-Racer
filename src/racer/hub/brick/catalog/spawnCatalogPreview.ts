@@ -15,8 +15,15 @@ import {
   type IEngineContext,
 } from '@naanouff/w3dts-core';
 import { P, S } from '../brickUnits';
-import { BRICK_MESH_ID, brickMaterialId, type BrickColorId } from '../brickCatalog';
-import { BRICK_INSTANCE_STRIDE_F } from '../brickInstanceData';
+import {
+  BRICK_MESH_ID,
+  brickGhostMaterialId,
+  brickMaterialId,
+  type BrickColorId,
+  type BrickPose,
+} from '../brickCatalog';
+import { packBrickInstanceData, BRICK_INSTANCE_STRIDE_F } from '../brickInstanceData';
+import { packLdrawInstanceData } from '../brickLdrawInstanceData';
 import { buildCatalogFbx, buildCatalogGlb, buildCatalogObj } from './catalogGlb';
 import {
   neutralAgingPixels,
@@ -46,21 +53,38 @@ export type CatalogPreviewOpts = {
   uvGrid?: 0 | 1 | false;
   /** AO / cavity / edge wear from the UV1 aging texture. Default on. */
   aging?: boolean;
+  /** World center (m). Default: resting on y=0 at origin. */
+  position?: [number, number, number];
+  /** Yaw radians around Y (brush ghost / brick-lab). Default 0. */
+  yaw?: number;
+  /**
+   * When set, box scale comes from catalog part size (same as placed bricks).
+   * Prefer this over raw footprint scaling when yawing a brush ghost.
+   */
+  partId?: string;
+  /**
+   * 0–1 opacity for brush ghosts. When set below 1, uses `BRICK_ghost_*` (BLEND).
+   * Catalog-lab previews leave this unset (opaque plastic).
+   */
+  opacity?: number;
 };
 
 function footprintSizeMeters(fp: BrickFootprint): [number, number, number] {
   return [fp[0] * S, fp[1] * P, fp[2] * S];
 }
 
-function packSizedInstance(
+/** Pack a single scaled+yawed instance (box path). Exported for LT1 unit tests. */
+export function packPreviewBoxInstance(
   position: [number, number, number],
-  size: [number, number, number]
+  size: [number, number, number],
+  yaw = 0
 ): Float32Array {
   const data = new Float32Array(BRICK_INSTANCE_STRIDE_F);
   const m = mat4.create();
   const inv = mat4.create();
   const q = quat.create();
   quat.identity(q);
+  if (yaw !== 0) quat.rotateY(q, q, yaw);
   mat4.fromRotationTranslationScale(
     m,
     q,
@@ -80,6 +104,14 @@ function packSizedInstance(
   data[34] = 1;
   data[35] = 1;
   return data;
+}
+
+function packSizedInstance(
+  position: [number, number, number],
+  size: [number, number, number],
+  yaw = 0
+): Float32Array {
+  return packPreviewBoxInstance(position, size, yaw);
 }
 
 function attachToSceneRoot(engine: Engine, entity: Entity): void {
@@ -121,7 +153,25 @@ export function spawnCatalogPreview(
     console.warn(`[CatalogPreview] missing mesh ${BRICK_MESH_ID}`);
     return [];
   }
-  const size = footprintSizeMeters(opts.footprint);
+  const yaw = opts.yaw ?? 0;
+  let instData: Float32Array;
+  let radius: number;
+  if (opts.partId) {
+    const pose: BrickPose = {
+      partId: opts.partId,
+      colorId: opts.colorId ?? 'gray',
+      position: opts.position ?? [0, footprintSizeMeters(opts.footprint)[1] * 0.5, 0],
+      yaw,
+    };
+    instData = packBrickInstanceData([pose]);
+    const size = footprintSizeMeters(opts.footprint);
+    radius = Math.max(size[0], size[1], size[2]) * 0.75 + 0.5;
+  } else {
+    const size = footprintSizeMeters(opts.footprint);
+    const pos = opts.position ?? ([0, size[1] * 0.5, 0] as [number, number, number]);
+    instData = packSizedInstance(pos, size, yaw);
+    radius = Math.max(size[0], size[1], size[2]) * 0.75 + 0.5;
+  }
   return spawnPreviewInstance(
     full,
     mesh,
@@ -129,8 +179,9 @@ export function spawnCatalogPreview(
     opts.plasticSet,
     opts.uvGrid,
     opts.aging,
-    packSizedInstance([0, size[1] * 0.5, 0], size),
-    Math.max(size[0], size[1], size[2]) * 0.75 + 0.5
+    instData,
+    radius,
+    opts.opacity
   );
 }
 
@@ -155,6 +206,16 @@ export type CatalogMeshPreviewOpts = {
   uvGrid?: 0 | 1 | false;
   /** AO / cavity / edge wear from the UV1 aging texture. Default on. */
   aging?: boolean;
+  /** World AABB centre (m). Default origin — catalog-lab studio. */
+  position?: [number, number, number];
+  /** Yaw radians (brick-lab ghost). Default 0. */
+  yaw?: number;
+  /**
+   * 0–1 opacity for brush ghosts. When set below 1, uses `BRICK_ghost_*`.
+   */
+  opacity?: number;
+  /** Part id for LDraw pose packing (dishes flip). Defaults to `key`. */
+  partId?: string;
 };
 
 export type CatalogMeshPreviewResult = {
@@ -189,6 +250,19 @@ export function spawnCatalogMeshPreview(
   if (!entry) return empty;
   uploadCatalogAgingTexture(full, entry.aging);
   const [sx, sy, sz] = entry.size;
+  const yaw = opts.yaw ?? 0;
+  const pos = opts.position ?? ([0, 0, 0] as [number, number, number]);
+  const usePose = opts.position != null || yaw !== 0 || opts.opacity != null;
+  const instData = usePose
+    ? packLdrawInstanceData([
+        {
+          partId: opts.partId ?? opts.key,
+          colorId: opts.colorId ?? 'gray',
+          position: pos,
+          yaw,
+        },
+      ])
+    : packSizedInstance([0, 0, 0], [1, 1, 1]);
   const spawned = spawnPreviewInstance(
     full,
     entry.mesh,
@@ -196,8 +270,9 @@ export function spawnCatalogMeshPreview(
     opts.plasticSet,
     opts.uvGrid,
     opts.aging,
-    packSizedInstance([0, 0, 0], [1, 1, 1]),
-    Math.hypot(sx, sy, sz) * 0.5 + 0.5
+    instData,
+    Math.hypot(sx, sy, sz) * 0.5 + 0.5,
+    opts.opacity
   );
   if (spawned.length === 0) return empty;
   const view = aoView(entry.aging, entry.coverage);
@@ -239,14 +314,21 @@ function resolvePreviewMaterial(
   colorId: BrickColorId | undefined,
   plasticSet: CatalogPlasticSet | undefined,
   uvGrid: 0 | 1 | false | undefined,
-  aging: boolean | undefined
+  aging: boolean | undefined,
+  opacity: number | undefined
 ) {
+  const color = colorId ?? 'gray';
+  if (opacity != null && opacity < 1) {
+    const ghost = full.resourceManager.getMaterialByName(brickGhostMaterialId(color));
+    if (ghost) return ghost;
+    const solid = full.resourceManager.getMaterialByName(brickMaterialId(color));
+    if (solid) return solid;
+  }
   if (uvGrid === 0 || uvGrid === 1) {
     const id = uvGrid === 1 ? CATALOG_UV_GRID_UV1_MATERIAL_ID : CATALOG_UV_GRID_MATERIAL_ID;
     const grid = full.resourceManager.getMaterialByName(id);
     if (grid) return grid;
   }
-  const color = colorId ?? 'gray';
   const set = plasticSet ?? DEFAULT_PLASTIC;
   const plasticId = catalogPlasticMaterialId(set, color, aging !== false);
   const plastic = full.resourceManager.getMaterialByName(plasticId);
@@ -263,22 +345,25 @@ function spawnPreviewInstance(
   uvGrid: 0 | 1 | false | undefined,
   aging: boolean | undefined,
   instData: Float32Array,
-  radius: number
+  radius: number,
+  opacity?: number
 ): Entity[] {
   clearCatalogPreview(full);
 
   const device = full.webGPUContext?.device;
   if (!device) return [];
 
-  const mat = resolvePreviewMaterial(full, colorId, plasticSet, uvGrid, aging);
+  const mat = resolvePreviewMaterial(full, colorId, plasticSet, uvGrid, aging, opacity);
   if (!mat) {
     console.warn(
       `[CatalogPreview] missing material ${
-        uvGrid === 0 || uvGrid === 1
-          ? uvGrid === 1
-            ? CATALOG_UV_GRID_UV1_MATERIAL_ID
-            : CATALOG_UV_GRID_MATERIAL_ID
-          : catalogPlasticMaterialId(plasticSet ?? DEFAULT_PLASTIC, colorId ?? 'gray', aging !== false)
+        opacity != null && opacity < 1
+          ? brickGhostMaterialId(colorId ?? 'gray')
+          : uvGrid === 0 || uvGrid === 1
+            ? uvGrid === 1
+              ? CATALOG_UV_GRID_UV1_MATERIAL_ID
+              : CATALOG_UV_GRID_MATERIAL_ID
+            : catalogPlasticMaterialId(plasticSet ?? DEFAULT_PLASTIC, colorId ?? 'gray', aging !== false)
       }`
     );
     return [];

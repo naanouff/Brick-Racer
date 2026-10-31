@@ -3,7 +3,7 @@
  * @description Orbit lab for brick manuals (BW1c) — no vehicles / hub possession.
  */
 
-import { brickCatalogMaterials } from '../../hub/brick/brickMaterials';
+import { brickCatalogMaterials, brickGhostMaterials } from '../../hub/brick/brickMaterials';
 import {
   CATALOG_PLASTIC_SHADER_ID,
   CATALOG_PLASTIC_SHADER_URL,
@@ -42,6 +42,7 @@ export function buildBrickLabSpec(): LevelSpec {
     materials: {
       ...blockoutMaterials(),
       ...brickCatalogMaterials(),
+      ...brickGhostMaterials(),
       ...catalogPlasticMaterials(),
       ...catalogUvGridMaterials(),
     },

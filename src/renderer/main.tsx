@@ -42,6 +42,10 @@ import {
   type VehicleKind,
 } from '../racer/vehicles/selectVehicle';
 import { AtelierShell } from './atelier/AtelierShell';
+import {
+  BrickLabBuildPanel,
+  type BrickLabBuildHandle,
+} from './brickLab/BrickLabBuildPanel';
 import { CatalogBrowserPanel } from './catalog/CatalogBrowserPanel';
 import './app.css';
 
@@ -92,6 +96,24 @@ function App(): ReactElement {
   const [bufferW, setBufferW] = useState(0);
   const [bufferH, setBufferH] = useState(0);
   const hostRef = useRef<BrickRacerHost | null>(null);
+  const brickBuildRef = useRef<BrickLabBuildHandle | null>(null);
+  const brickToolbarHostRef = useRef<HTMLDivElement | null>(null);
+  const brickCatalogHostRef = useRef<HTMLDivElement | null>(null);
+  const [brickHostsReady, setBrickHostsReady] = useState(false);
+
+  const markBrickHosts = (): void => {
+    if (brickToolbarHostRef.current && brickCatalogHostRef.current) {
+      setBrickHostsReady(true);
+    }
+  };
+
+  const runBrickFile = (action: 'newStructure' | 'saveStructure' | 'loadStructure'): void => {
+    brickBuildRef.current?.[action]();
+  };
+
+  useEffect(() => {
+    if (levelId !== 'brick-lab') setBrickHostsReady(false);
+  }, [levelId]);
 
   useEffect(() => {
     void window.brickRacer?.version().then(setVersion).catch(() => setVersion(null));
@@ -274,9 +296,57 @@ function App(): ReactElement {
           version={version}
           catalogSlot={
             levelId === 'catalog-lab' ? (
-              <CatalogBrowserPanel host={hostRef.current} embedded />
+              <CatalogBrowserPanel
+                host={hostRef.current}
+                embedded
+                debugTex={debugTex}
+                renderQuality={renderQuality}
+                onToggleDebugTex={onToggleDebugTex}
+                onSelectRenderQuality={onSelectRenderQuality}
+              />
             ) : null
           }
+          brickToolbarHost={
+            levelId === 'brick-lab' ? (
+              <div
+                className="br-atelier-toolbar-host"
+                ref={(el) => {
+                  brickToolbarHostRef.current = el;
+                  markBrickHosts();
+                }}
+              />
+            ) : null
+          }
+          brickCatalogHost={
+            levelId === 'brick-lab' ? (
+              <div
+                className="br-brick-catalog-host"
+                ref={(el) => {
+                  brickCatalogHostRef.current = el;
+                  markBrickHosts();
+                }}
+              />
+            ) : null
+          }
+          brickBuildSlot={
+            levelId === 'brick-lab' && brickHostsReady ? (
+              <BrickLabBuildPanel
+                ref={brickBuildRef}
+                host={hostRef.current}
+                canvas={canvasRef.current}
+                toolbarHost={brickToolbarHostRef}
+                catalogHost={brickCatalogHostRef}
+                brickLabView={brickLabView}
+                onSelectBrickLabView={onSelectBrickLabView}
+                onStats={(line) => {
+                  if (line) setBrickStats(line);
+                }}
+              />
+            ) : null
+          }
+          onBrickNewStructure={() => runBrickFile('newStructure')}
+          onBrickSaveStructure={() => runBrickFile('saveStructure')}
+          onBrickLoadStructure={() => runBrickFile('loadStructure')}
           onSelectLevel={onSelectLevel}
           onSelectVehicle={onSelectVehicle}
           onSelectCc={onSelectCc}

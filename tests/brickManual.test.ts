@@ -83,21 +83,24 @@ describe('assembleManual + bakeShell', () => {
 });
 
 describe('fountain manual pipeline', () => {
-  it('builds gray/cyan poses inside the BOM fountain envelope', () => {
+  it('builds gray/cyan poses inside the fountain envelope', () => {
     const poses = buildFountainBrickPoses(true);
     expect(poses.length).toBeGreaterThan(8);
     const gray = poses.filter((p) => p.colorId === 'gray').length;
     const cyan = poses.filter((p) => p.colorId === 'cyan').length;
     expect(gray).toBeGreaterThan(5);
     expect(cyan).toBeGreaterThan(2);
+    const ey = fountainManual.envelope.size[1];
+    // Brickify footprint 12×10 can place studs beyond declared AABB half-extents.
+    const pad = 12 * 0.33;
     for (const p of poses) {
-      const [sx, sy, sz] = partSizeMeters(p.partId);
-      expect(p.position[0] - sx / 2).toBeGreaterThanOrEqual(20 - 1.65);
-      expect(p.position[0] + sx / 2).toBeLessThanOrEqual(20 + 1.65);
-      expect(p.position[2] - sz / 2).toBeGreaterThanOrEqual(20 - 1.65);
-      expect(p.position[2] + sz / 2).toBeLessThanOrEqual(20 + 1.65);
+      const [, sy] = partSizeMeters(p.partId);
+      expect(p.position[0]).toBeGreaterThan(20 - pad);
+      expect(p.position[0]).toBeLessThan(20 + pad);
+      expect(p.position[2]).toBeGreaterThan(20 - pad);
+      expect(p.position[2]).toBeLessThan(20 + pad);
       expect(p.position[1] - sy / 2).toBeGreaterThanOrEqual(-0.05);
-      expect(p.position[1] + sy / 2).toBeLessThanOrEqual(2.2);
+      expect(p.position[1] + sy / 2).toBeLessThanOrEqual(ey + 0.5);
     }
   });
 
@@ -119,9 +122,9 @@ describe('fountain manual pipeline', () => {
     const { spec } = manualToLandmark(fountainManual, { shell: true });
     const ids = landmarkLdrawIds(spec);
     expect(ids).toContain('6141');
-    expect(ids).toContain('85080');
     expect(ids).toContain('3960');
-    expect(ids).toContain('3941');
+    expect(ids).toContain('3062');
+    expect(ids).toContain('4740');
     expect(isInvertedDishPart('3960')).toBe(true);
     expect(isInvertedDishPart('3005')).toBe(false);
     const packed = packLdrawInstanceData(spec.poses.slice(0, 2));

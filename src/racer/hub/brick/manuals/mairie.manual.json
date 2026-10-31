@@ -1,0 +1,725 @@
+{
+  "id": "landmark.mairie",
+  "version": 1,
+  "title": "Mairie — socle + statue tête manquante (24×12 × 24P)",
+  "origin": [
+    20,
+    0,
+    20
+  ],
+  "envelope": {
+    "size": [
+      8.25,
+      2.75,
+      4.29
+    ]
+  },
+  "partsList": [
+    {
+      "part": "11211",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "11211",
+      "color": "yellow",
+      "qty": 2
+    },
+    {
+      "part": "3005",
+      "color": "black",
+      "qty": 6
+    },
+    {
+      "part": "3005",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3005",
+      "color": "red",
+      "qty": 3
+    },
+    {
+      "part": "3005",
+      "color": "white",
+      "qty": 5
+    },
+    {
+      "part": "3005",
+      "color": "yellow",
+      "qty": 2
+    },
+    {
+      "part": "3006",
+      "color": "sand",
+      "qty": 24
+    },
+    {
+      "part": "3010",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "3028",
+      "color": "dark_gray",
+      "qty": 4
+    },
+    {
+      "part": "3028",
+      "color": "white",
+      "qty": 2
+    },
+    {
+      "part": "3029",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "3030",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "3033",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "3958",
+      "color": "white",
+      "qty": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — plate y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -6,
+            0,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            6,
+            0,
+            -6
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2 — plate y=1",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "white",
+          "at": [
+            -11,
+            1,
+            -5
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3033",
+          "color": "white",
+          "at": [
+            1,
+            1,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3030",
+          "color": "white",
+          "at": [
+            7,
+            1,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3029",
+          "color": "white",
+          "at": [
+            -11,
+            1,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "3 — brick y=2",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            2,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            2,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            2,
+            2
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "4 — brick y=5",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            5,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            5,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            5,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            5,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            5,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            5,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            5,
+            2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            5,
+            2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -5,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            -4,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -3,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            -2,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -1,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            0,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            1,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            2,
+            5,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "white",
+          "at": [
+            3,
+            5,
+            4
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "5 — brick y=8",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            8,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            8,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            8,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            8,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            8,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            8,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            -10,
+            8,
+            2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3006",
+          "color": "sand",
+          "at": [
+            0,
+            8,
+            2
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "6 — plate y=11",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "white",
+          "at": [
+            -9,
+            11,
+            -3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "white",
+          "at": [
+            3,
+            11,
+            -3
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7 — brick y=12",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            -1,
+            12,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "red",
+          "at": [
+            0,
+            12,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "8 — brick y=15",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -2,
+            15,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            -1,
+            15,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "red",
+          "at": [
+            0,
+            15,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            1,
+            15,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9 — brick y=18",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "yellow",
+          "at": [
+            -1,
+            18,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "red",
+          "at": [
+            -2,
+            18,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "yellow",
+          "at": [
+            0,
+            18,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            1,
+            18,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "10 — brick y=21",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -1,
+            21,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "yellow",
+          "at": [
+            -2,
+            21,
+            -1
+          ],
+          "rot": 90
+        }
+      ]
+    }
+  ]
+}
