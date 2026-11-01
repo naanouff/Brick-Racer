@@ -19,3 +19,9 @@ data/brick-lab-mcp.token
 data/brick-lab-captures/
 
 scripts/**/__pycache__/
+
+# LEGO instruction PDFs (licensed / large; keep local only)
+docs/notices/**/*.pdf
+
+# Catalog part thumbnails (baked locally; index.json stays tracked)
+public/catalog/thumbs/*.png
