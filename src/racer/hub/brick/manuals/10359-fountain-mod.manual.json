@@ -1,0 +1,111 @@
+{
+  "id": "landmark.10359-fountain-mod",
+  "version": 1,
+  "title": "10359 module fontaine",
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "envelope": {
+    "size": [
+      2.64,
+      1.43,
+      2.64
+    ]
+  },
+  "partsList": [
+    {
+      "part": "3031",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3941",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "3960",
+      "color": "gray",
+      "qty": 1
+    },
+    {
+      "part": "4740",
+      "color": "gray",
+      "qty": 1
+    },
+    {
+      "part": "6141",
+      "color": "cyan",
+      "qty": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — construction",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3941",
+          "color": "black",
+          "at": [
+            -1,
+            1,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3941",
+          "color": "black",
+          "at": [
+            -1,
+            4,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3960",
+          "color": "gray",
+          "at": [
+            -2,
+            7,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4740",
+          "color": "gray",
+          "at": [
+            -1,
+            9,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            0,
+            10,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

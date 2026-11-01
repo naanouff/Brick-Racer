@@ -9,6 +9,8 @@ export type MasterIndexEntry = {
   id: string;
   name: string;
   category_id: string;
+  /** Present when master-index was rebuilt with ED1 families; else join via categories.json. */
+  family?: string;
   ldraw_id: string | null;
   footprint: BrickFootprint;
   dims_mm?: { w?: number; h?: number; d?: number };

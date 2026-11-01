@@ -1,0 +1,38 @@
+{
+  "id": "landmark.fountain",
+  "version": 2,
+  "title": "Fontaine circulaire 3 paliers",
+  "footprint": [12, 10],
+  "legend": { "G": "gray", "C": "cyan" },
+  "layers": [
+    {
+      "kind": "plate",
+      "rows": [
+        ".GGGGGGGGGG.",
+        "GGCCCCCCCCGG",
+        "GCCCCCCCCCCG",
+        "GCCCCCCCCCCG",
+        "GCCCCCCCCCCG",
+        "GCCCCCCCCCCG",
+        "GCCCCCCCCCCG",
+        "GCCCCCCCCCCG",
+        "GGCCCCCCCCGG",
+        ".GGGGGGGGGG."
+      ]
+    }
+  ],
+  "ops": [
+    { "op": "brick", "part": "3062", "color": "gray", "at": [-1, 1, -1] },
+    { "op": "brick", "part": "4589", "color": "cyan", "at": [-2, 1, -1] },
+    { "op": "brick", "part": "6141", "color": "cyan", "at": [0, 1, -1] },
+    { "op": "brick", "part": "6141", "color": "cyan", "at": [-1, 1, -2] },
+    { "op": "brick", "part": "6141", "color": "cyan", "at": [-1, 1, 0] },
+    { "op": "brick", "part": "3062", "color": "gray", "at": [-1, 4, -1] },
+    { "op": "brick", "part": "3960", "color": "gray", "at": [-1, 7, -1] },
+    { "op": "brick", "part": "3062", "color": "gray", "at": [-1, 8, -1] },
+    { "op": "brick", "part": "6141", "color": "cyan", "at": [-2, 8, -1] },
+    { "op": "brick", "part": "6141", "color": "cyan", "at": [0, 8, -1] },
+    { "op": "brick", "part": "3960", "color": "gray", "at": [-1, 11, -1] },
+    { "op": "brick", "part": "4740", "color": "cyan", "at": [-1, 12, -1] }
+  ]
+}

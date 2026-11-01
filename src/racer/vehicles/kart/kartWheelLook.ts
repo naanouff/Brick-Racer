@@ -19,6 +19,7 @@ import {
   geometrySetToEngineMesh,
   type GeometrySet,
 } from '@naanouff/w3dts-gproc';
+import { RUBBER_PRESET } from '../../hub/brick/materials/brickMaterialPresets';
 
 export const KART_RUBBER_SHADER_ID = 'RockProceduralPBR';
 export const KART_RUBBER_MATERIAL_NAME = 'KartRubberTirePBR';
@@ -30,10 +31,10 @@ export const KART_RUBBER_PROPERTY_OVERRIDES: Record<string, unknown> = {
   wearColor: [0.28, 0.26, 0.24],
   mossAmount: 0.42,
   edgeWear: 0.62,
-  aoStrength: 0.72,
+  aoStrength: RUBBER_PRESET.aoStrength ?? 0.72,
   heightInfluence: 0.28,
-  roughness: 0.96,
-  metallic: 0,
+  roughness: RUBBER_PRESET.roughness,
+  metallic: RUBBER_PRESET.metallic,
   triplanarScale: 22,
   normalDetailScale: 0.09,
   macroAlbedo: 0.12,
@@ -41,12 +42,16 @@ export const KART_RUBBER_PROPERTY_OVERRIDES: Record<string, unknown> = {
   seed: 11,
 };
 
-/** SceneDD / PBR tire — kill IBL chrome on black rubber. */
+/** SceneDD / PBR tire — kill IBL chrome on black rubber (MT2 rubber preset). */
 export const KART_RUBBER_PBR_OVERRIDES = {
-  roughness: 0.96,
-  metallic: 0,
-  specularFactor: 0.04,
-  specularColorFactor: [0.1, 0.1, 0.1] as [number, number, number],
+  roughness: RUBBER_PRESET.roughness,
+  metallic: RUBBER_PRESET.metallic,
+  specularFactor: RUBBER_PRESET.specularFactor ?? 0.04,
+  specularColorFactor: (RUBBER_PRESET.specularColorFactor ?? [0.1, 0.1, 0.1]) as [
+    number,
+    number,
+    number,
+  ],
 };
 
 export function applyKartRubberToMaterials(

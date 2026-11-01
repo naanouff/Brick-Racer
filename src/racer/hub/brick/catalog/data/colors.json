@@ -1,85 +1,3872 @@
 {
-  "version": 1,
+  "version": 2,
+  "source": "LDConfig.ldr",
   "colors": [
     {
-      "id": "white",
-      "name": "White",
-      "rgb": [0.92, 0.92, 0.94],
-      "blId": 1
-    },
-    {
       "id": "black",
+      "ldrawCode": 0,
       "name": "Black",
-      "rgb": [0.12, 0.12, 0.14],
-      "blId": 11
+      "rgb": [
+        0.106,
+        0.165,
+        0.204
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
-      "id": "yellow",
-      "name": "Yellow",
-      "rgb": [0.95, 0.82, 0.18],
-      "blId": 14
-    },
-    {
-      "id": "red",
-      "name": "Red",
-      "rgb": [0.77, 0.13, 0.16],
-      "blId": 5
+      "id": "blue",
+      "ldrawCode": 1,
+      "name": "Bright Blue",
+      "rgb": [
+        0.118,
+        0.353,
+        0.659
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
       "id": "green",
-      "name": "Green",
-      "rgb": [0.16, 0.5, 0.2],
-      "blId": 6
+      "ldrawCode": 2,
+      "name": "Dark Green",
+      "rgb": [
+        0,
+        0.522,
+        0.169
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "dark_turquoise",
+      "ldrawCode": 3,
+      "name": "Bright Bluish Green",
+      "rgb": [
+        0.024,
+        0.616,
+        0.624
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "red",
+      "ldrawCode": 4,
+      "name": "Bright Red",
+      "rgb": [
+        0.706,
+        0,
+        0
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "dark_pink",
+      "ldrawCode": 5,
+      "name": "Bright Purple",
+      "rgb": [
+        0.827,
+        0.208,
+        0.616
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "brown",
+      "ldrawCode": 6,
+      "name": "Earth Orange",
+      "rgb": [
+        0.329,
+        0.2,
+        0.141
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_grey",
+      "ldrawCode": 7,
+      "name": "Grey",
+      "rgb": [
+        0.541,
+        0.573,
+        0.553
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "dark_grey",
+      "ldrawCode": 8,
+      "name": "Dark Grey",
+      "rgb": [
+        0.329,
+        0.349,
+        0.333
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_blue",
+      "ldrawCode": 9,
+      "name": "Light Blue",
+      "rgb": [
+        0.592,
+        0.796,
+        0.851
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "bright_green",
+      "ldrawCode": 10,
+      "name": "Bright Green",
+      "rgb": [
+        0.345,
+        0.671,
+        0.255
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "light_turquoise",
+      "ldrawCode": 11,
+      "name": "Medium Bluish Green",
+      "rgb": [
+        0,
+        0.667,
+        0.643
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "salmon",
+      "ldrawCode": 12,
+      "name": "Medium Red",
+      "rgb": [
+        0.941,
+        0.427,
+        0.38
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "pink",
+      "ldrawCode": 13,
+      "name": "Light Reddish Violet",
+      "rgb": [
+        0.965,
+        0.663,
+        0.733
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "yellow",
+      "ldrawCode": 14,
+      "name": "Bright Yellow",
+      "rgb": [
+        0.98,
+        0.784,
+        0.039
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "white",
+      "ldrawCode": 15,
+      "name": "White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "main_colour",
+      "ldrawCode": 16,
+      "name": "Main Colour",
+      "rgb": [
+        1,
+        1,
+        0.502
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_green",
+      "ldrawCode": 17,
+      "name": "Light Green",
+      "rgb": [
+        0.678,
+        0.851,
+        0.659
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_yellow",
+      "ldrawCode": 18,
+      "name": "Light Yellow",
+      "rgb": [
+        1,
+        0.839,
+        0.498
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "tan",
+      "ldrawCode": 19,
+      "name": "Brick Yellow",
+      "rgb": [
+        0.843,
+        0.729,
+        0.549
+      ],
+      "material": "plastic",
+      "common": true,
+      "aliases": [
+        "sand"
+      ]
+    },
+    {
+      "id": "light_violet",
+      "ldrawCode": 20,
+      "name": "Light Bluish Violet",
+      "rgb": [
+        0.686,
+        0.745,
+        0.839
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glow_in_dark_opaque",
+      "ldrawCode": 21,
+      "name": "Phosphorescent White",
+      "rgb": [
+        0.878,
+        1,
+        0.69
+      ],
+      "material": "glow",
+      "alpha": 0.961,
+      "luminance": 15,
+      "translucent": true
+    },
+    {
+      "id": "purple",
+      "ldrawCode": 22,
+      "name": "Bright Violet",
+      "rgb": [
+        0.404,
+        0.122,
+        0.506
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "dark_blue_violet",
+      "ldrawCode": 23,
+      "name": "Dark Royal Blue",
+      "rgb": [
+        0.055,
+        0.243,
+        0.604
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "edge_colour",
+      "ldrawCode": 24,
+      "name": "Edge Colour",
+      "rgb": [
+        0.498,
+        0.498,
+        0.498
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "orange",
+      "ldrawCode": 25,
+      "name": "Bright Orange",
+      "rgb": [
+        0.839,
+        0.475,
+        0.137
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "magenta",
+      "ldrawCode": 26,
+      "name": "Bright Reddish Violet",
+      "rgb": [
+        0.565,
+        0.122,
+        0.463
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
       "id": "lime",
-      "name": "Lime",
-      "rgb": [0.45, 0.82, 0.35],
-      "blId": 27
+      "ldrawCode": 27,
+      "name": "Bright Yellowish Green",
+      "rgb": [
+        0.647,
+        0.792,
+        0.094
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
-      "id": "sand",
-      "name": "Tan",
-      "rgb": [0.82, 0.74, 0.58],
-      "blId": 2,
-      "aliases": ["tan"]
+      "id": "dark_tan",
+      "ldrawCode": 28,
+      "name": "Sand Yellow",
+      "rgb": [
+        0.537,
+        0.49,
+        0.384
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
-      "id": "gray",
-      "name": "Light Bluish Gray",
-      "rgb": [0.63, 0.66, 0.7],
-      "blId": 86,
-      "aliases": ["light_bluish_gray", "lbg"]
+      "id": "bright_pink",
+      "ldrawCode": 29,
+      "name": "Light Purple",
+      "rgb": [
+        1,
+        0.62,
+        0.804
+      ],
+      "material": "plastic",
+      "common": true
     },
     {
-      "id": "dark_gray",
-      "name": "Dark Bluish Gray",
-      "rgb": [0.35, 0.38, 0.42],
-      "blId": 85,
-      "aliases": ["dark_bluish_gray", "dbg"]
+      "id": "medium_lavender",
+      "ldrawCode": 30,
+      "name": "Medium Lavender",
+      "rgb": [
+        0.627,
+        0.431,
+        0.725
+      ],
+      "material": "plastic"
     },
     {
-      "id": "terracotta",
+      "id": "lavender",
+      "ldrawCode": 31,
+      "name": "Lavender",
+      "rgb": [
+        0.804,
+        0.643,
+        0.871
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "trans_black_ir_lens",
+      "ldrawCode": 32,
+      "name": "Trans Black IR Lens",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "material": "transparent",
+      "alpha": 0.961,
+      "translucent": true
+    },
+    {
+      "id": "trans_dark_blue",
+      "ldrawCode": 33,
+      "name": "Transparent Blue",
+      "rgb": [
+        0,
+        0.125,
+        0.627
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_green",
+      "ldrawCode": 34,
+      "name": "Transparent Green",
+      "rgb": [
+        0.137,
+        0.471,
+        0.255
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true
+    },
+    {
+      "id": "trans_bright_green",
+      "ldrawCode": 35,
+      "name": "Transparent Bright Green",
+      "rgb": [
+        0.337,
+        0.902,
+        0.275
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_red",
+      "ldrawCode": 36,
+      "name": "Transparent Red",
+      "rgb": [
+        0.788,
+        0.102,
+        0.035
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true
+    },
+    {
+      "id": "trans_dark_pink",
+      "ldrawCode": 37,
+      "name": "Transparent Medium Reddish Violet",
+      "rgb": [
+        0.875,
+        0.4,
+        0.584
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_neon_orange",
+      "ldrawCode": 38,
+      "name": "Transparent Fluorescent Reddish Orange",
+      "rgb": [
+        1,
+        0.502,
+        0.051
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_very_light_blue",
+      "ldrawCode": 39,
+      "name": "Transparent Light Bluish Green",
+      "rgb": [
+        0.757,
+        0.875,
+        0.941
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_brown",
+      "ldrawCode": 40,
+      "name": "Transparent Brown",
+      "rgb": [
+        0.388,
+        0.373,
+        0.322
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_medium_blue",
+      "ldrawCode": 41,
+      "name": "Transparent Fluorescent Blue",
+      "rgb": [
+        0.333,
+        0.604,
+        0.718
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_neon_green",
+      "ldrawCode": 42,
+      "name": "Transparent Fluorescent Green",
+      "rgb": [
+        0.753,
+        1,
+        0
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_light_blue",
+      "ldrawCode": 43,
+      "name": "Transparent Light Blue",
+      "rgb": [
+        0.682,
+        0.914,
+        0.937
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true,
+      "aliases": [
+        "cyan",
+        "tlb"
+      ]
+    },
+    {
+      "id": "trans_bright_reddish_lilac",
+      "ldrawCode": 44,
+      "name": "Transparent Bright Reddish Lilac",
+      "rgb": [
+        0.588,
+        0.439,
+        0.624
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_pink",
+      "ldrawCode": 45,
+      "name": "Transparent Bright Pink",
+      "rgb": [
+        0.988,
+        0.592,
+        0.675
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_yellow",
+      "ldrawCode": 46,
+      "name": "Transparent Yellow",
+      "rgb": [
+        0.961,
+        0.804,
+        0.184
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true
+    },
+    {
+      "id": "trans_clear",
+      "ldrawCode": 47,
+      "name": "Transparent",
+      "rgb": [
+        0.988,
+        0.988,
+        0.988
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true,
+      "aliases": [
+        "clear"
+      ]
+    },
+    {
+      "id": "trans_purple",
+      "ldrawCode": 52,
+      "name": "Transparent Bright Bluish Violet",
+      "rgb": [
+        0.647,
+        0.647,
+        0.796
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_neon_yellow",
+      "ldrawCode": 54,
+      "name": "Transparent Fluorescent Yellow",
+      "rgb": [
+        0.855,
+        0.69,
+        0
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_orange",
+      "ldrawCode": 57,
+      "name": "Trans Bright Orange",
+      "rgb": [
+        0.941,
+        0.561,
+        0.11
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true
+    },
+    {
+      "id": "chrome_antique_brass",
+      "ldrawCode": 60,
+      "name": "Chrome Antique Brass",
+      "rgb": [
+        0.392,
+        0.353,
+        0.298
+      ],
+      "material": "chrome"
+    },
+    {
+      "id": "chrome_blue",
+      "ldrawCode": 61,
+      "name": "Chrome Blue",
+      "rgb": [
+        0.424,
+        0.588,
+        0.749
+      ],
+      "material": "chrome"
+    },
+    {
+      "id": "chrome_green",
+      "ldrawCode": 62,
+      "name": "Chrome Green",
+      "rgb": [
+        0.235,
+        0.702,
+        0.443
+      ],
+      "material": "chrome"
+    },
+    {
+      "id": "chrome_pink",
+      "ldrawCode": 63,
+      "name": "Chrome Pink",
+      "rgb": [
+        0.667,
+        0.302,
+        0.557
+      ],
+      "material": "chrome"
+    },
+    {
+      "id": "chrome_black",
+      "ldrawCode": 64,
+      "name": "Chrome Black",
+      "rgb": [
+        0.106,
+        0.165,
+        0.204
+      ],
+      "material": "chrome"
+    },
+    {
+      "id": "rubber_yellow",
+      "ldrawCode": 65,
+      "name": "Rubber Yellow",
+      "rgb": [
+        0.98,
+        0.784,
+        0.039
+      ],
+      "material": "rubber",
+      "common": true
+    },
+    {
+      "id": "rubber_trans_yellow",
+      "ldrawCode": 66,
+      "name": "Rubber Trans Yellow",
+      "rgb": [
+        0.961,
+        0.804,
+        0.184
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "rubber_trans_clear",
+      "ldrawCode": 67,
+      "name": "Rubber Trans Clear",
+      "rgb": [
+        0.988,
+        0.988,
+        0.988
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "very_light_orange",
+      "ldrawCode": 68,
+      "name": "Light Yellowish Orange",
+      "rgb": [
+        0.992,
+        0.765,
+        0.514
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "bright_reddish_lilac",
+      "ldrawCode": 69,
+      "name": "Bright Reddish Lilac",
+      "rgb": [
+        0.541,
+        0.071,
+        0.659
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "reddish_brown",
+      "ldrawCode": 70,
       "name": "Reddish Brown",
-      "rgb": [0.72, 0.4, 0.3],
-      "blId": 88,
-      "aliases": ["reddish_brown"]
+      "rgb": [
+        0.373,
+        0.192,
+        0.035
+      ],
+      "material": "plastic",
+      "common": true,
+      "aliases": [
+        "terracotta"
+      ]
     },
     {
-      "id": "cyan",
-      "name": "Trans-Light Blue",
-      "rgb": [0.35, 0.78, 0.88],
-      "blId": 41,
-      "translucent": true,
-      "aliases": ["trans_light_blue", "tlb"]
+      "id": "light_bluish_grey",
+      "ldrawCode": 71,
+      "name": "Medium Stone Grey",
+      "rgb": [
+        0.588,
+        0.588,
+        0.588
+      ],
+      "material": "plastic",
+      "common": true,
+      "aliases": [
+        "gray",
+        "lbg",
+        "light_bluish_gray"
+      ]
     },
     {
-      "id": "clear",
-      "name": "Trans-Clear",
-      "rgb": [0.88, 0.92, 0.95],
-      "blId": 40,
+      "id": "dark_bluish_grey",
+      "ldrawCode": 72,
+      "name": "Dark Stone Grey",
+      "rgb": [
+        0.392,
+        0.392,
+        0.392
+      ],
+      "material": "plastic",
+      "common": true,
+      "aliases": [
+        "dark_bluish_gray",
+        "dark_gray",
+        "dbg"
+      ]
+    },
+    {
+      "id": "medium_blue",
+      "ldrawCode": 73,
+      "name": "Medium Blue",
+      "rgb": [
+        0.451,
+        0.588,
+        0.784
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_green",
+      "ldrawCode": 74,
+      "name": "Medium Green",
+      "rgb": [
+        0.498,
+        0.769,
+        0.459
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "speckle_black_copper",
+      "ldrawCode": 75,
+      "name": "Copper, Diffuse",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "material": "speckle"
+    },
+    {
+      "id": "speckle_dark_bluish_grey_silver",
+      "ldrawCode": 76,
+      "name": "Speckle Dark Bluish Grey Silver",
+      "rgb": [
+        0.388,
+        0.373,
+        0.38
+      ],
+      "material": "speckle"
+    },
+    {
+      "id": "light_pink",
+      "ldrawCode": 77,
+      "name": "Light Pink",
+      "rgb": [
+        0.996,
+        0.8,
+        0.812
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_nougat",
+      "ldrawCode": 78,
+      "name": "Light Nougat",
+      "rgb": [
+        1,
+        0.788,
+        0.584
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "milky_white",
+      "ldrawCode": 79,
+      "name": "Nature",
+      "rgb": [
+        0.933,
+        0.933,
+        0.933
+      ],
+      "material": "transparent",
+      "alpha": 0.941,
+      "translucent": true
+    },
+    {
+      "id": "metallic_silver",
+      "ldrawCode": 80,
+      "name": "Metallic Silver",
+      "rgb": [
+        0.463,
+        0.463,
+        0.463
+      ],
+      "material": "metallic",
+      "common": true
+    },
+    {
+      "id": "metallic_green",
+      "ldrawCode": 81,
+      "name": "Metallic Green",
+      "rgb": [
+        0.761,
+        0.753,
+        0.435
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "metallic_gold",
+      "ldrawCode": 82,
+      "name": "Metallic Gold",
+      "rgb": [
+        0.859,
+        0.675,
+        0.204
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "pearl_black",
+      "ldrawCode": 83,
+      "name": "Metallic Black",
+      "rgb": [
+        0.039,
+        0.075,
+        0.153
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "medium_nougat",
+      "ldrawCode": 84,
+      "name": "Medium Nougat",
+      "rgb": [
+        0.667,
+        0.49,
+        0.333
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_lilac",
+      "ldrawCode": 85,
+      "name": "Medium Lilac",
+      "rgb": [
+        0.267,
+        0.102,
+        0.569
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_brown",
+      "ldrawCode": 86,
+      "name": "Brown",
+      "rgb": [
+        0.482,
+        0.365,
+        0.255
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "metallic_dark_grey",
+      "ldrawCode": 87,
+      "name": "Titanium",
+      "rgb": [
+        0.243,
+        0.235,
+        0.224
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "blue_violet",
+      "ldrawCode": 89,
+      "name": "Medium Royal Blue",
+      "rgb": [
+        0.11,
+        0.345,
+        0.655
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "nougat",
+      "ldrawCode": 92,
+      "name": "Nougat",
+      "rgb": [
+        0.733,
+        0.502,
+        0.353
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "light_salmon",
+      "ldrawCode": 100,
+      "name": "Light Red",
+      "rgb": [
+        0.976,
+        0.718,
+        0.647
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "violet",
+      "ldrawCode": 110,
+      "name": "Bright Bluish Violet",
+      "rgb": [
+        0.149,
+        0.275,
+        0.604
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_violet",
+      "ldrawCode": 112,
+      "name": "Medium Bluish Violet",
+      "rgb": [
+        0.282,
+        0.38,
+        0.675
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glitter_trans_dark_pink",
+      "ldrawCode": 114,
+      "name": "Transparent Medium Reddish-Violet w. Glitter 2%",
+      "rgb": [
+        0.875,
+        0.4,
+        0.584
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.725,
+          0.153,
+          0.565
+        ],
+        "fraction": 0.17,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "medium_lime",
+      "ldrawCode": 115,
+      "name": "Medium Yellowish Green",
+      "rgb": [
+        0.718,
+        0.831,
+        0.145
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glitter_trans_clear",
+      "ldrawCode": 117,
+      "name": "Transparent Glitter",
+      "rgb": [
+        0.933,
+        0.933,
+        0.933
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          1,
+          1,
+          1
+        ],
+        "fraction": 0.08,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "aqua",
+      "ldrawCode": 118,
+      "name": "Light Bluish Green",
+      "rgb": [
+        0.612,
+        0.839,
+        0.8
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_lime",
+      "ldrawCode": 120,
+      "name": "Light Yellowish Green",
+      "rgb": [
+        0.871,
+        0.918,
+        0.573
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_orange",
+      "ldrawCode": 121,
+      "name": "Medium Yellowish Orange",
+      "rgb": [
+        0.973,
+        0.604,
+        0.224
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "dark_salmon",
+      "ldrawCode": 123,
+      "name": "Bright Reddish Orange",
+      "rgb": [
+        0.933,
+        0.329,
+        0.204
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "spud_orange",
+      "ldrawCode": 125,
+      "name": "Light Orange",
+      "rgb": [
+        0.976,
+        0.655,
+        0.467
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "dark_nougat",
+      "ldrawCode": 128,
+      "name": "Dark Nougat",
+      "rgb": [
+        0.678,
+        0.38,
+        0.251
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glitter_trans_purple",
+      "ldrawCode": 129,
+      "name": "Transparent Bright Bluish Violet w. Glitter 2%",
+      "rgb": [
+        0.392,
+        0,
+        0.38
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.561,
+          0,
+          0.8
+        ],
+        "fraction": 0.03,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "speckle_black_silver",
+      "ldrawCode": 132,
+      "name": "Cool Silver, Diffuse",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "material": "speckle"
+    },
+    {
+      "id": "speckle_black_gold",
+      "ldrawCode": 133,
+      "name": "Warm Gold Diffuse",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "material": "speckle"
+    },
+    {
+      "id": "copper",
+      "ldrawCode": 134,
+      "name": "Copper",
+      "rgb": [
+        0.463,
+        0.302,
+        0.231
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_light_grey",
+      "ldrawCode": 135,
+      "name": "Silver",
+      "rgb": [
+        0.627,
+        0.627,
+        0.627
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "metallic_blue",
+      "ldrawCode": 137,
+      "name": "Sand Blue Metallic",
+      "rgb": [
+        0.357,
+        0.459,
+        0.565
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_light_gold",
+      "ldrawCode": 142,
+      "name": "Gold",
+      "rgb": [
+        0.871,
+        0.675,
+        0.4
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_dark_gold",
+      "ldrawCode": 147,
+      "name": "Metallic Sand Yellow",
+      "rgb": [
+        0.514,
+        0.447,
+        0.31
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_dark_grey",
+      "ldrawCode": 148,
+      "name": "Metallic Dark Grey",
+      "rgb": [
+        0.282,
+        0.302,
+        0.282
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_very_light_grey",
+      "ldrawCode": 150,
+      "name": "Metallic Light Grey",
+      "rgb": [
+        0.596,
+        0.608,
+        0.6
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "very_light_bluish_grey",
+      "ldrawCode": 151,
+      "name": "Light Stone Grey",
+      "rgb": [
+        0.784,
+        0.784,
+        0.784
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "trans_neon_red",
+      "ldrawCode": 158,
+      "name": "Transparent Fluorescent Red",
+      "rgb": [
+        0.945,
+        0.557,
+        0.733
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "pearl_red",
+      "ldrawCode": 176,
+      "name": "Red Flip-flop",
+      "rgb": [
+        0.58,
+        0.318,
+        0.282
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_yellow",
+      "ldrawCode": 178,
+      "name": "Yellow Flip-flop",
+      "rgb": [
+        0.671,
+        0.404,
+        0.227
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_silver",
+      "ldrawCode": 179,
+      "name": "Silver Flip-flop",
+      "rgb": [
+        0.537,
+        0.529,
+        0.533
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "dark_yellow",
+      "ldrawCode": 180,
+      "name": "Curry",
+      "rgb": [
+        0.867,
+        0.596,
+        0.18
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "pearl_white",
+      "ldrawCode": 183,
+      "name": "Metallic White",
+      "rgb": [
+        0.965,
+        0.949,
+        0.875
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "metallic_bright_red",
+      "ldrawCode": 184,
+      "name": "Metallic Bright Red",
+      "rgb": [
+        0.839,
+        0,
+        0.149
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "metallic_bright_blue",
+      "ldrawCode": 185,
+      "name": "Metallic Bright Blue",
+      "rgb": [
+        0,
+        0.349,
+        0.639
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "metallic_dark_green",
+      "ldrawCode": 186,
+      "name": "Metallic Dark Green",
+      "rgb": [
+        0,
+        0.557,
+        0.235
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_brown",
+      "ldrawCode": 187,
+      "name": "Metallic Earth Orange",
+      "rgb": [
+        0.341,
+        0.224,
+        0.173
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "reddish_gold",
+      "ldrawCode": 189,
+      "name": "Reddish Gold",
+      "rgb": [
+        0.675,
+        0.51,
+        0.278
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "bright_light_orange",
+      "ldrawCode": 191,
+      "name": "Flame Yellowish Orange",
+      "rgb": [
+        0.988,
+        0.675,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "lemon_metallic",
+      "ldrawCode": 200,
+      "name": "Lemon Metallic",
+      "rgb": [
+        0.439,
+        0.51,
+        0.141
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "bright_light_blue",
+      "ldrawCode": 212,
+      "name": "Light Royal Blue",
+      "rgb": [
+        0.616,
+        0.765,
+        0.969
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "medium_blue_violet",
+      "ldrawCode": 213,
+      "name": "Medium Royal Blue",
+      "rgb": [
+        0.278,
+        0.435,
+        0.714
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rust",
+      "ldrawCode": 216,
+      "name": "Rust",
+      "rgb": [
+        0.529,
+        0.169,
+        0.09
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "reddish_lilac",
+      "ldrawCode": 218,
+      "name": "Reddish Lilac",
+      "rgb": [
+        0.557,
+        0.333,
+        0.592
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "lilac",
+      "ldrawCode": 219,
+      "name": "Lilac",
+      "rgb": [
+        0.337,
+        0.306,
+        0.616
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "light_lilac",
+      "ldrawCode": 220,
+      "name": "Light Lilac",
+      "rgb": [
+        0.569,
+        0.584,
+        0.792
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "warm_yellowish_orange",
+      "ldrawCode": 225,
+      "name": "Warm Yellowish Orange",
+      "rgb": [
+        0.98,
+        0.663,
+        0.392
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "bright_light_yellow",
+      "ldrawCode": 226,
+      "name": "Bright Light Yellow",
+      "rgb": [
+        1,
+        0.925,
+        0.424
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "trans_bright_light_green",
+      "ldrawCode": 227,
+      "name": "Transparent Bright Yellowish Green",
+      "rgb": [
+        0.71,
+        0.851,
+        0.424
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_bright_light_orange",
+      "ldrawCode": 231,
+      "name": "Transparent Flame Yellowish Orange",
+      "rgb": [
+        0.988,
+        0.718,
+        0.427
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "sky_blue",
+      "ldrawCode": 232,
+      "name": "Dove Blue",
+      "rgb": [
+        0.467,
+        0.788,
+        0.847
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "trans_fire_yellow",
+      "ldrawCode": 234,
+      "name": "Transparent Fire Yellow",
+      "rgb": [
+        0.984,
+        0.91,
+        0.565
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "rubber_black",
+      "ldrawCode": 256,
+      "name": "Rubber Black",
+      "rgb": [
+        0.106,
+        0.165,
+        0.204
+      ],
+      "material": "rubber",
+      "common": true
+    },
+    {
+      "id": "dark_blue",
+      "ldrawCode": 272,
+      "name": "Dark Blue",
+      "rgb": [
+        0.098,
+        0.196,
+        0.353
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "rubber_blue",
+      "ldrawCode": 273,
+      "name": "Rubber Blue",
+      "rgb": [
+        0.118,
+        0.353,
+        0.659
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "trans_reddish_lilac",
+      "ldrawCode": 284,
+      "name": "Transparent Reddish Lilac",
+      "rgb": [
+        0.761,
+        0.506,
+        0.647
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "trans_light_green",
+      "ldrawCode": 285,
+      "name": "Transparent Light Green",
+      "rgb": [
+        0.49,
+        0.761,
+        0.569
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "dark_green",
+      "ldrawCode": 288,
+      "name": "Earth Green",
+      "rgb": [
+        0,
+        0.271,
+        0.102
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "trans_light_blue_violet",
+      "ldrawCode": 293,
+      "name": "Transparent Light Royal Blue",
+      "rgb": [
+        0.42,
+        0.671,
+        0.894
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "glow_in_dark_trans",
+      "ldrawCode": 294,
+      "name": "Phosphorescent Green",
+      "rgb": [
+        0.741,
+        0.776,
+        0.678
+      ],
+      "material": "glow",
+      "alpha": 0.784,
+      "luminance": 15,
+      "translucent": true
+    },
+    {
+      "id": "flamingo_pink",
+      "ldrawCode": 295,
+      "name": "Flamingo Pink",
+      "rgb": [
+        1,
+        0.58,
+        0.761
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "cool_silver",
+      "ldrawCode": 296,
+      "name": "Cool Silver",
+      "rgb": [
+        0.678,
+        0.678,
+        0.678
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "pearl_gold",
+      "ldrawCode": 297,
+      "name": "Warm Gold",
+      "rgb": [
+        0.667,
+        0.498,
+        0.18
+      ],
+      "material": "pearl",
+      "common": true
+    },
+    {
+      "id": "metallic_copper",
+      "ldrawCode": 300,
+      "name": "Metallic Copper",
+      "rgb": [
+        0.761,
+        0.498,
+        0.325
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "glitter_trans_light_blue",
+      "ldrawCode": 302,
+      "name": "Transparent Light Blue with Glitter 2%",
+      "rgb": [
+        0.682,
+        0.914,
+        0.937
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.349,
+          0.871,
+          0.749
+        ],
+        "fraction": 0.17,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "dark_brown",
+      "ldrawCode": 308,
+      "name": "Dark Brown",
+      "rgb": [
+        0.208,
+        0.129,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "maersk_blue",
+      "ldrawCode": 313,
+      "name": "Pastel Blue",
+      "rgb": [
+        0.671,
+        0.851,
+        1
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "flat_silver",
+      "ldrawCode": 315,
+      "name": "Silver Metallic",
+      "rgb": [
+        0.549,
+        0.549,
+        0.549
+      ],
+      "material": "pearl",
+      "common": true
+    },
+    {
+      "id": "titanium_metallic",
+      "ldrawCode": 316,
+      "name": "Titanium Metallic",
+      "rgb": [
+        0.243,
+        0.235,
+        0.224
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "dark_red",
+      "ldrawCode": 320,
+      "name": "New Dark Red",
+      "rgb": [
+        0.447,
+        0,
+        0.071
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "dark_azure",
+      "ldrawCode": 321,
+      "name": "Dark Azur",
+      "rgb": [
+        0.275,
+        0.608,
+        0.765
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_azure",
+      "ldrawCode": 322,
+      "name": "Medium Azur",
+      "rgb": [
+        0.408,
+        0.765,
+        0.886
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "light_aqua",
+      "ldrawCode": 323,
+      "name": "Aqua",
+      "rgb": [
+        0.827,
+        0.949,
+        0.918
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_red",
+      "ldrawCode": 324,
+      "name": "Rubber Red",
+      "rgb": [
+        0.706,
+        0,
+        0
+      ],
+      "material": "rubber",
+      "common": true
+    },
+    {
+      "id": "yellowish_green",
+      "ldrawCode": 326,
+      "name": "Spring Yellowish Green",
+      "rgb": [
+        0.886,
+        0.976,
+        0.604
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glow_in_dark_white",
+      "ldrawCode": 329,
+      "name": "White Glow",
+      "rgb": [
+        0.961,
+        0.953,
+        0.843
+      ],
+      "material": "glow",
+      "alpha": 0.961,
+      "luminance": 15,
       "translucent": true,
-      "aliases": ["trans_clear"]
+      "common": true
+    },
+    {
+      "id": "olive_green",
+      "ldrawCode": 330,
+      "name": "Olive Green",
+      "rgb": [
+        0.467,
+        0.467,
+        0.306
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "fluorescent_red_ink",
+      "ldrawCode": 332,
+      "name": "Fluorescent Red Ink",
+      "rgb": [
+        0.816,
+        0.427,
+        0.31
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "fluorescent_green_ink",
+      "ldrawCode": 333,
+      "name": "Fluorescent Green Ink",
+      "rgb": [
+        0.859,
+        0.918,
+        0.478
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "chrome_gold",
+      "ldrawCode": 334,
+      "name": "Metalized Gold",
+      "rgb": [
+        0.875,
+        0.757,
+        0.463
+      ],
+      "material": "chrome",
+      "common": true
+    },
+    {
+      "id": "sand_red",
+      "ldrawCode": 335,
+      "name": "Sand Red",
+      "rgb": [
+        0.533,
+        0.376,
+        0.369
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "glitter_trans_neon_green",
+      "ldrawCode": 339,
+      "name": "Transparent Fluorescent Green with Glitter 2%",
+      "rgb": [
+        0.753,
+        1,
+        0
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.6,
+          0.549,
+          0
+        ],
+        "fraction": 0.17,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "glitter_trans_orange",
+      "ldrawCode": 341,
+      "name": "Transparent Bright Orange with Glitter 2%",
+      "rgb": [
+        0.941,
+        0.561,
+        0.11
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.62,
+          0.165,
+          0.039
+        ],
+        "fraction": 0.17,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "conductive_black",
+      "ldrawCode": 342,
+      "name": "Conductive Black",
+      "rgb": [
+        0.243,
+        0.235,
+        0.224
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "reddish_copper",
+      "ldrawCode": 346,
+      "name": "Copper Metallic",
+      "rgb": [
+        0.502,
+        0.239,
+        0.027
+      ],
+      "material": "pearl"
+    },
+    {
+      "id": "rubber_orange",
+      "ldrawCode": 350,
+      "name": "Rubber Orange",
+      "rgb": [
+        0.839,
+        0.475,
+        0.137
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "medium_dark_pink",
+      "ldrawCode": 351,
+      "name": "Pink",
+      "rgb": [
+        0.969,
+        0.522,
+        0.694
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "coral",
+      "ldrawCode": 353,
+      "name": "Vibrant Coral",
+      "rgb": [
+        1,
+        0.427,
+        0.467
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "opal_trans_clear",
+      "ldrawCode": 360,
+      "name": "Transparent Clear Opal",
+      "rgb": [
+        0.988,
+        0.988,
+        0.988
+      ],
+      "material": "satin",
+      "alpha": 0.941,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          1,
+          1,
+          1
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "opal_trans_light_blue",
+      "ldrawCode": 362,
+      "name": "Transparent Blue Opal",
+      "rgb": [
+        0.682,
+        0.914,
+        0.937
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.349,
+          0.871,
+          0.749
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "opal_trans_black",
+      "ldrawCode": 363,
+      "name": "Transparent Brown Opal",
+      "rgb": [
+        0.388,
+        0.373,
+        0.322
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.467,
+          0.506,
+          0.788
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "opal_trans_dark_pink",
+      "ldrawCode": 364,
+      "name": "Transparent Medium Reddish Violet Opal",
+      "rgb": [
+        0.875,
+        0.4,
+        0.584
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.725,
+          0.153,
+          0.565
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "opal_trans_purple",
+      "ldrawCode": 365,
+      "name": "Transparent Violet Opal",
+      "rgb": [
+        0.404,
+        0.122,
+        0.506
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.184,
+          0.078,
+          0.337
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "earth_orange",
+      "ldrawCode": 366,
+      "name": "Light Orange Brown",
+      "rgb": [
+        0.847,
+        0.427,
+        0.173
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "opal_trans_bright_green",
+      "ldrawCode": 367,
+      "name": "Transparent Green Opal",
+      "rgb": [
+        0.337,
+        0.902,
+        0.275
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.043,
+          0.153,
+          0.043
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "neon_yellow",
+      "ldrawCode": 368,
+      "name": "Vibrant Yellow",
+      "rgb": [
+        0.929,
+        1,
+        0.129
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_brown",
+      "ldrawCode": 370,
+      "name": "Medium Brown",
+      "rgb": [
+        0.459,
+        0.349,
+        0.271
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_tan",
+      "ldrawCode": 371,
+      "name": "Warm Tan",
+      "rgb": [
+        0.8,
+        0.639,
+        0.451
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "sand_purple",
+      "ldrawCode": 373,
+      "name": "Sand Violet",
+      "rgb": [
+        0.459,
+        0.396,
+        0.49
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_light_grey",
+      "ldrawCode": 375,
+      "name": "Rubber Light Grey",
+      "rgb": [
+        0.541,
+        0.573,
+        0.553
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "opal_trans_yellow",
+      "ldrawCode": 376,
+      "name": "Transparent Yellow Opalescence",
+      "rgb": [
+        0.961,
+        0.804,
+        0.184
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0.706,
+          0.349,
+          0.031
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "sand_green",
+      "ldrawCode": 378,
+      "name": "Sand Green",
+      "rgb": [
+        0.439,
+        0.557,
+        0.486
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "sand_blue",
+      "ldrawCode": 379,
+      "name": "Sand Blue",
+      "rgb": [
+        0.439,
+        0.506,
+        0.604
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "chrome_silver",
+      "ldrawCode": 383,
+      "name": "Metalized Silver",
+      "rgb": [
+        0.808,
+        0.808,
+        0.808
+      ],
+      "material": "chrome",
+      "common": true
+    },
+    {
+      "id": "reddish_orange",
+      "ldrawCode": 402,
+      "name": "Reddish Orange",
+      "rgb": [
+        0.792,
+        0.298,
+        0.043
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_dark_blue",
+      "ldrawCode": 406,
+      "name": "Rubber Dark Blue",
+      "rgb": [
+        0.098,
+        0.196,
+        0.353
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "sienna_brown",
+      "ldrawCode": 422,
+      "name": "Sienna Brown",
+      "rgb": [
+        0.569,
+        0.361,
+        0.235
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "umber_brown",
+      "ldrawCode": 423,
+      "name": "Umber Brown",
+      "rgb": [
+        0.329,
+        0.247,
+        0.2
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "ochre_yellow",
+      "ldrawCode": 424,
+      "name": "Ochre Yellow",
+      "rgb": [
+        0.867,
+        0.62,
+        0.278
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "warm_pink",
+      "ldrawCode": 430,
+      "name": "Warm Pink",
+      "rgb": [
+        0.969,
+        0.608,
+        0.608
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "bright_blue_violet",
+      "ldrawCode": 431,
+      "name": "Blue Violet",
+      "rgb": [
+        0.4,
+        0.369,
+        0.655
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_purple",
+      "ldrawCode": 449,
+      "name": "Rubber Purple",
+      "rgb": [
+        0.404,
+        0.122,
+        0.506
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "fabuland_brown",
+      "ldrawCode": 450,
+      "name": "Brick Red",
+      "rgb": [
+        0.824,
+        0.467,
+        0.267
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "medium_orange",
+      "ldrawCode": 462,
+      "name": "Bright Yellowish Orange",
+      "rgb": [
+        0.961,
+        0.525,
+        0.141
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "dark_orange",
+      "ldrawCode": 484,
+      "name": "Dark Orange",
+      "rgb": [
+        0.569,
+        0.314,
+        0.11
+      ],
+      "material": "plastic",
+      "common": true
+    },
+    {
+      "id": "rubber_lime",
+      "ldrawCode": 490,
+      "name": "Rubber Lime",
+      "rgb": [
+        0.647,
+        0.792,
+        0.094
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "magnet",
+      "ldrawCode": 493,
+      "name": "Magnet",
+      "rgb": [
+        0.396,
+        0.404,
+        0.38
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "electric_contact_alloy",
+      "ldrawCode": 494,
+      "name": "Electric Contact Alloy",
+      "rgb": [
+        0.816,
+        0.816,
+        0.816
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "electric_contact_copper",
+      "ldrawCode": 495,
+      "name": "Electric Contact Copper",
+      "rgb": [
+        0.682,
+        0.478,
+        0.349
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "rubber_light_bluish_grey",
+      "ldrawCode": 496,
+      "name": "Rubber Light Bluish Grey",
+      "rgb": [
+        0.588,
+        0.588,
+        0.588
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "very_light_grey",
+      "ldrawCode": 503,
+      "name": "Light Grey",
+      "rgb": [
+        0.737,
+        0.706,
+        0.647
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_flat_silver",
+      "ldrawCode": 504,
+      "name": "Rubber Flat Silver",
+      "rgb": [
+        0.537,
+        0.529,
+        0.533
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "obsolete_light_orange_brown",
+      "ldrawCode": 507,
+      "name": "Obsolete Light Orange Brown",
+      "rgb": [
+        0.98,
+        0.612,
+        0.11
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "fabuland_red",
+      "ldrawCode": 508,
+      "name": "Red Orange",
+      "rgb": [
+        0.776,
+        0.318,
+        0.153
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "fabuland_orange",
+      "ldrawCode": 509,
+      "name": "Light Brown",
+      "rgb": [
+        0.812,
+        0.541,
+        0.278
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "fabuland_lime",
+      "ldrawCode": 510,
+      "name": "Pastel Green",
+      "rgb": [
+        0.675,
+        0.89,
+        0.353
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_white",
+      "ldrawCode": 511,
+      "name": "Rubber White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_green",
+      "ldrawCode": 10002,
+      "name": "Rubber Green",
+      "rgb": [
+        0,
+        0.522,
+        0.169
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_turquoise",
+      "ldrawCode": 10003,
+      "name": "Rubber Dark Turquoise",
+      "rgb": [
+        0.024,
+        0.616,
+        0.624
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_pink",
+      "ldrawCode": 10005,
+      "name": "Rubber Dark Pink",
+      "rgb": [
+        0.827,
+        0.208,
+        0.616
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_grey",
+      "ldrawCode": 10008,
+      "name": "Rubber Dark Grey",
+      "rgb": [
+        0.329,
+        0.349,
+        0.333
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_bright_green",
+      "ldrawCode": 10010,
+      "name": "Rubber Bright Green",
+      "rgb": [
+        0.345,
+        0.671,
+        0.255
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "lemon",
+      "ldrawCode": 10015,
+      "name": "Lemon",
+      "rgb": [
+        1,
+        0.949,
+        0.188
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rose_pink",
+      "ldrawCode": 10017,
+      "name": "Rose",
+      "rgb": [
+        1,
+        0.58,
+        0.58
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_tan",
+      "ldrawCode": 10019,
+      "name": "Rubber Tan",
+      "rgb": [
+        0.843,
+        0.729,
+        0.549
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "yellowish_dark_pink",
+      "ldrawCode": 10022,
+      "name": "Medium Reddish Violet",
+      "rgb": [
+        0.816,
+        0.314,
+        0.596
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "rubber_magenta",
+      "ldrawCode": 10026,
+      "name": "Rubber Magenta",
+      "rgb": [
+        0.565,
+        0.122,
+        0.463
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_tan",
+      "ldrawCode": 10028,
+      "name": "Rubber Dark Tan",
+      "rgb": [
+        0.537,
+        0.49,
+        0.384
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_bright_pink",
+      "ldrawCode": 10029,
+      "name": "Rubber Bright Pink",
+      "rgb": [
+        1,
+        0.62,
+        0.804
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_medium_lavender",
+      "ldrawCode": 10030,
+      "name": "Rubber Medium Lavender",
+      "rgb": [
+        0.627,
+        0.431,
+        0.725
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_lavender",
+      "ldrawCode": 10031,
+      "name": "Rubber Lavender",
+      "rgb": [
+        0.804,
+        0.643,
+        0.871
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_trans_bright_green",
+      "ldrawCode": 10035,
+      "name": "Rubber Trans Bright Green",
+      "rgb": [
+        0.337,
+        0.902,
+        0.275
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "rubber_trans_red",
+      "ldrawCode": 10036,
+      "name": "Rubber Trans Red",
+      "rgb": [
+        0.788,
+        0.102,
+        0.035
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "rubber_trans_light_blue",
+      "ldrawCode": 10043,
+      "name": "Rubber Trans Light Blue",
+      "rgb": [
+        0.682,
+        0.914,
+        0.937
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "metallic_light_blue",
+      "ldrawCode": 10045,
+      "name": "Cyan Metallic Ink",
+      "rgb": [
+        0.592,
+        0.796,
+        0.851
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "metallic_pink",
+      "ldrawCode": 10046,
+      "name": "Metallic Pink",
+      "rgb": [
+        0.678,
+        0.396,
+        0.604
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "trans_sticker",
+      "ldrawCode": 10047,
+      "name": "Trans Sticker",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "material": "transparent",
+      "alpha": 0.063,
+      "translucent": true
+    },
+    {
+      "id": "metallic_light_pink",
+      "ldrawCode": 10049,
+      "name": "Magenta Metallic Ink",
+      "rgb": [
+        0.996,
+        0.8,
+        0.812
+      ],
+      "material": "metallic"
+    },
+    {
+      "id": "rubber_trans_orange",
+      "ldrawCode": 10057,
+      "name": "Rubber Trans Orange",
+      "rgb": [
+        0.941,
+        0.561,
+        0.11
+      ],
+      "material": "rubber",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "rubber_reddish_brown",
+      "ldrawCode": 10070,
+      "name": "Rubber Reddish Brown",
+      "rgb": [
+        0.373,
+        0.192,
+        0.035
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_bluish_grey",
+      "ldrawCode": 10072,
+      "name": "Rubber Dark Bluish Grey",
+      "rgb": [
+        0.392,
+        0.392,
+        0.392
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_medium_blue",
+      "ldrawCode": 10073,
+      "name": "Rubber Medium Blue",
+      "rgb": [
+        0.451,
+        0.588,
+        0.784
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_light_nougat",
+      "ldrawCode": 10078,
+      "name": "Rubber Light Nougat",
+      "rgb": [
+        1,
+        0.788,
+        0.584
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_milky_white",
+      "ldrawCode": 10079,
+      "name": "Rubber Milky White",
+      "rgb": [
+        0.933,
+        0.933,
+        0.933
+      ],
+      "material": "rubber",
+      "alpha": 0.941,
+      "translucent": true
+    },
+    {
+      "id": "rubber_medium_nougat",
+      "ldrawCode": 10084,
+      "name": "Rubber Medium Nougat",
+      "rgb": [
+        0.667,
+        0.49,
+        0.333
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_medium_lilac",
+      "ldrawCode": 10085,
+      "name": "Rubber Medium Lilac",
+      "rgb": [
+        0.267,
+        0.102,
+        0.569
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_nougat",
+      "ldrawCode": 10092,
+      "name": "Rubber Nougat",
+      "rgb": [
+        0.733,
+        0.502,
+        0.353
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_pearl_light_grey",
+      "ldrawCode": 10135,
+      "name": "Rubber Pearl Light Grey",
+      "rgb": [
+        0.627,
+        0.627,
+        0.627
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_metallic_blue",
+      "ldrawCode": 10137,
+      "name": "Rubber Metallic Blue",
+      "rgb": [
+        0.357,
+        0.459,
+        0.565
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_pearl_dark_gold",
+      "ldrawCode": 10147,
+      "name": "Rubber Pearl Dark Gold",
+      "rgb": [
+        0.514,
+        0.447,
+        0.31
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_pearl_dark_grey",
+      "ldrawCode": 10148,
+      "name": "Rubber Pearl Dark Grey",
+      "rgb": [
+        0.282,
+        0.302,
+        0.282
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_pearl_very_light_grey",
+      "ldrawCode": 10150,
+      "name": "Rubber Pearl Very Light Grey",
+      "rgb": [
+        0.596,
+        0.608,
+        0.6
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_very_light_bluish_grey",
+      "ldrawCode": 10151,
+      "name": "Rubber Very Light Bluish Grey",
+      "rgb": [
+        0.784,
+        0.784,
+        0.784
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_reddish_gold",
+      "ldrawCode": 10189,
+      "name": "Rubber Reddish Gold",
+      "rgb": [
+        0.675,
+        0.51,
+        0.278
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_bright_light_orange",
+      "ldrawCode": 10191,
+      "name": "Rubber Bright Light Orange",
+      "rgb": [
+        0.988,
+        0.675,
+        0
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_lemon_metallic",
+      "ldrawCode": 10200,
+      "name": "Rubber Lemon Metallic",
+      "rgb": [
+        0.439,
+        0.51,
+        0.141
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_bright_light_blue",
+      "ldrawCode": 10212,
+      "name": "Rubber Bright Light Blue",
+      "rgb": [
+        0.616,
+        0.765,
+        0.969
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_bright_light_yellow",
+      "ldrawCode": 10226,
+      "name": "Rubber Bright Light Yellow",
+      "rgb": [
+        1,
+        0.925,
+        0.424
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_green",
+      "ldrawCode": 10288,
+      "name": "Rubber Dark Green",
+      "rgb": [
+        0,
+        0.271,
+        0.102
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_pearl_gold",
+      "ldrawCode": 10297,
+      "name": "Rubber Pearl Gold",
+      "rgb": [
+        0.667,
+        0.498,
+        0.18
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_brown",
+      "ldrawCode": 10308,
+      "name": "Rubber Dark Brown",
+      "rgb": [
+        0.208,
+        0.129,
+        0
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_red",
+      "ldrawCode": 10320,
+      "name": "Rubber Dark Red",
+      "rgb": [
+        0.447,
+        0,
+        0.071
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_azure",
+      "ldrawCode": 10321,
+      "name": "Rubber Dark Azure",
+      "rgb": [
+        0.275,
+        0.608,
+        0.765
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_medium_azure",
+      "ldrawCode": 10322,
+      "name": "Rubber Medium Azure",
+      "rgb": [
+        0.408,
+        0.765,
+        0.886
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_light_aqua",
+      "ldrawCode": 10323,
+      "name": "Rubber Light Aqua",
+      "rgb": [
+        0.827,
+        0.949,
+        0.918
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_yellowish_green",
+      "ldrawCode": 10326,
+      "name": "Rubber Yellowish Green",
+      "rgb": [
+        0.886,
+        0.976,
+        0.604
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_olive_green",
+      "ldrawCode": 10330,
+      "name": "Rubber Olive Green",
+      "rgb": [
+        0.467,
+        0.467,
+        0.306
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "glitter_trans_bright_green",
+      "ldrawCode": 10351,
+      "name": "Transparent Bright Green with Glitter 2%",
+      "rgb": [
+        0.337,
+        0.902,
+        0.275
+      ],
+      "material": "glitter",
+      "alpha": 0.502,
+      "glitter": {
+        "rgb": [
+          0.349,
+          0.686,
+          0.094
+        ],
+        "fraction": 0.17,
+        "size": 1
+      },
+      "translucent": true
+    },
+    {
+      "id": "opal_trans_dark_blue",
+      "ldrawCode": 10366,
+      "name": "Transparent Blue Opal",
+      "rgb": [
+        0,
+        0.125,
+        0.627
+      ],
+      "material": "satin",
+      "alpha": 0.784,
+      "luminance": 5,
+      "glitter": {
+        "rgb": [
+          0,
+          0.114,
+          0.22
+        ],
+        "fraction": 0.8,
+        "size": 0.060000000000000005
+      },
+      "translucent": true
+    },
+    {
+      "id": "trans_black",
+      "ldrawCode": 10375,
+      "name": "Transparent Black",
+      "rgb": [
+        0.129,
+        0.129,
+        0.129
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true,
+      "common": true
+    },
+    {
+      "id": "rubber_sand_green",
+      "ldrawCode": 10378,
+      "name": "Rubber Sand Green",
+      "rgb": [
+        0.439,
+        0.557,
+        0.486
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "rubber_dark_orange",
+      "ldrawCode": 10484,
+      "name": "Rubber Dark Orange",
+      "rgb": [
+        0.569,
+        0.314,
+        0.11
+      ],
+      "material": "rubber"
+    },
+    {
+      "id": "trans_white",
+      "ldrawCode": 11015,
+      "name": "Trans White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "transparent",
+      "alpha": 0.682,
+      "translucent": true
+    },
+    {
+      "id": "trans_tan",
+      "ldrawCode": 11019,
+      "name": "Trans Tan",
+      "rgb": [
+        0.843,
+        0.729,
+        0.549
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "canvas_black",
+      "ldrawCode": 20000,
+      "name": "Canvas Black",
+      "rgb": [
+        0.106,
+        0.165,
+        0.204
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_blue",
+      "ldrawCode": 20001,
+      "name": "Canvas Blue",
+      "rgb": [
+        0.118,
+        0.353,
+        0.659
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_green",
+      "ldrawCode": 20002,
+      "name": "Canvas Green",
+      "rgb": [
+        0,
+        0.522,
+        0.169
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_red",
+      "ldrawCode": 20004,
+      "name": "Canvas Red",
+      "rgb": [
+        0.706,
+        0,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_brown",
+      "ldrawCode": 20006,
+      "name": "Canvas Brown",
+      "rgb": [
+        0.329,
+        0.2,
+        0.141
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_light_grey",
+      "ldrawCode": 20007,
+      "name": "Canvas Light Grey",
+      "rgb": [
+        0.541,
+        0.573,
+        0.553
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_bright_green",
+      "ldrawCode": 20010,
+      "name": "Canvas Bright Green",
+      "rgb": [
+        0.345,
+        0.671,
+        0.255
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_yellow",
+      "ldrawCode": 20014,
+      "name": "Canvas Yellow",
+      "rgb": [
+        0.98,
+        0.784,
+        0.039
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_white",
+      "ldrawCode": 20015,
+      "name": "Canvas White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_tan",
+      "ldrawCode": 20019,
+      "name": "Canvas Tan",
+      "rgb": [
+        0.843,
+        0.729,
+        0.549
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_purple",
+      "ldrawCode": 20022,
+      "name": "Canvas Purple",
+      "rgb": [
+        0.404,
+        0.122,
+        0.506
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_dark_tan",
+      "ldrawCode": 20028,
+      "name": "Canvas Dark Tan",
+      "rgb": [
+        0.537,
+        0.49,
+        0.384
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_reddish_brown",
+      "ldrawCode": 20070,
+      "name": "Canvas Reddish Brown",
+      "rgb": [
+        0.373,
+        0.192,
+        0.035
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_light_bluish_grey",
+      "ldrawCode": 20071,
+      "name": "Canvas Light Bluish Grey",
+      "rgb": [
+        0.588,
+        0.588,
+        0.588
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_dark_bluish_grey",
+      "ldrawCode": 20072,
+      "name": "Canvas Dark Bluish Grey",
+      "rgb": [
+        0.392,
+        0.392,
+        0.392
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_light_brown",
+      "ldrawCode": 20086,
+      "name": "Canvas Light Brown",
+      "rgb": [
+        0.482,
+        0.365,
+        0.255
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_dark_green",
+      "ldrawCode": 20288,
+      "name": "Canvas Dark Green",
+      "rgb": [
+        0,
+        0.271,
+        0.102
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_dark_red",
+      "ldrawCode": 20320,
+      "name": "Canvas Dark Red",
+      "rgb": [
+        0.447,
+        0,
+        0.071
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_sand_red",
+      "ldrawCode": 20335,
+      "name": "Canvas Sand Red",
+      "rgb": [
+        0.533,
+        0.376,
+        0.369
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "canvas_cream",
+      "ldrawCode": 20500,
+      "name": "Canvas Cream",
+      "rgb": [
+        0.973,
+        0.953,
+        0.894
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_clear",
+      "ldrawCode": 30000,
+      "name": "Modulex Clear",
+      "rgb": [
+        0.988,
+        0.988,
+        0.988
+      ],
+      "material": "transparent",
+      "alpha": 0.502,
+      "translucent": true
+    },
+    {
+      "id": "modulex_white",
+      "ldrawCode": 30001,
+      "name": "Modulex White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_light_grey",
+      "ldrawCode": 30002,
+      "name": "Modulex Light Grey",
+      "rgb": [
+        0.541,
+        0.573,
+        0.553
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_black",
+      "ldrawCode": 30003,
+      "name": "Modulex Black",
+      "rgb": [
+        0.204,
+        0.263,
+        0.302
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_terracotta",
+      "ldrawCode": 30004,
+      "name": "Modulex Terracotta",
+      "rgb": [
+        0.824,
+        0.467,
+        0.267
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_buff",
+      "ldrawCode": 30005,
+      "name": "Modulex Buff",
+      "rgb": [
+        0.843,
+        0.729,
+        0.549
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_ochre_yellow",
+      "ldrawCode": 30006,
+      "name": "Modulex Ochre Yellow",
+      "rgb": [
+        0.996,
+        0.835,
+        0.341
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_olive_green",
+      "ldrawCode": 30007,
+      "name": "Modulex Olive Green",
+      "rgb": [
+        0.486,
+        0.565,
+        0.318
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_teal_blue",
+      "ldrawCode": 30008,
+      "name": "Modulex Teal Blue",
+      "rgb": [
+        0.275,
+        0.439,
+        0.514
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_brown",
+      "ldrawCode": 30009,
+      "name": "Modulex Brown",
+      "rgb": [
+        0.565,
+        0.455,
+        0.314
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_strong_red",
+      "ldrawCode": 30010,
+      "name": "Modulex Strong Red",
+      "rgb": [
+        0.706,
+        0,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_pastel_blue",
+      "ldrawCode": 30011,
+      "name": "Modulex Pastel Blue",
+      "rgb": [
+        0.671,
+        0.851,
+        1
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_orange",
+      "ldrawCode": 30012,
+      "name": "Modulex Orange",
+      "rgb": [
+        0.847,
+        0.427,
+        0.173
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_red",
+      "ldrawCode": 30013,
+      "name": "Modulex Red",
+      "rgb": [
+        0.776,
+        0.318,
+        0.153
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_pastel_green",
+      "ldrawCode": 30014,
+      "name": "Modulex Pastel Green",
+      "rgb": [
+        0.471,
+        0.988,
+        0.471
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_lemon",
+      "ldrawCode": 30015,
+      "name": "Modulex Lemon",
+      "rgb": [
+        1,
+        0.949,
+        0.188
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_pink",
+      "ldrawCode": 30016,
+      "name": "Modulex Pink",
+      "rgb": [
+        0.969,
+        0.522,
+        0.694
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_light_bluish_grey",
+      "ldrawCode": 30032,
+      "name": "Modulex Light Bluish Grey",
+      "rgb": [
+        0.686,
+        0.71,
+        0.78
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_pink_red",
+      "ldrawCode": 30033,
+      "name": "Modulex Pink Red",
+      "rgb": [
+        0.957,
+        0.361,
+        0.251
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_aqua_green",
+      "ldrawCode": 30034,
+      "name": "Modulex Aqua Green",
+      "rgb": [
+        0.153,
+        0.525,
+        0.494
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_light_yellow",
+      "ldrawCode": 30035,
+      "name": "Modulex Light Yellow",
+      "rgb": [
+        1,
+        0.89,
+        0.443
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_violet",
+      "ldrawCode": 30037,
+      "name": "Modulex Violet",
+      "rgb": [
+        0.741,
+        0.49,
+        0.522
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_medium_blue",
+      "ldrawCode": 30038,
+      "name": "Modulex Medium Blue",
+      "rgb": [
+        0.38,
+        0.686,
+        1
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_light_orange",
+      "ldrawCode": 30039,
+      "name": "Modulex Light Orange",
+      "rgb": [
+        0.969,
+        0.678,
+        0.388
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_charcoal_grey",
+      "ldrawCode": 30040,
+      "name": "Modulex Charcoal Grey",
+      "rgb": [
+        0.349,
+        0.365,
+        0.376
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_dark_brown",
+      "ldrawCode": 30054,
+      "name": "Modulex Dark Brown",
+      "rgb": [
+        0.2,
+        0,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_white",
+      "ldrawCode": 30080,
+      "name": "Modulex Foil White",
+      "rgb": [
+        0.957,
+        0.957,
+        0.957
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_black",
+      "ldrawCode": 30081,
+      "name": "Modulex Foil Black",
+      "rgb": [
+        0.204,
+        0.263,
+        0.302
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_dark_grey",
+      "ldrawCode": 30082,
+      "name": "Modulex Foil Dark Grey",
+      "rgb": [
+        0.349,
+        0.365,
+        0.376
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_light_grey",
+      "ldrawCode": 30083,
+      "name": "Modulex Foil Light Grey",
+      "rgb": [
+        0.612,
+        0.612,
+        0.612
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_dark_green",
+      "ldrawCode": 30084,
+      "name": "Modulex Foil Dark Green",
+      "rgb": [
+        0,
+        0.392,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_light_green",
+      "ldrawCode": 30085,
+      "name": "Modulex Foil Light Green",
+      "rgb": [
+        0.49,
+        0.71,
+        0.22
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_dark_blue",
+      "ldrawCode": 30086,
+      "name": "Modulex Foil Dark Blue",
+      "rgb": [
+        0,
+        0.341,
+        0.651
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_light_blue",
+      "ldrawCode": 30087,
+      "name": "Modulex Foil Light Blue",
+      "rgb": [
+        0.408,
+        0.682,
+        0.808
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_violet",
+      "ldrawCode": 30088,
+      "name": "Modulex Foil Violet",
+      "rgb": [
+        0.294,
+        0,
+        0.51
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_dark_red",
+      "ldrawCode": 30089,
+      "name": "Modulex Foil Dark Red",
+      "rgb": [
+        0.545,
+        0,
+        0
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_yellow",
+      "ldrawCode": 30090,
+      "name": "Modulex Foil Yellow",
+      "rgb": [
+        0.996,
+        0.835,
+        0.341
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_foil_orange",
+      "ldrawCode": 30091,
+      "name": "Modulex Foil Orange",
+      "rgb": [
+        0.969,
+        0.678,
+        0.388
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_dark_grey",
+      "ldrawCode": 31000,
+      "name": "Modulex Dark Grey",
+      "rgb": [
+        0.42,
+        0.353,
+        0.353
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_blue",
+      "ldrawCode": 31001,
+      "name": "Modulex Blue",
+      "rgb": [
+        0,
+        0.341,
+        0.651
+      ],
+      "material": "plastic"
+    },
+    {
+      "id": "modulex_very_light_grey",
+      "ldrawCode": 31002,
+      "name": "Modulex Very Light Grey",
+      "rgb": [
+        0.851,
+        0.835,
+        0.8
+      ],
+      "material": "plastic"
     }
   ]
 }

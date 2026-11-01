@@ -36,17 +36,42 @@ fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOutput {
     let p = pos[vertexIndex];
     var output: VertexOutput;
 
-    // Calculate the clip position. By setting the Z component to W,
-    // the skybox is forced to render at maximum depth (behind all other geometry).
-    output.clip_position = (frame.projectionMatrix * view_no_translation * vec4<f32>(p, 1.0)).xyww;
-
     // Assign unused properties for this shader to match the `VertexOutput` structure.
     output.uv = vec2<f32>(0.0, 0.0);
     output.tangent_space_light_dir = vec3<f32>(0.0, 0.0, 0.0);
     output.tangent_space_view_dir = vec3<f32>(0.0, 0.0, 0.0);
     output.shadowPos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
     output.color = vec4<f32>(0.0, 0.0, 0.0, 1.0);
-    
+
+    // Orthographic: a unit cube stays a finite box in the frustum (gl-matrix ortho
+    // stores 1 in m[3][3]). Fill the view and sample one view direction.
+    // Winding is clockwise so it survives the skybox pipeline's front-face cull.
+    if (frame.projectionMatrix[3].w > 0.5) {
+        let tri = vertexIndex % 3u;
+        var ndc = vec2<f32>(-1.0, -1.0);
+        if (tri == 1u) {
+            ndc = vec2<f32>(-1.0, 3.0);
+        } else if (tri == 2u) {
+            ndc = vec2<f32>(3.0, -1.0);
+        }
+        output.clip_position = vec4<f32>(ndc, 1.0, 1.0);
+        // lookAt stores the camera back-vector on the third row.
+        var dir = -vec3<f32>(
+            view_no_translation[0].z,
+            view_no_translation[1].z,
+            view_no_translation[2].z
+        );
+        if (abs(dir.y) > 0.85) {
+            dir = vec3<f32>(0.0, 0.35, 1.0);
+        }
+        output.world_position = dir;
+        output.world_normal = dir;
+        return output;
+    }
+
+    // Perspective: Z = W forces depth to the far plane, behind the scene.
+    output.clip_position = (frame.projectionMatrix * view_no_translation * vec4<f32>(p, 1.0)).xyww;
+
     // The world position is passed directly to the fragment shader for cubemap sampling.
     output.world_position = p;
     output.world_normal = p;

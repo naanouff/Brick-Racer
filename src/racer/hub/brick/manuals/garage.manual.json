@@ -1,0 +1,5379 @@
+{
+  "id": "landmark.garage",
+  "version": 1,
+  "title": "Garage Bolt — ON JUGERA TON BUILD (24×24 × 42P)",
+  "origin": [
+    20,
+    0,
+    20
+  ],
+  "envelope": {
+    "size": [
+      8.25,
+      4.73,
+      8.25
+    ]
+  },
+  "partsList": [
+    {
+      "part": "11211",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "2412",
+      "color": "white",
+      "qty": 3
+    },
+    {
+      "part": "2445",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "2465",
+      "color": "dark_gray",
+      "qty": 12
+    },
+    {
+      "part": "2465",
+      "color": "terracotta",
+      "qty": 16
+    },
+    {
+      "part": "3005",
+      "color": "black",
+      "qty": 2
+    },
+    {
+      "part": "3005",
+      "color": "dark_gray",
+      "qty": 54
+    },
+    {
+      "part": "3005",
+      "color": "terracotta",
+      "qty": 244
+    },
+    {
+      "part": "3005",
+      "color": "yellow",
+      "qty": 16
+    },
+    {
+      "part": "3008",
+      "color": "dark_gray",
+      "qty": 4
+    },
+    {
+      "part": "3008",
+      "color": "terracotta",
+      "qty": 4
+    },
+    {
+      "part": "3008",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "3009",
+      "color": "dark_gray",
+      "qty": 8
+    },
+    {
+      "part": "3009",
+      "color": "terracotta",
+      "qty": 24
+    },
+    {
+      "part": "3010",
+      "color": "dark_gray",
+      "qty": 4
+    },
+    {
+      "part": "3020",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3023",
+      "color": "black",
+      "qty": 1
+    },
+    {
+      "part": "3023",
+      "color": "dark_gray",
+      "qty": 7
+    },
+    {
+      "part": "3024",
+      "color": "black",
+      "qty": 9
+    },
+    {
+      "part": "3024",
+      "color": "dark_gray",
+      "qty": 6
+    },
+    {
+      "part": "3028",
+      "color": "dark_gray",
+      "qty": 10
+    },
+    {
+      "part": "3029",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "3030",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3033",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3070",
+      "color": "black",
+      "qty": 4
+    },
+    {
+      "part": "3070",
+      "color": "terracotta",
+      "qty": 6
+    },
+    {
+      "part": "3070",
+      "color": "white",
+      "qty": 4
+    },
+    {
+      "part": "3460",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "3623",
+      "color": "dark_gray",
+      "qty": 3
+    },
+    {
+      "part": "3710",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "4162",
+      "color": "terracotta",
+      "qty": 21
+    },
+    {
+      "part": "4162",
+      "color": "white",
+      "qty": 2
+    },
+    {
+      "part": "4477",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "60479",
+      "color": "dark_gray",
+      "qty": 8
+    },
+    {
+      "part": "6636",
+      "color": "terracotta",
+      "qty": 12
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — plate y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -6,
+            0,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            6,
+            0,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2445",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            6
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2445",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            6
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            8
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            8
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3460",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            9
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "dark_gray",
+          "at": [
+            -4,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            -3,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            0,
+            9
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            0,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            1,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            2,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3460",
+          "color": "dark_gray",
+          "at": [
+            3,
+            0,
+            9
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "dark_gray",
+          "at": [
+            11,
+            0,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            10
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            -9,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3020",
+          "color": "dark_gray",
+          "at": [
+            -8,
+            0,
+            10
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            -3,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "black",
+          "at": [
+            -2,
+            0,
+            10
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            0,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            1,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            2,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            3,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "dark_gray",
+          "at": [
+            4,
+            0,
+            10
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            8,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            9,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            10,
+            0,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            0,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            -10,
+            0,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            -9,
+            0,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            0,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            1,
+            0,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "dark_gray",
+          "at": [
+            3,
+            0,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            7,
+            0,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "black",
+          "at": [
+            8,
+            0,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "dark_gray",
+          "at": [
+            9,
+            0,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2 — brick y=1",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            1,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "dark_gray",
+          "at": [
+            4,
+            1,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            1,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            11,
+            1,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            1,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "dark_gray",
+          "at": [
+            11,
+            1,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            1,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            1,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            -12,
+            1,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "black",
+          "at": [
+            11,
+            1,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            1,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "black",
+          "at": [
+            -11,
+            1,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "dark_gray",
+          "at": [
+            -9,
+            1,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            1,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            1,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "dark_gray",
+          "at": [
+            5,
+            1,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "black",
+          "at": [
+            9,
+            1,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            1,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3 — brick y=4",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            4,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            4,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            4,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            4,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -11,
+            4,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            4,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            4,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            5,
+            4,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            6,
+            4,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "4 — brick y=7",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            7,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "terracotta",
+          "at": [
+            4,
+            7,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            7,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            11,
+            7,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -12,
+            7,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            11,
+            7,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -12,
+            7,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -6,
+            7,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            7,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            7,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            7,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            7,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5 — brick y=10",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            10,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            10,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            10,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            10,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -11,
+            10,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            10,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            10,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            5,
+            10,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            6,
+            10,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "6 — brick y=13",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            13,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "terracotta",
+          "at": [
+            4,
+            13,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            13,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            11,
+            13,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -12,
+            13,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            11,
+            13,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -12,
+            13,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -6,
+            13,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            13,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            13,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            13,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            13,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7 — brick y=16",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            16,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            16,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            16,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            16,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -11,
+            16,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            16,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            16,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            5,
+            16,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            6,
+            16,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "8 — brick y=19",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            19,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "dark_gray",
+          "at": [
+            4,
+            19,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            19,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            11,
+            19,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            19,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            11,
+            19,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            19,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -6,
+            19,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            19,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            19,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            5,
+            19,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            19,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9 — brick y=22",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            22,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            22,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            22,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            22,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -11,
+            22,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            -5,
+            22,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "yellow",
+          "at": [
+            -4,
+            22,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "yellow",
+          "at": [
+            4,
+            22,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            5,
+            22,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            6,
+            22,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "10 — tile y=25",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            25,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -4,
+            25,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            4,
+            25,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            25,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            25,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            25,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            25,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            25,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            11,
+            25,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            25,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            -6,
+            25,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "white",
+          "at": [
+            -5,
+            25,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2412",
+          "color": "white",
+          "at": [
+            3,
+            25,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            5,
+            25,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            11,
+            25,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "11 — tile y=26",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            26,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -4,
+            26,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            4,
+            26,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            26,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            26,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            26,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            26,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            26,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            11,
+            26,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            26,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            -6,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "white",
+          "at": [
+            -5,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "black",
+          "at": [
+            -4,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "white",
+          "at": [
+            -3,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "black",
+          "at": [
+            -2,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "white",
+          "at": [
+            -1,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "black",
+          "at": [
+            0,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "white",
+          "at": [
+            1,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "black",
+          "at": [
+            2,
+            26,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2412",
+          "color": "white",
+          "at": [
+            3,
+            26,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            5,
+            26,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            11,
+            26,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "12 — tile y=27",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            27,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -4,
+            27,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            4,
+            27,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            27,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            27,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            -12,
+            27,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "terracotta",
+          "at": [
+            11,
+            27,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            27,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            11,
+            27,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            -12,
+            27,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            -6,
+            27,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4162",
+          "color": "white",
+          "at": [
+            -5,
+            27,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2412",
+          "color": "white",
+          "at": [
+            3,
+            27,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "6636",
+          "color": "terracotta",
+          "at": [
+            5,
+            27,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3070",
+          "color": "terracotta",
+          "at": [
+            11,
+            27,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "13 — brick y=28",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            28,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "terracotta",
+          "at": [
+            4,
+            28,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            28,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            11,
+            28,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            -12,
+            28,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            11,
+            28,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -12,
+            28,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "terracotta",
+          "at": [
+            4,
+            28,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "14 — brick y=31",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            31,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            31,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -12,
+            31,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "terracotta",
+          "at": [
+            -11,
+            31,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "terracotta",
+          "at": [
+            5,
+            31,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            11,
+            31,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "15 — brick y=34",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            34,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "dark_gray",
+          "at": [
+            4,
+            34,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            34,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            11,
+            34,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            34,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            11,
+            34,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            34,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3008",
+          "color": "dark_gray",
+          "at": [
+            4,
+            34,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "16 — brick y=37",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -11,
+            37,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            5,
+            37,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -12
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            9
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            10
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            37,
+            11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2465",
+          "color": "dark_gray",
+          "at": [
+            -11,
+            37,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3009",
+          "color": "dark_gray",
+          "at": [
+            5,
+            37,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "dark_gray",
+          "at": [
+            11,
+            37,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "title": "17 — plate y=40",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -11,
+            40,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -5,
+            40,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            1,
+            40,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3029",
+          "color": "dark_gray",
+          "at": [
+            7,
+            40,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3028",
+          "color": "dark_gray",
+          "at": [
+            -11,
+            40,
+            1
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3033",
+          "color": "dark_gray",
+          "at": [
+            1,
+            40,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3030",
+          "color": "dark_gray",
+          "at": [
+            7,
+            40,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3029",
+          "color": "dark_gray",
+          "at": [
+            -11,
+            40,
+            7
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "18 — plate y=41",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            41,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            0,
+            41,
+            -12
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            41,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            11,
+            41,
+            -11
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4477",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            41,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "4477",
+          "color": "dark_gray",
+          "at": [
+            11,
+            41,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            -12,
+            41,
+            11
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "60479",
+          "color": "dark_gray",
+          "at": [
+            0,
+            41,
+            11
+          ],
+          "rot": 90
+        }
+      ]
+    }
+  ]
+}

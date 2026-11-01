@@ -17,7 +17,8 @@ import {
   catalogUvGridMaterials,
 } from '../src/racer/hub/brick/catalog/catalogPlasticMaterials';
 import { buildCityTestSpec } from '../src/racer/levels/cityTest/cityTestSpec';
-import { BRICK_COLOR_IDS, getColor } from '../src/racer/hub/brick/brickCatalog';
+import { getColor } from '../src/racer/hub/brick/brickCatalog';
+import { catalogCommonColorIds } from '../src/racer/hub/brick/catalog';
 import { MINIFIG_UV_GRID_SHADER_ID, MINIFIG_UV_GRID_TEXTURE_ID } from '../src/racer/minifig/minifigUvGridDebug';
 import { PLASTIC_MAP_SETS } from '../src/racer/minifig/plasticMapSets';
 import { buildBrickLabSpec } from '../src/racer/levels/brickLab/brickLabSpec';
@@ -25,17 +26,19 @@ import { buildCatalogLabSpec } from '../src/racer/levels/catalogLab/catalogLabSp
 
 describe('catalogPlasticMaterials', () => {
   const mats = catalogPlasticMaterials();
+  const commonIds = catalogCommonColorIds();
 
-  it('registers every set × BC1 color under CL_plastic_*', () => {
+  it('registers every set × common color under CL_plastic_* (MT1)', () => {
     expect(CATALOG_PLASTIC_SETS).toEqual(['017b', '003', 'off']);
+    expect(commonIds.length).toBeGreaterThanOrEqual(30);
     for (const set of CATALOG_PLASTIC_SETS) {
-      for (const color of BRICK_COLOR_IDS) {
+      for (const color of commonIds) {
         const id = catalogPlasticMaterialId(set, color);
         expect(mats[id]?.shaderGraphId).toBe(CATALOG_PLASTIC_SHADER_ID);
       }
     }
     expect(Object.keys(mats)).toHaveLength(
-      CATALOG_PLASTIC_SETS.length * BRICK_COLOR_IDS.length * 2
+      CATALOG_PLASTIC_SETS.length * commonIds.length * 2
     );
     expect(mats[catalogPlasticMaterialId('003', 'gray', false)]?.properties.edgeWear).toBe(0);
     expect(mats[catalogPlasticMaterialId('003', 'gray', false)]?.properties.aoStrength).toBe(0);
@@ -65,7 +68,7 @@ describe('catalogPlasticMaterials', () => {
     expect(off.properties.baseColor).toEqual([gray.rgb[0], gray.rgb[1], gray.rgb[2], 1]);
     expect(off.properties.usePlasticMaps).toBe(0);
 
-    const withMaps = mats[catalogPlasticMaterialId('003', 'cyan')]!;
+    const withMaps = mats[catalogPlasticMaterialId('003', 'gray')]!;
     expect(withMaps.properties.usePlasticMaps).toBe(1);
     expect(withMaps.properties.emissiveTexture).toBe(PLASTIC_MAP_SETS['003'].surface);
     expect(withMaps.properties.normalTexture).toBe(PLASTIC_MAP_SETS['003'].normal);

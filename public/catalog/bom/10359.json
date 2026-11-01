@@ -1,0 +1,2307 @@
+{
+  "version": 1,
+  "setNum": "10359-1",
+  "generated": "2026-10-31T10:30:16.101Z",
+  "ids": [
+    "10187",
+    "11203",
+    "11211",
+    "11212",
+    "14719",
+    "14719pr0002",
+    "15712",
+    "1613",
+    "18674",
+    "18853",
+    "19119",
+    "1941",
+    "20482",
+    "22667",
+    "22885",
+    "2357",
+    "2412b",
+    "2417",
+    "2420",
+    "24201",
+    "2423",
+    "2431",
+    "2445",
+    "2450",
+    "2456",
+    "24866",
+    "25269",
+    "26601",
+    "26603",
+    "26604",
+    "27263",
+    "27393",
+    "27507pr0008",
+    "3001",
+    "3003",
+    "3004",
+    "3005",
+    "3007",
+    "3008",
+    "3009",
+    "3010",
+    "30136",
+    "3020",
+    "3021",
+    "3022",
+    "3023",
+    "3024",
+    "3027",
+    "3031",
+    "3032",
+    "3034",
+    "3035",
+    "30374",
+    "30385",
+    "3062b",
+    "3068b",
+    "3068bpr9350",
+    "3069b",
+    "3069bpr9350",
+    "3070b",
+    "32028",
+    "32064a",
+    "32607",
+    "32828",
+    "32952",
+    "33078",
+    "33320",
+    "33909",
+    "3460",
+    "35459",
+    "35787",
+    "3622",
+    "3623",
+    "3659",
+    "3665",
+    "3666",
+    "3710",
+    "37695",
+    "37762",
+    "3795",
+    "38583",
+    "38585",
+    "3941",
+    "3942c",
+    "3958",
+    "39739",
+    "4032a",
+    "40379",
+    "4070",
+    "4162",
+    "41835pr0003",
+    "4274",
+    "4282",
+    "4367",
+    "43888",
+    "43898",
+    "4477",
+    "4490",
+    "4733",
+    "4740",
+    "49307",
+    "5091",
+    "5092",
+    "50950",
+    "5174",
+    "52107",
+    "5256",
+    "54200",
+    "5903",
+    "5904",
+    "59900",
+    "6141",
+    "6179",
+    "6180",
+    "62462",
+    "63864",
+    "63965",
+    "64644",
+    "64647",
+    "64799",
+    "6541",
+    "65509",
+    "65578",
+    "68211",
+    "76959",
+    "77844",
+    "78258",
+    "78666",
+    "80674pr0006",
+    "85861",
+    "85975",
+    "86876",
+    "87079",
+    "87087",
+    "87580",
+    "87620",
+    "87994",
+    "89678",
+    "90398",
+    "91405",
+    "93273",
+    "96874",
+    "98138"
+  ],
+  "counts": {
+    "promoted": 98,
+    "alreadyBc1": 41,
+    "unresolved": 4,
+    "noFootprint": 0
+  },
+  "colorHints": [
+    {
+      "from": "White",
+      "to": "white",
+      "note": "stone / arches"
+    },
+    {
+      "from": "Tan",
+      "to": "sand",
+      "note": "paths / coping"
+    },
+    {
+      "from": "Dark Orange",
+      "to": "terracotta",
+      "note": "zellij accents"
+    },
+    {
+      "from": "Light Bluish Gray",
+      "to": "gray",
+      "note": "fountain metal / dishes"
+    },
+    {
+      "from": "Dark Bluish Gray",
+      "to": "dark_gray",
+      "note": "accents"
+    },
+    {
+      "from": "Black",
+      "to": "black",
+      "note": "round pillars"
+    },
+    {
+      "from": "Green",
+      "to": "green",
+      "note": "foliage"
+    },
+    {
+      "from": "Trans-Light Blue",
+      "to": "cyan",
+      "note": "water"
+    },
+    {
+      "from": "Trans-Clear",
+      "to": "clear",
+      "note": "cascades"
+    },
+    {
+      "from": "Red",
+      "to": "red",
+      "note": "flowers"
+    },
+    {
+      "from": "Bright Light Yellow",
+      "to": "yellow",
+      "note": "flowers"
+    }
+  ],
+  "unresolved": [
+    "1941",
+    "5174",
+    "5256",
+    "5903"
+  ],
+  "noFootprint": [],
+  "defs": [
+    {
+      "id": "10187",
+      "name": "Weapon Bladed Claw Spread",
+      "category": "other",
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "10187",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "11203",
+      "name": "Tile Special 2 x 2 Inverted",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "11203",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "11211",
+      "name": "Brick Special 1 x 2 with 2 Studs on 1 Side",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "11211",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "11212",
+      "name": "Plate 3 x 3",
+      "category": "plate",
+      "footprint": [
+        3,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "11212",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "14719",
+      "name": "Tile 2 x 2 Corner",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "14719",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "14719pr0002",
+      "name": "Tile 2 x 2 Corner with Blue Star, Orange/Bright Light Orange Squares, Dark Turquoise Line Print",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "14719p00",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "15712",
+      "name": "Tile Special 1 x 1 with Clip with Rounded Edges",
+      "category": "tile",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "15712",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "1613",
+      "name": "Headwear Accessory Antlers",
+      "category": "other",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "1613",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "18674",
+      "name": "Plate Special Round 2 x 2 with Center Stud (Jumper Plate)",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "18674",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "18853",
+      "name": "Plant, Flower with 5 Pointed Petals and Pin",
+      "category": "plant",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "18853",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "19119",
+      "name": "Plant, Flower Stem with Bar and 6 Stems",
+      "category": "plant",
+      "footprint": [
+        3,
+        5,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "19119",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "20482",
+      "name": "Tile Special Round 1 x 1 with Hollow Bar",
+      "category": "tile",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "20482",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "22667",
+      "name": "Plant, Cherries",
+      "category": "plant",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "22667",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "22885",
+      "name": "Brick Special 1 x 2 x 1 2/3 with 4 Studs on 1 Side",
+      "category": "brick",
+      "footprint": [
+        1,
+        5,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "22885",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2357",
+      "name": "Brick 2 x 2 Corner",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2357",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2412b",
+      "name": "Tile Special 1 x 2 Grille with Bottom Groove",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2412b",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2417",
+      "name": "Plant, Leaves 6 x 5",
+      "category": "plant",
+      "footprint": [
+        6,
+        1,
+        5
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2417",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2420",
+      "name": "Plate 2 x 2 Corner",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2420",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "24201",
+      "name": "Brick Curved Inverted 2 x 1",
+      "category": "brick",
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "24201",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2423",
+      "name": "Plant, Leaves 4 x 3",
+      "category": "plant",
+      "footprint": [
+        4,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2423",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2431",
+      "name": "Tile 1 x 4 with Groove",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2431",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2445",
+      "name": "Plate 2 x 12",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        12
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2445",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2450",
+      "name": "Wedge Plate 3 x 3 Cut Corner",
+      "category": "plate",
+      "footprint": [
+        3,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2450",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "2456",
+      "name": "Brick 2 x 6",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "2456",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "24866",
+      "name": "Plant, Flower, Plate Round 1 x 1 with 5 Petals",
+      "category": "plant",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "24866",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "25269",
+      "name": "Tile Round 1 x 1 Quarter",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "25269",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "26601",
+      "name": "Wedge Plate 2 x 2 Cut Corner",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "26601",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "26603",
+      "name": "Tile 2 x 3",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "26603",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "26604",
+      "name": "Brick Special 1 x 1 with Studs on 2 Adjacent Sides",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "26604",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "27263",
+      "name": "Tile Special 2 x 2 Corner with Cut Corner - Facet",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "27263",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "27393",
+      "name": "Wave / Power Blast Rounded Energy with Bar Handle",
+      "category": "other",
+      "footprint": [
+        2,
+        2,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32643",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "27507pr0008",
+      "name": "Tile 4 x 4 Curved, Macaroni with Floor Tile Decoration, Blue Stars, Bright Light Orange Squares/Triangles Print",
+      "category": "tile",
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "27507",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3001",
+      "name": "Brick 2 x 4",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3001",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3003",
+      "name": "Brick 2 x 2",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3003",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3004",
+      "name": "Brick 1 x 2",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3004",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3005",
+      "name": "Brick 1 x 1",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30071",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3007",
+      "name": "Brick 2 x 8",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3007",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3008",
+      "name": "Brick 1 x 8",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "63322",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3009",
+      "name": "Brick 1 x 6",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3009",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3010",
+      "name": "Brick 1 x 4",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3010",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "30136",
+      "name": "Brick Special 1 x 2 Palisade [aka Log]",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30136",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3020",
+      "name": "Plate 2 x 4",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3020",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3021",
+      "name": "Plate 2 x 3",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3021",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3022",
+      "name": "Plate 2 x 2",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "94148",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3023",
+      "name": "Plate 1 x 2",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "28653",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3024",
+      "name": "Plate 1 x 1",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3024",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3027",
+      "name": "Plate 6 x 16",
+      "category": "plate",
+      "footprint": [
+        6,
+        1,
+        16
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3027",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3031",
+      "name": "Plate 4 x 4",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3031",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3032",
+      "name": "Plate 4 x 6",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3032",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3034",
+      "name": "Plate 2 x 8",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3034",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3035",
+      "name": "Plate 4 x 8",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3035",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "30374",
+      "name": "Bar 4L (Lightsaber Blade / Wand)",
+      "category": "other",
+      "footprint": [
+        1,
+        10,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30374",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "30385",
+      "name": "Rock 1 x 1 Crystal 5 Point",
+      "category": "other",
+      "footprint": [
+        1,
+        5,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30385",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3062b",
+      "name": "Brick Round 1 x 1 Open Stud",
+      "category": "round",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30068",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3068b",
+      "name": "Tile 2 x 2 with Groove",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3068b",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3068bpr9350",
+      "name": "Tile 2 x 2 with Dark Turquoise/Orange Chevrons, Bright Light Orange Diamond, BlieStar Print",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3068bp0y",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3069b",
+      "name": "Tile 1 x 2 with Groove",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3069b",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3069bpr9350",
+      "name": "Tile 1 x 2 with Blue/Orange/Bright Light Orange Squares Print",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3069bp0y",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3070b",
+      "name": "Tile 1 x 1 with Groove",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3070b",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "32028",
+      "name": "Plate Special 1 x 2 with Door Rail",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32028",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "32064a",
+      "name": "Technic Brick 1 x 2 with Axle Hole Type 1 [+ Opening] and Bottom Pin",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32064c",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "32607",
+      "name": "Plant, Plate 1 x 1 Round with 3 Leaves",
+      "category": "plant",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32607",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "32828",
+      "name": "Plate Special Round 1 x 1 with Hollow Stud and Horizontal Bar 1L",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32828",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "32952",
+      "name": "Brick Special 1 x 1 x 1 2/3 with Studs on 1 Side",
+      "category": "brick",
+      "footprint": [
+        1,
+        5,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "32952",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "33078",
+      "name": "Food Hot Dog / Sausage",
+      "category": "other",
+      "footprint": [
+        1,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "33078",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "33320",
+      "name": "Animal, Frog",
+      "category": "other",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "33320",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "33909",
+      "name": "Plate Special 2 x 2 with Only 2 studs",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "33909",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3460",
+      "name": "Plate 1 x 8",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3460",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "35459",
+      "name": "Tile Special 1 x 3 Inverted with Center Hole",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "35459",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "35787",
+      "name": "Tile 45° Cut 2 x 2 (Triangle)",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "35787",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3622",
+      "name": "Brick 1 x 3",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "45505",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3623",
+      "name": "Plate 1 x 3",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3623",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3659",
+      "name": "Brick Arch 1 x 4",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3659",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3665",
+      "name": "Brick Sloped Inverted 45° 2 x 1",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3665a",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3666",
+      "name": "Plate 1 x 6",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3666",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3710",
+      "name": "Plate 1 x 4",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3710",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "37695",
+      "name": "Plant, Stem with 3 Leaves and Bottom Pin",
+      "category": "plant",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "37695",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "37762",
+      "name": "Equipment Candlestick",
+      "category": "other",
+      "footprint": [
+        1,
+        4,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "37762",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3795",
+      "name": "Plate 2 x 6",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3795",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "38583",
+      "name": "Brick Arch 1 x 2 Jumper",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "38583",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "38585",
+      "name": "Brick Arch 1 1/2 x 1 1/2 Corner",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "38585",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3941",
+      "name": "Brick Round 2 x 2 with Axle Hole",
+      "category": "round",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "6143",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3942c",
+      "name": "Cone 2 x 2 x 2, Open Stud",
+      "category": "cone",
+      "footprint": [
+        2,
+        6,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3942c",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "3958",
+      "name": "Plate 6 x 6",
+      "category": "plate",
+      "footprint": [
+        6,
+        1,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "3958",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "39739",
+      "name": "Tile 1 x 1 Heart",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "39739",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4032a",
+      "name": "Plate Round 2 x 2 with Axle Hole Type 1 (+ Opening)",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4032a",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "40379",
+      "name": "Animal Body Part / Plant, Tail / Claw / Horn / Branch / Tentacle, End Section",
+      "category": "plant",
+      "footprint": [
+        4,
+        9,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "40379",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4070",
+      "name": "Brick Special 1 x 1 with Headlight",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "30069",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4162",
+      "name": "Tile 1 x 8 with Groove",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        8
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4162",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "41835pr0003",
+      "name": "Animal, Bird, Small with Orange Beak, Black Eyes Print",
+      "category": "other",
+      "footprint": [
+        2,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "41835p02",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4274",
+      "name": "Technic Pin 1/2 without Friction Ridges",
+      "category": "other",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4274",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4282",
+      "name": "Plate 2 x 16",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        16
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4282",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4367",
+      "name": "Plant, Flower, Minifig Accessory with 7 Thick Petals and Pin, Center Ring",
+      "category": "plant",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4367",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "43888",
+      "name": "Support Round 1 x 1 x 6 Solid Pillar",
+      "category": "round",
+      "footprint": [
+        1,
+        18,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "43888",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "43898",
+      "name": "Dish 3 x 3 Inverted [Radar]",
+      "category": "dish",
+      "footprint": [
+        3,
+        2,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "43898",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4477",
+      "name": "Plate 1 x 10",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        10
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4477",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4490",
+      "name": "Brick Arch 1 x 3",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4490",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4733",
+      "name": "Brick Special 1 x 1 Studs on 4 Sides",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4733",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "4740",
+      "name": "Dish 2 x 2 Inverted [Radar]",
+      "category": "dish",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4740",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "49307",
+      "name": "Brick Curved 1 x 1 x 2/3 Double Curved Top, No Studs",
+      "category": "brick",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "49307",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "5091",
+      "name": "Tile 1 x 2 with Stud Notch Left",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "5091",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "5092",
+      "name": "Tile 1 x 2 with Stud Notch Right",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "5092",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "50950",
+      "name": "Brick Curved 3 x 1 No Studs",
+      "category": "brick",
+      "footprint": [
+        3,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "50950",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "52107",
+      "name": "Brick Special 1 x 2 with Studs on 2 Sides",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "52107",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "54200",
+      "name": "Brick Sloped 30° 1 x 1 x 2/3 (Cheese Slope)",
+      "category": "slope",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "54200",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "5904",
+      "name": "Plant, Flower, Peony Rose with 2 Layers",
+      "category": "plant",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "5904",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "59900",
+      "name": "Cone 1 x 1 [Top Groove]",
+      "category": "cone",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "59900",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "6141",
+      "name": "Plate Round 1 x 1 with Solid Stud",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "4073",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "6179",
+      "name": "Plate Special 4 x 4, Studs on One Edge Plain]",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "6179",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "6180",
+      "name": "Plate Special 4 x 6, Studs on 3 Edges",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        6
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "6180",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "62462",
+      "name": "Technic Pin Connector Round [Slotted]",
+      "category": "round",
+      "footprint": [
+        1,
+        2,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "62462",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "63864",
+      "name": "Tile 1 x 3",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "63864",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "63965",
+      "name": "Bar 6L with Stop Ring",
+      "category": "other",
+      "footprint": [
+        1,
+        15,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "63965a",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "64644",
+      "name": "Equipment Telescope / Torch / Spyglass, Support Round 1 x 1 x 1 2/3",
+      "category": "round",
+      "footprint": [
+        1,
+        5,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "64644",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "64647",
+      "name": "Flame / Headwear Accessory Plume / Feather, Triple Point",
+      "category": "other",
+      "footprint": [
+        2,
+        4,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "64647",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "64799",
+      "name": "Plate Special 4 x 4 with 2 x 2 Opening",
+      "category": "plate",
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "64799",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "6541",
+      "name": "Technic Brick 1 x 1 with Pin Hole",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "6541",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "65509",
+      "name": "Plate Special 2 x 4 with Groove and Two Center Studs (Jumper)",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "65509",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "65578",
+      "name": "Bar, Angled with 1 x 1 Round Plate / Stud on End",
+      "category": "plate",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "65578",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "68211",
+      "name": "Bar 1L / Stem with 3 Sprouts/Prongs",
+      "category": "other",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "68211",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "76959",
+      "name": "Brick Sloped Inverted 45° 2 x 2 [Round Hollow Bottom Pin, Bar-sized Stud Holes]",
+      "category": "round",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "76959",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "77844",
+      "name": "Plate 3 x 3 Corner",
+      "category": "plate",
+      "footprint": [
+        3,
+        1,
+        3
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "77844",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "78258",
+      "name": "Bar 2L with Stop in Center",
+      "category": "other",
+      "footprint": [
+        1,
+        5,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "78258",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "78666",
+      "name": "Brick Curved 2 x 1 with Inverted Cutout",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "78666",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "80674pr0006",
+      "name": "Insect, Butterfly with Yellow, Orange, Black Decorations Print",
+      "category": "other",
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "80674",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "85861",
+      "name": "Plate Round 1 x 1 with Open Stud",
+      "category": "plate",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "85861",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "85975",
+      "name": "Cone 1.17 x 1.17 x 2/3 (Fez)",
+      "category": "cone",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "85975",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "86876",
+      "name": "Brick Special 1 x 2 with 1 Center Stud on 1 Side, Bottom Stud Holder",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "86876",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "87079",
+      "name": "Tile 2 x 4 with Groove",
+      "category": "tile",
+      "footprint": [
+        2,
+        1,
+        4
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "87079",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "87087",
+      "name": "Brick Special 1 x 1 with Stud on 1 Side",
+      "category": "brick",
+      "footprint": [
+        1,
+        3,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "87087",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "87580",
+      "name": "Plate Special 2 x 2 with Groove and Center Stud (Jumper)",
+      "category": "plate",
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "87580",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "87620",
+      "name": "Brick Wedged 2 x 2 Facet",
+      "category": "brick",
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "87620",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "87994",
+      "name": "Bar 3L",
+      "category": "other",
+      "footprint": [
+        1,
+        7,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "87994",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "89678",
+      "name": "Technic Pin 1/2 with Friction",
+      "category": "other",
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "89678",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "90398",
+      "name": "Minifig Trophy Statuette",
+      "category": "other",
+      "footprint": [
+        1,
+        4,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "90398",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "91405",
+      "name": "Plate 16 x 16",
+      "category": "plate",
+      "footprint": [
+        16,
+        1,
+        16
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "91405",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "93273",
+      "name": "Brick Curved 4 x 1 Double, No Studs",
+      "category": "brick",
+      "footprint": [
+        4,
+        2,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "93273",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "96874",
+      "name": "Brick and Axle Separator v2.0",
+      "category": "brick",
+      "footprint": [
+        9,
+        10,
+        2
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "96874",
+      "notes": "promoted from master-index (CF1)"
+    },
+    {
+      "id": "98138",
+      "name": "Tile Round 1 x 1",
+      "category": "tile",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "mesh": {
+        "status": "box"
+      },
+      "ldrawId": "98138",
+      "notes": "promoted from master-index (CF1)"
+    }
+  ]
+}

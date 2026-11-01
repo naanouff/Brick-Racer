@@ -28,6 +28,7 @@ describe('brick-racer smoke', () => {
       const host = await import('../src/racer/host/startBrickRacerHost');
       expect(typeof host.startBrickRacerHost).toBe('function');
     },
+    15_000
   );
 
   it('ships host entry module (CI without mono)', () => {

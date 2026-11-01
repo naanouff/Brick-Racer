@@ -1,0 +1,528 @@
+{
+  "id": "landmark.tower",
+  "version": 1,
+  "title": "Tour penchée (base + fût)",
+  "origin": [
+    20,
+    0,
+    20
+  ],
+  "envelope": {
+    "size": [
+      1.6500000000000001,
+      2.1999999999999997,
+      1.6500000000000001
+    ]
+  },
+  "partsList": [
+    {
+      "part": "11211",
+      "color": "gray",
+      "qty": 6
+    },
+    {
+      "part": "2420",
+      "color": "gray",
+      "qty": 1
+    },
+    {
+      "part": "3005",
+      "color": "gray",
+      "qty": 16
+    },
+    {
+      "part": "3005",
+      "color": "terracotta",
+      "qty": 4
+    },
+    {
+      "part": "3010",
+      "color": "gray",
+      "qty": 2
+    },
+    {
+      "part": "3023",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3040",
+      "color": "terracotta",
+      "qty": 2
+    },
+    {
+      "part": "3622",
+      "color": "gray",
+      "qty": 6
+    },
+    {
+      "part": "3623",
+      "color": "dark_gray",
+      "qty": 2
+    },
+    {
+      "part": "3710",
+      "color": "dark_gray",
+      "qty": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "base · 1 — plate y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3710",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            0,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2420",
+          "color": "gray",
+          "at": [
+            -1,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3623",
+          "color": "dark_gray",
+          "at": [
+            1,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3023",
+          "color": "dark_gray",
+          "at": [
+            -1,
+            0,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "base · 2 — brick y=1",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "gray",
+          "at": [
+            -2,
+            1,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            -2,
+            1,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            1,
+            1,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            -1,
+            1,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "base · 3 — brick y=4",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            4,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            -1,
+            4,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            4,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            1,
+            4,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            4,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            1,
+            4,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            4,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            -1,
+            4,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "shaft · 1 — brick y=0",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3010",
+          "color": "gray",
+          "at": [
+            -2,
+            7,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            -2,
+            7,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3622",
+          "color": "gray",
+          "at": [
+            1,
+            7,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            -1,
+            7,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "shaft · 2 — brick y=3",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -1,
+            10,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            0,
+            10,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            10,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            1,
+            10,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            10,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            1,
+            10,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -2,
+            10,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            -1,
+            10,
+            1
+          ],
+          "rot": 90
+        }
+      ]
+    },
+    {
+      "title": "shaft · 3 — brick y=6",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            0,
+            13,
+            -2
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -1,
+            13,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            1,
+            13,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "11211",
+          "color": "gray",
+          "at": [
+            -2,
+            13,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            0,
+            13,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "gray",
+          "at": [
+            -1,
+            13,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "title": "shaft · 4 — brick y=9",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -2,
+            16,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3040",
+          "color": "terracotta",
+          "at": [
+            -1,
+            16,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3040",
+          "color": "terracotta",
+          "at": [
+            0,
+            16,
+            -2
+          ],
+          "rot": 180
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            1,
+            16,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            -2,
+            16,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "terracotta",
+          "at": [
+            1,
+            16,
+            -1
+          ]
+        }
+      ]
+    }
+  ]
+}

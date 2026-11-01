@@ -18,8 +18,11 @@ pnpm install
 pnpm check
 pnpm test
 pnpm dev
+pnpm mcp:brick-lab   # stdio MCP → bus localhost (brick-lab ouvert sous pnpm dev)
 pnpm dist
 ```
+
+MCP brick-lab (agent construction) : [brick-lab-mcp.md](plans/brick-lab-mcp.md) · sprint [BRICK-LT](sprints/BRICK-LT.md).
 
 `pnpm dev` lance Electron via electron-vite. Boot par défaut : **`race-test`** (blockout ovale). Revue du slice :
 

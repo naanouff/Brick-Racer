@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "brick-lab": {
+      "command": "node",
+      "args": ["src/mcp/brickLabServer.mjs"],
+      "cwd": "C:/Local/Travail/Web/Brick-Racer",
+      "env": {
+        "BRICK_LAB_MCP_VERSION": "0.3.0"
+      }
+    }
+  }
+}

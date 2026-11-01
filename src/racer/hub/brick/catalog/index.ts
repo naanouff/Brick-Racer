@@ -7,27 +7,63 @@ export type {
   BrickCatalog,
   BrickColorDef,
   BrickFootprint,
+  BrickGlitterDef,
+  BrickMaterialKind,
   BrickMeshStatus,
   BrickPartCategory,
   BrickPartDef,
 } from './types';
+export { BRICK_MATERIAL_KINDS, BRICK_PART_CATEGORIES } from './types';
+export {
+  clearCatalogCategoriesCache,
+  FAMILY_MAP_CATEGORY_IDS,
+  categoryName,
+  familyForCategoryId,
+  loadCatalogCategories,
+  type CatalogCategoriesFile,
+  type CatalogCategoryDef,
+  type CatalogFamilyDef,
+  type CatalogFamilyId,
+} from './catalogFamilies';
 export {
   BRICK_CATALOG,
   FOUNTAIN_BOM_PART_IDS,
+  SEED_PART_IDS,
   catalogCanonicalColorIds,
   catalogCanonicalPartIds,
   catalogColorAcceptIds,
+  catalogColorsByMaterial,
+  catalogCommonColorIds,
+  catalogCommonColors,
   catalogPartAcceptIds,
   getColor,
   getPart,
+  isBrickMaterialKind,
   isCatalogColor,
   isCatalogPart,
+  materialOf,
   partFootprintFromCatalog,
   partMeshStatus,
   registerPartRuntime,
   resolveColorId,
   resolvePartId,
+  runtimePartCount,
+  seedPartCount,
 } from './loadCatalog';
+export {
+  indexMasterParts,
+  masterEntryToPartDef,
+  promotePartsFromMaster,
+  type PromoteBucket,
+  type PromoteItemResult,
+  type PromoteReport,
+} from './promoteParts';
+export {
+  EDITOR_COLOR_SLUGS,
+  SET_10359_COLOR_HINTS,
+  nearestEditorColor,
+  type EditorColorSlug,
+} from './colorNearest';
 export {
   footprintFromMasterDims,
   type MasterDimsStuds,
@@ -50,6 +86,18 @@ export {
   type StagingPart,
 } from './bc1Staging';
 export {
+  CATALOG_FAVORITES_KEY,
+  addFavorite,
+  favoritesByCategory,
+  favoritesInCategory,
+  isFavorite,
+  readFavorites,
+  removeFavorite,
+  toggleFavorite,
+  writeFavorites,
+  type CatalogFavorite,
+} from './catalogFavorites';
+export {
   clearCatalogPreview,
   spawnCatalogMeshPreview,
   spawnCatalogPreview,
@@ -60,8 +108,11 @@ export {
 export {
   clearLdrawMeshCache,
   ensureLdrawUploadedMesh,
+  fetchLdrawPart,
   getCachedLdrawMesh,
+  hasLdrawIpc,
   type EnsureLdrawMeshOpts,
+  type FetchLdrawPartResult,
   type LdrawUploadedMesh,
 } from './ldrawMeshCache';
 export {

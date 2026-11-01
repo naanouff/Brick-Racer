@@ -1,167 +1,297 @@
-# Prompt Gemini — mode d’emploi brick (Brick-Racer)
+# Authoring décors brick — prompts Gemini v2
 
-> **Statut** : authoring **v1** (Gemini → JSON à coordonnées). Peu fidèle sur silhouette / proportions. Remplacé progressivement par le pipeline **couches → brickify** : [brick-decor-pipeline.md](../plans/brick-decor-pipeline.md) · sprint [BRICK-DC1](../sprints/BRICK-DC1.md). Ne pas étendre ce prompt ; la réécriture v2 (image ortho + fiche cotes + couches) est **DC2**.
+Pipeline : [brick-decor-pipeline.md](../plans/brick-decor-pipeline.md) · sprint [BRICK-DC1](../sprints/BRICK-DC1.md) (runtime) · [BRICK-DC2](../sprints/BRICK-DC2.md) (ces prompts).
 
-**Usage** : joindre une **image de référence** (photo / concept de la construction) + le prompt manuel ci-dessous → Gemini rend **uniquement** le JSON d’assemblage.
-
-Pipeline runtime : image → JSON → `validateManual` → `assembleManual` → `bakeShell` → **LDraw InstancedMesh** (Brick Lab) ; proxy box si l’IPC LDraw est absent.  
-Gemini **ne code pas** ; il ne rend que le JSON.
-
-Les champs `part` sont des **design numbers LDraw** (`parts/<id>.dat`), chargés par `spawnLandmarkLdraw`.
-
----
-
-## Catalogue (autorisé uniquement)
-
-Source de vérité : [`parts.json`](../../src/racer/hub/brick/catalog/data/parts.json) + [`colors.json`](../../src/racer/hub/brick/catalog/data/colors.json) (plan [brick-part-catalog.md](../plans/brick-part-catalog.md)).
-
-### Règle d’ID (LDraw)
-
-- **Obligatoire** : **design number LDraw** (`3005`, `6141`, `3960`, `85080`, …) — id du `.dat` et clé Brick Lab.
-- Alias legacy (`1x1`, `plate_1x1`, …) acceptés par le validateur, **interdits** dans les manuels générés.
-- Pièce absente de `parts.json` = **refus** — l’ajouter au catalogue avant usage.
-- Brick Lab charge les `.dat` ; fallback box si l’IPC manque.
-
-### Pièces (extrait — seed BC1)
-
-| Id LDraw | Alias legacy | Emprise |
-| -------- | ------------ | ------- |
-| `3005` | `1x1` | 1×3×1 |
-| `3004` | `1x2` | 1×3×2 |
-| `3003` | `2x2` | 2×3×2 |
-| `3001` | `2x4` | 2×3×4 |
-| `3020` | `plate` | 2×1×4 |
-| `3068` | `tile` | 2×1×2 |
-| `6141` | `plate_1x1` | 1×1×1 |
-| `41539` | `3128` | 8×1×8 |
-| `85080` | — | 2×3×2 | macaroni 2×2 |
-| `48092` | — | 4×3×4 | macaroni 4×4 |
-| `3941` | — | 2×3×2 |
-| `3960` / `4740` | — | dish |
-| `4589` | `4589b` | 1×3×1 |
-
-Liste complète = `parts.json` (70+ pièces, extensible).
-
-`rot` ∈ `{0, 90, 180, 270}` (yaw Y). À 90°/270°, X et Z de l’emprise s’échangent.  
-Dishes `3960` / `4740` : retournées automatiquement au spawn (bol vers le haut) — pas d’autre pitch dans le JSON.
-
-### Couleurs (`color`)
-
-`white` · `black` · `yellow` · `lime` · `sand` · `gray` · `dark_gray` · `terracotta` · `cyan` · `clear`  
-(+ aliases `lbg`, `trans_light_blue`, …)  
-Choisir les couleurs **d’après l’image jointe**.
-
-### Unités
-
-- **1 stud (S)** = 0,33 m — X / Z  
-- **1 plate (P)** = 0,11 m — Y  
-- **1 brick (B)** = 3 plates = 0,33 m  
-- Coordonnées = **entiers** (studs / plates), relatives à `origin`  
-- `at: [sx, py, sz]` = coin **min** de la pièce  
-- `ring` / `disc` : pas de `center` — centre = `origin` ; `radius` + `y` suffisent
-
-### Enveloppe / placement
-
-- `id` : `landmark.<nom>` (ex. dérivé du sujet de l’image)  
-- `origin` : `[20, 0, 20]` mètres monde (Brick Lab recentre à `[0,0,0]`)  
-- `envelope.size` : AABB mètres qui contient toute la construction vue sur l’image (élargir si besoin)
-
----
-
-## Format JSON (sortie obligatoire)
-
-```json
-{
-  "id": "landmark.example",
-  "version": 1,
-  "title": "Titre court décrivant la construction",
-  "origin": [20, 0, 20],
-  "envelope": { "size": [3, 2, 3] },
-  "partsList": [
-    { "part": "3005", "color": "gray", "qty": 8 },
-    { "part": "6141", "color": "cyan", "qty": 16 }
-  ],
-  "steps": [
-    {
-      "title": "1 — Base",
-      "ops": [
-        { "op": "disc", "part": "6141", "color": "cyan", "radius": 3, "y": 0 }
-      ]
-    },
-    {
-      "title": "2 — Élément suivant",
-      "ops": [
-        { "op": "brick", "part": "3005", "color": "gray", "at": [-1, 0, -1] }
-      ]
-    }
-  ]
-}
+```mermaid
+flowchart LR
+  p0[Prompt0 image ortho] --> img[Planche face cote dessus]
+  img --> pA[PromptA fiche cotes]
+  pA --> fiche[Fiche validee a l oeil]
+  fiche --> pB[PromptB couches ASCII]
+  pB --> layers["*.layers.json"]
+  layers --> cli["pnpm brick:layers"]
+  cli --> manual["*.manual.json"]
+  manual --> lab[brick-lab ortho + overlay]
 ```
 
-### Macros `ops`
+Gemini **ne code pas**. Il produit du texte / JSON. Le convertisseur déterministe `brickifyLayers` choisit les pièces catalogue.
 
-| `op` | Champs | Effet |
-| ---- | ------ | ----- |
-| `brick` | `part`, `color`, `at`, `rot?` | Une pièce |
-| `ring` | `part`, `color`, `radius`, `y`, `courses?`, `count?` | Anneau autour de `origin` |
-| `disc` | `part`, `color`, `radius`, `y`, `filled?`, `innerRadius?` | Disque / anneau plat |
-| `wall` | `part`, `color`, `from`, `to`, `y`, `heightCourses?` | Mur grille |
-| `box` | `part`, `color`, `min`, `max` | Remplissage AABB (bake retire l’intérieur) |
+Catalogue : [`parts.json`](../../src/racer/hub/brick/catalog/data/parts.json) · [`colors.json`](../../src/racer/hub/brick/catalog/data/colors.json).  
+Couleurs ids brique (legacy, toujours valides) : `white` · `black` · `yellow` · `red` · `green` · `lime` · `sand` · `gray` · `dark_gray` · `terracotta` · `cyan` · `clear`.  
+Palette officielle LDraw + matériaux + stickers (decals) : plan [brick-materials.md](../plans/brick-materials.md) · sprint [BRICK-MT](../sprints/BRICK-MT.md) (les slugs ci-dessus deviennent des aliases).  
+Unités : 1 stud = 0,33 m (X/Z) · 1 plate = 0,11 m (Y) · 1 brick = 3 plates.  
+Orange garage / magenta billboard = **imprimé sur tuile**, pas une couleur de brique catalogue.
 
-`partsList` = nomenclature récap ; les `steps` font foi.
+Cotes city-test : [cityTestSpec.ts](../../src/racer/levels/cityTest/cityTestSpec.ts) · [test-slice-plans.md](test-slice-plans.md).  
+Index artworks : [art/README.md](art/README.md). A1/A2 = place entière, **pas** overlay brick-lab.
 
 ---
 
-## Prompt manuel JSON (copier-coller)
+## Prompt 0 — Image de référence exploitable
 
-Joindre **l’image de référence** de la construction (obligatoire).
+Usage : générateur d’image (Gemini / autre). **Pas** de perspective. Modèle de composition : [elev-scale-sheet.png](art/elev-scale-sheet.png).
+
+Cadre commun (à coller tel quel ; le sujet est dans la section suivante) :
 
 ```text
-Tu es un designer LEGO pour le jeu Brick-Racer. Tu produis UNIQUEMENT un JSON valide (pas de markdown, pas de commentaire) au format « mode d'emploi brick » ci-dessous.
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée aux couleurs catalogue (jaune, noir, blanc, gris, gris foncé, terracotta, sable, rouge, cyan translucide, transparent…).
+Pas de texte hors cotes optionnelles en studs / plates et enseignes listées dans le sujet.
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig à côté de la construction.
+Sujet : <coller un des blocs « Sujets Prompt 0 — city-test » ci-dessous>
+```
 
-Objectif principal :
-- Reproduire fidèlement l’ASSEMBLAGE de la construction visible sur l’IMAGE DE RÉFÉRENCE jointe
-- Même silhouette, mêmes volumes, mêmes couleurs, même empilement / disposition des pièces
-- Ne rien inventer qui n’apparaît pas sur l’image ; ne pas substituer un autre sujet
+Livrable : `docs/design/art/ref-<stem>-ortho.png` (+ copie `public/brick-refs/<stem>-ortho.*` pour overlay).
 
-Contraintes dures :
-- Champ "part" = design number LDraw UNIQUEMENT (ex. "3005", "6141", "85080", "3960", "4740", "4589", "41539", "3941") — PAS d'alias "1x1" / "plate_1x1" / "2x2"
-- La pièce doit exister dans parts.json ; N’INVENTE PAS d’ID hors catalogue
-- Couleurs = ids colors.json, choisies d’après l’image (gray, cyan, clear, white, sand, …)
-- Coordonnées entières : X/Z en studs, Y en plates ; `at` = coin min de la pièce (relatif à origin, PAS des mètres monde)
-- rot ∈ {0, 90, 180, 270} (yaw seulement)
-- ring / disc : `radius` + `y` (PAS de `center` — le centre est origin)
-- Tout dans envelope.size autour de origin [20, 0, 20] ; dimensionner envelope pour contenir la construction de l’image
-- Brick Lab charge les meshes LDraw (.dat) — choisir des IDs qui existent en LDraw
-- Macros ring / disc / brick / wall / box ; partsList + steps numérotés type notice LEGO
-- Pas de chevauchement ; pas de pièce hors catalogue
+**Fontaine** (`landmark.fountain`) : planches déjà canon ([ref-fountain-ortho.png](art/ref-fountain-ortho.png), hero, BOM) — **ne pas regénérer**.
+
+Hors lot city-test : Canopée / Mirage / Cime Gate (GDD) — uniquement Riviera Gate ici.
+
+---
+
+## Sujets Prompt 0 — city-test
+
+Chaque bloc = **prompt collable complet** (cadre + sujet). Fichier cible = livrable ortho. Les stubs layers / SVG actuels (pad 8×6 studs, gate 10×4, tour 4×4) **ne sont pas** la cible visuelle ; ils restent jusqu’à rebuild après artwork.
+
+### pad — `ref-pad-ortho.png`
+
+Collider city-test : 8×6×0,22 m → **24×18 studs × 2 plates**. Remplace l’ancien exemple « 8×6 studs ».  
+**Planche livrée** : [art/ref-pad-ortho.png](art/ref-pad-ortho.png) · overlay `/brick-refs/pad-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (jaune, noir, blanc, gris).
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.pad — dalle de départ tutoriel Brick Proving Grounds.
+Emprise au sol 24 studs (largeur) × 18 studs (profondeur), hauteur totale 2 plates (0,22 m).
+Dalle plate : bordure noire d’1 stud, champ jaune, deux chevrons noirs en V pointant vers le nord (haut de la vue dessus).
+Panneau vertical au bord nord de la dalle : poteau gris, plaque blanche, lettres noires imprimées « CIRCUIT D'ESSAI — PAS DE GLORY ».
+Cotes optionnelles : 24×18 studs, H=2P. Pas d’autre enseigne.
+```
+
+### gate — `ref-gate-ortho.png`
+
+Cible plan : hauteur 5,0 m, ouverture ~3,5×4,0 m. Stub layers 10×4 hors cible.  
+**Planche livrée** : [art/ref-gate-ortho.png](art/ref-gate-ortho.png) · overlay `/brick-refs/gate-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (terracotta, sable, noir, gris).
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.gate — Riviera Gate, arche coquillage verrouillée (stub city-test).
+Hors-tout 18 studs (largeur) × 4 studs (profondeur), hauteur 45 plates (5,0 m).
+Ouverture centrale 10 studs de large × 36 plates de haut (~3,3×4,0 m).
+Deux piliers terracotta ; couronne haute en forme de coquillage en briques / pentes sable (pas un linteau droit).
+Chaînes noires en travers de l’ouverture, petit cadenas noir au centre, petite tuile « SÉCURITÉ » en lettres noires.
+Cotes optionnelles : ouverture 10S×36P, H=45P. Pas de plage ni d’eau en fond.
+```
+
+### tower — `ref-tower-ortho.png`
+
+Blockout : 4×6×8 m → **12×18 studs**, H **72 plates**.  
+**Planche livrée** : [art/ref-tower-ortho.png](art/ref-tower-ortho.png) · overlay `/brick-refs/tower-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (gris, gris foncé, terracotta, blanc, noir).
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.tower — tour d’horloge penchée de la plaza.
+Socle 12 studs × 18 studs ; fût creux gris ; toit / lanterne terracotta ; cadran d’horloge blanc et noir sur la face sud.
+Hauteur totale 72 plates (8,0 m). Penchant lisible : sommet décalé d’environ 2 studs vers l’ouest (±5°) — les trois vues montrent le même décalage.
+Cotes optionnelles : footprint 12×18, H=72P, lean ~2S. Pas de ciel ni de place autour.
+```
+
+### billboard — `ref-billboard-ortho.png`
+
+Blockout : 8×2×5,5 m ; panneau plan 3,0×1,5 m.  
+**Planche livrée** : [art/ref-billboard-ortho.png](art/ref-billboard-ortho.png) · overlay `/brick-refs/billboard-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (gris foncé, gris, noir, blanc) ; magenta uniquement comme imprimé d’enseigne, pas comme brique pleine.
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.billboard — panneau classements cynique « TU N'ES PERSONNE ».
+Structure 24 studs (largeur) × 6 studs (profondeur), hauteur 50 plates (5,5 m).
+Poteaux / ossature gris foncé ; panneau face sud environ 9 studs × 14 plates (3,0×1,5 m) : tuile à fond magenta imprimé, lettres noires « TU N'ES PERSONNE ».
+Cotes optionnelles : footprint 24×6, panneau 9S×14P, H=50P.
+```
+
+### garage — `ref-garage-ortho.png`
+
+Blockout : 8×8×4,5 m → **24×24 studs**, H **42 plates** (~4,6 m).  
+**Planche livrée** : [art/ref-garage-ortho.png](art/ref-garage-ortho.png) · overlay `/brick-refs/garage-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (terracotta, gris foncé, jaune, noir, blanc). Pas d’orange brique.
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.garage — Garage Bolt, façade atelier vers la place.
+Volume 24×24 studs, hauteur 42 plates (~4,6 m).
+Façade ouest : mur terracotta et gris foncé, grande porte atelier 8 studs × 20 plates, linteau jaune, enseigne tuile blanche lettres noires « ON JUGERA TON BUILD ».
+Taches / plaques gris foncé en bas de mur (huile). Toit plat gris.
+Cotes optionnelles : footprint 24×24, porte 8S×20P, H=42P.
+```
+
+### vinyle — `ref-vinyle-ortho.png`
+
+Blockout : 6×6×4 m → **18×18 studs**, H **36 plates** (l’axono « 8×8 » est en retard).  
+**Planche livrée** : [art/ref-vinyle-ortho.png](art/ref-vinyle-ortho.png) · overlay `/brick-refs/vinyle-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (rouge, noir, jaune, transparent, cyan translucide, blanc, gris).
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig.
+Sujet : landmark.vinyle — boutique Vinyle, vitrine louche fermée / « bientôt ».
+Volume 18×18 studs, hauteur 36 plates (4,0 m).
+Façade est : vitrine en transparent / cyan, volet mi-baissé noir, enseigne rouge « VINYLE », petite tuile « BIENTÔT ».
+Intérieur suggéré seulement par des tuiles vêtement (noir, jaune, rouge) derrière la vitre — pas de personnage.
+Cotes optionnelles : footprint 18×18, H=36P.
+```
+
+### mairie — `ref-mairie-ortho.png`
+
+Blockout : 8×4×2,5 m → **24×12 studs**, H **24 plates** (~2,6 m).  
+**Planche livrée** : [art/ref-mairie-ortho.png](art/ref-mairie-ortho.png) · overlay `/brick-refs/mairie-ortho.png`.
+
+```text
+Planche technique LEGO / brick, fond gris neutre uni, sans perspective.
+Trois vues orthographiques alignées de LA MÊME construction :
+1) dessus (plan)  2) face  3) côté
+Grille de studs visible (lignes fines) sur chaque vue, échelle lisible en studs et plates.
+Palette plastique limitée (sable, blanc, jaune, noir, rouge, gris foncé). Pas de bleu catalogue.
+Pas de décor de fond, pas d’ombre portée complexe, pas de minifig séparée à côté.
+Sujet : landmark.mairie — socle mairie + statue minifig cassée (construction en briques).
+Socle / fronton bas 24 studs × 12 studs, hauteur totale 24 plates (~2,6 m), plaque « MAIRIE ».
+Au centre du socle : statue construite en briques (jaune / noir / rouge), tête fendue ou manquante ; rappel d’écharpe en rouge / blanc / gris foncé (pas de bleu).
+Cotes optionnelles : footprint 24×12, H=24P.
+```
+
+---
+
+## Prompt A — Fiche de cotes
+
+Joindre l’image ortho. Gemini rend **uniquement** le JSON fiche (pas de markdown).
+
+```text
+Tu es un designer LEGO pour Brick-Racer. À partir de l’IMAGE ORTHO jointe, produis UNIQUEMENT un JSON fiche de cotes (pas de markdown).
+
+{
+  "id": "landmark.<nom>",
+  "title": "titre court",
+  "footprintStuds": [W, D],
+  "heightPlates": H,
+  "colors": ["yellow", "black"],
+  "volumes": [
+    { "name": "base", "kind": "plate|brick|tile", "notes": "une phrase" }
+  ],
+  "specials": [
+    { "name": "optionnel dish/macaroni", "partHint": "3960", "notes": "…" }
+  ]
+}
+
+Règles :
+- footprintStuds = emprise au sol en studs entiers, lue sur la vue dessus
+- heightPlates = hauteur totale en plates (1 brick = 3)
+- colors = ids colors.json présents sur l’image
+- Ne pas inventer de pièces hors silhouette ; specials seulement si formes rondes / pentes évidentes
+- Pas de coordonnées at[] ici
+```
+
+Valider à l’œil (W×D, hauteur, couleurs) avant le Prompt B.
+
+---
+
+## Prompt B — Couches ASCII
+
+Joindre l’image ortho **et** la fiche validée. Gemini rend **uniquement** le `.layers.json`.
+
+```text
+Tu es un designer LEGO pour Brick-Racer. Produis UNIQUEMENT un JSON au format couches (pas de markdown).
 
 Format exact :
 {
   "id": "landmark.<nom>",
   "version": 1,
   "title": "...",
-  "origin": [20, 0, 20],
-  "envelope": { "size": [W, H, D] },
-  "partsList": [ { "part": "<ldrawId>", "color": "...", "qty": N } ],
-  "steps": [
-    { "title": "1 — ...", "ops": [ { "op": "ring"|"disc"|"brick"|"wall"|"box", "part": "<ldrawId>", ... } ] }
-  ]
+  "footprint": [W, D],
+  "legend": { "Y": "yellow", "K": "black" },
+  "layers": [
+    { "kind": "plate", "rows": ["KKKK…", "KYYY…"] }
+  ],
+  "ops": []
 }
 
-L’image jointe est la seule référence de forme et de couleurs.
-Génère le mode d'emploi complet qui assemble cette construction.
+Règles dures :
+- footprint = footprintStuds de la fiche ; rows.length = D ; chaque row.length = W
+- Caractère = 1 stud ; "." = vide ; lettres de legend uniquement
+- kind ∈ { plate, brick, tile } ; empilement bas → haut ; plate/tile = 1P, brick = 3P
+- legend → ids colors.json d’après l’image
+- Modificateurs (sans légende) : `/` et `\` = pentes slope catalogue (`options.slopeColor`, défaut sand)
+- options optionnel : `{ "runningBond": true, "capTiles": false, "slopeColor": "sand" }`
+- ops[] : uniquement des ops "brick" pour pièces spéciales (dish, macaroni, cone…) avec at [sx,py,sz] entiers relatifs au centre footprint — PAS de ring/disc/wall/box
+- Ne pas inventer d’IDs part hors catalogue ; pour le remplissage grille, brickify choisira les pièces — tu mets des lettres couleurs (et `/` `\`) dans rows
+- Fidélité silhouette / couleurs à l’image ; pas de sujet substitué
 ```
 
-### Boucle d’erreurs
 
-Si `validateManual` / tests échouent, recoller à Gemini :
+Enregistrer sous `src/racer/hub/brick/layers/<stem>.layers.json`, puis :
+
+```bash
+pnpm brick:layers src/racer/hub/brick/layers/<stem>.layers.json
+```
+
+Contrôle : brick-lab · vues Face / Côté / Dessus · overlay.
+
+---
+
+## Boucle d’erreurs
+
+**Validation schema / brickify** — recoller :
 
 ```text
-Ce JSON a été rejeté. Corrige UNIQUEMENT le JSON (même format), sans explication.
+Ce JSON couches a été rejeté. Corrige UNIQUEMENT le JSON (même format), sans explication.
 
 Erreurs :
-<coller le message d'erreur>
+<coller le message validateLayers / BrickifyError>
+```
+
+**Fidélité visuelle** (après overlay brick-lab) — recoller :
+
+```text
+Le rendu brick-lab ne correspond pas à l’image ortho. Corrige UNIQUEMENT le JSON couches.
+
+Écart observé :
+- <ex. couche 0 trop large de 2 studs sur X>
+- <ex. jaune manquant au centre>
+- <ex. hauteur 1 plate au lieu de 2>
+
+Image et fiche de cotes inchangées sauf si tu dois ajuster footprint/height.
 ```
 
 ---
+
+## Annexe — format manuel runtime (généré, ne pas demander à Gemini)
+
+Sortie de `brickifyLayers` : [`manualSchema`](../../src/racer/hub/brick/manual/manualSchema.ts) → `assembleManual` → `bakeShell` → LDraw.  
+Legacy v1 (Gemini → `at[]` / macros) : abandonné pour les nouveaux décors ; fichier historique conservé uniquement comme référence d’échec.

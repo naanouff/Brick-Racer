@@ -14,6 +14,23 @@ export {
   type ManualValidationIssue,
   type ManualValidationResult,
 } from './manualSchema';
+export {
+  formatLayersIssues,
+  validateLayers,
+  type BrickLayer,
+  type BrickLayers,
+  type LayerKind,
+  type LayersValidationResult,
+} from './layersSchema';
+export { brickifyLayers, BrickifyError } from './brickifyLayers';
+export {
+  formatAssemblyIssues,
+  validateAssembly,
+  type AssemblyModule,
+  type AssemblyValidationResult,
+  type BrickAssembly,
+} from './assemblySchema';
+export { brickifyAssembly, type LoadLayersJson } from './brickifyAssembly';
 export { manualToLandmark, type ManualLandmarkResult } from './manualToLandmark';
 export {
   cellKey,

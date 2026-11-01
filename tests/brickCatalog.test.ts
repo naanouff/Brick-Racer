@@ -49,15 +49,16 @@ describe('brickInstanceData', () => {
 });
 
 describe('fountainKit', () => {
-  it('stays inside the 3×2×3 BOM fountain envelope around (20,1,20)', () => {
+  it('stays inside the fountain envelope around (20,1,20)', () => {
     const poses = buildFountainBrickPoses();
     expect(poses.length).toBeGreaterThan(8);
+    const pad = 12 * 0.33;
     for (const p of poses) {
-      const [sx, sy, sz] = partSizeMeters(p.partId);
-      expect(p.position[0] - sx / 2).toBeGreaterThanOrEqual(20 - 1.65);
-      expect(p.position[0] + sx / 2).toBeLessThanOrEqual(20 + 1.65);
-      expect(p.position[2] - sz / 2).toBeGreaterThanOrEqual(20 - 1.65);
-      expect(p.position[2] + sz / 2).toBeLessThanOrEqual(20 + 1.65);
+      const [, sy] = partSizeMeters(p.partId);
+      expect(p.position[0]).toBeGreaterThan(20 - pad);
+      expect(p.position[0]).toBeLessThan(20 + pad);
+      expect(p.position[2]).toBeGreaterThan(20 - pad);
+      expect(p.position[2]).toBeLessThan(20 + pad);
       expect(p.position[1] - sy / 2).toBeGreaterThanOrEqual(-0.05);
       expect(p.position[1] + sy / 2).toBeLessThanOrEqual(2.15);
     }

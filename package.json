@@ -16,10 +16,16 @@
     "test": "vitest --run",
     "check": "tsc --noEmit",
     "catalog:build": "python scripts/catalog/build_master_catalog.py --index-only",
+    "catalog:categories": "python scripts/catalog/build_master_catalog.py --categories-only",
+    "catalog:palette": "node scripts/catalog/build_lego_palette.mjs",
     "catalog:rebuild": "python scripts/catalog/fetch_sources.py && python scripts/catalog/build_master_catalog.py",
-    "ldraw:bake": "node scripts/ldraw/bake_cache.mjs"
+    "catalog:promote-set": "node scripts/catalog/promote_set_bom.mjs",
+    "ldraw:bake": "node scripts/ldraw/bake_cache.mjs",
+    "brick:layers": "node scripts/brick/layers-to-manual.mjs",
+    "mcp:brick-lab": "node src/mcp/brickLabServer.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@naanouff/w3dts-animation": "0.0.14",
     "@naanouff/w3dts-audio": "0.0.19",
     "@naanouff/w3dts-core": "0.0.37",
@@ -31,6 +37,7 @@
     "draco3dgltf": "^1.5.7",
     "fflate": "^0.8.2",
     "gl-matrix": "^3.4.3",
+    "lucide-react": "^1.65.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.23.8"

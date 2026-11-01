@@ -1,0 +1,1903 @@
+{
+  "id": "landmark.10359-base-fountain",
+  "version": 1,
+  "title": "10359 base + fontaine (approx notice)",
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "envelope": {
+    "size": [
+      7.92,
+      2.53,
+      7.92
+    ]
+  },
+  "partsList": [
+    {
+      "part": "15068",
+      "color": "green",
+      "qty": 4
+    },
+    {
+      "part": "2431",
+      "color": "sand",
+      "qty": 4
+    },
+    {
+      "part": "24866",
+      "color": "red",
+      "qty": 1
+    },
+    {
+      "part": "24866",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "3005",
+      "color": "white",
+      "qty": 20
+    },
+    {
+      "part": "3020",
+      "color": "cyan",
+      "qty": 2
+    },
+    {
+      "part": "3024",
+      "color": "sand",
+      "qty": 104
+    },
+    {
+      "part": "3031",
+      "color": "dark_gray",
+      "qty": 1
+    },
+    {
+      "part": "3031",
+      "color": "green",
+      "qty": 4
+    },
+    {
+      "part": "3068",
+      "color": "sand",
+      "qty": 4
+    },
+    {
+      "part": "3068",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "3070b",
+      "color": "terracotta",
+      "qty": 6
+    },
+    {
+      "part": "3070b",
+      "color": "white",
+      "qty": 6
+    },
+    {
+      "part": "3941",
+      "color": "white",
+      "qty": 2
+    },
+    {
+      "part": "3958",
+      "color": "sand",
+      "qty": 6
+    },
+    {
+      "part": "3960",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "3961",
+      "color": "white",
+      "qty": 1
+    },
+    {
+      "part": "59900",
+      "color": "clear",
+      "qty": 1
+    },
+    {
+      "part": "6141",
+      "color": "cyan",
+      "qty": 8
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — construction",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3958",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "green",
+          "at": [
+            -10,
+            1,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "green",
+          "at": [
+            6,
+            1,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "green",
+          "at": [
+            -10,
+            1,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "green",
+          "at": [
+            6,
+            1,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3031",
+          "color": "dark_gray",
+          "at": [
+            -2,
+            1,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3020",
+          "color": "cyan",
+          "at": [
+            -9,
+            1,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3020",
+          "color": "cyan",
+          "at": [
+            5,
+            1,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3068",
+          "color": "white",
+          "at": [
+            -1,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            -3,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            2,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            -3,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            -2,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            1,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            -2,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3068",
+          "color": "sand",
+          "at": [
+            -4,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3068",
+          "color": "sand",
+          "at": [
+            2,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3068",
+          "color": "sand",
+          "at": [
+            -1,
+            2,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3068",
+          "color": "sand",
+          "at": [
+            -1,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "15068",
+          "color": "green",
+          "at": [
+            -9,
+            2,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "15068",
+          "color": "green",
+          "at": [
+            7,
+            2,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "15068",
+          "color": "green",
+          "at": [
+            -9,
+            2,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "15068",
+          "color": "green",
+          "at": [
+            7,
+            2,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "sand",
+          "at": [
+            6,
+            2,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "sand",
+          "at": [
+            -10,
+            2,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "2431",
+          "color": "sand",
+          "at": [
+            6,
+            2,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -3,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -2,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            1,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            2,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            -4
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -3,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -2,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            1,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            2,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            3
+          ],
+          "rot": 90
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            -4,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3005",
+          "color": "white",
+          "at": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            -2,
+            2,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            -2,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            -2,
+            2,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            -1,
+            2,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            -1,
+            2,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            0,
+            2,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            1,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3941",
+          "color": "white",
+          "at": [
+            -1,
+            5,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3941",
+          "color": "white",
+          "at": [
+            -1,
+            8,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3961",
+          "color": "white",
+          "at": [
+            -4,
+            11,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3960",
+          "color": "white",
+          "at": [
+            -2,
+            14,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "59900",
+          "color": "clear",
+          "at": [
+            0,
+            17,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "6141",
+          "color": "cyan",
+          "at": [
+            0,
+            20,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            -8,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            -7,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "terracotta",
+          "at": [
+            5,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3070b",
+          "color": "white",
+          "at": [
+            6,
+            2,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "24866",
+          "color": "red",
+          "at": [
+            -8,
+            2,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "24866",
+          "color": "yellow",
+          "at": [
+            6,
+            2,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -10,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -9,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -9,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -9,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -9,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -8,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -8,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -8,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -8,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -7,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -7,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -7,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -7,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -6,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -6,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -6,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -6,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -5,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -5,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -5,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -5,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -4,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -3,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -3,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -3,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -3,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -2,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -2,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -2,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -2,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -1,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -1,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -1,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            -1,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            0,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            0,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            0,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            0,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            1,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            1,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            1,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            1,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            2,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            3,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            3,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            3,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            4,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            4,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            4,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            4,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            5,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            5,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            5,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            5,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            6,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            6,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            6,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            6,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            7,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            7,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            7,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            7,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            8,
+            0,
+            7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -8
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -7
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            -1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            2
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            3
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            4
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            5
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            6
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "3024",
+          "color": "sand",
+          "at": [
+            9,
+            0,
+            7
+          ]
+        }
+      ]
+    }
+  ]
+}

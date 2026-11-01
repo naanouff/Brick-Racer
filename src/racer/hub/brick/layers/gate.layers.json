@@ -1,0 +1,64 @@
+{
+  "id": "landmark.gate",
+  "version": 1,
+  "title": "Riviera Gate coquillage (stub 10×4)",
+  "footprint": [10, 4],
+  "legend": {
+    "T": "terracotta",
+    "S": "sand",
+    "K": "black"
+  },
+  "options": {
+    "runningBond": true,
+    "capTiles": false,
+    "slopeColor": "sand"
+  },
+  "layers": [
+    {
+      "kind": "brick",
+      "rows": [
+        "TT......TT",
+        "TT......TT",
+        "TT......TT",
+        "TT......TT"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "TT......TT",
+        "TT......TT",
+        "TT......TT",
+        "TT......TT"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "TT......TT",
+        "TT.SSSS.TT",
+        "TT......TT",
+        "TT......TT"
+      ]
+    },
+    {
+      "kind": "brick",
+      "rows": [
+        "TT./..\\.TT",
+        "TT.SSSS.TT",
+        "..........",
+        ".........."
+      ]
+    },
+    {
+      "kind": "plate",
+      "rows": [
+        "..SSSSSS..",
+        "..SKKKKS..",
+        "..........",
+        ".........."
+      ]
+    }
+  ],
+  "ops": []
+}

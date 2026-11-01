@@ -61,6 +61,11 @@ Accents : jaune piste, mint ville, orange lab.
 - Métadonnées rail : `levelGroup` / `levelShortTitle` / `levelRole` / `levelAccent` dans [`registry.ts`](../../src/racer/levels/registry.ts).
 - `CatalogBrowserPanel` en `embedded` dans le tiroir catalogue, widgets design system (`br-atelier-input` / `select` / `chip` / `meta` / `empty`).
 
+## Suite brick-lab (volets)
+
+Hiérarchie BOM (étapes / sous-étapes) à gauche + catalogue repliable à droite : [brick-lab-hierarchy.md](brick-lab-hierarchy.md) · [BRICK-HV](../sprints/BRICK-HV.md). La maquette `atelier.html` est mise à jour dans HV4.
+
 ## Hors de ce plan
 
 - Écrans joueur (`#title`, `#hub`, `#race-hud`), [`nav.js`](../mocup/js/nav.js), HUD de course produit ([BRICK-UI1](../sprints/BRICK-UI1.md)).
+- Structure d’étapes / sous-BOM dans le schéma (→ HV).

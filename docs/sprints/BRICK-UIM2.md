@@ -45,6 +45,8 @@ Fait quand :
 
 Port React livré dans `src/renderer/atelier/` (remplace `LevelReviewBar`) — voir [dev-atelier.md](../plans/dev-atelier.md) § Port React.
 
+Volets brick-lab (hiérarchie + catalogue repliable) : [BRICK-HV](BRICK-HV.md) · [brick-lab-hierarchy.md](../plans/brick-lab-hierarchy.md).
+
 ## Hors de ce sprint
 
 - Restyle profond de `CatalogBrowserPanel` (seulement mode `embedded`).

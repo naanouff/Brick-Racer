@@ -18,13 +18,19 @@ import {
   type BrickRacerHost,
 } from '../racer/host/startBrickRacerHost';
 import type { BrickManualId } from '../racer/hub/brick/manuals/registry';
+import { getBrickManual } from '../racer/hub/brick/manuals/registry';
 import {
   readBrickLabManualId,
+  readBrickLabOverlayOpacity,
   readBrickLabShell,
+  readBrickLabView,
   writeBrickLabManualId,
+  writeBrickLabOverlayOpacity,
   writeBrickLabShell,
+  writeBrickLabView,
 } from '../racer/hub/brick/manuals/labPrefs';
-import { fountainShellReport } from '../racer/hub/brick';
+import { manualToLandmark } from '../racer/hub/brick';
+import type { BrickLabView } from '../racer/levels/brickLab/brickLabCamera';
 import {
   getKartTelemetry,
   resolveCcTier,
@@ -36,8 +42,21 @@ import {
   type VehicleKind,
 } from '../racer/vehicles/selectVehicle';
 import { AtelierShell } from './atelier/AtelierShell';
+import {
+  BrickLabBuildPanel,
+  type BrickLabBuildHandle,
+} from './brickLab/BrickLabBuildPanel';
 import { CatalogBrowserPanel } from './catalog/CatalogBrowserPanel';
 import './app.css';
+
+function brickLabStatsLine(manual: BrickManualId, shell: boolean): string | null {
+  try {
+    const r = manualToLandmark(getBrickManual(manual), { shell }).report;
+    return `${manual} ${r.kept}/${r.total}`;
+  } catch {
+    return null;
+  }
+}
 
 function App(): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -61,14 +80,13 @@ function App(): ReactElement {
   );
   const [brickManual, setBrickManual] = useState<BrickManualId>(() => readBrickLabManualId());
   const [brickShell, setBrickShell] = useState(() => readBrickLabShell());
-  const [brickStats, setBrickStats] = useState<string | null>(() => {
-    try {
-      const r = fountainShellReport(readBrickLabShell());
-      return `fontaine ${r.kept}/${r.total}`;
-    } catch {
-      return null;
-    }
-  });
+  const [brickLabView, setBrickLabView] = useState<BrickLabView>(() => readBrickLabView());
+  const [brickOverlayOpacity, setBrickOverlayOpacity] = useState(() =>
+    readBrickLabOverlayOpacity()
+  );
+  const [brickStats, setBrickStats] = useState<string | null>(() =>
+    brickLabStatsLine(readBrickLabManualId(), readBrickLabShell())
+  );
   const [telemetry, setTelemetry] = useState<KartTelemetrySnapshot>(() => getKartTelemetry());
   const [fps, setFps] = useState(0);
   const [frameMs, setFrameMs] = useState(0);
@@ -78,6 +96,24 @@ function App(): ReactElement {
   const [bufferW, setBufferW] = useState(0);
   const [bufferH, setBufferH] = useState(0);
   const hostRef = useRef<BrickRacerHost | null>(null);
+  const brickBuildRef = useRef<BrickLabBuildHandle | null>(null);
+  const brickToolbarHostRef = useRef<HTMLDivElement | null>(null);
+  const brickCatalogHostRef = useRef<HTMLDivElement | null>(null);
+  const [brickHostsReady, setBrickHostsReady] = useState(false);
+
+  const markBrickHosts = (): void => {
+    if (brickToolbarHostRef.current && brickCatalogHostRef.current) {
+      setBrickHostsReady(true);
+    }
+  };
+
+  const runBrickFile = (action: 'newStructure' | 'saveStructure' | 'loadStructure'): void => {
+    brickBuildRef.current?.[action]();
+  };
+
+  useEffect(() => {
+    if (levelId !== 'brick-lab') setBrickHostsReady(false);
+  }, [levelId]);
 
   useEffect(() => {
     void window.brickRacer?.version().then(setVersion).catch(() => setVersion(null));
@@ -187,17 +223,15 @@ function App(): ReactElement {
     writeBrickLabShell(shell);
     setBrickManual(manual);
     setBrickShell(shell);
-    try {
-      const r = fountainShellReport(shell);
-      setBrickStats(`${manual} ${r.kept}/${r.total}`);
-    } catch {
-      setBrickStats(null);
-    }
+    setBrickStats(brickLabStatsLine(manual, shell));
     const host = hostRef.current;
     if (!host) return;
     void host
       .loadLevel('brick-lab')
-      .then(() => setLevelId('brick-lab'))
+      .then(() => {
+        setLevelId('brick-lab');
+        host.setBrickLabView(brickLabView);
+      })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   };
 
@@ -209,6 +243,17 @@ function App(): ReactElement {
   const onToggleBrickShell = (on: boolean): void => {
     if (on === brickShell && levelId === 'brick-lab') return;
     reloadBrickLab(brickManual, on);
+  };
+
+  const onSelectBrickLabView = (view: BrickLabView): void => {
+    writeBrickLabView(view);
+    setBrickLabView(view);
+    hostRef.current?.setBrickLabView(view);
+  };
+
+  const onBrickOverlayOpacity = (opacity: number): void => {
+    writeBrickLabOverlayOpacity(opacity);
+    setBrickOverlayOpacity(opacity);
   };
 
   return (
@@ -238,6 +283,8 @@ function App(): ReactElement {
           brickManual={brickManual}
           brickShell={brickShell}
           brickStats={brickStats}
+          brickLabView={brickLabView}
+          brickOverlayOpacity={brickOverlayOpacity}
           telemetry={telemetry}
           fps={fps}
           frameMs={frameMs}
@@ -249,9 +296,57 @@ function App(): ReactElement {
           version={version}
           catalogSlot={
             levelId === 'catalog-lab' ? (
-              <CatalogBrowserPanel host={hostRef.current} embedded />
+              <CatalogBrowserPanel
+                host={hostRef.current}
+                embedded
+                debugTex={debugTex}
+                renderQuality={renderQuality}
+                onToggleDebugTex={onToggleDebugTex}
+                onSelectRenderQuality={onSelectRenderQuality}
+              />
             ) : null
           }
+          brickToolbarHost={
+            levelId === 'brick-lab' ? (
+              <div
+                className="br-atelier-toolbar-host"
+                ref={(el) => {
+                  brickToolbarHostRef.current = el;
+                  markBrickHosts();
+                }}
+              />
+            ) : null
+          }
+          brickCatalogHost={
+            levelId === 'brick-lab' ? (
+              <div
+                className="br-brick-catalog-host"
+                ref={(el) => {
+                  brickCatalogHostRef.current = el;
+                  markBrickHosts();
+                }}
+              />
+            ) : null
+          }
+          brickBuildSlot={
+            levelId === 'brick-lab' && brickHostsReady ? (
+              <BrickLabBuildPanel
+                ref={brickBuildRef}
+                host={hostRef.current}
+                canvas={canvasRef.current}
+                toolbarHost={brickToolbarHostRef}
+                catalogHost={brickCatalogHostRef}
+                brickLabView={brickLabView}
+                onSelectBrickLabView={onSelectBrickLabView}
+                onStats={(line) => {
+                  if (line) setBrickStats(line);
+                }}
+              />
+            ) : null
+          }
+          onBrickNewStructure={() => runBrickFile('newStructure')}
+          onBrickSaveStructure={() => runBrickFile('saveStructure')}
+          onBrickLoadStructure={() => runBrickFile('loadStructure')}
           onSelectLevel={onSelectLevel}
           onSelectVehicle={onSelectVehicle}
           onSelectCc={onSelectCc}
@@ -259,6 +354,8 @@ function App(): ReactElement {
           onSelectRenderQuality={onSelectRenderQuality}
           onSelectBrickManual={onSelectBrickManual}
           onToggleBrickShell={onToggleBrickShell}
+          onSelectBrickLabView={onSelectBrickLabView}
+          onBrickOverlayOpacity={onBrickOverlayOpacity}
         />
       ) : (
         <div className="br-shell" aria-busy="true">

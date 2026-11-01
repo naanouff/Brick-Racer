@@ -1,0 +1,37 @@
+---
+description: Tout développement doit être testé ; préférer le TDD (Vitest).
+alwaysApply: true
+---
+
+# Tests & TDD
+
+Brick Racer : **chaque changement de comportement a un test**. Idéalement **TDD** (rouge → vert → refactor). Runner : `pnpm test` (Vitest, `tests/**/*.test.ts`). CI = `pnpm check` + `pnpm test`.
+
+## Workflow (préféré)
+
+1. **Rouge** — écrire / étendre un test qui échoue et décrit le contrat.
+2. **Vert** — implémenter le minimum pour passer.
+3. **Refactor** — nettoyer ; les tests restent verts.
+4. Avant de conclure : `pnpm test` (fichier touché au minimum ; suite complète si zone partagée).
+
+## Obligatoire
+
+- Nouveau module / bugfix / régression UI → test dans `tests/` (même ticket).
+- UI/UX : étendre `tests/uiUxRegression.test.ts` ou un test dédié (ex. `catalogListThumbs`) — tokens, écrans, anti-patterns, invariants CSS/source.
+- Ne pas merger / ne pas dire « done » si les tests concernés sont rouges ou absents pour le nouveau comportement.
+- Si un test n’est pas réaliste (WebGPU/Electron pur) : smoke / contrat source / mock documenté — pas « on verra ».
+
+## Style des tests
+
+- Vitest `describe` / `it` / `expect` ; mirror du domaine (`brick*`, `catalog*`, `uiUx*`).
+- Asserter le **contrat** (API, tokens, invariants), pas l’implémentation privée fragile.
+- Pas de skips permanents sans raison dans le test.
+
+```typescript
+// ❌ BAD — feature sans test, ou test écrit après « ça marche chez moi »
+// ✅ GOOD — test rouge d’abord, puis code ; `pnpm test -- tests/foo.test.ts` vert
+```
+
+## Hors scope test unitaire
+
+Docs-only, typos pures, assets binaires sans logique. Dès qu’il y a de la logique ou un garde-fou anti-régression → test.

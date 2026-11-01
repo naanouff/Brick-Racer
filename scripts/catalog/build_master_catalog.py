@@ -272,6 +272,106 @@ def footprint_from_master_dims(dimensions: Dict[str, float]) -> List[int]:
     return [sx, py, sz]
 
 
+# Rebrickable part_cat_id → Brick-Racer family (ED1). Unlisted → "other".
+FAMILY_BY_CATEGORY_ID: Dict[str, str] = {
+    "11": "bricks",
+    "5": "bricks",
+    "6": "bricks",
+    "14": "plates",
+    "9": "plates",
+    "49": "plates",
+    "19": "tiles",
+    "15": "tiles",
+    "67": "tiles",
+    "20": "rounds",
+    "21": "rounds",
+    "3": "slopes",
+    "37": "arches",
+    "18": "brackets",
+    "34": "brackets",
+    "8": "technic",
+    "12": "technic",
+    "17": "technic",
+    "22": "technic",
+    "25": "technic",
+    "26": "technic",
+    "40": "technic",
+    "46": "technic",
+    "51": "technic",
+    "52": "technic",
+    "53": "technic",
+    "54": "technic",
+    "55": "technic",
+    "76": "plant",
+    "33": "plant",
+    "38": "plant",
+    "28": "plant",
+    "74": "plant",
+    "75": "plant",
+    "45": "light",
+    "69": "light",
+    "13": "minifig",
+    "27": "minifig",
+    "59": "minifig",
+    "60": "minifig",
+    "61": "minifig",
+    "62": "minifig",
+    "63": "minifig",
+    "64": "minifig",
+    "65": "minifig",
+    "70": "minifig",
+    "71": "minifig",
+    "72": "minifig",
+    "73": "minifig",
+}
+
+FAMILY_LABELS: Dict[str, str] = {
+    "bricks": "Briques",
+    "plates": "Plaques",
+    "tiles": "Tuiles",
+    "rounds": "Ronds et dômes",
+    "slopes": "Pentes",
+    "arches": "Arches et courbes",
+    "brackets": "Supports et charnières",
+    "technic": "Technic",
+    "plant": "Végétal et décor",
+    "light": "Transparent et lumière",
+    "minifig": "Minifig",
+    "other": "Autres",
+}
+
+
+def write_categories_json(categories_csv: Path, out_path: Path) -> int:
+    """Write public/catalog/categories.json from Rebrickable part_categories.csv."""
+    cats: List[dict] = []
+    if categories_csv.is_file():
+        with categories_csv.open("r", encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                cid = str(row.get("id") or "").strip()
+                if not cid:
+                    continue
+                cats.append(
+                    {
+                        "id": cid,
+                        "name": (row.get("name") or "").strip(),
+                        "family": FAMILY_BY_CATEGORY_ID.get(cid, "other"),
+                    }
+                )
+    payload = {
+        "version": 1,
+        "families": [{"id": k, "name": v} for k, v in FAMILY_LABELS.items()],
+        "categories": cats,
+        "familyByCategoryId": {c["id"]: c["family"] for c in cats},
+    }
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    logger.info("Wrote categories %s (%s)", out_path, len(cats))
+    return len(cats)
+
+
 def write_master_index(catalog_parts: List[dict], index_path: Path) -> int:
     """Slim navigable index for catalog-lab (has_3d only)."""
     entries: List[dict] = []
@@ -279,11 +379,13 @@ def write_master_index(catalog_parts: List[dict], index_path: Path) -> int:
         if not p.get("has_3d_model") or not p.get("dimensions"):
             continue
         dims = p["dimensions"]
+        cat_id = str(p.get("category_id", ""))
         entries.append(
             {
                 "id": p["design_id"],
                 "name": p.get("name", ""),
-                "category_id": str(p.get("category_id", "")),
+                "category_id": cat_id,
+                "family": FAMILY_BY_CATEGORY_ID.get(cat_id, "other"),
                 "ldraw_id": p.get("ldraw_id"),
                 "footprint": footprint_from_master_dims(dims),
                 "dims_mm": {
@@ -421,12 +523,21 @@ def main() -> None:
     default_ldraw = repo / "data" / "ldraw"
     default_out = repo / "data" / "out" / "lego_master_catalog.json"
     default_index = repo / "public" / "catalog" / "master-index.json"
+    default_categories = repo / "public" / "catalog" / "categories.json"
+    default_cat_csv = repo / "data" / "rebrickable" / "part_categories.csv"
 
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--parts-csv", type=Path, default=default_csv)
     ap.add_argument("--ldraw-root", type=Path, default=default_ldraw)
     ap.add_argument("--output", type=Path, default=default_out)
     ap.add_argument("--index", type=Path, default=default_index)
+    ap.add_argument("--categories", type=Path, default=default_categories)
+    ap.add_argument("--categories-csv", type=Path, default=default_cat_csv)
+    ap.add_argument(
+        "--categories-only",
+        action="store_true",
+        help="Only rebuild public/catalog/categories.json",
+    )
     ap.add_argument(
         "--index-only",
         action="store_true",
@@ -447,10 +558,15 @@ def main() -> None:
     ap.add_argument("--skip-index", action="store_true")
     args = ap.parse_args()
 
+    if args.categories_only:
+        write_categories_json(args.categories_csv, args.categories)
+        return
+
     if args.index_only:
         if not args.output.is_file():
             raise FileNotFoundError(f"Missing master catalog: {args.output}")
         export_index_from_master(args.output, args.index)
+        write_categories_json(args.categories_csv, args.categories)
         return
 
     only: Optional[List[str]] = None
@@ -471,6 +587,7 @@ def main() -> None:
     )
     if not args.skip_index and args.output.is_file():
         export_index_from_master(args.output, args.index)
+    write_categories_json(args.categories_csv, args.categories)
 
 
 if __name__ == "__main__":
