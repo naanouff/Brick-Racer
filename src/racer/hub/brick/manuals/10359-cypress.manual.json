@@ -1,0 +1,71 @@
+{
+  "id": "landmark.10359-cypress",
+  "version": 1,
+  "title": "10359 module cypres",
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "envelope": {
+    "size": [
+      2.64,
+      2.42,
+      2.64
+    ]
+  },
+  "partsList": [
+    {
+      "part": "24866",
+      "color": "lime",
+      "qty": 1
+    },
+    {
+      "part": "24866",
+      "color": "yellow",
+      "qty": 1
+    },
+    {
+      "part": "43888",
+      "color": "green",
+      "qty": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "1 — construction",
+      "ops": [
+        {
+          "op": "brick",
+          "part": "43888",
+          "color": "green",
+          "at": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "24866",
+          "color": "lime",
+          "at": [
+            0,
+            18,
+            0
+          ]
+        },
+        {
+          "op": "brick",
+          "part": "24866",
+          "color": "yellow",
+          "at": [
+            0,
+            19,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

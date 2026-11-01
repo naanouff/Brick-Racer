@@ -1,9 +1,13 @@
 /**
  * @file mcpCommands.test.ts
- * @description LT4 + BA1/BA2 — MCP command apply.
+ * @description LT4 + BA1/BA2 + CF1c — MCP command apply.
  */
 
 import { describe, expect, it } from 'vitest';
+import {
+  getPart,
+  type MasterIndexEntry,
+} from '../src/racer/hub/brick/catalog';
 import { createEmptyEditorState } from '../src/racer/levels/brickLab/editor/editorState';
 import { applyMcpCommand } from '../src/racer/levels/brickLab/editor/mcpCommands';
 import {
@@ -295,5 +299,95 @@ describe('mcpMacros (BA2)', () => {
     expect(res.ok).toBe(true);
     expect((res.rejected as unknown[]).length).toBe(0);
     expect(state.ops.length).toBe(specs.length);
+  });
+});
+
+describe('applyMcpCommand (CF1c promote)', () => {
+  const cfMaster: MasterIndexEntry[] = [
+    {
+      id: 'cf-test-99101',
+      name: 'Brick 1 x 2 Round',
+      category_id: '5',
+      footprint: [1, 3, 2],
+      ldraw_id: 'cf-test-99101',
+    },
+    {
+      id: '3005',
+      name: 'Brick 1 x 1',
+      category_id: '5',
+      footprint: [1, 3, 1],
+      ldraw_id: '3005',
+    },
+  ];
+
+  it('promote_parts registers unknown ids and reports buckets', async () => {
+    const state = createEmptyEditorState();
+    const res = await applyMcpCommand(
+      { type: 'promote_parts', ids: ['cf-test-99101', '3005', 'missing-cf'] },
+      {
+        levelId: 'brick-lab',
+        state,
+        loadMasterParts: async () => cfMaster,
+      }
+    );
+    expect(res.ok).toBe(true);
+    expect(res.counts).toEqual({
+      promoted: 1,
+      alreadyBc1: 1,
+      unresolved: 1,
+      noFootprint: 0,
+    });
+    expect(getPart('cf-test-99101')?.footprint).toEqual([1, 3, 2]);
+
+    const place = await applyMcpCommand(
+      {
+        type: 'place_bricks',
+        bricks: [{ part: 'cf-test-99101', color: 'gray', at: [0, 0, 0] }],
+      },
+      { levelId: 'brick-lab', state }
+    );
+    expect(place.ok).toBe(true);
+    expect(state.ops).toHaveLength(1);
+  });
+
+  it('promote_status reports counts', async () => {
+    const state = createEmptyEditorState();
+    const res = await applyMcpCommand(
+      { type: 'promote_status' },
+      { levelId: 'brick-lab', state }
+    );
+    expect(res.ok).toBe(true);
+    expect(typeof res.seedCount).toBe('number');
+    expect(typeof res.runtimeCount).toBe('number');
+    expect(typeof res.stagingCount).toBe('number');
+    expect((res.runtimeCount as number) >= (res.seedCount as number)).toBe(true);
+  });
+
+  it('promote_bom uses loadBomIds then promote', async () => {
+    const state = createEmptyEditorState();
+    const res = await applyMcpCommand(
+      { type: 'promote_bom', setNum: '10359' },
+      {
+        levelId: 'brick-lab',
+        state,
+        loadMasterParts: async () => cfMaster,
+        loadBomIds: async () => ['cf-test-99101'],
+      }
+    );
+    expect(res.ok).toBe(true);
+    expect(res.setNum).toBe('10359');
+    expect((res.registered as string[]).includes('cf-test-99101')).toBe(true);
+  });
+
+  it('list_parts includes source seed|staging', async () => {
+    const state = createEmptyEditorState();
+    const res = await applyMcpCommand(
+      { type: 'list_parts' },
+      { levelId: 'brick-lab', state }
+    );
+    expect(res.ok).toBe(true);
+    const parts = res.parts as { id: string; source: string }[];
+    expect(parts.find((p) => p.id === '3005')?.source).toBe('seed');
+    expect(parts.find((p) => p.id === 'cf-test-99101')?.source).toBe('staging');
   });
 });

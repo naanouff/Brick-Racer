@@ -14,41 +14,42 @@ Prérequis : lib LDraw locale (`data/ldraw/ldraw/LDConfig.ldr` + `LDConfig_TLG.l
 
 ---
 
-## BRICK-MT1 — Palette officielle + types + aliases
+## BRICK-MT1 — Palette officielle + types + aliases ✅
 
-Fichiers : `scripts/catalog/build_lego_palette.ts` (ou `.mjs`), [`colors.json`](../../src/racer/hub/brick/catalog/data/colors.json), [`types.ts`](../../src/racer/hub/brick/catalog/types.ts), [`brickCatalog.ts`](../../src/racer/hub/brick/brickCatalog.ts) (`materialOf`, `resolveColorId`), tests.
+Fichiers : [`build_lego_palette.mjs`](../../scripts/catalog/build_lego_palette.mjs), [`colors.json`](../../src/racer/hub/brick/catalog/data/colors.json), [`types.ts`](../../src/racer/hub/brick/catalog/types.ts), [`loadCatalog.ts`](../../src/racer/hub/brick/catalog/loadCatalog.ts) (`materialOf`), tests.
 
 Fait quand :
 
-- Script lit `LDConfig.ldr` + noms TLG (UTF-16 si besoin) → `colors.json` v2 (`ldrawCode`, `name`, `rgb`, `alpha?`, `material`, `glitter?`, `luminance?`, `common?`, `aliases?`).
+- Script lit `LDConfig.ldr` → `colors.json` v2 (`ldrawCode`, `name`, `rgb`, `alpha?`, `material`, `glitter?`, `luminance?`, `common?`, `aliases?`). (`LDConfig_TLG.ldr` local = stub « Content removed » → noms LDraw humanisés.)
 - `BrickMaterialKind` + mapping finition LDraw → kind (voir plan).
 - Les 13 slugs legacy (`white`, `gray`, `cyan`, `clear`, …) résolvent vers des codes officiels ; manuels / layers existants valident sans changement.
 - `materialOf(colorId)` et `BrickPartDef.allowedMaterials?` typés.
+- Pregen plastique limitée aux couleurs `common` (interim MT2 lazy).
 - Tests : comptes par matériau, alias, `materialOf` sur legacy.
 
-## BRICK-MT2 — Presets plastic / transparent / rubber + ensure
+## BRICK-MT2 — Presets plastic / transparent / rubber + ensure ✅
 
-Fichiers : `src/racer/hub/brick/materials/brickMaterialPresets.ts`, [`landmarkPlasticMaterial.ts`](../../src/racer/hub/brick/landmarkPlasticMaterial.ts) → `ensureBrickMaterial`, [`catalogPlasticMaterials.ts`](../../src/racer/hub/brick/catalog/catalogPlasticMaterials.ts) (lazy), [`spawnLandmarkLdraw.ts`](../../src/racer/hub/brick/spawnLandmarkLdraw.ts), [`brickMaterials.ts`](../../src/racer/hub/brick/brickMaterials.ts), [`kartWheelLook.ts`](../../src/racer/vehicles/kart/kartWheelLook.ts).
+Fichiers : [`brickMaterialPresets.ts`](../../src/racer/hub/brick/materials/brickMaterialPresets.ts), [`landmarkPlasticMaterial.ts`](../../src/racer/hub/brick/landmarkPlasticMaterial.ts) (`ensureBrickMaterial`), [`catalogPlasticMaterials.ts`](../../src/racer/hub/brick/catalog/catalogPlasticMaterials.ts), [`spawnLandmarkLdraw.ts`](../../src/racer/hub/brick/spawnLandmarkLdraw.ts), [`brickMaterials.ts`](../../src/racer/hub/brick/brickMaterials.ts), [`kartWheelLook.ts`](../../src/racer/vehicles/kart/kartWheelLook.ts).
 
 Fait quand :
 
-- Presets `plastic`, `transparent`, `rubber` appliqués sur clone 017B.
-- Création lazy des mats (plus de produit cartésien set × toutes couleurs × aging).
+- Presets `plastic`, `transparent`, `rubber` (+ chrome/metallic/pearl/glow/glitter/satin/speckle stubs) appliqués sur clone 017B.
+- Template lazy via donor white/gray si couleur hors pregen common.
 - Lots BLEND (transparent) : double face, pas d’ombre, spawn après opaques.
 - Clé de lot reste `part|color`.
-- Kart tire réutilise les overrides rubber.
+- Kart tire réutilise `RUBBER_PRESET`.
 - Playtest catalog-lab : Trans-Clear / Rubber Black lisibles vs ABS.
 
-## BRICK-MT3 — Picker matériau → couleur + contraintes pièce
+## BRICK-MT3 — Picker matériau → couleur + contraintes pièce ✅
 
-Fichiers : [`LegoColorPicker.tsx`](../../src/renderer/atelier/LegoColorPicker.tsx) → `LegoMaterialColorPicker`, [`BrickLabBuildPanel.tsx`](../../src/renderer/brickLab/BrickLabBuildPanel.tsx), [`CatalogBrowserPanel.tsx`](../../src/renderer/catalog/CatalogBrowserPanel.tsx), éditeur (`editorState` / MCP), quelques `parts.json` (`allowedMaterials` pneus / vitres).
+Fichiers : [`LegoColorPicker.tsx`](../../src/renderer/atelier/LegoColorPicker.tsx) (`LegoMaterialColorPicker`), [`BrickLabBuildPanel.tsx`](../../src/renderer/brickLab/BrickLabBuildPanel.tsx), [`parts.json`](../../src/racer/hub/brick/catalog/data/parts.json), [`manualSchema.ts`](../../src/racer/hub/brick/manual/manualSchema.ts).
 
 Fait quand :
 
-- UI : onglets matériau (compteurs) → grille couleurs filtrée ; « Courantes » (~40) / « Toutes » / recherche nom ou code.
+- UI : onglets matériau (compteurs) → grille couleurs filtrée ; « Courantes » / « Toutes » / recherche nom ou code.
 - Onglets hors `allowedMaterials` grisés ; validation manuel = **warning** si couleur hors contrainte.
-- MCP `place` / paint acceptent slug, alias ou code LDraw numérique.
-- CSS atelier mis à jour (pas de régression picker actuel).
+- MCP / `resolveColorId` acceptent slug, alias ou code LDraw numérique (`71`, `256`, …).
+- Pièces pneu / vitre / jante / feux avec `allowedMaterials` ; CSS picker mis à jour.
 
 ## BRICK-MT4 — Chrome / metallic / pearl / glow + glitter shader
 

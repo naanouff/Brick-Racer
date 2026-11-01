@@ -4,8 +4,10 @@
  */
 
 import {
+  getPart,
   isBrickColorId,
   isBrickPartId,
+  materialOf,
   type BrickColorId,
   type BrickPartId,
 } from '../brickCatalog';
@@ -94,10 +96,12 @@ export type BrickManual = {
 export type ManualValidationIssue = {
   path: string;
   message: string;
+  /** Default `error`. Warnings do not fail validation (MT3 allowedMaterials). */
+  severity?: 'error' | 'warning';
 };
 
 export type ManualValidationResult =
-  | { ok: true; manual: BrickManual }
+  | { ok: true; manual: BrickManual; warnings?: ManualValidationIssue[] }
   | { ok: false; issues: ManualValidationIssue[] };
 
 function isInt(n: unknown): n is number {
@@ -124,8 +128,35 @@ function isIntVec3(v: unknown): v is ManualVec3 {
   return Array.isArray(v) && v.length === 3 && v.every(isInt);
 }
 
-function pushIssue(issues: ManualValidationIssue[], path: string, message: string): void {
-  issues.push({ path, message });
+function pushIssue(
+  issues: ManualValidationIssue[],
+  path: string,
+  message: string,
+  severity: 'error' | 'warning' = 'error'
+): void {
+  issues.push({ path, message, severity });
+}
+
+function warnAllowedMaterials(
+  issues: ManualValidationIssue[],
+  path: string,
+  partId: unknown,
+  colorId: unknown
+): void {
+  if (typeof partId !== 'string' || typeof colorId !== 'string') return;
+  if (!isPart(partId) || !isColor(colorId)) return;
+  const part = getPart(partId);
+  const allowed = part?.allowedMaterials;
+  if (!allowed || allowed.length === 0) return;
+  const finish = materialOf(colorId);
+  if (!allowed.includes(finish)) {
+    pushIssue(
+      issues,
+      `${path}.color`,
+      `colour finish '${finish}' not in allowedMaterials [${allowed.join(', ')}] for part ${part.id}`,
+      'warning'
+    );
+  }
 }
 
 function validateOp(op: unknown, path: string, issues: ManualValidationIssue[]): void {
@@ -143,6 +174,7 @@ function validateOp(op: unknown, path: string, issues: ManualValidationIssue[]):
   const needPartColor = (): void => {
     if (!isPart(o.part)) pushIssue(issues, `${path}.part`, `unknown part '${String(o.part)}'`);
     if (!isColor(o.color)) pushIssue(issues, `${path}.color`, `unknown color '${String(o.color)}'`);
+    warnAllowedMaterials(issues, path, o.part, o.color);
     if (o.rot !== undefined && !isRotDeg(o.rot)) {
       pushIssue(issues, `${path}.rot`, 'rot must be 0|90|180|270');
     }
@@ -250,6 +282,7 @@ export function validateManual(raw: unknown): ManualValidationResult {
       const row = e as Record<string, unknown>;
       if (!isPart(row.part)) pushIssue(issues, `${p}.part`, `unknown part`);
       if (!isColor(row.color)) pushIssue(issues, `${p}.color`, `unknown color`);
+      warnAllowedMaterials(issues, p, row.part, row.color);
       if (!isInt(row.qty) || row.qty < 1) pushIssue(issues, `${p}.qty`, 'qty >= 1');
     });
   }
@@ -281,11 +314,25 @@ export function validateManual(raw: unknown): ManualValidationResult {
     }
   }
 
-  if (issues.length) return { ok: false, issues };
+  const errors = issues.filter((i) => (i.severity ?? 'error') === 'error');
+  const warnings = issues.filter((i) => i.severity === 'warning');
+  if (errors.length) return { ok: false, issues: errors };
 
-  return { ok: true, manual: raw as BrickManual };
+  return {
+    ok: true,
+    manual: raw as BrickManual,
+    ...(warnings.length ? { warnings } : {}),
+  };
 }
 
 export function formatManualIssues(issues: ManualValidationIssue[]): string {
-  return issues.map((i) => (i.path ? `${i.path}: ${i.message}` : i.message)).join('\n');
+  return issues
+    .map((i) => {
+      const prefix = i.severity === 'warning' ? 'warning' : i.path ? i.path : '';
+      if (i.severity === 'warning') {
+        return i.path ? `warning ${i.path}: ${i.message}` : `warning: ${i.message}`;
+      }
+      return prefix ? `${i.path}: ${i.message}` : i.message;
+    })
+    .join('\n');
 }

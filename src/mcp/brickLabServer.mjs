@@ -65,7 +65,7 @@ function toolResult(data) {
 
 const server = new McpServer({
   name: 'brick-lab',
-  version: '0.2.0',
+  version: '0.3.0',
 });
 
 server.registerTool(
@@ -270,6 +270,28 @@ server.registerTool(
 );
 
 server.registerTool(
+  'place_assembly',
+  {
+    description:
+      'Merge a saved manuals/<stem>.manual.json into the current scene at world at=[sx,py,sz] (module local origin + offset). One undo. dryRun supported. Does not replace the scene (unlike load).',
+    inputSchema: {
+      stem: z.string().describe('Saved manual stem, e.g. 10359-fountain'),
+      at: Vec3Schema.describe('World offset for the module local origin'),
+      dryRun: z.boolean().optional(),
+    },
+  },
+  async ({ stem, at, dryRun }) =>
+    toolResult(
+      await busCommand({
+        type: 'place_assembly',
+        stem,
+        at,
+        ...(dryRun ? { dryRun } : {}),
+      })
+    )
+);
+
+server.registerTool(
   'fill_rect',
   {
     description:
@@ -350,6 +372,57 @@ server.registerTool(
     },
   },
   async (args) => toolResult(await busCommand({ type: 'column', ...args }))
+);
+
+server.registerTool(
+  'promote_parts',
+  {
+    description:
+      'CF1c: resolve design ids against master-index → registerPartRuntime + staging. persist=true merges into parts.json via IPC. Prefer promote_bom after CLI catalog:promote-set.',
+    inputSchema: {
+      ids: z.array(z.string()).min(1),
+      persist: z.boolean().optional(),
+      setNum: z.string().optional().describe('Optional label for the report'),
+    },
+  },
+  async ({ ids, persist, setNum }) =>
+    toolResult(
+      await busCommand({
+        type: 'promote_parts',
+        ids,
+        ...(persist ? { persist } : {}),
+        ...(setNum ? { setNum } : {}),
+      })
+    )
+);
+
+server.registerTool(
+  'promote_status',
+  {
+    description: 'CF1c: seedCount / runtimeCount / stagingCount for the live catalog.',
+    inputSchema: {},
+  },
+  async () => toolResult(await busCommand({ type: 'promote_status' }))
+);
+
+server.registerTool(
+  'promote_bom',
+  {
+    description:
+      'CF1c: load /catalog/bom/<setNum>.json (from pnpm catalog:promote-set) then promote_parts. persist optional.',
+    inputSchema: {
+      setNum: z.string().describe('e.g. 10359'),
+      persist: z.boolean().optional(),
+    },
+  },
+  async ({ setNum, persist }) =>
+    toolResult(
+      await busCommand({
+        type: 'promote_bom',
+        setNum,
+        ...(persist ? { persist } : {}),
+      })
+    )
 );
 
 async function main() {

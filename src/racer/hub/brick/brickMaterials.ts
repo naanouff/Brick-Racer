@@ -1,6 +1,6 @@
 /**
  * @file brickMaterials.ts
- * @description Pastel plastic PBR specs from BC1 color catalog.
+ * @description Flat PBR brick mats from official palette + MT2 finish presets.
  */
 
 import type { MaterialSpec } from '../../levels/shared/levelTypes';
@@ -11,19 +11,22 @@ import {
   type BrickColorId,
 } from './brickCatalog';
 import { BRICK_CATALOG, getColor } from './catalog';
+import { applyPresetToProps, presetForColorId } from './materials/brickMaterialPresets';
 
 function plasticMat(colorId: BrickColorId): MaterialSpec {
   const def = getColor(colorId);
-  const baseColor = def ? [...def.rgb] : [0.7, 0.7, 0.7];
-  const roughness = def?.translucent ? 0.22 : 0.38;
+  const baseColor = (def ? def.rgb : ([0.7, 0.7, 0.7] as const)) as [
+    number,
+    number,
+    number,
+  ];
+  const preset = presetForColorId(colorId);
+  const properties: MaterialSpec['properties'] = {};
+  applyPresetToProps(properties, preset, baseColor);
   return {
     shaderGraphId: 'pbr',
     name: brickMaterialId(colorId),
-    properties: {
-      baseColor,
-      roughness,
-      metallic: 0.04,
-    },
+    properties,
   };
 }
 

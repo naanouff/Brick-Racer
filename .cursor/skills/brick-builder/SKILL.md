@@ -11,7 +11,7 @@ description: >-
 
 Pilote **uniquement** le MCP `brick-lab` (session Electron ouverte). Ne pas écrire les `.manual.json` à la main pendant une édition, et **ne pas** contourner via HTTP si le MCP est down — s’arrêter et le signaler.
 
-Plan / sprint : `docs/plans/brick-lab-agent.md` · `docs/sprints/BRICK-BA.md`.
+Plan / sprint : `docs/plans/brick-lab-agent.md` · `docs/sprints/BRICK-BA.md` · `docs/sprints/BRICK-CF.md`.
 
 ## Prérequis (checklist)
 
@@ -23,27 +23,34 @@ Plan / sprint : `docs/plans/brick-lab-agent.md` · `docs/sprints/BRICK-BA.md`.
 ## Protocole
 
 1. **`status`** — connecté ? stem courant ?
-2. **Analyser l’entrée**
+2. **Promo catalogue (set / BOM)** — avant de poser des pièces hors BC1 seed :
+   - CLI une fois : `pnpm catalog:promote-set -- <setNum>` → `public/catalog/bom/<setNum>.json`.
+   - Session : `promote_bom { setNum }` (ou `promote_parts { ids }`) → runtime + staging.
+   - `promote_status` / `list_parts` (`source: seed|staging`) pour vérifier.
+   - Couleurs set → slugs éditeur (`tan`→`sand`, `dark_orange`→`terracotta`, …).
+3. **Analyser l’entrée**
    - Image : emprise (studs), hauteur (plates), sous-ensembles, palette → 12 couleurs catalogue (`list_colors`).
    - Notice : 1 étape notice = 1 lot `place_bricks` (ou une macro).
-3. **`list_parts`** — nomenclature + substitutions (voir `reference/parts.md`). Annoncer les écarts catalogue (ex. pas de feuille).
-4. **`new`** si nouvelle structure (`stem` / `title` demandés).
-5. **Plan par couches** bas → haut. Coords `[sx, py, sz]` = coin min grille ; 1 brick = 3 plates. Voir `reference/coordinates.md`.
-6. **Par sous-ensemble**
+4. **`list_parts`** — nomenclature + substitutions (voir `reference/parts.md`). Annoncer les écarts catalogue (ex. pas de feuille / unresolved).
+5. **`new`** si nouvelle structure (`stem` / `title` demandés).
+6. **Plan par couches** bas → haut. Coords `[sx, py, sz]` = coin min grille ; 1 brick = 3 plates. Voir `reference/coordinates.md`.
+7. **Par sous-ensemble**
    - Prefer macros (`fill_rect`, `wall`, `ring`, `disc`, `column`) quand ça colle.
    - `dryRun: true` d’abord → corriger `rejected[]` (cell / opId).
    - Poser pour de vrai.
    - `analyze` → **0 flottante** bloquante (corriger ou justifier).
    - `capture` ou `capture_set` → lire le PNG avec Read ; comparer à la ref.
    - Max **3** boucles correction / sous-ensemble.
-7. **`save`** seulement si l’utilisateur le demande.
-8. Résumé : BOM (`analyze`), captures, écarts restants.
+8. **`save`** seulement si l’utilisateur le demande.
+9. Résumé : BOM (`analyze`), captures, écarts restants.
 
 ## Outils clés
 
 | Outil | Usage |
 | ----- | ----- |
+| `promote_bom` / `promote_parts` / `promote_status` | BOM → runtime (CF) |
 | `place_bricks` | Lot + `dryRun` |
+| `place_assembly` | Merge `manuals/<stem>` at `at` (sous-module → scène) |
 | `fill_rect` / `wall` / `ring` / `disc` / `column` | Macros |
 | `query_region` | Trouver de la place |
 | `analyze` | BBox, BOM, flottantes |

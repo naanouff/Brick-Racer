@@ -36,8 +36,11 @@
 | [plans/brick-lab-tools.md](plans/brick-lab-tools.md) | Plan outils brick-lab (fantôme yaw, caméra, Lucide, MCP) |
 | [plans/brick-lab-mcp.md](plans/brick-lab-mcp.md) | Plan MCP agent → éditeur brick-lab (bus localhost, lot 1) |
 | [sprints/BRICK-LT.md](sprints/BRICK-LT.md) | Sprint LT1–LT5 outils brick-lab |
+| [plans/brick-lab-hierarchy.md](plans/brick-lab-hierarchy.md) | Plan volets brick-lab + hiérarchie BOM / sous-étapes |
+| [sprints/BRICK-HV.md](sprints/BRICK-HV.md) | Sprint HV1–HV6 volets + hiérarchie |
 | [plans/brick-lab-agent.md](plans/brick-lab-agent.md) | Plan agent constructeur (image/notice → brick-lab, MCP lot 2) |
 | [sprints/BRICK-BA.md](sprints/BRICK-BA.md) | Sprint BA1–BA5 agent constructeur |
+| [plans/catalog-full-coverage.md](plans/catalog-full-coverage.md) | Plan couverture catalogue : BOM set → BC1 runtime → MCP |
 | [plans/brick-lab-facades.md](plans/brick-lab-facades.md) | Plan façades city-test (garage / vinyle / mairie) |
 | [sprints/BRICK-FC.md](sprints/BRICK-FC.md) | Sprint FC1–FC4 façades |
 | [plans/brick-materials.md](plans/brick-materials.md) | Plan matériaux LEGO : palette LDConfig, presets, stickers decals |

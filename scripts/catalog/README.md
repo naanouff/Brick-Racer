@@ -9,6 +9,17 @@ Pipeline pour enrichir le catalogue pièces (métadonnées Rebrickable + AABB LD
 - Python 3.10+
 - ~150 Mo disque (ZIP LDraw + extract)
 
+## Palette couleurs (MT1)
+
+```powershell
+# Regenerer colors.json depuis data/ldraw/ldraw/LDConfig.ldr
+pnpm catalog:palette
+# ≡ node scripts/catalog/build_lego_palette.mjs
+```
+
+Sortie : `src/racer/hub/brick/catalog/data/colors.json` (palette officielle + aliases legacy).  
+Plan : [docs/plans/brick-materials.md](../../docs/plans/brick-materials.md).
+
 ## Usage
 
 ```powershell

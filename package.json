@@ -17,7 +17,9 @@
     "check": "tsc --noEmit",
     "catalog:build": "python scripts/catalog/build_master_catalog.py --index-only",
     "catalog:categories": "python scripts/catalog/build_master_catalog.py --categories-only",
+    "catalog:palette": "node scripts/catalog/build_lego_palette.mjs",
     "catalog:rebuild": "python scripts/catalog/fetch_sources.py && python scripts/catalog/build_master_catalog.py",
+    "catalog:promote-set": "node scripts/catalog/promote_set_bom.mjs",
     "ldraw:bake": "node scripts/ldraw/bake_cache.mjs",
     "brick:layers": "node scripts/brick/layers-to-manual.mjs",
     "mcp:brick-lab": "node src/mcp/brickLabServer.mjs"

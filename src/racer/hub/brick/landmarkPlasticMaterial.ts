@@ -1,17 +1,35 @@
 /**
  * @file landmarkPlasticMaterial.ts
- * @description Landmark LDraw plastic = catalog 017B + per-part UV1 aging (same as minifig/catalog).
+ * @description Landmark / brick LDraw materials = catalog 017B clone + MT2 finish preset.
  *
- * Clones the level's uploaded catalog plastic material (GPUTextures already bound)
- * and swaps only the UV1 aging map — avoids re-resolving AmbientCG URLs at runtime.
+ * Clones an uploaded catalog plastic material (GPUTextures already bound)
+ * and applies BrickMaterialKind presets (rubber, transparent, chrome, …).
  */
 
 import { vec3 } from 'gl-matrix';
 import { Material, type Engine, type Material as MaterialType } from '@naanouff/w3dts-core';
-import { brickMaterialId, getColor, resolveColorId, type BrickColorId } from './brickCatalog';
-import { catalogPlasticMaterialId } from './catalog/catalogPlasticMaterials';
+import {
+  brickMaterialId,
+  getColor,
+  materialOf,
+  resolveColorId,
+  type BrickColorId,
+} from './brickCatalog';
+import {
+  catalogPlasticMaterialId,
+  DEFAULT_CATALOG_PLASTIC_SET,
+  type CatalogPlasticSet,
+} from './catalog/catalogPlasticMaterials';
 import { MINIFIG_LDRAW_PLASTIC_SET } from '../../minifig/ldrawPlasticMaterial';
 import { MINIFIG_WHITE_TEXTURE_ID } from '../../minifig/plasticMaterial';
+import {
+  applyPresetToProps,
+  materialKindNeedsBlend,
+  presetFor,
+  type BrickMaterialPreset,
+} from './materials/brickMaterialPresets';
+import { RUBBER_MAP_SET } from './materials/rubberMapSets';
+import type { BrickMaterialKind } from './catalog/types';
 
 /** AmbientCG set for landmarks — same as minifig LDraw (017B). */
 export const LANDMARK_PLASTIC_SET = MINIFIG_LDRAW_PLASTIC_SET;
@@ -20,59 +38,60 @@ export function landmarkAgingTextureId(ldrawId: string): string {
   return `LM_ldraw_aging.${ldrawId}`;
 }
 
+/** Plastic keeps the legacy id shape; other finishes include the kind. */
 export function landmarkPlasticMaterialId(ldrawId: string, colorId: BrickColorId): string {
-  const color = resolveColorId(colorId) ?? colorId;
-  return `LM_plastic_${LANDMARK_PLASTIC_SET}_${color}_${ldrawId}`;
+  return landmarkBrickMaterialId(ldrawId, colorId, materialOf(colorId));
 }
 
-function catalogTemplate(engine: Engine, colorId: BrickColorId): MaterialType | null {
+export function landmarkBrickMaterialId(
+  ldrawId: string,
+  colorId: BrickColorId,
+  kind: BrickMaterialKind = materialOf(colorId)
+): string {
+  const color = resolveColorId(colorId) ?? colorId;
+  if (kind === 'plastic') {
+    return `LM_plastic_${LANDMARK_PLASTIC_SET}_${color}_${ldrawId}`;
+  }
+  return `LM_${kind}_${LANDMARK_PLASTIC_SET}_${color}_${ldrawId}`;
+}
+
+function findCatalogPlasticTemplate(
+  engine: Engine,
+  colorId: BrickColorId
+): MaterialType | null {
   const rm = engine.resourceManager;
   const primary = catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, colorId, true);
   const alt = catalogPlasticMaterialId('003', colorId, true);
-  return rm.getMaterialByName(primary) ?? rm.getMaterialByName(alt) ?? null;
-}
+  const direct = rm.getMaterialByName(primary) ?? rm.getMaterialByName(alt);
+  if (direct) return direct;
 
-/**
- * Catalog 017B plastic for this part, with its UV1 aging map when available.
- * Prefer a per-part clone; if aging is missing, reuse the shared catalog mat (UV0 maps still on).
- */
-export function ensureLandmarkPlasticMaterial(
-  engine: Engine,
-  ldrawId: string,
-  colorId: BrickColorId,
-  hasAging: boolean
-): MaterialType | null {
-  const rm = engine.resourceManager;
-  const name = landmarkPlasticMaterialId(ldrawId, colorId);
+  // Lazy: retint any uploaded 017b / 003 plastic (common palette donor).
+  const donor =
+    rm.getMaterialByName(
+      catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, 'light_bluish_grey', true)
+    ) ??
+    rm.getMaterialByName(catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, 'white', true)) ??
+    rm.getMaterialByName(catalogPlasticMaterialId('003', 'light_bluish_grey', true));
+  if (!donor?.shaderGraph) return null;
+
+  const tint = getColor(colorId)?.rgb ?? [0.63, 0.66, 0.7];
+  const name = catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, colorId, true);
   const existing = rm.getMaterialByName(name);
   if (existing) return existing;
 
-  const template = catalogTemplate(engine, colorId);
-  if (!template?.shaderGraph) {
-    const known = [
-      catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, colorId, true),
-      catalogPlasticMaterialId('003', colorId, true),
-      brickMaterialId(colorId),
-    ];
-    console.warn(
-      `[LandmarkPlastic] no catalog plastic for ${colorId}. Tried ${known.join(', ')}. Flat brick fallback.`
-    );
-    return rm.getMaterialByName(brickMaterialId(colorId)) ?? null;
-  }
+  const mat = cloneMaterial(donor, name, tint, null);
+  applyPresetOntoMaterial(engine, mat, presetFor('plastic', getColor(colorId)), tint, 'plastic');
+  rm.uploadMaterial(mat);
+  console.info(`[BrickMaterial] lazy catalog plastic ${name} from ${donor.name}`);
+  return mat;
+}
 
-  const agingId = hasAging ? landmarkAgingTextureId(ldrawId) : null;
-  const agingTex = agingId ? rm.getTexture(agingId) : null;
-
-  // No per-part aging → shared catalog mat already has UV0 AmbientCG + shared UV1 slot.
-  if (!agingTex) {
-    console.info(
-      `[LandmarkPlastic] ${ldrawId}/${colorId}: using shared ${template.name} (no aging tex)`
-    );
-    return template;
-  }
-
-  const tint = getColor(colorId)?.rgb ?? [0.63, 0.66, 0.7];
-  const whiteTex = rm.getTexture(MINIFIG_WHITE_TEXTURE_ID);
+function cloneMaterial(
+  template: MaterialType,
+  name: string,
+  tint: readonly [number, number, number],
+  agingTex: unknown
+): MaterialType {
   const mat = new Material({
     name,
     shaderGraph: template.shaderGraph,
@@ -84,25 +103,128 @@ export function ensureLandmarkPlasticMaterial(
     doubleSided: template.doubleSided,
   });
   mat.sampler = template.sampler;
-
   for (const [k, v] of template.properties.entries()) {
     mat.properties.set(k, v);
   }
-
-  mat.properties.set('baseColorTexture', agingTex);
-  mat.properties.set('useAgingMap', 1);
+  if (agingTex) {
+    mat.properties.set('baseColorTexture', agingTex);
+    mat.properties.set('useAgingMap', 1);
+  }
   mat.properties.set('usePrint', 0);
   mat.properties.set('baseColor', [tint[0]!, tint[1]!, tint[2]!, 1]);
+  return mat;
+}
+
+function copyRubberMapsFromDonor(engine: Engine, mat: MaterialType): void {
+  const rm = engine.resourceManager;
+  const donor =
+    rm.getMaterialByName(
+      catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, 'rubber_black', true)
+    ) ??
+    rm.getMaterialByName(catalogPlasticMaterialId(LANDMARK_PLASTIC_SET, 'rubber_black', false));
+  const surf = donor?.properties.get('emissiveTexture') ?? rm.getTexture(RUBBER_MAP_SET.surface);
+  const nrm = donor?.properties.get('normalTexture') ?? rm.getTexture(RUBBER_MAP_SET.normal);
+  if (surf) mat.properties.set('emissiveTexture', surf);
+  else mat.properties.set('emissiveTexture', RUBBER_MAP_SET.surface);
+  if (nrm) mat.properties.set('normalTexture', nrm);
+  else mat.properties.set('normalTexture', RUBBER_MAP_SET.normal);
+}
+
+function applyPresetOntoMaterial(
+  engine: Engine,
+  mat: MaterialType,
+  preset: BrickMaterialPreset,
+  tint: readonly [number, number, number],
+  kind: BrickMaterialKind
+): void {
+  const bag: Record<string, unknown> = {};
+  for (const [k, v] of mat.properties.entries()) bag[k] = v;
+  applyPresetToProps(bag, preset, tint);
+  for (const [k, v] of Object.entries(bag)) {
+    mat.properties.set(k, v);
+  }
+  if (kind === 'rubber') {
+    copyRubberMapsFromDonor(engine, mat);
+  }
+  mat.metallic = preset.metallic;
+  mat.roughness = preset.roughness;
+  if (preset.alphaMode) mat.alphaMode = preset.alphaMode;
+  if (preset.doubleSided != null) mat.doubleSided = preset.doubleSided;
+  mat.diffuseColor = vec3.fromValues(tint[0]!, tint[1]!, tint[2]!);
+}
+
+/**
+ * Catalog 017B (+ maps) for this part/colour, with finish preset and optional UV1 aging.
+ */
+export function ensureBrickMaterial(
+  engine: Engine,
+  ldrawId: string,
+  colorId: BrickColorId,
+  hasAging: boolean
+): MaterialType | null {
+  const rm = engine.resourceManager;
+  const kind = materialOf(colorId);
+  const name = landmarkBrickMaterialId(ldrawId, colorId, kind);
+  const existing = rm.getMaterialByName(name);
+  if (existing) return existing;
+
+  const template = findCatalogPlasticTemplate(engine, colorId);
+  if (!template?.shaderGraph) {
+    console.warn(
+      `[BrickMaterial] no catalog plastic for ${colorId}. Flat brick fallback (${brickMaterialId(colorId)}).`
+    );
+    return rm.getMaterialByName(brickMaterialId(colorId)) ?? null;
+  }
+
+  const tint = getColor(colorId)?.rgb ?? [0.63, 0.66, 0.7];
+  const preset = presetFor(kind, getColor(colorId));
+  const wantsAging =
+    hasAging && preset.useAgingMap !== 0 && !materialKindNeedsBlend(kind);
+  const agingId = wantsAging ? landmarkAgingTextureId(ldrawId) : null;
+  const agingTex = agingId ? rm.getTexture(agingId) : null;
+
+  // Plastic without per-part aging can share the catalog template only if finish is plastic.
+  if (kind === 'plastic' && !agingTex) {
+    return template;
+  }
+
+  const whiteTex = rm.getTexture(MINIFIG_WHITE_TEXTURE_ID);
+  const mat = cloneMaterial(template, name, tint, agingTex);
   if (!mat.properties.get('emissiveTexture') && whiteTex) {
     mat.properties.set('emissiveTexture', whiteTex);
   }
+  applyPresetOntoMaterial(engine, mat, preset, tint, kind);
 
-  const usePlastic = mat.properties.get('usePlasticMaps');
-  const normal = mat.properties.get('normalTexture');
   console.info(
-    `[LandmarkPlastic] ${name}: cloned ${template.name}, usePlasticMaps=${String(usePlastic)}, normal=${typeof normal}`
+    `[BrickMaterial] ${name}: kind=${kind} from ${template.name}, aging=${agingTex ? 1 : 0}`
   );
 
   rm.uploadMaterial(mat);
   return mat;
 }
+
+/**
+ * @deprecated Prefer ensureBrickMaterial — kept for call-site compat.
+ */
+export function ensureLandmarkPlasticMaterial(
+  engine: Engine,
+  ldrawId: string,
+  colorId: BrickColorId,
+  hasAging: boolean
+): MaterialType | null {
+  return ensureBrickMaterial(engine, ldrawId, colorId, hasAging);
+}
+
+/** Whether this colour's batches should cast shadows. */
+export function brickMaterialCastShadow(
+  colorId: BrickColorId,
+  landmarkDefault: boolean
+): boolean {
+  const kind = materialOf(colorId);
+  const preset = presetFor(kind, getColor(colorId));
+  if (preset.castShadow === false || materialKindNeedsBlend(kind)) return false;
+  return landmarkDefault;
+}
+
+export type { CatalogPlasticSet };
+export { DEFAULT_CATALOG_PLASTIC_SET };

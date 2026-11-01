@@ -1559,6 +1559,100 @@
   box-shadow: 2px 3px 0 rgb(26 21 32 / 12%);
 }
 
+.br-color-picker__pop--wide {
+  min-width: 18rem;
+  max-width: min(24rem, 92vw);
+}
+
+.br-color-picker__kind {
+  display: block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+  line-height: 1.1;
+}
+
+.br-color-picker__materials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0 0 0.45rem;
+  max-height: 5.5rem;
+  overflow: auto;
+}
+
+.br-color-picker__mat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--br-rule, #c8c0b4);
+  background: transparent;
+  color: var(--br-ink-muted, #5a5348);
+  font-size: 0.62rem;
+  padding: 0.12rem 0.35rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.br-color-picker__mat-tab.is-active {
+  border-color: var(--br-ink, #1a1520);
+  color: var(--br-ink, #1a1520);
+  background: var(--br-stud-yellow, #f5c518);
+}
+
+.br-color-picker__mat-tab:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.br-color-picker__mat-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.br-color-picker__search {
+  flex: 1 1 6rem;
+  min-width: 5rem;
+  border: 1px solid var(--br-rule, #c8c0b4);
+  background: var(--br-paper, #fff);
+  color: var(--br-ink, #1a1520);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 2px;
+}
+
+.br-color-picker__empty {
+  margin: 0.35rem 0 0;
+  font-size: 0.65rem;
+  color: var(--br-ink-muted, #5a5348);
+}
+
+.br-color-picker__pop-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.4rem;
+  align-items: center;
+}
+
+.br-color-picker__toggle {
+  flex: 1 1 auto;
+  border: 1px solid var(--br-rule, #c8c0b4);
+  background: transparent;
+  color: var(--br-ink-muted, #5a5348);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.35rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.br-color-picker__toggle.is-active {
+  border-color: var(--br-ink, #1a1520);
+  color: var(--br-ink, #1a1520);
+  background: var(--br-stud-yellow, #f5c518);
+}
+
 .br-color-picker__pop-title {
   margin: 0 0 0.35rem;
   font-size: 0.65rem;
@@ -1570,7 +1664,9 @@
 
 .br-color-picker__grid {
   display: grid;
-  grid-template-columns: repeat(6, 1.4rem);
+  grid-template-columns: repeat(8, 1.25rem);
+  max-height: 14rem;
+  overflow: auto;
   gap: 0.3rem;
   justify-content: start;
 }

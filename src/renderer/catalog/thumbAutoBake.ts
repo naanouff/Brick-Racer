@@ -4,7 +4,7 @@
  * Skips ids already on disk (index.json) unless `force` is set.
  */
 
-import { BRICK_CATALOG } from '../../racer/hub/brick/catalog';
+import { BRICK_CATALOG, getColor } from '../../racer/hub/brick/catalog';
 import { fetchLdrawPart, hasLdrawIpc } from '../../racer/hub/brick/catalog/ldrawMeshCache';
 import { footprintBoxMesh, rasterizePartThumb } from '../../racer/hub/brick/catalog/thumbRaster';
 import type { BrickFootprint } from '../../racer/hub/brick/catalog/types';
@@ -128,7 +128,7 @@ async function bakeOne(part: ThumbBakePart): Promise<boolean> {
     return false;
   }
   const mesh = await meshFor(part);
-  const rgb = BRICK_CATALOG.colors.find((c) => c.id === 'gray')?.rgb;
+  const rgb = getColor('gray')?.rgb;
   const img = rasterizePartThumb(mesh.vertices, mesh.indices, { size: 128, rgb });
   if (!img) {
     lastMsg = `${part.ldrawId}: rendu vide`;

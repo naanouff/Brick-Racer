@@ -9,12 +9,19 @@ import type {
   BrickCatalog,
   BrickColorDef,
   BrickFootprint,
+  BrickMaterialKind,
   BrickMeshStatus,
   BrickPartDef,
 } from './types';
+import { BRICK_MATERIAL_KINDS } from './types';
 
 type PartsFile = { version: number; parts: BrickPartDef[] };
-type ColorsFile = { version: number; colors: BrickColorDef[] };
+type ColorsFile = {
+  version: number;
+  source?: string;
+  generated?: string;
+  colors: BrickColorDef[];
+};
 
 function buildPartIndex(parts: readonly BrickPartDef[]): {
   byId: Map<string, BrickPartDef>;
@@ -41,15 +48,26 @@ function buildPartIndex(parts: readonly BrickPartDef[]): {
 function buildColorIndex(colors: readonly BrickColorDef[]): {
   byId: Map<string, BrickColorDef>;
   resolve: Map<string, string>;
+  byCode: Map<number, string>;
 } {
   const byId = new Map<string, BrickColorDef>();
   const resolve = new Map<string, string>();
+  const byCode = new Map<number, string>();
   for (const c of colors) {
     if (byId.has(c.id)) {
       throw new Error(`duplicate color id '${c.id}' in catalog`);
     }
     byId.set(c.id, c);
     resolve.set(c.id, c.id);
+    if (c.ldrawCode != null) {
+      if (byCode.has(c.ldrawCode) && byCode.get(c.ldrawCode) !== c.id) {
+        throw new Error(
+          `duplicate ldrawCode ${c.ldrawCode}: ${byCode.get(c.ldrawCode)} vs ${c.id}`
+        );
+      }
+      byCode.set(c.ldrawCode, c.id);
+      resolve.set(String(c.ldrawCode), c.id);
+    }
     for (const a of c.aliases ?? []) {
       if (resolve.has(a) && resolve.get(a) !== c.id) {
         throw new Error(`color alias '${a}' maps to both ${resolve.get(a)} and ${c.id}`);
@@ -57,11 +75,14 @@ function buildColorIndex(colors: readonly BrickColorDef[]): {
       resolve.set(a, c.id);
     }
   }
-  return { byId, resolve };
+  return { byId, resolve, byCode };
 }
 
 const partsFile = partsJson as unknown as PartsFile;
 const colorsFile = colorsJson as unknown as ColorsFile;
+
+/** Ids from disk seed `parts.json` (immutable set for CF promote reports). */
+export const SEED_PART_IDS: ReadonlySet<string> = new Set(partsFile.parts.map((p) => p.id));
 
 /** Mutable runtime parts (seed + CL1 registerPartRuntime). */
 const runtimeParts: BrickPartDef[] = [...partsFile.parts];
@@ -85,12 +106,21 @@ export function registerPartRuntime(def: BrickPartDef): void {
   partIndex = buildPartIndex(runtimeParts);
 }
 
+/** How many parts are currently registered (seed + session). */
+export function runtimePartCount(): number {
+  return runtimeParts.length;
+}
+
+export function seedPartCount(): number {
+  return SEED_PART_IDS.size;
+}
+
 /** Canonical part id, or undefined if unknown. */
 export function resolvePartId(idOrAlias: string): string | undefined {
   return partIndex.resolve.get(idOrAlias);
 }
 
-/** Canonical color id, or undefined if unknown. */
+/** Canonical color id, or undefined if unknown (slug, alias, or LDraw CODE as string). */
 export function resolveColorId(idOrAlias: string): string | undefined {
   return colorIndex.resolve.get(idOrAlias);
 }
@@ -103,6 +133,16 @@ export function getPart(idOrAlias: string): BrickPartDef | undefined {
 export function getColor(idOrAlias: string): BrickColorDef | undefined {
   const id = resolveColorId(idOrAlias);
   return id ? colorIndex.byId.get(id) : undefined;
+}
+
+/** Colours flagged `common` (UI default palette). */
+export function catalogCommonColors(): readonly BrickColorDef[] {
+  return colorsFile.colors.filter((c) => c.common);
+}
+
+/** Colours for a given material kind. */
+export function catalogColorsByMaterial(kind: BrickMaterialKind): readonly BrickColorDef[] {
+  return colorsFile.colors.filter((c) => (c.material ?? 'plastic') === kind);
 }
 
 export function isCatalogPart(idOrAlias: string): boolean {
@@ -140,6 +180,29 @@ export function catalogCanonicalPartIds(): readonly string[] {
 
 export function catalogCanonicalColorIds(): readonly string[] {
   return [...colorIndex.byId.keys()].sort();
+}
+
+/** Colours flagged `common` (picker default / plastic pregen until MT2 lazy). */
+export function catalogCommonColorIds(): readonly string[] {
+  return colorsFile.colors.filter((c) => c.common).map((c) => c.id);
+}
+
+/**
+ * Finish for a colour id or alias. Unknown → `plastic`.
+ * Legacy colours without `material` fall back to translucent → transparent.
+ */
+export function materialOf(idOrAlias: string): BrickMaterialKind {
+  const def = getColor(idOrAlias);
+  if (!def) return 'plastic';
+  if (def.material && (BRICK_MATERIAL_KINDS as readonly string[]).includes(def.material)) {
+    return def.material;
+  }
+  if (def.translucent) return 'transparent';
+  return 'plastic';
+}
+
+export function isBrickMaterialKind(value: string): value is BrickMaterialKind {
+  return (BRICK_MATERIAL_KINDS as readonly string[]).includes(value);
 }
 
 /** Fountain BOM design ids that must exist (BC1 gate). */

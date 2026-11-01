@@ -3,7 +3,20 @@
  * @description Pure command apply for brick-lab MCP bus (LT4 + BA1–BA2).
  */
 
-import { BRICK_CATALOG } from '../../../hub/brick/catalog';
+import {
+  BRICK_CATALOG,
+  SEED_PART_IDS,
+  indexMasterParts,
+  loadMasterIndex,
+  promotePartsFromMaster,
+  readStaging,
+  registerPartRuntime,
+  runtimePartCount,
+  seedPartCount,
+  upsertStaging,
+  type BrickPartDef,
+  type MasterIndexEntry,
+} from '../../../hub/brick/catalog';
 import { isBrickColorId, isBrickPartId } from '../../../hub/brick/brickCatalog';
 import { validateManual } from '../../../hub/brick/manual';
 import {
@@ -115,7 +128,16 @@ export type McpCommand =
       dryRun?: boolean;
     }
   /** Meta for main-process capture (stem + optional view already applied). */
-  | { type: 'capture_meta' };
+  | { type: 'capture_meta' }
+  | { type: 'promote_parts'; ids: string[]; persist?: boolean; setNum?: string }
+  | { type: 'promote_status' }
+  | { type: 'promote_bom'; setNum: string; persist?: boolean }
+  | {
+      type: 'place_assembly';
+      stem: string;
+      at: [number, number, number];
+      dryRun?: boolean;
+    };
 
 export type McpHandlerContext = {
   levelId: string;
@@ -128,6 +150,14 @@ export type McpHandlerContext = {
     { ok: true; stem: string; manual: unknown } | { ok: false; error: string }
   >;
   setView?: (view: BrickLabView) => void | Promise<void>;
+  /** CF1c — inject master map in tests; default loadMasterIndex(). */
+  loadMasterParts?: () => Promise<readonly MasterIndexEntry[]>;
+  /** CF1c — merge staging → parts.json via Electron IPC. */
+  mergeBc1Parts?: (
+    staging: readonly BrickPartDef[]
+  ) => Promise<{ ok: boolean; added?: number; total?: number; error?: string }>;
+  /** CF1c — load `/catalog/bom/<setNum>.json` ids (tests / custom). */
+  loadBomIds?: (setNum: string) => Promise<string[] | null>;
 };
 
 export type McpResult = {
@@ -157,8 +187,35 @@ export function mcpCommandNeedsSceneSync(type: string): boolean {
     type === 'wall' ||
     type === 'ring' ||
     type === 'disc' ||
-    type === 'column'
+    type === 'column' ||
+    type === 'place_assembly'
   );
+}
+
+/**
+ * Map a saved manual's brick ops into place_bricks specs, translated by world `at`.
+ * Local coords in the manual stay relative to the module origin; `at` is the world min corner offset.
+ */
+export function bricksFromManualOffset(
+  manual: { steps: readonly { ops: readonly { op?: string; part?: string; color?: string; at?: number[]; rot?: number }[] }[] },
+  at: readonly [number, number, number]
+): McpBrickSpec[] {
+  const [ox, oy, oz] = at;
+  const out: McpBrickSpec[] = [];
+  for (const step of manual.steps) {
+    for (const op of step.ops) {
+      if (op.op !== 'brick' || typeof op.part !== 'string' || typeof op.color !== 'string') continue;
+      if (!Array.isArray(op.at) || op.at.length !== 3) continue;
+      const spec: McpBrickSpec = {
+        part: op.part,
+        color: op.color,
+        at: [op.at[0]! + ox, op.at[1]! + oy, op.at[2]! + oz],
+      };
+      if (op.rot === 90 || op.rot === 180 || op.rot === 270) spec.rot = op.rot;
+      out.push(spec);
+    }
+  }
+  return out;
 }
 
 function asCommand(raw: unknown): McpCommand | null {
@@ -374,6 +431,7 @@ export async function applyMcpCommand(
           footprint: p.footprint,
           category: p.category,
           ldrawId: p.ldrawId ?? null,
+          source: SEED_PART_IDS.has(p.id) ? 'seed' : 'staging',
         })),
       };
     case 'list_colors':
@@ -653,7 +711,144 @@ export async function applyMcpCommand(
         }),
         Boolean(cmd.dryRun)
       );
+    case 'place_assembly': {
+      const stem = String(cmd.stem ?? '').trim();
+      if (!stem) return { ok: false, error: 'stem requis' };
+      if (!Array.isArray(cmd.at) || cmd.at.length !== 3) {
+        return { ok: false, error: 'at [sx,py,sz] requis' };
+      }
+      if (!ctx.readManual) return { ok: false, error: 'readManual indisponible' };
+      const res = await ctx.readManual(stem);
+      if (!res.ok) return { ok: false, error: res.error };
+      const checked = validateManual(res.manual);
+      if (!checked.ok) {
+        return {
+          ok: false,
+          error: checked.issues[0]
+            ? `${checked.issues[0].path}: ${checked.issues[0].message}`
+            : 'manuel invalide',
+        };
+      }
+      const bricks = bricksFromManualOffset(checked.manual, cmd.at);
+      if (bricks.length === 0) return { ok: false, error: 'assemblage vide' };
+      const placed = placeBricksBatch(ctx.state, bricks, Boolean(cmd.dryRun));
+      return {
+        ...placed,
+        stem,
+        at: cmd.at,
+        placedCount: Array.isArray(placed.placed) ? placed.placed.length : 0,
+      };
+    }
+    case 'promote_status':
+      return {
+        ok: true,
+        seedCount: seedPartCount(),
+        runtimeCount: runtimePartCount(),
+        stagingCount: readStaging().length,
+      };
+    case 'promote_parts': {
+      if (!Array.isArray(cmd.ids) || cmd.ids.length === 0) {
+        return { ok: false, error: 'ids[] requis' };
+      }
+      return applyPromote(ctx, cmd.ids, Boolean(cmd.persist), cmd.setNum);
+    }
+    case 'promote_bom': {
+      const setNum = String(cmd.setNum ?? '').trim().replace(/-1$/, '');
+      if (!setNum) return { ok: false, error: 'setNum requis' };
+      const ids = await resolveBomIds(ctx, setNum);
+      if (!ids) {
+        return {
+          ok: false,
+          error: `BOM introuvable — lancer pnpm catalog:promote-set -- ${setNum}`,
+        };
+      }
+      return applyPromote(ctx, ids, Boolean(cmd.persist), setNum);
+    }
     default:
       return { ok: false, error: `type inconnu: ${(cmd as { type: string }).type}` };
   }
+}
+
+async function resolveBomIds(
+  ctx: McpHandlerContext,
+  setNum: string
+): Promise<string[] | null> {
+  if (ctx.loadBomIds) return ctx.loadBomIds(setNum);
+  try {
+    const res = await fetch(`/catalog/bom/${setNum}.json`);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { ids?: unknown };
+    if (!Array.isArray(data.ids)) return null;
+    return data.ids.map((id) => String(id));
+  } catch {
+    return null;
+  }
+}
+
+async function applyPromote(
+  ctx: McpHandlerContext,
+  ids: readonly string[],
+  persist: boolean,
+  setNum?: string
+): Promise<McpResult> {
+  let parts: readonly MasterIndexEntry[];
+  try {
+    parts = ctx.loadMasterParts
+      ? await ctx.loadMasterParts()
+      : (await loadMasterIndex()).parts;
+  } catch (err) {
+    return {
+      ok: false,
+      error: `master-index: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  const report = promotePartsFromMaster(
+    ids,
+    indexMasterParts(parts),
+    SEED_PART_IDS,
+    setNum ? { setNum } : undefined
+  );
+
+  for (const def of report.defs) {
+    if (SEED_PART_IDS.has(def.id)) continue;
+    registerPartRuntime(def);
+    upsertStaging(def);
+  }
+
+  let persistResult: { ok: boolean; added?: number; total?: number; error?: string } | null =
+    null;
+  if (persist) {
+    const staging = readStaging();
+    if (!ctx.mergeBc1Parts) {
+      return {
+        ok: false,
+        error: 'mergeBc1Parts indisponible (hors Electron ?)',
+        counts: report.counts,
+        results: report.results,
+      };
+    }
+    persistResult = await ctx.mergeBc1Parts(staging);
+    if (!persistResult.ok) {
+      return {
+        ok: false,
+        error: persistResult.error ?? 'persist échoué',
+        counts: report.counts,
+        results: report.results,
+      };
+    }
+  }
+
+  return {
+    ok: true,
+    ...(setNum ? { setNum } : {}),
+    counts: report.counts,
+    results: report.results,
+    registered: report.defs.filter((d) => !SEED_PART_IDS.has(d.id)).map((d) => d.id),
+    runtimeCount: runtimePartCount(),
+    stagingCount: readStaging().length,
+    ...(persistResult
+      ? { persisted: true, added: persistResult.added, total: persistResult.total }
+      : { persisted: false }),
+  };
 }

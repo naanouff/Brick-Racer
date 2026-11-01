@@ -99,12 +99,17 @@ Rayon depuis l’inverse de `viewProjectionMatrix` (perspective + ortho). Empile
 - Readback miniature : 1 frame de retard → attendre 2 frames ; valider 3 pièces avant batch.
 - Hot-reload Vite après écriture manuel → le registry ignore le stem en cours d’édition.
 
+## Suite : volets + hiérarchie
+
+Conservation des étapes / sous-étapes, arbre BOM et catalogue repliable : [brick-lab-hierarchy.md](brick-lab-hierarchy.md) · [BRICK-HV](../sprints/BRICK-HV.md).
+
 ## Hors scope (premier passage)
 
 - Macros `ring` / `disc` / `wall` / `box` dans l’éditeur (ops `brick` seules).
 - Édition multi-joueurs / cloud.
 - Miniatures CDN Rebrickable (licence) — rendu local uniquement.
 - Remplacement du pipeline DC pour les formes en grille.
+- Arbre d’étapes / sous-BOM dans l’UI (→ HV).
 
 ## Critères de succès (plan)
 
@@ -118,3 +123,4 @@ Rayon depuis l’inverse de `viewProjectionMatrix` (perspective + ortho). Empile
 | Date | Note |
 | ---- | ---- |
 | 2026-10-30 | Consignation : pivot construction manuelle après essais Gemini fontaine ; ouverture sprint ED |
+| 2026-11-01 | Pointeur suite HV (volets + hiérarchie BOM / `substeps`) |

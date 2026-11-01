@@ -27,9 +27,11 @@ describe('brick part catalog (BC1)', () => {
     expect(resolvePartId('plate')).toBe('3020');
     expect(resolvePartId('tile')).toBe('3068');
     expect(resolvePartId('plate_1x1')).toBe('6141');
-    expect(resolveColorId('gray')).toBe('gray');
-    expect(resolveColorId('lbg')).toBe('gray');
-    expect(resolveColorId('trans_light_blue')).toBe('cyan');
+    expect(resolveColorId('gray')).toBe('light_bluish_grey');
+    expect(resolveColorId('lbg')).toBe('light_bluish_grey');
+    expect(resolveColorId('cyan')).toBe('trans_light_blue');
+    expect(resolveColorId('trans_light_blue')).toBe('trans_light_blue');
+    expect(resolveColorId('clear')).toBe('trans_clear');
   });
 
   it('exposes fountain BOM design ids (authoring before mesh)', () => {
@@ -91,6 +93,8 @@ describe('brick part catalog (BC1)', () => {
   it('colors include Light Bluish Gray + trans water', () => {
     expect(isBrickColorId('gray')).toBe(true);
     expect(getColor('cyan')?.translucent).toBe(true);
-    expect(getColor('clear')?.blId).toBe(40);
+    expect(getColor('clear')?.ldrawCode).toBe(47);
+    expect(getColor('clear')?.material).toBe('transparent');
   });
 });
+

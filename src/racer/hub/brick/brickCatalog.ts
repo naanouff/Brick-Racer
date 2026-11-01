@@ -12,11 +12,13 @@ import {
   getPart,
   isCatalogColor,
   isCatalogPart,
+  materialOf,
   partFootprintFromCatalog,
   resolveColorId,
   resolvePartId,
 } from './catalog';
 import { P, S } from './brickUnits';
+import type { BrickMaterialKind } from './catalog/types';
 
 /** Part id accepted in manuals = design id or alias (e.g. "3005" | "1x1"). */
 export type BrickPartId = string;
@@ -45,7 +47,8 @@ export const BRICK_COLOR_IDS: readonly string[] = catalogCanonicalColorIds();
 export const BRICK_COLOR_ACCEPT_IDS: readonly string[] = catalogColorAcceptIds();
 
 export { isCatalogColor as isBrickColorId, isCatalogPart as isBrickPartId };
-export { resolveColorId, resolvePartId, getPart, getColor };
+export { resolveColorId, resolvePartId, getPart, getColor, materialOf };
+export type { BrickMaterialKind };
 
 /** Full extents (m) for a part — applied as instance scale on unit cube. */
 export function partSizeMeters(partId: BrickPartId): [number, number, number] {

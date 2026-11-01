@@ -7,11 +7,13 @@ export type {
   BrickCatalog,
   BrickColorDef,
   BrickFootprint,
+  BrickGlitterDef,
+  BrickMaterialKind,
   BrickMeshStatus,
   BrickPartCategory,
   BrickPartDef,
 } from './types';
-export { BRICK_PART_CATEGORIES } from './types';
+export { BRICK_MATERIAL_KINDS, BRICK_PART_CATEGORIES } from './types';
 export {
   clearCatalogCategoriesCache,
   FAMILY_MAP_CATEGORY_IDS,
@@ -26,20 +28,42 @@ export {
 export {
   BRICK_CATALOG,
   FOUNTAIN_BOM_PART_IDS,
+  SEED_PART_IDS,
   catalogCanonicalColorIds,
   catalogCanonicalPartIds,
   catalogColorAcceptIds,
+  catalogColorsByMaterial,
+  catalogCommonColorIds,
+  catalogCommonColors,
   catalogPartAcceptIds,
   getColor,
   getPart,
+  isBrickMaterialKind,
   isCatalogColor,
   isCatalogPart,
+  materialOf,
   partFootprintFromCatalog,
   partMeshStatus,
   registerPartRuntime,
   resolveColorId,
   resolvePartId,
+  runtimePartCount,
+  seedPartCount,
 } from './loadCatalog';
+export {
+  indexMasterParts,
+  masterEntryToPartDef,
+  promotePartsFromMaster,
+  type PromoteBucket,
+  type PromoteItemResult,
+  type PromoteReport,
+} from './promoteParts';
+export {
+  EDITOR_COLOR_SLUGS,
+  SET_10359_COLOR_HINTS,
+  nearestEditorColor,
+  type EditorColorSlug,
+} from './colorNearest';
 export {
   footprintFromMasterDims,
   type MasterDimsStuds,

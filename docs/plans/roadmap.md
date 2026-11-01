@@ -16,6 +16,7 @@ Séquence : **course jouable d’abord**, puis **Lego City hub**, puis **custom*
 | **DC** | Authoring décors grilles : couches ASCII → brickify → assembly ; ortho + overlay brick-lab | [brick-decor-pipeline.md](brick-decor-pipeline.md) · DC1–DC4 · après BW1 |
 | **ED** | Construction manuelle brick-lab : catalogue (familles, thumbs) + pose souris → `.manual.json` | [brick-lab-editor.md](brick-lab-editor.md) · [BRICK-ED](../sprints/BRICK-ED.md) · après BW1 + CL ; landmarks ronds / fidélité |
 | **LT** | Outils brick-lab : fantôme yaw, Orbite/Pan, Lucide, MCP agent (bus localhost) | [brick-lab-tools.md](brick-lab-tools.md) · [brick-lab-mcp.md](brick-lab-mcp.md) · [BRICK-LT](../sprints/BRICK-LT.md) · après ED |
+| **HV** | Volets brick-lab : hiérarchie BOM (étapes / sous-étapes) + catalogue repliable | [brick-lab-hierarchy.md](brick-lab-hierarchy.md) · [BRICK-HV](../sprints/BRICK-HV.md) · après ED + Atelier |
 | **BA** | Agent constructeur : MCP lot 2 (dry-run, macros, capture) + skill/subagent image→notice | [brick-lab-agent.md](brick-lab-agent.md) · [BRICK-BA](../sprints/BRICK-BA.md) · après LT |
 | **FC** | Façades city-test : garage / vinyle / mairie (couches + overlay Prompt 0) | [brick-lab-facades.md](brick-lab-facades.md) · [BRICK-FC](../sprints/BRICK-FC.md) · après LT |
 | **MT** | Matériaux LEGO : palette officielle LDConfig, presets (rubber / trans / chrome…), stickers en decals | [brick-materials.md](brick-materials.md) · [BRICK-MT](../sprints/BRICK-MT.md) · après CL + BW1 |
@@ -36,6 +37,7 @@ flowchart LR
   BW1 --> ED[ED editor brick-lab]
   CL[CL1-CL5 catalog-lab LDraw] --> ED
   ED --> LT[LT tools + MCP]
+  ED --> HV[HV hierarchy volets]
   LT --> BA[BA agent builder]
   CL --> MT[MT materials stickers]
   BW1 --> MT
@@ -48,6 +50,7 @@ flowchart LR
   DC --> P2
   ED --> P2
   LT --> P2
+  HV --> P2
   BA --> P2
   MT --> P2
   FC[FC facades] --> P2
@@ -68,6 +71,7 @@ flowchart LR
 - **DC** : couches ASCII + brickify pour formes en grille (pad / gate / façades) ; ortho + overlay.
 - **ED** : pose manuelle dans brick-lab pour landmarks ronds / fidélité pièce-à-pièce ; catalogue familles + miniatures LDraw.
 - **LT** : fantôme orienté, caméra Orbite/Pan, Lucide, MCP (`pnpm mcp:brick-lab` + bus sous `pnpm dev`).
+- **HV** : volets brick-lab (hiérarchie Manuel → Étapes → Sous-étapes + BOM ; catalogue repliable) ; schéma `substeps` ([brick-lab-hierarchy.md](brick-lab-hierarchy.md)).
 - **BA** : agent Cursor (skill + subagent) image/notice → brick-lab ; MCP lot 2 (dry-run, analyze, macros, capture).
 - **FC** : façades Prompt 0 → couches / manuels (garage, vinyle, mairie livrés ; playtest overlay + city-test mesh ensuite).
 - **MT** : palette officielle LDraw (matériau → couleur), presets PBR (caoutchouc, transparent, chrome…), autocollants officiels en decals ; manuels gardent le champ `color` seul.

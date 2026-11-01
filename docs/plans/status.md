@@ -72,10 +72,11 @@ Déjà dans le code (au-delà de la note 0.1.0) :
 | **DC1–DC4** | Couches, brickify, pad, gate, tour. Cochés. |
 | **UIM1 / UIM2** | Maquettes HTML joueur et Atelier. Cochées. L’Atelier React est dans l’app ; la coque joueur React (UI1) n’existe pas (`src/renderer/` n’a pas de dossier `ui/`). |
 
-Frontière actuelle : **[BRICK-FC](../sprints/BRICK-FC.md)** façades livrées (garage / vinyle / mairie manuels + overlays). **[BRICK-LT](../sprints/BRICK-LT.md)** outils OK. Suite agent : **[BRICK-BA](../sprints/BRICK-BA.md)** ([brick-lab-agent.md](brick-lab-agent.md)). Suite rendu matière : **[BRICK-MT](../sprints/BRICK-MT.md)** ([brick-materials.md](brick-materials.md)) — palette LDConfig, presets, stickers decals. Autre suite contenu : playtest overlay ±1 stud ; spawn mesh sur `city-test` ; ED7 fontaine.
+Frontière actuelle : **[BRICK-FC](../sprints/BRICK-FC.md)** façades livrées (garage / vinyle / mairie manuels + overlays). **[BRICK-LT](../sprints/BRICK-LT.md)** outils OK. Suite volets brick-lab : **[BRICK-HV](../sprints/BRICK-HV.md)** ([brick-lab-hierarchy.md](brick-lab-hierarchy.md)). Suite agent : **[BRICK-BA](../sprints/BRICK-BA.md)** ([brick-lab-agent.md](brick-lab-agent.md)). Suite rendu matière : **[BRICK-MT](../sprints/BRICK-MT.md)** ([brick-materials.md](brick-materials.md)) — palette LDConfig, presets, stickers decals. Autre suite contenu : playtest overlay ±1 stud ; spawn mesh sur `city-test` ; ED7 fontaine.
 
 Pas commencé :
 
+- **[HV](../sprints/BRICK-HV.md)** — volets hiérarchie BOM + catalogue repliable ; schéma `substeps` (plan [brick-lab-hierarchy.md](brick-lab-hierarchy.md)).
 - **[MT](../sprints/BRICK-MT.md)** — matériaux / palette officielle / stickers (plan [brick-materials.md](brick-materials.md)).
 - **[BA](../sprints/BRICK-BA.md)** — agent constructeur MCP lot 2 + skill/subagent (plan [brick-lab-agent.md](brick-lab-agent.md)).
 - **P1 / [BRICK-B3](../sprints/BRICK-B3.md)** — 3 tours, checkpoints, 3 IA, items, finish. `SessionFlow` le dit explicitement.

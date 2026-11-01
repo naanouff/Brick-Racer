@@ -28,9 +28,12 @@ import { registerAgingTexture } from './catalog/catalogAgingTexture';
 import { ensureLdrawUploadedMesh, fetchLdrawPart, hasLdrawIpc } from './catalog/ldrawMeshCache';
 import { packLdrawInstanceData } from './brickLdrawInstanceData';
 import {
-  ensureLandmarkPlasticMaterial,
+  brickMaterialCastShadow,
+  ensureBrickMaterial,
   landmarkAgingTextureId,
 } from './landmarkPlasticMaterial';
+import { materialOf } from './brickCatalog';
+import { materialKindNeedsBlend } from './materials/brickMaterialPresets';
 import type { BrickLandmarkSpec } from './spawnBrickLandmark';
 
 function attachToSceneRoot(engine: Engine, entity: Entity): void {
@@ -169,10 +172,17 @@ export async function spawnLandmarkLdraw(
   const { ecsWorld: world } = full;
   const batches = groupBrickPoses(spec.poses);
   const created: Entity[] = [];
-  const castShadow = spec.castShadow ?? false;
+  const castShadowDefault = spec.castShadow ?? false;
   const boxBatches = new Map<string, BrickPose[]>();
+  /** Opaque first, then BLEND (transparent / glitter / satin). */
+  const orderedKeys = [...batches.keys()].sort((a, b) => {
+    const ka = materialKindNeedsBlend(materialOf(parseBrickBatchKey(a).colorId)) ? 1 : 0;
+    const kb = materialKindNeedsBlend(materialOf(parseBrickBatchKey(b).colorId)) ? 1 : 0;
+    return ka - kb;
+  });
 
-  for (const [key, poses] of batches) {
+  for (const key of orderedKeys) {
+    const poses = batches.get(key)!;
     const { partId, colorId } = parseBrickBatchKey(key);
     const ldrawId = resolvePartId(partId) ?? partId;
     const meshEntry = meshes.get(ldrawId);
@@ -181,7 +191,7 @@ export async function spawnLandmarkLdraw(
       continue;
     }
 
-    const resolvedMat = ensureLandmarkPlasticMaterial(
+    const resolvedMat = ensureBrickMaterial(
       full,
       ldrawId,
       colorId as BrickColorId,
@@ -192,6 +202,8 @@ export async function spawnLandmarkLdraw(
       boxBatches.set(key, poses);
       continue;
     }
+
+    const castShadow = brickMaterialCastShadow(colorId as BrickColorId, castShadowDefault);
 
     const instData = packLdrawInstanceData(poses);
     const instanceBuffer = device.createBuffer({

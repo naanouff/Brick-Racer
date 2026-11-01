@@ -26,20 +26,27 @@ export {
   groupBrickPoses,
   isBrickColorId,
   isBrickPartId,
+  materialOf,
   parseBrickBatchKey,
   partSizeMeters,
   resolveColorId,
   resolvePartId,
   type BrickBatchKey,
   type BrickColorId,
+  type BrickMaterialKind,
   type BrickPartId,
   type BrickPose,
 } from './brickCatalog';
 export {
   BRICK_CATALOG,
+  BRICK_MATERIAL_KINDS,
   FOUNTAIN_BOM_PART_IDS,
   catalogCanonicalColorIds,
   catalogCanonicalPartIds,
+  catalogColorsByMaterial,
+  catalogCommonColorIds,
+  catalogCommonColors,
+  isBrickMaterialKind,
   partMeshStatus,
   type BrickMeshStatus,
   type BrickPartDef,
@@ -57,11 +64,26 @@ export {
 } from './spawnLandmarkLdraw';
 export { isInvertedDishPart, packLdrawInstanceData } from './brickLdrawInstanceData';
 export {
+  ensureBrickMaterial,
   ensureLandmarkPlasticMaterial,
   landmarkAgingTextureId,
   landmarkPlasticMaterialId,
   LANDMARK_PLASTIC_SET,
 } from './landmarkPlasticMaterial';
+export {
+  RUBBER_PRESET,
+  TRANSPARENT_PRESET,
+  applyPresetToProps,
+  materialKindNeedsBlend,
+  presetFor,
+  presetForColorId,
+  type BrickMaterialPreset,
+} from './materials/brickMaterialPresets';
+export {
+  RUBBER_MAP_SET,
+  RUBBER_UV_SCALE,
+  applyAmbientRubberMaps,
+} from './materials/rubberMapSets';
 export {
   FOUNTAIN_ANCHOR,
   FOUNTAIN_BOUNDING_RADIUS,

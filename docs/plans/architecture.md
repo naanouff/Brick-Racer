@@ -244,6 +244,7 @@ Shell inchangé : `src/main`, `src/preload`, `src/renderer` (overlay s’abonne 
 | ----- | -------------------- | ------ |
 | **P0** | EngineBoot + SceneDirector minimal + Kart inline ; SandboxKart | [BRICK-B2](../sprints/BRICK-B2.md) |
 | **UI** | Overlay React joueur (parallèle). Atelier dev = HTML hors app, pas cet overlay | [BRICK-UI1](../sprints/BRICK-UI1.md) · [BRICK-UIM2](../sprints/BRICK-UIM2.md) |
+| **HV** | Brick-lab : volets hiérarchie BOM + catalogue ; schéma `ManualStep.substeps` | [BRICK-HV](../sprints/BRICK-HV.md) · [brick-lab-hierarchy.md](brick-lab-hierarchy.md) |
 | **P1** | SessionFlow RaceActive ; RaceSystem minimal sur `race-test` | [BRICK-B3](../sprints/BRICK-B3.md) |
 | **H1** | Possession pied / véhicule sur `city-test` (pas le HubSystem complet) | [BRICK-H1](../sprints/BRICK-H1.md) |
 | **BW1** | Brick Module Kit + InstancedMesh landmarks hub | [BRICK-BW1](../sprints/BRICK-BW1.md) · [brick-world-rendering.md](brick-world-rendering.md) |

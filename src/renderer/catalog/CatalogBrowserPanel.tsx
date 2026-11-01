@@ -62,7 +62,7 @@ type HeightFilter = '' | 'plate' | 'brick' | 'tall';
 type ViewMode = 'list' | 'grid';
 type SortMode = 'id' | 'name' | 'size';
 
-const ROW_H = 30;
+const ROW_H = 36;
 const VIEW_H = 360;
 
 function chipClass(active: boolean, variant?: 'accent' | 'ghost'): string {
@@ -856,6 +856,7 @@ export function CatalogBrowserPanel(props: CatalogBrowserPanelProps): ReactEleme
                 const inFav = favoriteIds.has(p.id);
                 const inSt = stagingIds.has(p.id);
                 const active = selected?.id === p.id;
+                const lid = p.ldraw_id ?? p.id;
                 return (
                   <button
                     key={p.id}
@@ -866,6 +867,21 @@ export function CatalogBrowserPanel(props: CatalogBrowserPanelProps): ReactEleme
                     style={{ top: idx * ROW_H, height: ROW_H - 2 }}
                     onClick={() => onSelect(p)}
                   >
+                    <img
+                      className="br-catalog__row-thumb"
+                      src={`/catalog/thumbs/${lid}.png?t=${thumbTick}`}
+                      alt=""
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.opacity = '0.25';
+                        (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(1)';
+                        reportMissingThumb(toThumbPart(p));
+                      }}
+                      onLoad={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.opacity = '1';
+                        (e.currentTarget as HTMLImageElement).style.filter = '';
+                      }}
+                    />
                     <span className="br-catalog__id">{p.id}</span>
                     <span className="br-catalog__name">{p.name}</span>
                     {inFav ? (

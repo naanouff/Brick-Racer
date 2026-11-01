@@ -13,8 +13,15 @@ import {
   MINIFIG_UV_GRID_TEXTURE_ID,
 } from '../../../minifig/minifigUvGridDebug';
 import { minifigPlasticMaterial } from '../../../minifig/plasticMaterial';
-import { BRICK_COLOR_IDS, getColor, resolveColorId, type BrickColorId } from '../brickCatalog';
+import { resolveColorId, type BrickColorId } from '../brickCatalog';
+import { catalogCommonColorIds, getColor, materialOf } from './loadCatalog';
 import { CATALOG_AGING_TEXTURE_ID } from './catalogAgingTexture';
+import {
+  applyPresetToProps,
+  materialKindNeedsBlend,
+  presetFor,
+} from '../materials/brickMaterialPresets';
+import { applyAmbientRubberMaps } from '../materials/rubberMapSets';
 
 /**
  * Dedicated catalog plastic graph. The UV1 aging map takes the print slot (baseColorTexture):
@@ -76,13 +83,21 @@ export function tuneCatalogPlastic(spec: MaterialSpec, aging: boolean): void {
 
 function onePlasticMat(set: CatalogPlasticSet, colorId: string, aging: boolean): MaterialSpec {
   const name = catalogPlasticMaterialId(set, colorId, aging);
-  const spec = minifigPlasticMaterial({ name, tintRgb: tintFor(colorId) });
-  if (set !== 'off') {
+  const tint = tintFor(colorId);
+  const kind = materialOf(colorId);
+  const spec = minifigPlasticMaterial({ name, tintRgb: tint });
+  if (set !== 'off' && kind === 'plastic') {
     const bag: Record<string, MaterialSpec> = { [name]: spec };
     applyAmbientPlasticMaps(bag, set);
   }
   spec.shaderGraphId = CATALOG_PLASTIC_SHADER_ID;
-  tuneCatalogPlastic(spec, aging);
+  const useAging = aging && !materialKindNeedsBlend(kind);
+  tuneCatalogPlastic(spec, useAging);
+  const preset = presetFor(kind, getColor(colorId));
+  applyPresetToProps(spec.properties, preset, tint);
+  if (kind === 'rubber') {
+    applyAmbientRubberMaps(spec);
+  }
   return spec;
 }
 
@@ -101,11 +116,15 @@ function catalogUvGridMaterial(channel: 0 | 1): MaterialSpec {
   };
 }
 
-/** All set × color combos for LevelSpec.materials (no plastic*-color.webp). */
+/**
+ * Set × common-color combos for LevelSpec.materials (no plastic*-color.webp).
+ * MT1: only `common` colours (~40) until MT2 lazy ensure — full palette is 300+.
+ */
 export function catalogPlasticMaterials(): Record<string, MaterialSpec> {
   const out: Record<string, MaterialSpec> = {};
+  const colorIds = catalogCommonColorIds();
   for (const set of CATALOG_PLASTIC_SETS) {
-    for (const colorId of BRICK_COLOR_IDS) {
+    for (const colorId of colorIds) {
       for (const aging of [true, false]) {
         const spec = onePlasticMat(set, colorId, aging);
         out[spec.name] = spec;

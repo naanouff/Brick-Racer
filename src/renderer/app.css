@@ -187,7 +187,7 @@ body,
   align-items: center;
   gap: 0.4rem;
   margin: 0;
-  padding: 0 0.45rem;
+  padding: 0 0.35rem 0 0.25rem;
   border: 2px solid transparent;
   border-radius: 4px;
   background: transparent;
@@ -196,6 +196,16 @@ body,
   font-size: 0.74rem;
   text-align: left;
   cursor: pointer;
+}
+
+.br-catalog__row-thumb {
+  flex: 0 0 1.75rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  border-radius: 3px;
+  background: rgb(26 21 32 / 6%);
+  pointer-events: none;
 }
 
 .br-catalog__row:hover {

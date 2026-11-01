@@ -740,7 +740,9 @@
       "mesh": {
         "status": "box"
       },
-      "ldrawId": "4073"
+      "ldrawId": "4073",
+      "allowedMaterials": ["plastic", "transparent", "glow"],
+      "tags": ["light", "stud"]
     },
     {
       "id": "4032",
@@ -1132,7 +1134,9 @@
       "mesh": {
         "status": "box"
       },
-      "ldrawId": "98138"
+      "ldrawId": "98138",
+      "allowedMaterials": ["plastic", "transparent", "glow"],
+      "tags": ["light", "tile"]
     },
     {
       "id": "14769",
@@ -1147,6 +1151,56 @@
         "status": "missing"
       },
       "ldrawId": "14769"
+    },
+    {
+      "id": "3641",
+      "name": "Tyre 15 x 6 Offset Tread Small",
+      "category": "other",
+      "footprint": [1, 4, 2],
+      "mesh": { "status": "missing" },
+      "ldrawId": "3641",
+      "allowedMaterials": ["rubber"],
+      "tags": ["tire", "tyre", "wheel"]
+    },
+    {
+      "id": "4624",
+      "name": "Wheel 8 x 6",
+      "category": "other",
+      "footprint": [1, 2, 1],
+      "mesh": { "status": "missing" },
+      "ldrawId": "4624",
+      "allowedMaterials": ["plastic", "chrome", "metallic", "pearl"],
+      "tags": ["wheel", "rim"]
+    },
+    {
+      "id": "56890",
+      "name": "Tyre 24 x 12 R Balloon",
+      "category": "other",
+      "footprint": [1, 7, 3],
+      "mesh": { "status": "missing" },
+      "ldrawId": "56890",
+      "allowedMaterials": ["rubber"],
+      "tags": ["tire", "tyre", "wheel"]
+    },
+    {
+      "id": "3823",
+      "name": "Windscreen 2 x 4 x 2",
+      "category": "other",
+      "footprint": [2, 6, 4],
+      "mesh": { "status": "missing" },
+      "ldrawId": "3823",
+      "allowedMaterials": ["transparent"],
+      "tags": ["windscreen", "window", "glass"]
+    },
+    {
+      "id": "60601",
+      "name": "Glass for Window 1 x 2 x 2 Flat",
+      "category": "other",
+      "footprint": [1, 4, 2],
+      "mesh": { "status": "missing" },
+      "ldrawId": "60601",
+      "allowedMaterials": ["transparent"],
+      "tags": ["window", "glass"]
     }
   ]
 }

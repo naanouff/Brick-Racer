@@ -18,6 +18,8 @@ import {
   BRICK_CATALOG,
   fetchLdrawPart,
   getCachedLdrawMesh,
+  getPart,
+  readStaging,
   registerPartRuntime,
 } from '../../racer/hub/brick/catalog';
 import { BRICK_GHOST_OPACITY } from '../../racer/hub/brick/brickCatalog';
@@ -141,6 +143,13 @@ export const BrickLabBuildPanel = forwardRef<BrickLabBuildHandle, BrickLabBuildP
     useEffect(() => {
       setHostsReady((n) => n + 1);
     }, [toolbarHost, catalogHost]);
+
+    /** CF2 — reload BC1 staging into runtime catalog on brick-lab mount. */
+    useEffect(() => {
+      for (const part of readStaging()) {
+        registerPartRuntime(part);
+      }
+    }, []);
 
     const onStatsRef = useRef(onStats);
     onStatsRef.current = onStats;
@@ -363,6 +372,11 @@ export const BrickLabBuildPanel = forwardRef<BrickLabBuildHandle, BrickLabBuildP
           setView: (view) => {
             onSelectBrickLabView(view);
           },
+          mergeBc1Parts: async (staging) => {
+            const merge = window.brickRacer?.mergeBc1Parts;
+            if (!merge) return { ok: false, error: 'mergeBc1Parts indisponible' };
+            return merge(staging);
+          },
         });
         stateRef.current = working;
         setState({
@@ -375,14 +389,37 @@ export const BrickLabBuildPanel = forwardRef<BrickLabBuildHandle, BrickLabBuildP
           syncScene(working);
         }
         const placedN = (result as { placed?: unknown[] }).placed?.length;
-        if (result.ok && (type === 'place_bricks' || type === 'fill_rect' || type === 'wall' || type === 'ring' || type === 'disc' || type === 'column')) {
+        if (
+          result.ok &&
+          (type === 'place_bricks' ||
+            type === 'place_assembly' ||
+            type === 'fill_rect' ||
+            type === 'wall' ||
+            type === 'ring' ||
+            type === 'disc' ||
+            type === 'column')
+        ) {
           setMsg(
             dryRun
-              ? `MCP · dryRun · ${String(placedN ?? 0)} ok`
-              : `MCP · ${type} · ${String(placedN ?? 0)} briques`
+              ? `MCP · dryRun · ${String(placedN ?? (result as { placedCount?: number }).placedCount ?? 0)} ok`
+              : `MCP · ${type} · ${String(placedN ?? (result as { placedCount?: number }).placedCount ?? 0)} briques`
           );
-        } else if (result.ok && (type === 'new' || type === 'load' || type === 'save' || type === 'set_view')) {
-          setMsg(`MCP · ${type} · ${working.stem}`);
+        } else if (
+          result.ok &&
+          (type === 'new' ||
+            type === 'load' ||
+            type === 'save' ||
+            type === 'set_view' ||
+            type === 'promote_parts' ||
+            type === 'promote_bom' ||
+            type === 'promote_status')
+        ) {
+          const reg = (result as { registered?: string[] }).registered;
+          setMsg(
+            type.startsWith('promote')
+              ? `MCP · ${type} · +${String(reg?.length ?? 0)} pièces`
+              : `MCP · ${type} · ${working.stem}`
+          );
         } else if (!result.ok && result.error) {
           setMsg(`MCP · ${result.error}`);
         }
@@ -792,6 +829,7 @@ export const BrickLabBuildPanel = forwardRef<BrickLabBuildHandle, BrickLabBuildP
         {state.tool === 'brush' ? (
           <LegoColorPicker
             value={state.colorId}
+            allowedMaterials={getPart(state.partId)?.allowedMaterials}
             onChange={(id) => setState((s) => ({ ...s, colorId: id }))}
           />
         ) : null}
